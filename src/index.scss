@@ -1,0 +1,220 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap");
+
+body {
+  background-color: rgb(196, 193, 193);
+  font-family: "Poppins", sans-serif;
+}
+
+* {
+  font-family: "Poppins", sans-serif;
+}
+
+.wrap {
+  //background-color: red;
+  //display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  left: 50%;
+  top: 40%;
+  transform: translate(-50%, 50%);
+
+  position: absolute;
+  // left: 50%;
+  // top: 50%;
+}
+
+.box-login {
+  background-color: white;
+  margin-top: -1rem;
+  margin-bottom: -2rem;
+  width: 900px;
+  max-height: 70vh;
+  overflow-y: auto;
+  border-bottom-left-radius: 1em;
+  border-bottom-right-radius: 1em;
+
+  .tes {
+    font-size: 30px;
+    font-weight: bold;
+    width: 500px;
+    margin: 0 0 0 25%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    text-align: center;
+    margin-top: 3rem;
+  }
+
+  .s-gogle {
+    height: 60px;
+    width: 450px;
+    margin: 0 0 0 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 5rem;
+    outline-style: solid;
+    outline-width: 1px;
+    outline-color: rgb(228, 238, 248);
+    border-radius: 25px;
+
+    &:hover {
+      outline-color: rgb(166, 240, 253);
+      background-color: rgb(241, 247, 252);
+    }
+  }
+
+  .s-apple {
+    height: 60px;
+    width: 450px;
+    margin: 0 0 0 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 2.5rem;
+    outline-style: solid;
+    outline-width: 1px;
+    outline-color: rgb(204, 202, 202);
+    border-radius: 25px;
+
+    &:hover {
+      outline-color: rgb(166, 240, 253);
+      background-color: rgb(232, 232, 232);
+    }
+
+  }
+
+  .signup {
+    font-size: large;
+    margin: 7% 0 0 25%;
+    display: flex;
+
+    span {
+      color: rgb(16, 131, 238);
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .or {
+    // margin-top: 2em;
+    // margin-bottom: 1em;
+    margin: 5% 0 0 25%;
+    font-size: medium;
+    width: 450px; 
+   text-align: center; 
+   border-bottom: 1px solid rgb(165, 165, 165); 
+   line-height: 0.1em;
+   span {
+    background:#fff; 
+    width: 50px;
+    padding:10px 15px; 
+   }
+   //margin: 10px 0 20px; 
+  }
+}
+
+.head {
+  height: 60px;
+  background-color: white;
+  margin-top: -19rem;
+  border-top-left-radius: 1em;
+  border-top-right-radius: 1em;
+
+  // position: fixed;
+  width: 900px;
+
+  .close {
+    margin-left: 0.5em;
+    float: left;
+    margin-top: 0.5em;
+
+    &:hover {
+      border-radius: 15px;
+      background-color: rgb(153, 152, 152);
+    }
+  }
+
+  .twitter {
+    margin-top: 0.3em;
+    //margin: auto;
+    //display: block;
+  }
+}
+
+.foot {
+  background-color: rgb(255, 255, 255);
+  margin-bottom: -45rem;
+  border-bottom-left-radius: 1em;
+  border-bottom-right-radius: 1em;
+
+  // position: fixed;
+  width: 900px;
+}
+
+.input {
+  height: 60px;
+  width: 450px;
+  margin: 0 0 0 25%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 2.5rem;
+  border-color: rgb(204, 202, 202);
+  border-radius: 7px;
+
+  &:focus {
+    outline-color: rgb(20, 181, 255);
+    text-decoration-color: red;
+  }
+}
+
+.next {
+  height: 60px;
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  background-color: black;
+  width: 450px;
+  margin: 0 0 0 25%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 2.5rem;
+  outline-style: solid;
+  outline-width: 1px;
+  outline-color: rgb(204, 202, 202);
+  border-radius: 25px;
+
+  &:hover {
+    background-color: rgb(56, 56, 56);
+  }
+}
+
+.f-pass {
+  height: 60px;
+  font-size: 20px;
+  font-weight: bold;
+  width: 450px;
+  margin: 0 0 0 25%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 2.5rem;
+  outline-style: solid;
+  outline-width: 1px;
+  outline-color: white;
+  border-radius: 25px;
+
+  &:hover {
+    background-color: rgb(192, 191, 191);
+  }
+}
