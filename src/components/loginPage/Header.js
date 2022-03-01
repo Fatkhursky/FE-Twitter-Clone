@@ -5,13 +5,13 @@ import { FaTwitter } from "react-icons/fa";
 const Header = () => {
   return (
     <div >
-    <div className="head" >
+    <div className="loginpage__head" >
         <FaTimes
-          className="close"
+          className="loginpage__head__close"
           style={{ fontSize: "2em", cursor: "pointer" }}
         />
         <FaTwitter
-          className="twitter"
+          className="loginpage__head__twitter"
           style={{ color: "rgb(16, 131, 238)", fontSize: "3rem" }}
         />
       </div>
