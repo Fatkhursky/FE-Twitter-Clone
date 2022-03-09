@@ -31,8 +31,10 @@ const Signup = ({
 const yearFilter = yearsDate.map((obj) => {
     if (obj.value % 4 === 0) {
       return obj.component
-    }
+    } return obj.value
   })
+
+
 
   //console.log(1111, yearFilter)
 

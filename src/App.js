@@ -9,7 +9,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div style={{background:"green"}} className="App">
+      <div className="App">
         <Routes>
           <Route path="*" element={<LoginPage />} />
           <Route path="/home" element={<Home />} />

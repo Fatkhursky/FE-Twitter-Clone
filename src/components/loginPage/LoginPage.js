@@ -11,35 +11,36 @@ const LoginPage = () => {
   const [month, setMonth] = useState("");
   const [day, setDay] = useState("");
   const [years, setYears] = useState("");
-  const isTrue = name && phone && month && day && years ? true : false
-
+  const isTrue = name && phone && month && day && years ? true : false;
 
   return (
-    <div className="loginpage">
-      <Header />
-      <Routes>
-        <Route path="/" element={<Login className="loginpage__login" />} />
-        <Route
-          path="/register"
-          element={
-            <Signup
-              className="loginpage__signup"
-              onChangeName={(e) => setName(e.target.value)}
-              onChangePhone={(e) => setPhone(e.target.value)}
-              onChangeMonth={(e) => setMonth(e.target.value)}
-              onChangeDay={(e) => setDay(e.target.value)}
-              onChangeYears={(e) => setYears(e.target.value)}
-              month={month}
-              year={years}
-              day={day}
-              color={isTrue ? 'rgb(44, 43, 43)' : ''}
-              pointer={isTrue ? 'pointer' : ''}
-              event={isTrue ? '' : 'none'}
-            />
-          }
-        />
-      </Routes>
-      <Footer />
+    <div className="wrap">
+      <div className="loginpage">
+        <Header />
+        <Routes>
+          <Route path="/" element={<Login className="loginpage__login" />} />
+          <Route
+            path="/register"
+            element={
+              <Signup
+                className="loginpage__signup"
+                onChangeName={(e) => setName(e.target.value)}
+                onChangePhone={(e) => setPhone(e.target.value)}
+                onChangeMonth={(e) => setMonth(e.target.value)}
+                onChangeDay={(e) => setDay(e.target.value)}
+                onChangeYears={(e) => setYears(e.target.value)}
+                month={month}
+                year={years}
+                day={day}
+                color={isTrue ? "rgb(44, 43, 43)" : ""}
+                pointer={isTrue ? "pointer" : ""}
+                event={isTrue ? "" : "none"}
+              />
+            }
+          />
+        </Routes>
+        <Footer />
+      </div>
     </div>
   );
 };
