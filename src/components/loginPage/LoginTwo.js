@@ -1,0 +1,160 @@
+import { useNavigate } from "react-router-dom";
+import Header from "./Header";
+import Footer from "./Footer";
+import { useState } from "react";
+import api from "../../api/apiUrl";
+import toast, { Toaster } from "react-hot-toast";
+
+const LoginTwo = ({ userName, toSignUp }) => {
+  const [passNull, setPassNull] = useState(true);
+  const [passValue, setPassValue] = useState("");
+  const tes = (e) => {
+    e.preventDefault();
+    setPassNull(!passNull);
+  };
+
+  const onChangePass = (e) => {
+    setPassValue(e.target.value);
+  };
+
+  const notify = async () => {
+    //e.preventDefault()
+    const username = userName;
+    const password = passValue;
+    const newLogin = { username, password };
+    try {
+      const res = await api.post("auth/login", newLogin);
+      console.log(333, res.data.access_token)
+      localStorage.setItem("Bearer", res.data.access_token)
+      return res.data.message;
+
+    } catch (error) {
+      if (error.response) {
+        throw new Error(error.response.data.message);
+        // console.log(error.response.status);
+        // console.log(error.response.headers);
+      } else if (error.request) {
+        throw new Error(error.request);
+      } else {
+        throw new Error(error.message);
+      }
+    }
+  };
+
+  let navigate = useNavigate();
+
+  const toHome = () => {
+    navigate("/home");
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    toast.promise(
+      notify(),
+      {
+        loading: "Loading...",
+        success: (data) => {
+          setTimeout(toHome, 1200);
+          
+          return data;
+        },
+        error: (error) => `${error}`,
+      },
+      {
+        style: {
+          minWidth: "250px",
+        },
+        success: {
+          duration: 1000,
+          //icon: "🔥",
+        },
+      }
+    );
+    // navigate('/home');
+  };
+
+  // const tes = async (e) => {
+  //   console.log('tes')
+  // }
+
+  return (
+    <div>
+      <Header />
+      <form onSubmit={handleSubmit} className="loginpage__login__box">
+        <div className="loginpage__login__body">
+          <h1 className="loginpage__login__title">Enter your password</h1>
+
+          <label htmlFor="" className="loginpage__login__inp2">
+            <input
+              className="loginpage__login__inpUser"
+              type="text"
+              placeholder={userName}
+              disabled="false"
+            />
+            <span className="loginpage__login__label2">username</span>
+          </label>
+
+          <label htmlFor="" className="loginpage__login__inpPass">
+            <input
+              onChange={onChangePass}
+              className="loginpage__login__form__pass"
+              type={passNull ? "password" : "text"}
+              placeholder="Password"
+              //onChange={onChangeUsername}
+            />
+            <button
+              onClick={tes}
+              style={{ border: "none", backgroundColor: "transparent" }}
+            >
+              <svg
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                className="loginpage__login__eye"
+                style={{ color: "rgb(15, 20, 25)" }}
+              >
+                <g>
+                  <path d="M14.548 11.634c-1.207 0-2.188-.98-2.188-2.188 0-.664.302-1.25.77-1.653-.363-.097-.736-.165-1.13-.165-2.416 0-4.375 1.96-4.375 4.376S9.585 16.38 12 16.38c2.418 0 4.377-1.96 4.377-4.376 0-.4-.07-.78-.17-1.146-.402.47-.992.776-1.66.776z"></path>
+                  <path d="M12 19.79c-7.228 0-10.12-6.724-10.24-7.01-.254-.466-.254-1.105.035-1.642C1.88 10.923 4.772 4.2 12 4.2s10.12 6.723 10.24 7.01c.254.465.254 1.104-.035 1.64-.085.216-2.977 6.94-10.205 6.94zm0-14c-6.154 0-8.668 5.787-8.772 6.033-.068.135-.068.208-.033.273.137.316 2.65 6.104 8.805 6.104 6.18 0 8.747-5.973 8.772-6.033.07-.136.07-.21.034-.274-.138-.316-2.652-6.103-8.806-6.103z"></path>
+                </g>
+              </svg>
+            </button>
+          </label>
+
+          <button
+            type="submit"
+            style={{
+              cursor: "pointer",
+              pointerEvents: passValue ? "" : "none",
+              backgroundColor: passValue ? "black" : "",
+            }}
+            className="loginpage__login__buttons2"
+          >
+            Log in
+          </button>
+          <h1 className="loginpage__login__bottom">
+            Don't have account?{""}
+            <span>
+            <button onClick={toSignUp} style={{
+                  cursor: "pointer",
+                  textDecoration: "none",
+                  border: "none",
+                  backgroundColor: "transparent",
+                  color: "rgb(16, 131, 238)",
+                  fontSize: "17px",
+                  fontWeight:"bolder"
+                }} >
+            Sign Up
+            </button>
+              
+            </span>
+          </h1>
+        </div>
+        <Toaster />
+      </form>
+      <Footer />
+    </div>
+  );
+};
+
+export default LoginTwo;
+

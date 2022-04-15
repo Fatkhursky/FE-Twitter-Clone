@@ -1,5 +1,10 @@
 import { monthsDate, daysDate, yearsDate } from "./valueDate.js";
-import { Link } from "react-router-dom";
+import api from "../../api/apiUrl";
+import toast, { Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import Header from "./Header";
+import Footer from "./Footer";
+//import { useHistory } from "react-router-dom";
 
 
 const Signup = ({
@@ -11,10 +16,14 @@ const Signup = ({
   color,
   pointer,
   event,
-  onClick,
   month,
   year,
-  day
+  day,
+  name,
+  username,
+  password,
+  email,
+  phone,
 }) => {
   const isApril = month === "April";
   const isJune = month === "June";
@@ -26,42 +35,88 @@ const Signup = ({
     yearNotNull && year % 100 === 0
       ? yearNotNull && year % 400 === 0
       : yearNotNull && year % 4 === 0;
-  const yearComp = yearsDate.map((obj) => obj.component)
+  const yearComp = yearsDate.map((obj) => obj.component);
 
-const yearFilter = yearsDate.map((obj) => {
+  const yearFilter = yearsDate.map((obj) => {
     if (obj.value % 4 === 0) {
-      return obj.component
-    } return obj.value
-  })
-
-
-
-  //console.log(1111, yearFilter)
-
+      return obj.component;
+    }
+    return obj.value;
+  });
 
   const getDay = () => {
     if (isApril || isJune || isSeptember || isNovember) {
-      return daysDate.slice(0, 31); // -- 30 hari
+      return daysDate.slice(0, 31);
     } else if (isFebruary && isLeapYear()) {
-      return daysDate.slice(0, 30); // -- 29 hari
+      return daysDate.slice(0, 30);
     } else if (isFebruary) {
-      return daysDate.slice(0, 30);   // -- 28 hari error
+      return daysDate.slice(0, 30);
     } else {
       return daysDate;
     }
   };
 
   const getYear = () => {
-    if (isFebruary && day === '29') {
-      return yearFilter
+    if (isFebruary && day === "29") {
+      return yearFilter;
     } else {
-      return yearComp
+      return yearComp;
+    }
+  };
+
+  let navigate = useNavigate();
+  
+  const notify = async () => {
+    const newReg = { name, username, password, email, phone };
+    try {
+      const res = await api.post("/auth/register", newReg);
+      return res.data.message
+    } catch (error) {
+      if (error.response) {
+        throw new Error (error.response.data.message)
+        // console.log(error.response.status);
+        // console.log(error.response.headers);
+      } else if (error.request) {
+        throw new Error (error.request)
+      } else {
+        throw new Error (error.message)
+      }
     }
   }
 
+  const toSign = () => {
+    navigate('/')
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    toast.promise(
+      notify(),
+      {
+        loading: "Loading...",
+        success: (data) => {
+          setTimeout(toSign, 1200)
+          return data
+        },
+        error: (error) => `${error}`,
+      },
+      {
+        style: {
+          minWidth: "250px",
+        },
+        success: {
+          duration: 1000,
+          //icon: "🔥",
+        },
+      }, 
+    );
+   // navigate('/home');
+  };
+
   return (
     <div>
-      <div className="loginpage__signup__box">
+    <Header/>
+      <form className="loginpage__signup__box" onSubmit={handleSubmit}>
         <h1 className="loginpage__signup__title">Create your account</h1>
         <div className="loginpage__signup__inputs1">
           <input
@@ -96,7 +151,7 @@ const yearFilter = yearsDate.map((obj) => {
             </p>
           </div>
         </div>
-        <form className="loginpage__signup__inputs2">
+        <div className="loginpage__signup__inputs2">
           <select
             className="loginpage__signup__month"
             list="Month"
@@ -121,23 +176,26 @@ const yearFilter = yearsDate.map((obj) => {
           >
             {getYear()}
           </select>
-        </form>
+        </div>
         {
-          <Link
-            className="loginpage__signup__button"
-            to="/home"
-            style={{
-              textDecoration: "none",
-              backgroundColor: color,
-              cursor: pointer,
-              pointerEvents: event,
-            }}
-            onClick={onClick}
-          >
-            Next
-          </Link>
+          <div>
+            <button
+              className="loginpage__signup__button"
+              type="submit"
+              style={{
+                textDecoration: "none",
+                backgroundColor: color,
+                cursor: pointer,
+                pointerEvents: event,
+              }}
+            >
+              Signup
+            </button>
+            <Toaster />
+          </div>
         }
-      </div>
+      </form>
+      <Footer/>
     </div>
   );
 };

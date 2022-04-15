@@ -1,9 +1,39 @@
 import { Link } from "react-router-dom";
+import Header from "./Header";
+import Footer from "./Footer";
 
-const Login = () => {
+const Login = ({ onChangeUsername, onSubmitUserName, pointer, color }) => {
+  const forgot = (e) => {
+    e.preventDefault()
+    alert('Fitur belum tersedia')
+  }
+  // const username = userName
+  // const password = `pass${passName}`
+
+  // const onChangeUsername = (e) => {
+  //   setUserName(e.target.value)
+  // }
+
+  // const handleSubmit = async(e) => {
+  //   e.preventDefault()
+  //   const newLogin = {username, password}
+  //   try {
+  //     const res = await api.post("auth/login", newLogin)
+  //     console.log(111, res)
+
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
+
+  // const tes = async (e) => {
+  //   console.log('tes')
+  // }
+
   return (
     <div>
-      <div className="loginpage__login__box">
+      <Header />
+      <form onSubmit={onSubmitUserName} className="loginpage__login__box">
         <h1 className="loginpage__login__title">Sign in to Twitter</h1>
         <div
           style={{ cursor: "pointer" }}
@@ -56,25 +86,41 @@ const Login = () => {
         <h1 className="loginpage__login__content">
           <span>Or</span>
         </h1>
-        <input
-          className="loginpage__login__form"
-          type="text"
-          placeholder="Phone, email or username"
-        />
+
+        <label htmlFor="" className="loginpage__login__inp">
+          <input
+            className="loginpage__login__form"
+            type="text"
+            placeholder="&nbsp;&nbsp;"
+            onChange={onChangeUsername}
+          />
+          <span className="loginpage__login__label">
+            Phone, email or username
+          </span>
+          <span className="focus-bg"></span>
+        </label>
+
         <button
-          style={{ cursor: "pointer" }}
+          style={{
+            cursor: "pointer",
+            pointerEvents: pointer,
+            backgroundColor: color,
+          }}
+          type='submit'
           className="loginpage__login__buttons2"
         >
           Next
         </button>
+
         <button
-          style={{ cursor: "pointer" }}
+          onClick={forgot}
+          style={{ cursor: "pointer", pointerEvents:'' }}
           className="loginpage__login__buttons2 loginpage__login__buttons2--second"
         >
           Forgot Password?
         </button>
         <h1 className="loginpage__login__bottom">
-          Don't have account?{" "}
+          Don't have account?&nbsp;{" "}
           <span>
             <Link
               to="/register"
@@ -84,11 +130,12 @@ const Login = () => {
                 color: "rgb(16, 131, 238)",
               }}
             >
-              &nbsp;Sign up
+              Sign up
             </Link>
           </span>
         </h1>
-      </div>
+      </form>
+      <Footer />
     </div>
   );
 };

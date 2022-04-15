@@ -7,13 +7,21 @@ import foto2 from "./foto2.jpg";
 import foto3 from "./foto3.jpg";
 import TextareaAutosize from "react-textarea-autosize";
 import { useState } from "react";
-import AddTweet from "./AddTweet";
+import { decodeToken } from "react-jwt";
+
+
+
+
 
 const Home = () => {
+
+  const token = localStorage.getItem("Bearer");
+  const myDecodedToken = decodeToken(token);
+  console.log(999, myDecodedToken.username)
+
   const [tweet, setTweet] = useState("");
   const color = tweet ? "rgb(29, 108, 255)" : "";
   const isPointer = tweet ? "pointer" : "";
-  //console.log(color)
 
   return (
     <div className="homepage">
@@ -99,7 +107,7 @@ const Home = () => {
             alt="joebiden"
           />
           <p id="namejoe" style={{ fontSize: "1.3rem" }}>
-            @JoeBiden
+            &nbsp;@{myDecodedToken.username}
           </p>
           <FiMoreHorizontal id="morejoe" style={{ fontSize: "1.9rem" }} />
         </div>
@@ -137,7 +145,9 @@ const Home = () => {
         </div>
         <div>
         <h1>tes</h1>
-          <AddTweet />
+
+          
+          
         </div>
         <div>
           <hr className="homepage__line" />

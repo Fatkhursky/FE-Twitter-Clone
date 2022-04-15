@@ -1,0 +1,440 @@
+.loginpage {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  
+    &__head {
+      height: 60px;
+      background-color: rgb(255, 255, 255);
+      // margin-top: -19rem;
+      border-top-left-radius: 1em;
+      border-top-right-radius: 1em;
+    }
+  
+    &__footer {
+      height: 60px;
+      background-color: rgb(255, 255, 255);
+      //margin-bottom: -45rem;
+      border-bottom-left-radius: 1em;
+      border-bottom-right-radius: 1em;
+    }
+  
+    &__head__close {
+      margin-left: 0.5em;
+      float: left;
+      margin-top: 0.5em;
+  
+      &:hover {
+        border-radius: 15px;
+        background-color: rgb(153, 152, 152);
+      }
+    }
+  
+    &__head__twitter {
+      margin-top: 0.3em;
+    }
+  
+    
+    &__login__box,
+    &__signup__box {
+      background-color: white;
+      //margin-top: -1rem;
+      //margin-bottom: -2rem;
+      //width: 75%;
+      max-height: 70vh;
+      overflow-y: auto;
+      //border-bottom-left-radius: 1em;
+      //border-bottom-right-radius: 1em;
+    }
+
+    &__login__body {
+      //background-color: red;
+      max-width: 450px;
+      margin: 0 auto;
+    }
+  
+    &__login__title {
+      font-size: 30px;
+      font-weight: bold;
+      width: 500px;
+      margin: 0 0 0 25%;
+      display: flex;
+      justify-content: left;
+      align-items: center;
+      text-align: center;
+      margin-top: 3rem;
+    }
+  
+    &__login__buttons1 {
+      height: 60px;
+      width: 450px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      margin-top: 2.5rem;
+      outline-style: solid;
+      outline-width: 1px;
+      outline-color: rgb(228, 238, 248);
+      border-radius: 25px;
+  
+      &:hover {
+        outline-color: rgb(166, 240, 253);
+        background-color: rgb(241, 247, 252);
+      }
+    }
+  
+    &__login__content {
+      margin: 45px auto;
+      font-size: medium;
+      width: 450px;
+      text-align: center;
+      border-bottom: 1px solid rgb(165, 165, 165);
+      line-height: 0.1em;
+  
+      span {
+        background: #fff;
+        width: 50px;
+        padding: 10px 15px;
+      }
+    }
+  
+    &__login__inp {
+      position: relative;
+      background-color: red;
+      overflow: hidden;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      //margin-left: 3%;
+      width: 450px;
+      max-width: 450px;
+
+      input:focus +  .loginpage__login__label  {
+        color: #0077FF;
+        transform: translate3d(0, -15px, 0) scale(0.75);
+      }
+      
+    }
+
+    &__login__form {
+      height: 75px;
+      width: 450px;
+      margin: 5px auto;
+      height: 75px;
+      padding: 0 0 0 14px;
+      font-size: 20px;
+      //background-color: red;
+      //font-weight: 5000;
+
+            //display: flex;
+      //justify-content: center;
+      //align-items: center;
+      //text-align: center;
+      //margin-top: 2.5rem;
+      border: 1px solid rgb(204, 202, 202);
+      border-radius: 7px;
+
+      &:focus {
+        border: 3px solid #1885e5;
+        //box-shadow: 0 0 2px #1670BE;
+        outline-offset: 0px;
+        outline: none;
+      }
+
+      &:not(:placeholder-shown) + .loginpage__login__label {
+        //color: rgba(235, 31, 31, 0.5);
+        transform: translate3d(0, -15px, 0) scale(0.75);
+      }
+    }
+
+    &__login__label {
+      position: absolute;
+      font-size: 20px;
+      top: -8px;
+      left: 15px;
+      color: rgba(0, 0, 0, 0.5);
+      transform-origin: 0 0;
+      transform: translate3d(0, 0, 0);
+      transition: all 0.2s ease;
+      pointer-events: none;
+    }
+
+    &__login__inp2 {
+      position: relative;
+      background-color: rgb(14, 33, 251);
+      //text-align: center;
+      //margin-left: 2%;
+      //width: 450px;
+      //width: 4500px;
+    }
+
+    &__login__inpUser {
+      font-size: 20px;
+      height: 60px;
+      width: 450px;
+      max-width: 450px;
+      font-weight: bold;
+      //margin: 0 0 0 0%;
+      height: 60px;
+      text-indent: 15px;
+      //display: flex;
+      color: rgba(0, 0, 0, 0.5);
+      background-color: rgb(244, 245, 246);
+     // margin-left: 200px;
+      padding: 15px 0 0 0;
+      //justify-content: center;
+      //align-items: center;
+      //text-align: center;
+      margin-top: 2.5rem;
+      border: none;
+      border-radius: 9px;
+    }
+
+    &__login__label2 {
+      position: absolute;
+      font-size: 17px;
+      top: -25px;
+      left: 15px;
+      color: rgba(0, 0, 0, 0.5);
+      transform-origin: 0 0;
+      transform: translate3d(0, 0, 0);
+      transition: all 0.2s ease;
+      pointer-events: none;
+    
+    }
+
+    &__login__inpPass {
+      position: relative;
+      //background-color: rgb(38, 108, 238);
+      //text-align: center;
+      //padding-left: 2px;
+      //max-width: 450px;
+      //width: 4500px;
+    }
+
+    
+    &__login__form__pass {
+      height: 60px;
+      width: 445px;
+      //margin: 0 0 0 2%;
+      height: 67px;
+      //display: flex;
+      text-indent: 15px;
+      //justify-content: center;
+      //align-items: center;
+      //text-align: center;
+      margin-top: 2.5rem;
+      border: 1px solid rgb(204, 202, 202);
+      border-radius: 9px;
+
+      &:focus {
+        border: 2px solid #1670BE;
+        box-shadow: 0 0 5px #1670BE;
+        outline-offset: 0px;
+        outline: none;
+      }
+    }
+
+    &__login__eye {
+      width: 2em;
+      cursor: pointer;
+      position: absolute;
+      left: 420px;
+      top: 3px;
+      //color: red;
+      //background-color: red;
+      &:hover {
+        background-color: rgb(225, 220, 220);
+        border-radius: 15px;
+      }
+    }
+  
+    &__login__buttons2 {
+      height: 60px;
+      font-size: 20px;
+      font-weight: bold;
+      color: white;
+      //background-color: rgba(156, 153, 153);
+      width: 450px;
+      //margin: 0 0 0 0%;
+      //display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      margin-top: 2.5rem;
+      outline-style: solid;
+      outline-width: 1px;
+      outline-color: rgb(252, 252, 252);
+      border-radius: 25px;
+  
+      &:hover {
+        background-color: rgb(56, 56, 56);
+      }
+  
+      &--second {
+        color: black;
+        outline-color: white;
+        background-color: white;
+  
+        &:hover {
+          background-color: rgb(216, 211, 211);
+        }
+      }
+    }
+  
+    &__login__bottom {
+      font-size: larger;
+      font-weight: lighter;
+      margin: 45px auto;
+      text-align: left;
+      // justify-items: left;
+      // justify-content: left;
+      // align-items: left;
+      // background-color: red;
+      max-width: 450px;
+      //float: left;
+      //display: flex;
+      text-decoration: none;
+  
+      span {
+        font-weight: bold;
+        color: rgb(16, 131, 238);
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  
+    &__signup__title {
+      font-size: 35px;
+      font-weight: bold;
+      width: 500px;
+      margin: 0 0 5% 5%;
+      display: flex;
+      justify-content: left;
+      align-items: center;
+      text-align: center;
+      margin-top: 3rem;
+    }
+  
+    &__signup__inputs1 {
+      margin: 5% 0 0 5%;
+      display: flex;
+    }
+  
+    &__signup__name {
+      height: 85px;
+      width: 780px;
+      font-size: larger;
+      display: flex;
+      border-radius: 5px;
+      border-color: rgb(191, 189, 189);
+  
+      &:focus {
+        outline-color: rgb(30, 167, 247);
+      }
+    }
+  
+    &__signup__phone {
+      height: 85px;
+      width: 780px;
+      font-size: larger;
+      display: flex;
+      border-color: rgb(191, 189, 189);
+      border-radius: 5px;
+  
+      &:focus {
+        outline-color: rgb(30, 167, 247);
+      }
+    }
+  
+    &__signup__content {
+      text-align: left;
+      font-size: large;
+      font-weight: bold;
+      width: 780px;
+      margin: 5% 2% 0 5%;
+    }
+  
+    &__signup__date {
+      font-weight: bold;
+      margin-top: 5%;
+    }
+  
+    &__signup__desc {
+      font-weight: lighter;
+      margin-top: -1rem;
+      color: rgb(139, 138, 138);
+    }
+  
+    &__signup__inputs2 {
+      height: 85px;
+      margin: 3% 0 0 5%;
+      width: 780px;
+      font-size: larger;
+      display: flex;
+      justify-content: space-between;
+      border-radius: 5px;
+    }
+  
+    &__signup__button {
+      color: white;
+      border-color: white;
+      background-color: rgb(134, 131, 131);
+      height: 85px;
+      margin: 7% 0 1% 5%;
+      width: 780px;
+      font-size: 25px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      border-radius: 35px;
+  
+      &:active {
+        transform: scale(0.99);
+      }
+    }
+  
+    &__signup__month {
+      height: 85px;
+      border-color: rgb(191, 189, 189);
+      padding-right: 3rem;
+      width: 380px;
+      font-size: larger;
+      border-radius: 7px;
+  
+      &:focus {
+        outline-color: rgb(30, 167, 247);
+      }
+    }
+  
+    &__signup__day {
+      height: 85px;
+      border-color: rgb(191, 189, 189);
+      padding-right: 3rem;
+      width: 160px;
+      font-size: larger;
+      border-radius: 7px;
+  
+      &:focus {
+        outline-color: rgb(30, 167, 247);
+      }
+    }
+  
+    &__signup__years {
+      height: 85px;
+      border-color: rgb(191, 189, 189);
+      padding-right: 2rem;
+      width: 220px;
+      font-size: larger;
+      border-radius: 7px;
+  
+      &:focus {
+        outline-color: rgb(30, 167, 247);
+      }
+    }
+  }
+
