@@ -4,8 +4,6 @@ import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
-//import { useHistory } from "react-router-dom";
-
 
 const Signup = ({
   onChangeName,
@@ -123,6 +121,7 @@ const Signup = ({
             className="loginpage__signup__name"
             type="text"
             placeholder="Name"
+            value={name}
             onChange={onChangeName}
           />
         </div>
@@ -131,6 +130,7 @@ const Signup = ({
             className="loginpage__signup__phone"
             type="text"
             placeholder="Phone"
+            value={phone}
             onChange={onChangePhone}
           />
         </div>
@@ -156,6 +156,7 @@ const Signup = ({
             className="loginpage__signup__month"
             list="Month"
             placeholder="Month"
+            value={month}
             onChange={onChangeMonth}
           >
             {monthsDate}
@@ -164,6 +165,7 @@ const Signup = ({
             className="loginpage__signup__day"
             list="Days"
             placeholder="Day"
+            value={day}
             onChange={onChangeDay}
           >
             {getDay()}
@@ -172,6 +174,7 @@ const Signup = ({
             className="loginpage__signup__years"
             list="Years"
             placeholder="Year"
+            value={year}
             onChange={onChangeYears}
           >
             {getYear()}

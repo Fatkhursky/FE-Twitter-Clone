@@ -56,9 +56,10 @@
     &__login__title {
       font-size: 30px;
       font-weight: bold;
-      width: 500px;
-      margin: 0 0 0 25%;
-      display: flex;
+      width: 450px;
+      margin: 0 auto;
+      //background-color: red;
+      //display: flex;
       justify-content: left;
       align-items: center;
       text-align: center;
@@ -241,8 +242,8 @@
       width: 2em;
       cursor: pointer;
       position: absolute;
-      left: 420px;
-      top: 3px;
+      left: 410px;
+      top: -1px;
       //color: red;
       //background-color: red;
       &:hover {

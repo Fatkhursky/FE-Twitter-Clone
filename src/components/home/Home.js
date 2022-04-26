@@ -8,20 +8,56 @@ import foto3 from "./foto3.jpg";
 import TextareaAutosize from "react-textarea-autosize";
 import { useState } from "react";
 import { decodeToken } from "react-jwt";
-
-
-
-
+import { useNavigate } from "react-router-dom";
+import api from "../../api/apiUrl";
+import AddTweet from "../addTweet/AddTweet";
 
 const Home = () => {
-
+  let navigate = useNavigate();
   const token = localStorage.getItem("Bearer");
   const myDecodedToken = decodeToken(token);
-  console.log(999, myDecodedToken.username)
+
+  const logOut = () => {
+    localStorage.removeItem("Bearer");
+    navigate("/");
+  };
 
   const [tweet, setTweet] = useState("");
+  const [newTweet, setNewTweet] = useState("");
   const color = tweet ? "rgb(29, 108, 255)" : "";
   const isPointer = tweet ? "pointer" : "";
+
+  let headers = {
+    "Content-Type": "application/json",
+    Authorization: token,
+  };
+
+  const bodyParameters = { text: tweet, image: "default" };
+
+  const [array, setArray] = useState([]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();    
+    try {
+      const res = await api.post("tweets", bodyParameters, {
+        headers: headers,
+      });
+      setTweet("");
+      setNewTweet(res.data.data.text);
+      setArray(array => [res.data.data.text, ...array])
+      //return res.data.message;
+    } catch (error) {
+      if (error.response) {
+        throw new Error(error.response.data.message);
+        // console.log(error.response.status);
+        // console.log(error.response.headers);
+      } else if (error.request) {
+        throw new Error(error.request);
+      } else {
+        throw new Error(error.message);
+      }
+    }
+  };
 
   return (
     <div className="homepage">
@@ -96,7 +132,9 @@ const Home = () => {
         </div>
 
         <div>
-          <button className="homepage__tweetbtn">Tweet</button>
+          <button onClick={logOut} className="homepage__tweetbtn">
+            Logout
+          </button>
         </div>
 
         <div className="homepage__accuser">
@@ -113,60 +151,63 @@ const Home = () => {
         </div>
       </div>
       <div id="main" className="homepage__section">
-        <div className="homepage__mainhead">
-          <img
-            className="homepage__tophead"
-            style={{ height: "50px" }}
-            src={Image}
-            alt="user"
-          />
-          <TextareaAutosize
-            onChange={(e) => setTweet(e.target.value)}
-            className="homepage__tophead"
-            placeholder="What's Happening?"
-            id="textarea"
-          />
-        </div>
-        <div className="homepage__mainhead2">
-          <div className="homepage__iconmainhead">
-            <svg className="homepage__icon2">{mySvg.img}</svg>
-            <svg className="homepage__icon2">{mySvg.gif}</svg>
-            <svg className="homepage__icon2">{mySvg.poll}</svg>
-            <svg className="homepage__icon2">{mySvg.emot}</svg>
-            <svg className="homepage__icon2">{mySvg.time}</svg>
-            <svg className="homepage__icon2">{mySvg.location}</svg>
+        <form onSubmit={handleSubmit}>
+          <div className="homepage__mainhead">
+            <img
+              className="homepage__tophead"
+              style={{ height: "50px" }}
+              src={Image}
+              alt="user"
+            />
+            <TextareaAutosize
+              maxLength={280}
+              value={tweet}
+              onChange={(e) => setTweet(e.target.value)}
+              className="homepage__tophead"
+              placeholder="What's Happening?"
+              id="textarea"
+            />
           </div>
-          <button
-            id="tweetbtnmain"
-            style={{ backgroundColor: color, cursor: isPointer }}
-          >
-            Tweet
-          </button>
-        </div>
-        <div>
-        <h1>tes</h1>
+          <div className="homepage__mainhead2">
+            <div className="homepage__iconmainhead">
+              <svg className="homepage__icon2">{mySvg.img}</svg>
+              <svg className="homepage__icon2">{mySvg.gif}</svg>
+              <svg className="homepage__icon2">{mySvg.poll}</svg>
+              <svg className="homepage__icon2">{mySvg.emot}</svg>
+              <svg className="homepage__icon2">{mySvg.time}</svg>
+              <svg className="homepage__icon2">{mySvg.location}</svg>
+            </div>
+            <button
+              type="submit"
+              id="tweetbtnmain"
+              style={{ backgroundColor: color, cursor: isPointer }}
+            >
+              Tweet
+            </button>
+          </div>
 
-          
-          
-        </div>
-        <div>
-          <hr className="homepage__line" />
-        </div>
-        <div className="homepage__topmain">
-          <p className="homepage__topmainitem">Digitals creators &gt;</p>
-          <p className="homepage__topmainitem">K-Pop &gt;</p>
-          <p className="homepage__topmainitem">Cats &gt;</p>
-          <p className="homepage__topmainitem">Viral &gt;</p>
-        </div>
+          <div>            
+            {newTweet ? array.map((item, index) => (
+              <AddTweet  key={index} newTweet={item} /> 
+            )) : ""}
+          </div>
 
-        <div className="homepage__botmain">
-          <h1 style={{ fontSize: "bold" }}>Welcome to Twitter!</h1>
-          <p style={{ marginTop: "-1rem" }}>
-            This is the best place to see what’s happening in your world. Find
-            some people and topics to follow now.
-          </p>
-          <button id="letsbtn">Let's go</button>
-        </div>
+          <div className="homepage__topmain">
+            <p className="homepage__topmainitem">Digitals creators &gt;</p>
+            <p className="homepage__topmainitem">K-Pop &gt;</p>
+            <p className="homepage__topmainitem">Cats &gt;</p>
+            <p className="homepage__topmainitem">Viral &gt;</p>
+          </div>
+
+          <div className="homepage__botmain">
+            <h1 style={{ fontSize: "bold" }}>Welcome to Twitter!</h1>
+            <p style={{ marginTop: "-1rem" }}>
+              This is the best place to see what’s happening in your world. Find
+              some people and topics to follow now.
+            </p>
+            <button id="letsbtn">Let's go</button>
+          </div>
+        </form>
       </div>
       <div id="right" className="homepage__section">
         <div className="homepage__rightbox">
@@ -409,3 +450,4 @@ const Home = () => {
 };
 
 export default Home;
+// <div>{newTweet ? <AddTweet newTweet={newTweet} /> : ""}</div>

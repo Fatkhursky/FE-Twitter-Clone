@@ -2,34 +2,11 @@ import { Link } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
 
-const Login = ({ onChangeUsername, onSubmitUserName, pointer, color }) => {
+const Login = ({ onChangeUsername, username, onSubmitUserName, pointer, color }) => {
   const forgot = (e) => {
     e.preventDefault()
     alert('Fitur belum tersedia')
   }
-  // const username = userName
-  // const password = `pass${passName}`
-
-  // const onChangeUsername = (e) => {
-  //   setUserName(e.target.value)
-  // }
-
-  // const handleSubmit = async(e) => {
-  //   e.preventDefault()
-  //   const newLogin = {username, password}
-  //   try {
-  //     const res = await api.post("auth/login", newLogin)
-  //     console.log(111, res)
-
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
-
-  // const tes = async (e) => {
-  //   console.log('tes')
-  // }
-
   return (
     <div>
       <Header />
@@ -92,6 +69,7 @@ const Login = ({ onChangeUsername, onSubmitUserName, pointer, color }) => {
             className="loginpage__login__form"
             type="text"
             placeholder="&nbsp;&nbsp;"
+            value={username}
             onChange={onChangeUsername}
           />
           <span className="loginpage__login__label">

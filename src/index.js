@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 import './components/loginPage/index.scss';
 import './components/home/index.scss';
+import './components/addTweet/index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 

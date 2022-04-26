@@ -1,0 +1,89 @@
+.addtweet {
+ 
+  padding-top: 15px;
+  margin-bottom: -7px;
+
+  &:hover{
+    background-color: rgba(206, 206, 206, 0.25);
+  }
+  
+  &__content {
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+  
+  // &__section {
+  //   background-color: green;
+  // }
+
+  &__line {
+    //margin-left: -5.5%;
+    //margin-right: 500%;
+    //background-color: red;
+    width: 100%;
+    border: 0.5px solid rgb(221, 218, 218);
+  }
+
+
+  &__text{
+    //background-color: red;
+      //position: absolute;
+      //top: 0px;
+      //left: 55px;
+      //margin-top: 0px;
+    //  /padding-top: -20px;
+      padding-left: 5px;
+      margin-top: -55px;
+      margin-left: 53px;
+      //background-color: yellow;
+      //float: right;
+      justify-content: space-between;
+      display: flex;
+      //background-color: red;
+      p, svg {
+          //background-color: red;
+          margin-top: 1px;
+          margin-bottom: 0px;
+      }
+  }
+
+  #rightmore2 {
+    //margin-left: 50%;
+    //padding: 3px;
+    border-radius: 35px;
+    //background-color: red;
+    &:hover {
+      cursor: pointer;
+      fill: rgb(112, 177, 247);
+      background-color: rgb(201, 223, 247);
+    }
+  }
+
+  &__icon {
+    display: flex;
+    margin-left: 45px;
+    column-gap: 12%;
+    //color: rgba(23, 22, 22, 0.75);
+  }
+
+  &__iconlist {
+    cursor: pointer;
+    fill: rgba(23, 22, 22, 0.65);
+    padding: 10px;
+    height: 25px;
+    width: 25px;
+    border-radius: 35px;
+    &:hover {
+      background-color: rgb(219, 229, 247);
+      fill: rgb(12, 77, 240);
+    }
+  }
+
+  #iconlike {
+    &:hover {
+      background-color: rgba(254, 25, 224, 0.15);
+      fill: rgb(248, 10, 212);
+    }
+  }
+
+}

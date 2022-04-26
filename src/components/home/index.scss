@@ -207,7 +207,7 @@
       //filter: blur(3px);
       //position: absolute;
       //background-color: green;
-      padding: 12% 5% 5% 5%;
+      padding: 85px 0px 0px 0px;
       //top: 0;
       outline-style: solid;
       outline-width: 1px;
@@ -216,18 +216,10 @@
   
     &__mainhead {
       //float: left;
-      display: flex;
-      //zoom: 1;
-      //height:90px;
       //background-color: red;
-      //align-items: center;
-      //justify-content: space-between;
-      //ext-align: center;
-      //position: absolute;
-      //justify-content: space-between;
-      //align-items: center;
-      //background-color: rgb(157, 240, 24);
-      // z-index: -22;
+      display: flex;
+      padding-left: 25px;
+      padding-right:25px;
     }
   
     &__tophead {
@@ -237,37 +229,27 @@
     }
   
     #textarea {
-      //background-color: rgb(103, 30, 228);
+      overflow: hidden;
+      //background-color: red;
       border: none;
       border-color: transparent;
-      //background-image: none;
-      //display: none;
-      //overflow: auto;
-      // /height: 45px;
-      //height: auto 0;
       padding-top: 20px;
       width: 100%;
       font-size: x-large;
-      //margin-left: 8%;
-      //margin-top: -6%;
       outline: none;
-      //position: absolute;
       resize: none;
     }
   
     &__mainhead2 {
       //background-color: red;
+      padding-left: 25px;
+      padding-right: 15px;
       padding-bottom: 13px;
       border-bottom: 3px solid rgb(221, 218, 218);
       border-width: 100%;
       display: flex;
       align-items: center;
-      //margin-top:3rem;
-      // border-bottom-width: 1500px;
-      // border-bottom: 1px solid black;
-      //border-color: rgb(189, 190, 190);
-      //border-bottom-width: thin;
-      //background-color: red;
+      
     }
   
     &__iconmainhead {
@@ -314,13 +296,16 @@
     }
   
     &__line {
-      margin-left: -5.5%;
+      //margin-left: -5.5%;
       //margin-right: 500%;
-      width: 110.5%;
+      width: 100%;
       border: 0.5px solid rgb(221, 218, 218);
     }
   
     &__topmain {
+      padding-left: 25px;
+      padding-right: 25px;
+      //background-color: rebeccapurple;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -330,6 +315,7 @@
     }
   
     &__topmainitem {
+      //background-color: red;
       font-size: large;
       outline-style: solid;
       outline-width: 1px;
@@ -508,5 +494,6 @@
     &__section {
       padding: 25% 5% 5% 5%;
     }
+    
   }
   

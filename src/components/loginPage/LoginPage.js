@@ -4,7 +4,7 @@ import Signup from "./Signup";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-const LoginPage = (changeTesName) => {
+const LoginPage = () => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [month, setMonth] = useState("");
@@ -29,7 +29,6 @@ const LoginPage = (changeTesName) => {
     navigate("/register");
   }
 
-
   return (
     <div className="wrap">
       <div className="loginpage">
@@ -43,10 +42,8 @@ const LoginPage = (changeTesName) => {
                 <Login
                   className="loginpage__login"
                   passName={name}
+                  username = {userName}
                   onChangeUsername = {(e) => setUserName(e.target.value)}
-
-                  onChangeTesName = {changeTesName}
-                  
                   onSubmitUserName={isUserName}
                   pointer={!userName ? "none" : ""}
                   color={userName ? "black" : "rgba(156, 153, 153)"}

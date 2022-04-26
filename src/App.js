@@ -1,21 +1,21 @@
 import LoginPage from "./components/loginPage/LoginPage";
+import LoginRoute from "./LoginRoute";
 import Home from "./components/home/Home";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState } from "react";
-
-
+import HomeRoute from "./HomeRoute";
 
 function App() {
- const [tesName, setTesName] = useState("");
-console.log(111, tesName)
- const changeTesName = (e) => setTesName(e.target.value)
-
   return (
     <BrowserRouter>
       <div className="App">
         <Routes>
-          <Route path="*" element={<LoginPage changeUserName={changeTesName} userName={tesName} />} />
-          <Route path="/home" element={<Home userName={tesName} />} />
+          <Route path="*" element={<HomeRoute />}>
+            <Route path="*" element={<LoginPage />} />
+          </Route>
+
+          <Route path="/home" element={<LoginRoute />}>
+            <Route path="/home" element={<Home />} />
+          </Route>
         </Routes>
       </div>
     </BrowserRouter>
@@ -23,3 +23,6 @@ console.log(111, tesName)
 }
 
 export default App;
+ 
+// bug 
+// token ada langsung masuk home tetapi tidak bisa login
