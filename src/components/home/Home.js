@@ -6,11 +6,12 @@ import foto1 from "./foto1.jpg";
 import foto2 from "./foto2.jpg";
 import foto3 from "./foto3.jpg";
 import TextareaAutosize from "react-textarea-autosize";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { decodeToken } from "react-jwt";
 import { useNavigate } from "react-router-dom";
 import api from "../../api/apiUrl";
 import AddTweet from "../addTweet/AddTweet";
+//import Counter from "./Counter"
 
 const Home = () => {
   let navigate = useNavigate();
@@ -33,18 +34,20 @@ const Home = () => {
   };
 
   const bodyParameters = { text: tweet, image: "default" };
-
-  const [array, setArray] = useState([]);
+  let [array, setArray] = useState([]);
 
   const handleSubmit = async (e) => {
-    e.preventDefault();    
+    e.preventDefault();
     try {
       const res = await api.post("tweets", bodyParameters, {
         headers: headers,
       });
+      const obj = { id: res.data.data.id, text: res.data.data.text };
+      //console.log(333, obj)
       setTweet("");
       setNewTweet(res.data.data.text);
-      setArray(array => [res.data.data.text, ...array])
+      setArray((array) => [obj, ...array]);
+      //setId(res.data.data.id);
       //return res.data.message;
     } catch (error) {
       if (error.response) {
@@ -58,6 +61,10 @@ const Home = () => {
       }
     }
   };
+
+  useEffect(() => {
+    console.log(123, array);
+  }, [array]);
 
   return (
     <div className="homepage">
@@ -186,10 +193,18 @@ const Home = () => {
             </button>
           </div>
 
-          <div>            
-            {newTweet ? array.map((item, index) => (
-              <AddTweet  key={index} newTweet={item} /> 
-            )) : ""}
+          <div>
+            {newTweet
+              ? array.map((item) => (
+                  <AddTweet
+                    key={item.id}
+                    newTweet={item.text}
+                    id={item.id}
+                    array={array}
+                    setArray={setArray}
+                  />
+                ))
+              : ""}
           </div>
 
           <div className="homepage__topmain">
