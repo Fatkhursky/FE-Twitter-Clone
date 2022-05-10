@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 import './components/loginPage/index.scss';
 import './components/home/index.scss';
+import './components/home/profile.scss';
 import './components/addTweet/index.scss';
+import './index2.scss'
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 

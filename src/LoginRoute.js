@@ -1,11 +1,11 @@
 import { Navigate } from "react-router-dom";
-import Home from "./components/home/Home";
+import HomePage from "./components/home/HomePage";
 
 const LoginRoute = () => {
   const item = localStorage.getItem("Bearer");
   return (
     item !== null ? (
-        <Home />
+        <HomePage />
       ) : (
         <Navigate to="/" />
       )

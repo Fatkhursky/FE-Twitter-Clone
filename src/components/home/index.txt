@@ -6,16 +6,12 @@
     grid-template-columns: 25% 50% 25%;
   
     &__header {
-      background-color: rgb(255, 255, 255);
+      background-color: rgb(248, 19, 19);
       position: fixed;
       backdrop-filter: blur(8px);
       height: 10%;
       width: 50%;
-      z-index: 1;
-      //border-left: 1px solid rgb(221, 218, 218);
-      // border-right: 1px solid rgb(221, 218, 218);
-      //margin-top: 20%;
-      //margin-left: 25%;
+      margin-left: 25%;
       //z-index: 1;
       display: grid;
       grid-template-columns: 90% 15%;
@@ -39,21 +35,11 @@
   
     &__header2 {
       background-color: rgb(255, 255, 255);
-      //padding-left: 25px;
-      padding-top: 9px;
       position: fixed;
       height: 10%;
       width: 25%;
       margin-left: 76%;
-      //z-index: 1;
-
-    }
-
-    &__home{
-      //background-color: red;
-      box-shadow: 0px 0px 0px 0px rgb(252, 252, 252),
-        1px 0px 0px 0px rgb(204, 201, 201);
-
+      z-index: 1;
     }
   
     label {
@@ -114,11 +100,10 @@
       top: 0em;
       height: 100vh;
       box-sizing: border-box;
-      z-index: 2;
     }
   
     &__iconhome {
-      //font-weight: bold;
+      font-weight: bold;
       height: 65px;
       width: 130px;
       padding-left: 10px;
@@ -224,8 +209,7 @@
       //background-color: green;
       padding: 85px 0px 0px 0px;
       //top: 0;
-      //border-right: 5px solid black ;
-      //outline-style: solid;
+      outline-style: solid;
       outline-width: 1px;
       outline-color: rgb(212, 211, 211);
     }
@@ -261,8 +245,7 @@
       padding-left: 25px;
       padding-right: 15px;
       padding-bottom: 13px;
-      //border-right: 2px solid rgb(221, 218, 218);
-      border-bottom: 2px solid rgb(221, 218, 218);
+      border-bottom: 3px solid rgb(221, 218, 218);
       border-width: 100%;
       display: flex;
       align-items: center;
@@ -419,7 +402,6 @@
   
     #right {
       outline-width: 1px;
-      //background-color: red;
     }
   
     &__rightbox {
@@ -503,7 +485,7 @@
       }
     }
   
-    &__title {
+    &__home {
       margin-top: 1rem;
   
       margin-left: 5%;
@@ -517,7 +499,6 @@
     &__section {
       padding: 25% 5% 5% 5%;
     }
-
     
   }
   
