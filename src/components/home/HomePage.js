@@ -5,7 +5,7 @@ import Image from "./logo193.png";
 import foto1 from "./foto1.jpg";
 import foto2 from "./foto2.jpg";
 import foto3 from "./foto3.jpg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { decodeToken } from "react-jwt";
 import { useNavigate } from "react-router-dom";
 import api from "../../api/apiUrl";
@@ -47,7 +47,6 @@ const HomePage = () => {
         headers: headers,
       });
       const obj = { id: res.data.data.id, text: res.data.data.text };
-      console.log(11, res.data);
 
       setTweet("");
       setNewTweet(res.data.data.text);
@@ -67,16 +66,16 @@ const HomePage = () => {
     }
   };
   
-  const [tweets, setTweets] = useState([]) 
+  let [tweets, setTweets] = useState([]) 
 
-  const getTweets = async (e) => {
+  const getTweets = async () => {
     //e.preventDefault();
     try {
       const res = await api.get("tweets", {
         headers: headers,
       });
-      setTweets(res.data.data)
-      
+      const myTweet= res.data.data
+      setTweets(myTweet.reverse())
     } catch (error) {
       if (error.response) {
         throw new Error(error.response.data.message);
@@ -105,6 +104,12 @@ const HomePage = () => {
   const isLists = onComp === "lists" ? "bold" : "";
   const isProfile = onComp === "profile" ? "bold" : "";
   const isMore = onComp === "more" ? "bold" : "";
+  useEffect (() => {
+    if (onComp==="profile") {
+      //console.log("gettweets")
+      return getTweets()
+    }
+  })
   return (
     <div className="homepage">
       <div>
@@ -224,7 +229,7 @@ const HomePage = () => {
             onClick={() => {
               setOnComp("profile");
               scrollToTop();
-              getTweets();
+              //getTweets();
             }}
             style={{ width: "130px" }}
             className="homepage__icons"
@@ -298,7 +303,7 @@ const HomePage = () => {
       </div>
 
       {onComp === "profile" ? (
-        <Profile setOnComp={setOnComp} allTweet={tweets} />
+        <Profile setOnComp={setOnComp} tweets={tweets} setArray={setArray} array={array} />
       ) : (
         <Home
           handleSubmit={handleSubmit}

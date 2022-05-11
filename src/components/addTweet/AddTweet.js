@@ -4,7 +4,7 @@ import { mySvg } from "../home/svg";
 import api from "../../api/apiUrl";
 import Popup from "reactjs-popup";
 
-const AddTweet = ({ newTweet, id, array, setArray, setProgress }) => {
+const AddTweet = ({ newTweet, id, array, setArray }) => {
   const token = localStorage.getItem("Bearer");
   const myDecodedToken = decodeToken(token);
   let headers = {
@@ -17,7 +17,6 @@ const AddTweet = ({ newTweet, id, array, setArray, setProgress }) => {
       const res = await api.delete(`tweets/${id}`, {
         headers: headers,
       });
-      setProgress(100);
       setArray((array = array.filter((item) => item.id !== id)));
       return res.data.message;
     } catch (error) {}
