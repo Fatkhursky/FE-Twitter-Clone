@@ -96,6 +96,12 @@ const HomePage = () => {
     });
   };
 
+
+//Pop Up style  
+const contentStyle = { backgroundColor: '', position:"fixed" };
+const overlayStyle = { background: '' };
+const arrowStyle = { color: '' }; 
+
   const isHome = onComp === "home" ? "bold" : "";
   const isExplore = onComp === "explore" ? "bold" : "";
   const isNotifications = onComp === "notifications" ? "bold" : "";
@@ -263,6 +269,7 @@ const HomePage = () => {
           </div>
 
           <Popup
+          style={{backgroundColor:"red"}}
             trigger={
               <div className="homepage__accuser">
                 <img
@@ -277,6 +284,7 @@ const HomePage = () => {
                 <FiMoreHorizontal id="morejoe" style={{ fontSize: "1.9rem" }} />
               </div>
             }
+            {...{contentStyle, overlayStyle, arrowStyle }}
             position="top"
           >
             <div>
@@ -291,14 +299,15 @@ const HomePage = () => {
                   &nbsp;@{myDecodedToken.username}
                 </p>
               </div>
-              <div className="homepage__popup" onClick={noFeature}>
+              <div className="homepage__popupcontent" onClick={noFeature}>
                 <p>Add an existing account</p>
               </div>
-              <div className="homepage__popup" onClick={logOut}>
+              <div className="homepage__popupcontent" onClick={logOut}>
                 <p>Log Out &nbsp;@{myDecodedToken.username}</p>
               </div>
             </div>
           </Popup>
+
         </div>
       </div>
 

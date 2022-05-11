@@ -19,6 +19,7 @@ const Profile = ({ setOnComp, tweets, setTweets, setArray, array }) => {
       behavior: "smooth",
     });
   };
+  //console.log(123, tweets.length)
   return (
     <div className="profile__wrap">
       <div className="profile__header">
@@ -39,8 +40,8 @@ const Profile = ({ setOnComp, tweets, setTweets, setArray, array }) => {
           {mySvg.arrow}
         </svg>
         <div className="profile__name">
-          <h2>name</h2>
-          <p>345 Tweets</p>
+          <h2>{myDecodedToken.name}</h2>
+          <p>{tweets.length} Tweets</p>
         </div>
       </div>
       <div className="profile__beranda">

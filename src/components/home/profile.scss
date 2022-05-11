@@ -6,11 +6,11 @@
   }
 
   &__header {
-    background-color: rgb(254, 254, 254);
+    background-color: rgba(254, 254, 254, 0.75);
     position: fixed;
     backdrop-filter: blur(8px);
     width: 50%;
-    z-index: 1;
+    z-index: 9999;
     //row-gap: 60px;
     display: flex;
   }

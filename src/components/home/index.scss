@@ -6,7 +6,7 @@
     grid-template-columns: 25% 50% 25%;
   
     &__header {
-      background-color: rgb(255, 255, 255);
+      background-color: rgba(255, 255, 255, 0.75);
       position: fixed;
       backdrop-filter: blur(8px);
       height: 10%;
@@ -86,11 +86,11 @@
     }
   
     &__mainheader {
-      //background-color: rgb(185, 21, 21);
+      background-color: rgb(255, 255, 255);
       position: fixed;
       height: 10%;
       width: 25%;
-      z-index: 1;
+      z-index: 9999;
     }
   
     #twitter {
@@ -185,6 +185,7 @@
       cursor: pointer;
       font-weight: lighter;
       color: rgb(63, 61, 61);
+      
   
       &:hover {
         background-color: rgb(218, 214, 214);
@@ -427,13 +428,15 @@
       border-radius: 25px;
     }
 
-    &__popup{
+
+    &__popupcontent{
       padding: 3px;
       cursor: pointer;
       &:hover{
         background-color: rgba(213, 217, 217, 0.35);
       }
     }
+    
   
     &__headrightbox {
       //background-color: red;
