@@ -12,7 +12,7 @@ const Header = () => {
         />
         <FaTwitter
           className="loginpage__head__twitter"
-          style={{ color: "rgb(16, 131, 238)", fontSize: "3rem" }}
+          style={{ color: "rgb(16, 131, 238)", fontSize:"35px" }}
         />
       </div>
     </div>

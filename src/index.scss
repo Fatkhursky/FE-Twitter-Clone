@@ -8,11 +8,25 @@ body {
 
 * {
   font-family: "Poppins", sans-serif;
+  box-sizing: border-box;
 }
 
 .wrap {
-  max-width: 900px;
-  margin: 3rem auto;
+   display:flex;
+   position:fixed;
+   left:0px;
+   top:0px;
+   width:100%;
+   height:100%;
+   justify-content:center;
+   align-items:center;
+   //background-color: red;
 }
 
-
+//Phone
+@media (max-width: 705px) {
+  html,
+  body {
+    background-color: white;
+  }
+}

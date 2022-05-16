@@ -3,8 +3,19 @@ import LoginTwo from "./LoginTwo";
 import Signup from "./Signup";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { useState } from "react";
+// import { useAtom } from "jotai";
+// import { textAtom } from "../../atom/State.js";
 
 const LoginPage = () => {
+  //const [date] = useAtom(getDate);
+
+  // const [date, setDAte] = useAtom(textAtom);
+
+  // const tes = () => {
+  //   setDAte('coba')
+  //   console.log(date)
+  // }
+
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [month, setMonth] = useState("");
@@ -19,15 +30,15 @@ const LoginPage = () => {
 
   const isUserName = (e) => {
     e.preventDefault();
-    setIsNext(true)
-  }
+    setIsNext(true);
+  };
 
   let navigate = useNavigate();
 
   const toSignUp = () => {
-    setIsNext(false)
+    setIsNext(false);
     navigate("/register");
-  }
+  };
 
   return (
     <div className="wrap">
@@ -37,13 +48,13 @@ const LoginPage = () => {
             path="/"
             element={
               isNext ? (
-                <LoginTwo userName={userName} toSignUp = {toSignUp} />
+                <LoginTwo userName={userName} toSignUp={toSignUp} />
               ) : (
                 <Login
                   className="loginpage__login"
                   passName={name}
-                  username = {userName}
-                  onChangeUsername = {(e) => setUserName(e.target.value)}
+                  username={userName}
+                  onChangeUsername={(e) => setUserName(e.target.value)}
                   onSubmitUserName={isUserName}
                   pointer={!userName ? "none" : ""}
                   color={userName ? "black" : "rgba(156, 153, 153)"}

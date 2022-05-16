@@ -13,7 +13,10 @@ import Popup from "reactjs-popup";
 import Home from "./Home";
 import Profile from "./Profile";
 
+
 const HomePage = () => {
+  
+
   let navigate = useNavigate();
   const token = localStorage.getItem("Bearer");
   const myDecodedToken = decodeToken(token);
@@ -30,7 +33,6 @@ const HomePage = () => {
   const [tweet, setTweet] = useState("");
   const [newTweet, setNewTweet] = useState("");
   const [onComp, setOnComp] = useState("");
- 
 
   let headers = {
     "Content-Type": "application/json",
@@ -65,8 +67,8 @@ const HomePage = () => {
       }
     }
   };
-  
-  let [tweets, setTweets] = useState([]) 
+
+  let [tweets, setTweets] = useState([]);
 
   const getTweets = async () => {
     //e.preventDefault();
@@ -74,8 +76,8 @@ const HomePage = () => {
       const res = await api.get("tweets", {
         headers: headers,
       });
-      const myTweet= res.data.data
-      setTweets(myTweet.reverse())
+      const myTweet = res.data.data;
+      setTweets(myTweet.reverse());
     } catch (error) {
       if (error.response) {
         throw new Error(error.response.data.message);
@@ -96,11 +98,10 @@ const HomePage = () => {
     });
   };
 
-
-//Pop Up style  
-const contentStyle = { backgroundColor: '', position:"fixed" };
-const overlayStyle = { background: '' };
-const arrowStyle = { color: '' }; 
+  //Pop Up style
+  const contentStyle = { backgroundColor: "", position: "fixed" };
+  const overlayStyle = { background: "" };
+  const arrowStyle = { color: "" };
 
   const isHome = onComp === "home" ? "bold" : "";
   const isExplore = onComp === "explore" ? "bold" : "";
@@ -110,12 +111,12 @@ const arrowStyle = { color: '' };
   const isLists = onComp === "lists" ? "bold" : "";
   const isProfile = onComp === "profile" ? "bold" : "";
   const isMore = onComp === "more" ? "bold" : "";
-  useEffect (() => {
-    if (onComp==="profile") {
+  useEffect(() => {
+    if (onComp === "profile") {
       //console.log("gettweets")
-      return getTweets()
+      return getTweets();
     }
-  })
+  });
   return (
     <div className="homepage">
       <div>
@@ -269,7 +270,7 @@ const arrowStyle = { color: '' };
           </div>
 
           <Popup
-          style={{backgroundColor:"red"}}
+            style={{ backgroundColor: "red" }}
             trigger={
               <div className="homepage__accuser">
                 <img
@@ -284,7 +285,7 @@ const arrowStyle = { color: '' };
                 <FiMoreHorizontal id="morejoe" style={{ fontSize: "1.9rem" }} />
               </div>
             }
-            {...{contentStyle, overlayStyle, arrowStyle }}
+            {...{ contentStyle, overlayStyle, arrowStyle }}
             position="top"
           >
             <div>
@@ -307,12 +308,16 @@ const arrowStyle = { color: '' };
               </div>
             </div>
           </Popup>
-
         </div>
       </div>
 
       {onComp === "profile" ? (
-        <Profile setOnComp={setOnComp} tweets={tweets} setArray={setArray} array={array} />
+        <Profile
+          setOnComp={setOnComp}
+          tweets={tweets}
+          setArray={setArray}
+          array={array}
+        />
       ) : (
         <Home
           handleSubmit={handleSubmit}

@@ -4,6 +4,8 @@ import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
+import { useAtom } from "jotai";
+import { textAtom } from "../../atom/State.js";
 
 const Signup = ({
   onChangeName,
@@ -23,6 +25,27 @@ const Signup = ({
   email,
   phone,
 }) => {
+  const [date, setDAte] = useAtom(textAtom);
+  let dateObj = new Date();
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  let regisMonth = months[dateObj.getMonth()];
+  let regisYear = dateObj.getFullYear();
+  let regisDate = dateObj.getDate();
+  const regisTime= regisDate + " " + regisMonth + " " + regisYear;
+
   const isApril = month === "April";
   const isJune = month === "June";
   const isSeptember = month === "September";
@@ -63,28 +86,28 @@ const Signup = ({
   };
 
   let navigate = useNavigate();
-  
+
   const notify = async () => {
     const newReg = { name, username, password, email, phone };
     try {
       const res = await api.post("/auth/register", newReg);
-      return res.data.message
+      return res.data.message;
     } catch (error) {
       if (error.response) {
-        throw new Error (error.response.data.message)
+        throw new Error(error.response.data.message);
         // console.log(error.response.status);
         // console.log(error.response.headers);
       } else if (error.request) {
-        throw new Error (error.request)
+        throw new Error(error.request);
       } else {
-        throw new Error (error.message)
+        throw new Error(error.message);
       }
     }
-  }
+  };
 
   const toSign = () => {
-    navigate('/')
-  }
+    navigate("/");
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -93,8 +116,9 @@ const Signup = ({
       {
         loading: "Loading...",
         success: (data) => {
-          setTimeout(toSign, 1200)
-          return data
+          setTimeout(toSign, 1200);
+          setDAte(regisTime);
+          return data;
         },
         error: (error) => `${error}`,
       },
@@ -106,15 +130,16 @@ const Signup = ({
           duration: 1000,
           //icon: "🔥",
         },
-      }, 
+      }
     );
-   // navigate('/home');
+    // navigate('/home');
   };
 
   return (
     <div>
-    <Header/>
-      <form className="loginpage__signup__box" onSubmit={handleSubmit}>
+      <Header />
+      <form style={{backgroundColor:""}} className="loginpage__signup__box" onSubmit={handleSubmit}>
+        <div className="loginpage__signup__wrap">
         <h1 className="loginpage__signup__title">Create your account</h1>
         <div className="loginpage__signup__inputs1">
           <input
@@ -197,8 +222,10 @@ const Signup = ({
             <Toaster />
           </div>
         }
+        </div>
+      
       </form>
-      <Footer/>
+      <Footer />
     </div>
   );
 };

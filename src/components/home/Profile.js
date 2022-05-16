@@ -4,8 +4,12 @@ import Image from "./beranda.jpg";
 import { useState } from "react";
 import Alltweet from "./Alltweet";
 import { decodeToken } from "react-jwt";
+import { useAtom } from "jotai";
+import { textAtom } from "../../atom/State.js";
 
 const Profile = ({ setOnComp, tweets, setTweets, setArray, array }) => {
+  const [date] = useAtom(textAtom);
+  //console.log(111, date);
   const [onSection, setOnSection] = useState("");
   const isTweet = onSection === "tweet" || onSection === "" ? "bold" : "";
   const isTweetAndReply = onSection === "tweetandreply" ? "bold" : "";
@@ -19,7 +23,9 @@ const Profile = ({ setOnComp, tweets, setTweets, setArray, array }) => {
       behavior: "smooth",
     });
   };
-  //console.log(123, tweets.length)
+  const tes  = () => {
+    console.log(12, myDecodedToken)
+  }
   return (
     <div className="profile__wrap">
       <div className="profile__header">
@@ -55,7 +61,11 @@ const Profile = ({ setOnComp, tweets, setTweets, setArray, array }) => {
           <p>
             Never lost hope, because it is the key to achieve all your dreams.
           </p>
-          <p>Join August 2019</p>
+          <div style={{display:"flex", lineHeight:"5px"}}>
+          <svg onClick={tes} style={{width:"30px", height:"30px"}}>{mySvg.date}</svg> 
+          <p>Join {date}</p>
+          </div>
+          
           <p>475 Following&nbsp;&nbsp;&nbsp;105 Follower</p>
         </div>
         <div

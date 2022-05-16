@@ -74,6 +74,9 @@ const LoginTwo = ({ userName, toSignUp }) => {
       }
     );
   };
+
+
+  
   return (
     <div>
       <Header />
@@ -86,7 +89,7 @@ const LoginTwo = ({ userName, toSignUp }) => {
               className="loginpage__login__inpUser"
               type="text"
               placeholder={userName}
-              disabled={false}
+              disabled={true}
             />
             <span className="loginpage__login__label2">username</span>
           </label>
@@ -128,7 +131,7 @@ const LoginTwo = ({ userName, toSignUp }) => {
               pointerEvents: passValue ? "" : "none",
               backgroundColor: passValue ? "black" : "",
             }}
-            className="loginpage__login__buttons2"
+            className="loginpage__login__buttons3"
           >
             Log in
           </button>
