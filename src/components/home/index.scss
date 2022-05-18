@@ -1,526 +1,586 @@
+body {
+  background-color: white;
+}
 
+#homewrapper {
+  max-width: 1440px;
+  top: 0;
+  margin: 0 auto;
+  
+}
 .homepage {
-    background-color: white;
-    margin: 0 auto;
+  //max-width: 1024px;
+  background-color: rgb(255, 255, 255);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 25% 45% 30%;
+  //color: red;
+
+
+
+  &__header {
+    background-color: rgba(253, 253, 253, 0.75);
+    //position: fixed;
+    top: 0;
+    position: sticky;
+    backdrop-filter: blur(8px);
+    //height: 10%;
+    width: 100%;
+    z-index: 1;
+    //border-left: 1px solid rgb(221, 218, 218);
+    // border-right: 1px solid rgb(221, 218, 218);
+    //margin-top: 20%;
+    //margin-left: 25%;
+    //z-index: 1;
     display: grid;
-    grid-template-columns: 25% 50% 25%;
-  
-    &__header {
-      background-color: rgba(255, 255, 255, 0.75);
-      position: fixed;
-      backdrop-filter: blur(8px);
-      height: 10%;
-      width: 50%;
-      z-index: 1;
-      //border-left: 1px solid rgb(221, 218, 218);
-      // border-right: 1px solid rgb(221, 218, 218);
-      //margin-top: 20%;
-      //margin-left: 25%;
-      //z-index: 1;
-      display: grid;
-      grid-template-columns: 90% 15%;
-    }
-  
-    #stars {
-      border-radius: 35px;
-      //background-color: red;
-      padding: 5px;
-      cursor: pointer;
-      &:hover {
-        background-color: rgb(229, 231, 235);
-      }
-    }
-  
-    #whthappen {
-      border-radius: 0px;
-      background-color: rgb(255, 255, 255);
-      outline-style: none;
-    }
-  
-    &__header2 {
-      background-color: rgb(255, 255, 255);
-      //padding-left: 25px;
-      padding-top: 9px;
-      position: fixed;
-      height: 10%;
-      width: 25%;
-      margin-left: 76%;
-      //z-index: 1;
+    grid-template-columns: 90% 15%;
+  }
 
-    }
-
-    &__home{
-      //background-color: red;
-      box-shadow: 0px 0px 0px 0px rgb(252, 252, 252),
-        1px 0px 0px 0px rgb(204, 201, 201);
-
-    }
-  
-    label {
-      //border: none;
-      //outline-color: white;
-      top: 5px;
-      position: relative;
-    }
-  
-    label:before {
-      border: none;
-      //outline-color: white;
-      content: "";
-      position: absolute;
-      left: 25px;
-      top: 0;
-      bottom: 0;
-      width: 20px;
-      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='35' height='35' viewBox='0 0 25 25' fill-rule='evenodd'%3E%3Cpath d='M16.036 18.455l2.404-2.405 5.586 5.587-2.404 2.404zM8.5 2C12.1 2 15 4.9 15 8.5S12.1 15 8.5 15 2 12.1 2 8.5 4.9 2 8.5 2zm0-2C3.8 0 0 3.8 0 8.5S3.8 17 8.5 17 17 13.2 17 8.5 13.2 0 8.5 0zM15 16a1 1 0 1 1 2 0 1 1 0 1 1-2 0'%3E%3C/path%3E%3C/svg%3E")
-        center / contain no-repeat;
-    }
-  
-    input {
-      border: none;
-      background-color: rgb(232, 238, 243);
-      outline-color: rgb(30, 167, 247);
-      border-radius: 45px;
-      padding: 3% 15% 3% 15%;
-      //padding: 25px 85px;
-    }
-  
-    &__mainheader {
-      background-color: rgb(255, 255, 255);
-      position: fixed;
-      height: 10%;
-      width: 25%;
-      z-index: 9999;
-    }
-  
-    #twitter {
-      margin-top: 1rem;
-      border-radius: 45px;
-      padding: 10px;
-      //background-color: red;
-      margin-left: 20%;
-      cursor: pointer;
-      &:hover {
-        background-color: rgb(182, 204, 245);
-      }
-    }
-  
-    #menu {
-      position: sticky;
-      //background-color: rgb(114, 201, 56);
-      box-shadow: 0px 0px 0px 0px rgb(252, 252, 252),
-        1px 0px 0px 0px rgb(204, 201, 201);
-      margin-left: 15%;
-      top: 0em;
-      height: 100vh;
-      box-sizing: border-box;
-      z-index: 2;
-    }
-  
-    &__iconhome {
-      //font-weight: bold;
-      height: 65px;
-      width: 130px;
-      padding-left: 10px;
-      border-radius: 45px;
-      display: flex;
-      //margin-bottom: -0.7em;
-      justify-content: left;
-      column-gap: 7%;
-      align-items: center;
-      font-size: 2.5em;
-      cursor: pointer;
-      //background-color: yellow;
-      &:hover {
-        background-color: rgb(218, 214, 214);
-      }
-    }
-  
-    &__icons {
-      //margin-top: -1.5rem;
-      padding-left: 12px;
-      border-radius: 45px;
-      column-gap: 7%;
-      display: flex;
-      height: 65px;
-      width: 250px;
-      font-weight: lighter;
-      color: rgb(240, 29, 29);
-      cursor: pointer;
-      //background-color: rgb(212, 187, 235);
-      justify-content: left;
-      text-align: left;
-      align-items: center;
-      font-size: 2.5em;
-      font-weight: lighter;
-      color: rgb(63, 61, 61);
-      &:hover {
-        background-color: rgb(218, 214, 214);
-      }
-    }
-  
-    &__tweetbtn {
-      padding: 5% 5% 5% 5%;
-      border-color: white;
-      border-radius: 45px;
-      font-weight: bold;
-      font-size: x-large;
-      color: white;
-      margin-top: 0.5rem;
-      width: 85%;
-      background-color: rgb(29, 108, 255);
-      cursor: pointer;
-      &:hover {
-        background-color: rgb(0, 86, 247);
-      }
-    }
-  
-    &__accuser {
-      //background-color: red;
-      border-radius: 35px;
-      display: flex;
-      margin-top: 3em;
-      align-items: center;
-      //justify-content: space-between;
-      cursor: pointer;
-      font-weight: lighter;
-      color: rgb(63, 61, 61);
-      
-  
-      &:hover {
-        background-color: rgb(218, 214, 214);
-      }
-    }
-  
-    #imgjoe {
-      flex: 1;
-      position: absolute;
-      margin-left: 4%;
-      //background-color: yellow;
-      //width: 50px;
-    }
-  
-    #namejoe {
-      //background-color: green;
-      margin-left: 24%;
-      flex: 2;
-      //width: -45rem;
-      ///width: 2px;
-    }
-  
-    #morejoe {
-      //background-color: blue;
-      margin-right: 5%;
-    }
-  
-    &__icontitle {
-      //background-color: red;
-      font-size: 0.6em;
-      //margin-left: 0.5em;
-    }
-  
-    #main {
-      //filter: blur(3px);
-      //position: absolute;
-      //background-color: green;
-      padding: 85px 0px 0px 0px;
-      //top: 0;
-      //border-right: 5px solid black ;
-      //outline-style: solid;
-      outline-width: 1px;
-      outline-color: rgb(212, 211, 211);
-    }
-  
-    &__mainhead {
-      //float: left;
-      //background-color: red;
-      display: flex;
-      padding-left: 25px;
-      padding-right:25px;
-    }
-  
-    &__tophead {
-      //float: left;
-      padding: 5px;
-      //background-color: blue;
-    }
-  
-    #textarea {
-      overflow: hidden;
-      //background-color: red;
-      border: none;
-      border-color: transparent;
-      padding-top: 20px;
-      width: 100%;
-      font-size: x-large;
-      outline: none;
-      resize: none;
-    }
-  
-    &__mainhead2 {
-      //background-color: red;
-      padding-left: 25px;
-      padding-right: 15px;
-      padding-bottom: 13px;
-      //border-right: 2px solid rgb(221, 218, 218);
-      border-bottom: 2px solid rgb(221, 218, 218);
-      border-width: 100%;
-      display: flex;
-      align-items: center;
-      
-    }
-  
-    &__iconmainhead {
-      //background-color: red;
-      display: flex;
-      //padding: 0% 0% -51px 0%;
-      //padding-top: -30rem;
-      align-items: center;
-      //text-align: center;
-      column-gap: 5px;
-      max-height: 55px;
-      width: 55%;
-      //margin-left: 200%;
-      //background-color: rgb(81, 187, 236);
-      //font-size: 9rem;
-      color: rgb(29, 108, 255);
-    }
-  
-    &__icon2 {
-      cursor: pointer;
-      padding: 10px;
-      height: 35px;
-      width: 35px;
-      column-gap: 2px;
-      border-radius: 25px;
-      &:hover {
-        background-color: rgb(219, 229, 247);
-      }
-      //padding: 2px;
-    }
-  
-    #tweetbtnmain {
-      padding: 1% 4% 1% 4%;
-      margin-left: 25%;
-      border-radius: 35px;
-      font-size: larger;
-      color: white;
-      background-color: rgb(129, 171, 250);
-      border-style: none;
-      border: 230px;
-      //background-color: red;
-      // margin-top: -4rem;
-      //margin-right: -15rem;
-    }
-  
-    &__line {
-      //margin-left: -5.5%;
-      //margin-right: 500%;
-      width: 100%;
-      border: 0.5px solid rgb(221, 218, 218);
-    }
-  
-    &__topmain {
-      padding-left: 25px;
-      padding-right: 25px;
-      //background-color: rebeccapurple;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-  
-      //font-weight:bold;
-      //outline-style: solid;
-    }
-  
-    &__topmainitem {
-      //background-color: red;
-      font-size: large;
-      outline-style: solid;
-      outline-width: 1px;
-      padding: 1.5% 3.5% 1.5% 3.5%;
-      border-radius: 35px;
-      outline-color: rgb(179, 179, 179);
-      cursor: pointer;
-      &:hover {
-        background-color: rgb(207, 205, 205);
-      }
-    }
-  
-    &__botmain {
-      margin-left: 14%;
-      //background-color: red;
-      align-items: center;
-      //text-align: center;
-      width: 75%;
-      //color: rebeccapurple;
-    }
-  
-    #setting {
-      cursor: pointer;
-      padding: 3px;
-      //background-color: red;
-      border-radius: 20px;
-      &:hover {
-        background-color: rgb(179, 175, 175);
-      }
-    }
-  
-    #rightmore {
-      padding: 3px;
-      border-radius: 25px;
-      //background-color: red;
-      &:hover {
-        fill: rgb(112, 177, 247);
-        background-color: rgb(201, 223, 247);
-      }
-    }
-  
-    &__contentright {
-      cursor: pointer;
-      //background-color: red;
-      &:hover {
-        background-color: rgb(228, 227, 227);
-      }
-    }
-  
-    #smore {
-      border-bottom-left-radius: 25px;
-      border-bottom-right-radius: 25px;
-      //background-color: rgb(235, 206, 206);
-      padding: 0.1% 0% 0% 5%;
-      cursor: pointer;
-      &:hover {
-        background-color: rgb(228, 227, 227);
-      }
-    }
-  
-    #smore2 {
-      border-bottom-left-radius: 25px;
-      border-bottom-right-radius: 25px;
-      //background-color: rgb(235, 206, 206);
-      padding: 0.1% 0% 0% 5%;
-      cursor: pointer;
-      &:hover {
-        background-color: rgb(228, 227, 227);
-      }
-    }
-  
-    #letsbtn {
-      padding: 2% 7% 2% 7%;
-      //margin-left: 25%;
-      font-weight: bolder;
-      border-radius: 45px;
-      font-size: x-large;
-      color: white;
-      background-color: rgb(29, 108, 255);
-      border-style: none;
-      border: 230px;
-      cursor: pointer;
-    }
-  
-    #right {
-      outline-width: 1px;
-      //background-color: red;
-    }
-  
-    &__rightbox {
-      background-color: rgb(232, 238, 243);
-      border-radius: 25px;
-    }
+  &__header2 {
+    background-color: white;
+    max-width: 348px;
+    //padding-left: 25px;
+    border-color: white;
+    //padding-top: 9px;
+    border: none;
+    padding-top: 10px;
+    top: 0;
+    position: sticky;
+    height: 80px;
+  }
 
 
-    &__popupcontent{
-      padding: 3px;
-      cursor: pointer;
-      &:hover{
-        background-color: rgba(213, 217, 217, 0.35);
-      }
-    }
-    
-  
-    &__headrightbox {
-      //background-color: red;
-      height: 60px;
-      display: flex;
-      //align-items: center;
-      justify-content: space-between;
-      //column-gap: 50%;
-      padding: 5% 5% 0% 5%;
-      //align-items: center;
-    }
-  
-    &__contentrighttitle {
-      margin-top: -1rem;
-      height: 25px;
-      //background-color: red;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      //column-gap: -20%;
-      padding: 5% 3% 0% 5%;
-    }
-  
-    &__contentrightdesc {
-      margin-top: -1rem;
-      padding: 0% 0% 0% 5%;
-      //font-weight: bold;
-      //background-color: red;
-    }
-  
-    &__rightboxbot {
-      background-color: rgb(232, 238, 243);
-      border-radius: 25px;
-    }
-  
-    &__rightboxbotcontent {
-      //background-color: rgb(73, 126, 170);
-      //  /column-gap: -10rem;
-      display: flex;
-      //justify-content: space-between;
-      padding: 5% 3% 0% 5%;
-      cursor: pointer;
-      &:hover {
-        background-color: rgb(228, 227, 227);
-      }
-    }
-  
-    &__avatar {
-      position: absolute;
-      flex: 1;
-      //margin-right: 100px;
-    }
-  
-    &__username {
-      flex: 2;
-      width: 100px;
-      margin-left: 22%;
-    }
-  
-    &__lastbtn {
-      width: 200px;
-    }
-  
-    &__tos {
-      :hover {
-        text-decoration: underline;
-      }
-    }
-  
-    &__title {
-      margin-top: 1rem;
-  
-      margin-left: 5%;
-    }
-  
-    &__search {
-      margin-top: 1rem;
-      margin-left: 2%;
-    }
-  
-    &__section {
-      padding: 25% 5% 5% 5%;
-    }
+  &__home {
+    //background-color: red;
+    box-shadow: 0px 0px 0px 0px rgb(252, 252, 252),
+      1px 0px 0px 0px rgb(204, 201, 201);
+  }
 
+
+  #stars {
+    border-radius: 35px;
+    //background-color: red;
+    padding: 5px;
+    cursor: pointer;
+    &:hover {
+      background-color: rgb(229, 231, 235);
+    }
+  }
+
+  #whthappen {
+    border-radius: 0px;
+    background-color: rgb(255, 255, 255);
+    outline-style: none;
+  }
+
+ 
+
+  label {
+    //border: none;
+    //outline-color: white;
+    top: 5px;
+    position: relative;
+  }
+
+  label:before {
+    border: none;
+    //outline-color: white;
+    content: "";
+    position: absolute;
+    left: 25px;
+    top: 0;
+    bottom: 0;
+    width: 20px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='35' height='35' viewBox='0 0 25 25' fill-rule='evenodd'%3E%3Cpath d='M16.036 18.455l2.404-2.405 5.586 5.587-2.404 2.404zM8.5 2C12.1 2 15 4.9 15 8.5S12.1 15 8.5 15 2 12.1 2 8.5 4.9 2 8.5 2zm0-2C3.8 0 0 3.8 0 8.5S3.8 17 8.5 17 17 13.2 17 8.5 13.2 0 8.5 0zM15 16a1 1 0 1 1 2 0 1 1 0 1 1-2 0'%3E%3C/path%3E%3C/svg%3E")
+      center / contain no-repeat;
+  }
+
+  input {
+    border: none;
+    background-color: rgb(243, 234, 232);
+    outline-color: rgb(30, 167, 247);
+    border-radius: 45px;
+    padding: 3% 15% 3% 15%;
+    width: 100%;
+    //width: max-content;
+    //padding: 25px 85px;
+  }
+
+  // &__mainheader {
+  //   background-color: rgb(255, 255, 255);
+  //   position: fixed;
+  //   height: 10%;
+  //   width: 25%;
+  //   z-index: 9999;
+  // }
+
+  #menu {
+    //background-color: rgba(243, 19, 19, 0.16);
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: column;
+    border-right: 0.05px solid rgba(152, 134, 134, 0.75);
+    padding-left: 17%;
+    position: sticky;
+    top: 0;
+    z-index: 0;
+    height: 100vh;
     
   }
-  
+
+
+
+  // &__iconhome {
+  //   //font-weight: bold;
+  //   height: 65px;
+  //   width: 130px;
+  //   padding-left: 10px;
+  //   border-radius: 45px;
+  //   display: flex;
+  //   //margin-bottom: -0.7em;
+  //   justify-content: left;
+  //   column-gap: 7%;
+  //   align-items: center;
+  //   font-size: 2.5em;
+  //   cursor: pointer;
+  //   //background-color: yellow;
+  //   &:hover {
+  //     background-color: rgb(218, 214, 214);
+  //   }
+  // }
+
+  &__icons {
+    //background-color: rgb(255, 160, 160);
+    width: fit-content;
+    padding: 0 12px 0 12px;
+    border-radius: 50px;
+    display: flex;
+    height: 45px;
+    font-weight: lighter;
+    color: rgb(240, 29, 29);
+    cursor: pointer;
+    align-items: center;
+    font-size: 2.5em;
+    font-weight: lighter;
+    color: rgb(63, 61, 61);
+    &:hover {
+      background-color: rgba(218, 214, 214, 0.55);
+    }
+  }
+
+  #twitt {
+    //background-color: red;
+    //position: relative;
+    padding: 12px 0px 0px 12px;
+  }
+
+  #twitter {
+    fill: blue;
+    width: 30px;
+    height: 30px;
+    border-radius: 35px;
+    //position: absolute;
+    top: 6px;
+    //background-size:89px;
+    //background-color: yellow;
+    cursor: pointer;
+    &:hover {
+      background-color: rgb(182, 204, 245);
+    }
+  }
+
+  &__tweetbtn {
+    //display: block;
+    padding: 3% 3% 3% 3%;
+    border: none;
+    border-radius: 45px;
+    font-weight: bold;
+    font-size: 20px;
+    color: white;
+    margin-top: 0.5rem;
+    width: 85%;
+    background-color: rgb(29, 108, 255);
+    cursor: pointer;
+    &:hover {
+      background-color: rgb(0, 86, 247);
+    }
+  }
+
+  &__accuser {
+    //background-color: red;
+    border-radius: 45px;
+    display: flex;
+    width: 100wh;
+    //background-color: yellow;
+    padding: 5px 5px 5px 5px;
+    //width: fit-content;
+    //border-top: 7px;
+    //padding-top: 7px;
+    //margin-top: 3em;
+    align-items: center;
+    //justify-content: space-between;
+    cursor: pointer;
+    font-weight: lighter;
+    color: rgb(63, 61, 61);
+
+    &:hover, &:active {
+      background-color: rgba(215, 218, 214, 0.55);
+    }
+  }
+
+  #imgjoe {
+    //flex: 1;
+    //position: absolute;
+    //margin-left: 4%;
+    //background-color: yellow;
+    //width: 50px;
+  }
+
+  #namejoe {
+    //background-color: green;
+    //margin-left: 24%;
+    //flex: 2;
+    //width: -45rem;
+    ///width: 2px;
+  }
+
+  #morejoe {
+    //background-color: blue;
+    //margin-left: 5%;
+  }
+
+  &__icontitle {
+    //background-color: red;
+    //padding-left: 10%;
+    font-size: 20px;
+    margin-left: 0.5em;
+  }
+
+  #main {
+    //filter: blur(3px);
+    //position: absolute;
+    //background-color: green;
+    padding: 0px 0px 0px 0px;
+    //top: 0;
+    //border-right: 5px solid black ;
+    //outline-style: solid;
+    outline-width: 1px;
+    outline-color: rgb(212, 211, 211);
+  }
+
+  &__mainhead {
+    //float: left;
+    //background-color: red;
+    display: flex;
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+
+  &__tophead {
+    //float: left;
+    padding: 5px;
+    //background-color: blue;
+  }
+
+  #textarea {
+    overflow: hidden;
+    //background-color: red;
+    border: none;
+    border-color: transparent;
+    padding-top: 20px;
+    width: 100%;
+    font-size: x-large;
+    outline: none;
+    resize: none;
+  }
+
+  &__mainhead2 {
+    //background-color: red;
+    padding-left: 25px;
+    padding-right: 15px;
+    padding-bottom: 13px;
+    //border-right: 2px solid rgb(221, 218, 218);
+    border-bottom: 2px solid rgb(221, 218, 218);
+    border-width: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  &__iconmainhead {
+    //background-color: red;
+    display: flex;
+    //padding: 0% 0% -51px 0%;
+    //padding-top: -30rem;
+    align-items: center;
+    //text-align: center;
+    column-gap: 5px;
+    max-height: 55px;
+    width: 55%;
+    //margin-left: 200%;
+    //background-color: rgb(81, 187, 236);
+    //font-size: 9rem;
+    color: rgb(29, 108, 255);
+  }
+
+  &__icon2 {
+    cursor: pointer;
+    padding: 10px;
+    height: 35px;
+    width: 35px;
+    column-gap: 2px;
+    border-radius: 25px;
+    &:hover {
+      background-color: rgb(219, 229, 247);
+    }
+    //padding: 2px;
+  }
+
+  #tweetbtnmain {
+    padding: 1% 4% 1% 4%;
+    margin-left: 25%;
+    border-radius: 35px;
+    //font-size: 25px;
+    color: white;
+    background-color: rgb(129, 171, 250);
+    border-style: none;
+    border: 230px;
+    //background-color: red;
+    // margin-top: -4rem;
+    //margin-right: -15rem;
+  }
+
+  &__line {
+    //margin-left: -5.5%;
+    //margin-right: 500%;
+    width: 100%;
+    border: 0.5px solid rgb(221, 218, 218);
+  }
+
+  &__topmain {
+    padding-left: 25px;
+    padding-right: 25px;
+    //background-color: rebeccapurple;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    //font-weight:bold;
+    //outline-style: solid;
+  }
+
+  &__topmainitem {
+    //background-color: red;
+    font-size: large;
+    outline-style: solid;
+    outline-width: 1px;
+    padding: 1.5% 3.5% 1.5% 3.5%;
+    border-radius: 35px;
+    outline-color: rgb(179, 179, 179);
+    cursor: pointer;
+    &:hover {
+      background-color: rgb(207, 205, 205);
+    }
+  }
+
+  &__botmain {
+    margin-left: 14%;
+    //background-color: red;
+    align-items: center;
+    //text-align: center;
+    width: 75%;
+    //color: rebeccapurple;
+  }
+
+  #setting {
+    cursor: pointer;
+    padding: 3px;
+    //background-color: red;
+    border-radius: 20px;
+    &:hover {
+      background-color: rgb(179, 175, 175);
+    }
+  }
+
+  #rightmore {
+    padding: 3px;
+    border-radius: 25px;
+    //background-color: red;
+    &:hover {
+      fill: rgb(112, 177, 247);
+      background-color: rgb(201, 223, 247);
+    }
+  }
+
+  &__contentright {
+    cursor: pointer;
+    //background-color: red;
+    &:hover {
+      background-color: rgb(228, 227, 227);
+    }
+  }
+
+  #smore {
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    //background-color: rgb(235, 206, 206);
+    padding: 0.1% 0% 0% 5%;
+    cursor: pointer;
+    &:hover {
+      background-color: rgb(228, 227, 227);
+    }
+  }
+
+  #smore2 {
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    //background-color: rgb(235, 206, 206);
+    padding: 0.1% 0% 0% 5%;
+    cursor: pointer;
+    &:hover {
+      background-color: rgb(228, 227, 227);
+    }
+  }
+
+  #letsbtn {
+    padding: 2% 7% 2% 7%;
+    //margin-left: 25%;
+    font-weight: bolder;
+    border-radius: 45px;
+    font-size: x-large;
+    color: white;
+    background-color: rgb(29, 108, 255);
+    border-style: none;
+    border: 230px;
+    cursor: pointer;
+  }
+
+  #right {
+    outline-width: 1px;
+    // background-color: red;
+    // padding-right: 20%;
+  }
+
+  &__rightbox {
+    background-color: rgba(232, 238, 243, 0.55);
+    border-radius: 25px;
+    max-width: 348px;
+  }
+
+  &__popupcontent {
+    padding: 3px;
+    cursor: pointer;
+    &:hover {
+      background-color: rgba(213, 217, 217, 0.35);
+    }
+  }
+
+  &__headrightbox {
+    //background-color: red;
+    height: 60px;
+    display: flex;
+    //align-items: center;
+    justify-content: space-between;
+    //column-gap: 50%;
+    padding: 5% 5% 0% 5%;
+    //align-items: center;
+  }
+
+  &__contentrighttitle {
+    margin-top: -1rem;
+    height: 25px;
+    //background-color: red;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    //column-gap: -20%;
+    padding: 5% 3% 0% 5%;
+  }
+
+  &__contentrightdesc {
+    margin-top: -1rem;
+    padding: 0% 0% 0% 5%;
+    //font-weight: bold;
+    //background-color: red;
+  }
+
+  &__rightboxbot {
+    background-color: rgb(232, 238, 243);
+    border-radius: 25px;
+    max-width: 348px;
+  }
+
+  &__rightboxbotcontent {
+    //background-color: rgb(73, 126, 170);
+    //  /column-gap: -10rem;
+    display: flex;
+    //justify-content: space-between;
+    padding: 5% 3% 0% 5%;
+    cursor: pointer;
+    &:hover {
+      background-color: rgb(228, 227, 227);
+    }
+  }
+
+  &__avatar {
+    position: absolute;
+    flex: 1;
+    //margin-right: 100px;
+  }
+
+  &__username {
+    flex: 2;
+    width: 100px;
+    margin-left: 22%;
+  }
+
+  &__lastbtn {
+    width: 200px;
+  }
+
+  &__tos {
+    :hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__title {
+    margin-top: 1rem;
+
+    margin-left: 5%;
+  }
+
+  &__search {
+    margin-top: 1rem;
+    margin-left: 2%;
+  }
+
+  &__sectionright {
+    //background-color: red;
+    padding: 0% 5% 5% 5%;
+  }
+}
+
+//Laptop medium
+@media (max-width: 1024px) {
+  .homepage {
+    grid-template-columns: 10% 60% 30%;
+
+    &__icontitle {
+      display: none;
+      //display: none;
+      //background-color: red;
+    }
+
+    &__accuser{
+      width: fit-content;
+    }
+
+    #leftusername, #morejoe {
+      display: none;
+    }
+
+    &__tweetbtn {
+      display: none;
+    }
+  }
+}

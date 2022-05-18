@@ -13,10 +13,7 @@ import Popup from "reactjs-popup";
 import Home from "./Home";
 import Profile from "./Profile";
 
-
 const HomePage = () => {
-  
-
   let navigate = useNavigate();
   const token = localStorage.getItem("Bearer");
   const myDecodedToken = decodeToken(token);
@@ -117,172 +114,201 @@ const HomePage = () => {
       return getTweets();
     }
   });
+  useEffect(() => {
+    console.log(11, window.matchMedia("(max-width: 1024px)").matches);
+  });
   return (
+    <div id="homewrapper">
     <div className="homepage">
       <div>
-        <div className="homepage__mainheader">
-          <FaTwitter
-            id="twitter"
-            style={{ color: "blue", fontSize: "2.5em" }}
-          />
-        </div>
-        <div className="homepage__header2">
-          <label>
-            <input
-              style={{ fontSize: "larger" }}
-              type="text"
-              placeholder="Search Twitter"
-            />
-          </label>
-        </div>
         <div id="menu" className="homepage__section">
-          <div
-            onClick={() => {
-              setOnComp("home");
-              scrollToTop();
-            }}
-            className="homepage__iconhome"
-          >
-            <svg style={{ width: "35px", height: "35px" }}>
-              {onComp === "home" || onComp === ""
-                ? mySvg.home[1]
-                : mySvg.home[0]}
-            </svg>
-            <p className="homepage__icontitle" style={{ fontWeight: isHome }}>
-              Home
-            </p>
+          <div id="twitt">
+            <div id="twitter">{mySvg.twitter}</div>
           </div>
-
-          <div
-            onClick={() => setOnComp("explore")}
-            style={{ width: "150px" }}
-            className="homepage__icons"
-          >
-            <svg style={{ width: "35px", height: "35px", position: "static" }}>
-              {onComp === "explore" ? mySvg.explore[1] : mySvg.explore[0]}
-            </svg>
-            <p
-              className="homepage__icontitle"
-              style={{ fontWeight: isExplore }}
+          <div style={{ backgroundColor: "" }}>
+            <div
+              onClick={() => {
+                setOnComp("home");
+                scrollToTop();
+              }}
+              className="homepage__icons"
             >
-              Explore
-            </p>
-          </div>
-
-          <div
-            onClick={() => setOnComp("notifications")}
-            style={{ width: "210px" }}
-            className="homepage__icons"
-          >
-            <svg style={{ width: "35px", height: "35px" }}>
-              {onComp === "notifications"
-                ? mySvg.notification[1]
-                : mySvg.notification[0]}
-            </svg>
-            <p
-              className="homepage__icontitle"
-              style={{ fontWeight: isNotifications }}
-            >
-              Notifications
-            </p>
-          </div>
-
-          <div
-            onClick={() => setOnComp("messages")}
-            style={{ width: "180px" }}
-            className="homepage__icons"
-          >
-            <svg style={{ width: "35px", height: "35px" }}>
-              {onComp === "messages" ? mySvg.messages[1] : mySvg.messages[0]}
-            </svg>
-            <p
-              className="homepage__icontitle"
-              style={{ fontWeight: isMessages }}
-            >
-              Messages
-            </p>
-          </div>
-
-          <div
-            onClick={() => setOnComp("bookmarks")}
-            style={{ width: "190px" }}
-            className="homepage__icons"
-          >
-            <svg style={{ width: "35px", height: "35px" }}>
-              {onComp === "bookmarks" ? mySvg.bookmarks[1] : mySvg.bookmarks[0]}
-            </svg>
-            <p
-              className="homepage__icontitle"
-              style={{ fontWeight: isBookmarks }}
-            >
-              Bookmarks
-            </p>
-          </div>
-
-          <div
-            onClick={() => setOnComp("lists")}
-            style={{ width: "110px" }}
-            className="homepage__icons"
-          >
-            <svg style={{ width: "35px", height: "35px" }}>
-              {onComp === "lists" ? mySvg.lists[1] : mySvg.lists[0]}
-            </svg>
-            <p className="homepage__icontitle" style={{ fontWeight: isLists }}>
-              Lists
-            </p>
-          </div>
-
-          <div
-            onClick={() => {
-              setOnComp("profile");
-              scrollToTop();
-              //getTweets();
-            }}
-            style={{ width: "130px" }}
-            className="homepage__icons"
-          >
-            <svg style={{ width: "35px", height: "35px" }}>
-              {onComp === "profile" ? mySvg.profile[0] : mySvg.profile[1]}
-            </svg>
-            <p
-              className="homepage__icontitle"
-              style={{ fontWeight: isProfile }}
-            >
-              Profile
-            </p>
-          </div>
-
-          <div
-            onClick={() => setOnComp("more")}
-            style={{ width: "120px" }}
-            className="homepage__icons"
-          >
-            <svg style={{ width: "35px", height: "35px" }}>
-              {mySvg.moremenu}
-            </svg>
-            <p className="homepage__icontitle" style={{ fontWeight: isMore }}>
-              More
-            </p>
+              <svg style={{ width: "24px", height: "24px" }}>
+                {onComp === "home" || onComp === ""
+                  ? mySvg.home[1]
+                  : mySvg.home[0]}
+              </svg>
+              <p className="homepage__icontitle" style={{ fontWeight: isHome }}>
+                Home
+              </p>
+            </div>
           </div>
 
           <div>
-            <button className="homepage__tweetbtn">Tweet</button>
+            <div
+              onClick={() => setOnComp("explore")}
+              className="homepage__icons"
+            >
+              <svg
+                style={{ width: "24px", height: "24px", position: "static" }}
+              >
+                {onComp === "explore" ? mySvg.explore[1] : mySvg.explore[0]}
+              </svg>
+              <p
+                className="homepage__icontitle"
+                style={{ fontWeight: isExplore }}
+              >
+                Explore
+              </p>
+            </div>
+          </div>
+          <div>
+            {" "}
+            <div
+              onClick={() => setOnComp("notifications")}
+              className="homepage__icons"
+            >
+              <svg style={{ width: "24px", height: "24px" }}>
+                {onComp === "notifications"
+                  ? mySvg.notification[1]
+                  : mySvg.notification[0]}
+              </svg>
+              <p
+                className="homepage__icontitle"
+                style={{ fontWeight: isNotifications }}
+              >
+                Notifications
+              </p>
+            </div>
           </div>
 
+          <div>
+            {" "}
+            <div
+              onClick={() => setOnComp("messages")}
+              className="homepage__icons"
+            >
+              <svg style={{ width: "24px", height: "24px" }}>
+                {onComp === "messages" ? mySvg.messages[1] : mySvg.messages[0]}
+              </svg>
+              <p
+                className="homepage__icontitle"
+                style={{ fontWeight: isMessages }}
+              >
+                Messages
+              </p>
+            </div>
+          </div>
+
+          <div>
+            {" "}
+            <div
+              onClick={() => setOnComp("bookmarks")}
+              className="homepage__icons"
+            >
+              <svg style={{ width: "24px", height: "24px" }}>
+                {onComp === "bookmarks"
+                  ? mySvg.bookmarks[1]
+                  : mySvg.bookmarks[0]}
+              </svg>
+              <p
+                className="homepage__icontitle"
+                style={{ fontWeight: isBookmarks }}
+              >
+                Bookmarks
+              </p>
+            </div>
+          </div>
+
+          <div>
+            {" "}
+            <div onClick={() => setOnComp("lists")} className="homepage__icons">
+              <svg style={{ width: "24px", height: "24px" }}>
+                {onComp === "lists" ? mySvg.lists[1] : mySvg.lists[0]}
+              </svg>
+              <p
+                className="homepage__icontitle"
+                style={{ fontWeight: isLists }}
+              >
+                Lists
+              </p>
+            </div>
+          </div>
+
+          <div>
+            {" "}
+            <div
+              onClick={() => {
+                setOnComp("profile");
+                scrollToTop();
+                //getTweets();
+              }}
+              className="homepage__icons"
+            >
+              <svg style={{ width: "24px", height: "24px" }}>
+                {onComp === "profile" ? mySvg.profile[0] : mySvg.profile[1]}
+              </svg>
+              <p
+                className="homepage__icontitle"
+                style={{ fontWeight: isProfile }}
+              >
+                Profile
+              </p>
+            </div>
+          </div>
+
+          <div>
+            {" "}
+            <div onClick={() => setOnComp("more")} className="homepage__icons">
+              <svg style={{ width: "24px", height: "24px" }}>
+                {mySvg.moremenu}
+              </svg>
+              <p className="homepage__icontitle" style={{ fontWeight: isMore }}>
+                More
+              </p>
+            </div>
+          </div>
+
+          <div>
+            <div>
+              <button className="homepage__tweetbtn">Tweet</button>
+            </div>
+          </div>
+          <div style={{ backgroundColor: "", flexGrow:"1" }}></div>
           <Popup
             style={{ backgroundColor: "red" }}
             trigger={
-              <div className="homepage__accuser">
-                <img
-                  id="imgjoe"
-                  style={{ height: "50px" }}
-                  src={Image}
-                  alt="joebiden"
-                />
-                <p id="namejoe" style={{ fontSize: "1.3rem" }}>
-                  &nbsp;@{myDecodedToken.username}
-                </p>
-                <FiMoreHorizontal id="morejoe" style={{ fontSize: "1.9rem" }} />
+              <div style={{ backgroundColor: "", width: "" }}>
+                <div className="homepage__accuser">
+                  <img
+                    id="imgjoe"
+                    style={{
+                      height: "50px",
+                      padding: "0 2% 0 2%",
+                      backgroundColor: "",
+                    }}
+                    src={Image}
+                    alt="joebiden"
+                  />
+                  <div
+                    id="leftusername"
+                    style={{
+                      backgroundColor: "",
+                      lineHeight: "3px",
+                      padding: "0 0 0 5px",
+                      flexGrow:"1"
+                    }}
+                  >
+                    <p>{myDecodedToken.name}</p>
+                    <p id="namejoe" style={{ }}>
+                      @{myDecodedToken.username}
+                    </p>
+                  </div>
+                  <FiMoreHorizontal
+                    id="morejoe"
+                    style={{ fontSize: "1.9rem" }}
+                  />
+                </div>
               </div>
             }
             {...{ contentStyle, overlayStyle, arrowStyle }}
@@ -329,7 +355,16 @@ const HomePage = () => {
         />
       )}
 
-      <div id="right" className="homepage__section">
+      <div id="right" className="homepage__sectionright">
+        <div className="homepage__header2">
+          <label>
+            <input
+              style={{ fontSize: "larger", backgroundColor:"" }}
+              type="text"
+              placeholder="Search Twitter"
+            />
+          </label>
+        </div>
         <div className="homepage__rightbox">
           <section className="homepage__headrightbox">
             <h1 style={{ marginTop: "0" }}>Trends&nbsp;for&nbsp;you</h1>
@@ -565,7 +600,8 @@ const HomePage = () => {
         </p>
         <p>© 2022 Twitter, Inc.</p>
       </div>
-    </div>
+      </div>
+      </div>
   );
 };
 
