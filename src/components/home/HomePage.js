@@ -1,5 +1,3 @@
-import { FaTwitter } from "react-icons/fa";
-import { FiMoreHorizontal } from "react-icons/fi";
 import { mySvg } from "./svg";
 import Image from "./logo193.png";
 import foto1 from "./foto1.jpg";
@@ -114,15 +112,10 @@ const HomePage = () => {
       return getTweets();
     }
   });
-  const [normalLaptop, setNormalLaptop] = useState(false)
-  const isNormalLaptop = normalLaptop?"right":"top"
 
-  useEffect(() => {
-    if (window.matchMedia("(max-width: 1024px)").matches) {
-      setNormalLaptop(true)
-    } else 
-    setNormalLaptop(false)
-  });
+  // useEffect(() => {
+  //   console.log(window.matchMedia("(max-width: 1024px)").matches)
+  // });
   return (
     <div id="homewrapper">
     <div className="homepage">
@@ -278,6 +271,7 @@ const HomePage = () => {
           <div>
             <div>
               <button className="homepage__tweetbtn">Tweet</button>
+              <div id="addtweet">{mySvg.addTweet}</div>
             </div>
           </div>
           <div style={{ backgroundColor: "", flexGrow:"1" }}></div>
@@ -289,7 +283,7 @@ const HomePage = () => {
                   <img
                     id="imgjoe"
                     style={{
-                      height: "50px",
+                      height: "45px",
                       padding: "0 2% 0 2%",
                       backgroundColor: "",
                     }}
@@ -310,10 +304,7 @@ const HomePage = () => {
                       @{myDecodedToken.username}
                     </p>
                   </div>
-                  <FiMoreHorizontal
-                    id="morejoe"
-                    style={{ fontSize: "1.9rem" }}
-                  />
+                  <svg id="morejoe" style={{height:"25px", weight:"25px", width:"25px"}}>{mySvg.more}</svg>
                 </div>
               </div>
             }

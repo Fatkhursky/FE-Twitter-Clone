@@ -30,7 +30,7 @@ const AddTweet = ({ newTweet, id, array, setArray }) => {
       <div className="addtweet__content">
         <div className="addtweet__section" style={{ position: "relative" }}>
           <img
-            style={{ height: "50px", marginLeft: "0px" }}
+            style={{ height: "45px", marginLeft: "0px" }}
             src={Image}
             alt="joebiden"
           />
@@ -46,7 +46,7 @@ const AddTweet = ({ newTweet, id, array, setArray }) => {
               trigger={
                 <svg
                   id="rightmore2"
-                  style={{ height: "30px", width: "30px", marginRight: "0" }}
+                  style={{ height: "25px", width: "25px", marginRight: "0" }}
                 >
                   {mySvg.more}
                 </svg>
@@ -153,28 +153,3 @@ const AddTweet = ({ newTweet, id, array, setArray }) => {
 
 export default AddTweet;
 
-// <Modal
-//   isOpen={modalIsOpen}
-//   onAfterOpen={afterOpenModal}
-//   onRequestClose={closeModal}
-//   style={customStyles}
-//   contentLabel="Example Modal"
-// >
-//   <h2>Delete Tweet?</h2>
-//   <p>
-//     This can't be undone and it wil;l be removed from yout profile., the
-//     timeline of any accounts that follow you, and from Twitter search results.
-//   </p>
-//   <div>
-//     <button onClick={handleDelete}>Delete</button>
-//     <button onClick={closeModal}>Cancel</button>
-//   </div>
-// </Modal>;
-
-// <svg
-//   //onClick={handleDelete}
-//   id="rightmore2"
-//   style={{ height: "30px", width: "30px", marginRight: "0" }}
-// >
-//   {mySvg.more}
-// </svg>;

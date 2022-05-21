@@ -95,7 +95,6 @@ const Profile = ({ setOnComp, tweets, setTweets, setArray, array }) => {
         </div>
         <div className="profile__line"></div>
       </div>
-
       <div>
         {tweets.map((item) => (
           <Alltweet

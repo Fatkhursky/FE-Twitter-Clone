@@ -30,7 +30,7 @@ const Home = ({
           <div className="homepage__mainhead">
             <img
               className="homepage__tophead"
-              style={{ height: "50px" }}
+              style={{ height: "45px" }}
               src={Image}
               alt="user"
             />
@@ -83,8 +83,8 @@ const Home = ({
           </div>
 
           <div className="homepage__botmain">
-            <h2 style={{ fontSize: "bold" }}>Welcome to Twitter!</h2>
-            <p style={{ marginTop: "-1rem" }}>
+            <p style={{ fontSize: "larger", fontWeight:"bold" }}>Welcome to Twitter!</p>
+            <p style={{ marginTop: "-1rem", fontSize: "small" }}>
               This is the best place to see what’s happening in your world. Find
               some people and topics to follow now.
             </p>

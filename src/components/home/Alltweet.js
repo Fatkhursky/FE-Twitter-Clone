@@ -50,7 +50,7 @@ const Alltweet = ({ item, id, tweets, setTweets, array, setArray }) => {
           trigger={
             <svg
               className="profile__more"
-              style={{ height: "30px", width: "30px", marginRight: "0" }}
+              style={{ height: "25px", width: "25px", marginRight: "0" }}
             >
               {mySvg.more}
             </svg>

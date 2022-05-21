@@ -6,7 +6,7 @@
   }
 
   &__header {
-    background-color: rgba(254, 254, 254, 0.75);
+    background-color: rgba(254, 254, 254, 0.85);
     //position: fixed;
     top: 0;
     position: sticky;
@@ -52,7 +52,7 @@
       left: 3%;
       background-color: rgb(255, 255, 255);
       //margin-left: ;
-      width: 150px;
+      width: 134px;
       //margin-left: 5%;
       //padding-left: 7%;
       //height: 50%;
@@ -121,8 +121,8 @@
     cursor: pointer;
     fill: rgba(23, 22, 22, 0.65);
     padding: 10px;
-    height: 45px;
-    width: 45px;
+    height: 35px;
+    width: 35px;
     border-radius: 35px;
     &:hover {
       background-color: rgb(219, 229, 247);
