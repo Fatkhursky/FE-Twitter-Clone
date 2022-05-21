@@ -2,9 +2,12 @@
     //justify-content: center;
     //align-items: center;
     //background-color: red;
+    //color: red;
+    //font-size: small;
     text-align: center;
     max-width: fit-content;
     margin: 0 auto;
+    font-size: small;
   
     &__head {
       height: 60px;
@@ -57,7 +60,7 @@
 
     &__signup__wrap {
     //background-color: red;
-    width: 500px;
+    width: 450px;
     margin: 0 auto;
      
     }
@@ -69,16 +72,18 @@
     }
   
     &__login__title {
-      font-size: 30px;
-      font-weight: bold;
-      width: 450px;
+      //font-size: px;
+      //font-weight: bold;
+      width: 300px;
       margin: 0 auto;
+      //color: red;
+      //background-color: red;
       //background-color: red;
       //display: flex;
       justify-content: left;
-      align-items: center;
-      text-align: center;
-      margin-top: 1.5rem;
+      align-items: left;
+      text-align: left;
+      margin-top: 1rem;
     }
   
     &__login__buttons1 {
@@ -105,8 +110,8 @@
   
     &__login__content {
     //background-color: ;
-      margin: 40px auto;
-      font-size: medium;
+      margin: 25px auto;
+      font-size: small;
       width: 300px;
       text-align: center;
       border-bottom: 1px solid rgb(165, 165, 165);
@@ -126,13 +131,14 @@
       align-items: center;
       justify-content: center;
       text-align: center;
+      //color: red;
       //margin-left: 3%;
       width: 450px;
       max-width: 450px;
 
       input:focus +  .loginpage__login__label  {
         color: #0077FF;
-        transform: translate3d(0, -10px, 0) scale(0.75);
+        transform: translate3d(0, -5px, 0) scale(0.75);
       }
       
     }
@@ -143,7 +149,7 @@
      // margin: 5px auto;
       height: 50px;
       padding: 0 0 0 14px;
-      font-size: 20px;
+      //font-size: 20px;
       //background-color: red;
       //font-weight: 5000;
 
@@ -164,13 +170,13 @@
 
       &:not(:placeholder-shown) + .loginpage__login__label {
         //color: rgba(235, 31, 31, 0.5);
-        transform: translate3d(0, -10px, 0) scale(0.75);
+        transform: translate3d(0, -5px, 0) scale(0.75);
       }
     }
 
     &__login__label {
       position: absolute;
-      font-size: 20px;
+      //font-size: 20px;
       top: -8px;
       left: 15px;
       color: rgba(0, 0, 0, 0.5);
@@ -186,13 +192,13 @@
     }
 
     &__login__inpUser {
-      font-size: 20px;
-      height: 60px;
+      //font-size: 20px;
+      //height: 53px;
       width: 450px;
       max-width: 450px;
       font-weight: bold;
       //margin: 0 0 0 0%;
-      height: 60px;
+      height: 53px;
       text-indent: 15px;
       //display: flex;
       color: rgba(0, 0, 0, 0.5);
@@ -202,7 +208,7 @@
       //justify-content: center;
       //align-items: center;
       //text-align: center;
-      margin-top: 2.5rem;
+      margin-top: 1.5rem;
       border: none;
       border-radius: 9px;
     }
@@ -231,16 +237,16 @@
 
     
     &__login__form__pass {
-      height: 60px;
+     //height: 53px;
       width: 445px;
       //margin: 0 0 0 2%;
-      height: 67px;
+      height: 53px;
       //display: flex;
       text-indent: 15px;
       //justify-content: center;
       //align-items: center;
       //text-align: center;
-      margin-top: 2.5rem;
+      margin-top: 1.5rem;
       border: 1px solid rgb(204, 202, 202);
       border-radius: 9px;
 
@@ -268,7 +274,7 @@
   
     &__login__buttons2 {
       height: 40px;
-      font-size: 20px;
+      //font-size: 20px;
       font-weight: bold;
       color: white;
       //background-color: rgba(156, 153, 153);
@@ -302,7 +308,7 @@
     }
   
  &__login__buttons3 {
-      height: 50px;
+      height: 53px;
       font-size: 20px;
       font-weight: bold;
       color: white;
@@ -314,7 +320,7 @@
       justify-content: center;
       align-items: center;
       text-align: center;
-      margin-top: 4.5rem;
+      margin-top: 3.5rem;
       //outline-style: solid;
       outline-width: 1px;
       outline-color: rgb(252, 252, 252);
@@ -360,7 +366,7 @@
     }
   
     &__signup__title {
-      font-size: 35px;
+      //font-size: 35px;
       font-weight: bold;
       width: 500px;
       margin: 0 0 5% 0;
@@ -368,7 +374,7 @@
       justify-content: left;
       align-items: center;
       text-align: center;
-      margin-top: 3rem;
+      margin-top: 1.5rem;
     }
   
     &__signup__inputs1 {
@@ -377,12 +383,13 @@
     }
   
     &__signup__name {
-      height: 70px;
+      height: 53px;
       width: 780px;
       font-size: larger;
       display: flex;
+      border: 1px solid rgba(219, 218, 213, 0.75);
       border-radius: 5px;
-      border-color: rgb(191, 189, 189);
+      ///border-color: rgb(191, 189, 189);
   
       &:focus {
         outline-color: rgb(30, 167, 247);
@@ -390,11 +397,11 @@
     }
   
     &__signup__phone {
-      height: 70px;
+      height: 53px;
       width: 780px;
       font-size: larger;
       display: flex;
-      border-color: rgb(191, 189, 189);
+      border: 1px solid rgba(219, 218, 213, 0.75);
       border-radius: 5px;
   
       &:focus {
@@ -404,15 +411,26 @@
   
     &__signup__content {
       text-align: left;
-      font-size: large;
-      font-weight: bold;
-      width: 500px;
+      //font-size: large;
+     // font-weight: bold;
+     //background-color: red;
+      width: 450px;
       margin: 5% 2% 0 0;
     }
   
+    #email{
+      //background-color: red;
+      text-align: right;
+      cursor: pointer;
+      &:hover{
+        text-decoration: underline;
+      }
+    }
+
     &__signup__date {
+      //text-align: left;
       font-weight: bold;
-      margin-top: 5%;
+      //margin-top: 5%;
     }
   
     &__signup__desc {
@@ -425,7 +443,7 @@
       //background-color: red;
       height: 70px;
       margin: 3% 0 0 0;
-      width: 500px;
+      width:450px;
       font-size: larger;
       display: flex;
       justify-content: space-between;
@@ -437,10 +455,12 @@
       border: 1.5px solid rgb(101, 100, 100);
       //border-color: white;
       background-color: rgb(134, 131, 131);
-      height: 70px;
+      height: 53px;
       margin: 7% 0 1% 0;
-      width: 500px;
-      font-size: 25px;
+      width: 450px;
+      font-size: medium;
+      font-weight: bold;
+      //font-size: 25px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -453,11 +473,11 @@
     }
   
     &__signup__month {
-      height: 70px;
+      height: 53px;
       border-color: rgb(191, 189, 189);
       padding-right: 3rem;
-      width: 220px;
-      font-size: larger;
+      width: 200px;
+      //font-size: larger;
       border-radius: 7px;
   
       &:focus {
@@ -466,11 +486,11 @@
     }
   
     &__signup__day {
-      height: 70px;
+      height: 53px;
       border-color: rgb(191, 189, 189);
       padding-right: 3rem;
-      width: 120px;
-      font-size: larger;
+      width: 100px;
+      //font-size: larger;
       border-radius: 7px;
   
       &:focus {
@@ -479,11 +499,11 @@
     }
   
     &__signup__years {
-      height: 70px;
+      height: 53px;
       border-color: rgb(191, 189, 189);
       padding-right: 2rem;
-      width: 150px;
-      font-size: larger;
+      width: 140px;
+      //font-size: larger;
       border-radius: 7px;
   
       &:focus {

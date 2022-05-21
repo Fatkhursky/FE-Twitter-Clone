@@ -37,8 +37,8 @@ const Profile = ({ setOnComp, tweets, setTweets, setArray, array }) => {
           style={{
             hoverColor: "red",
             cursor: "pointer",
-            width: "35px",
-            height: "35px",
+            width: "55px",
+            height: "55px",
             paddingTop: "3%",
             paddingLeft: "5%",
           }}
@@ -52,8 +52,11 @@ const Profile = ({ setOnComp, tweets, setTweets, setArray, array }) => {
       </div>
       <div className="profile__beranda">
         <img id="backdrop" src={Image} alt="beranda" />
-        <img id="user" src={userImage} alt="userImage" />
+        
         <div className="profile__desc">
+          <div>
+          <img id="user" src={userImage} alt="userImage" />  
+          </div>
           <div style={{ lineHeight: "7px" }}>
             <h2>{myDecodedToken.name}</h2>
             <p>@{myDecodedToken.username}</p>

@@ -82,7 +82,7 @@ const LoginTwo = ({ userName, toSignUp }) => {
       <Header />
       <form onSubmit={handleSubmit} className="loginpage__login__box">
         <div className="loginpage__login__body">
-          <h1 className="loginpage__login__title">Enter your password</h1>
+          <h1 className="loginpage__login__title" style={{float:"left"}}>Enter your password</h1>
 
           <label htmlFor="" className="loginpage__login__inp2">
             <input

@@ -16,7 +16,7 @@ const Home = ({
   return (
     <div className="homepage__home">
       <div className="homepage__header">
-        <h1 className="homepage__title">Home</h1>
+        <h2 className="homepage__title">Home</h2>
         <svg
           id="stars"
           style={{ width: "35px", height: "35px", marginTop: "1rem" }}
@@ -83,7 +83,7 @@ const Home = ({
           </div>
 
           <div className="homepage__botmain">
-            <h1 style={{ fontSize: "bold" }}>Welcome to Twitter!</h1>
+            <h2 style={{ fontSize: "bold" }}>Welcome to Twitter!</h2>
             <p style={{ marginTop: "-1rem" }}>
               This is the best place to see what’s happening in your world. Find
               some people and topics to follow now.

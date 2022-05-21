@@ -114,8 +114,14 @@ const HomePage = () => {
       return getTweets();
     }
   });
+  const [normalLaptop, setNormalLaptop] = useState(false)
+  const isNormalLaptop = normalLaptop?"right":"top"
+
   useEffect(() => {
-    console.log(11, window.matchMedia("(max-width: 1024px)").matches);
+    if (window.matchMedia("(max-width: 1024px)").matches) {
+      setNormalLaptop(true)
+    } else 
+    setNormalLaptop(false)
   });
   return (
     <div id="homewrapper">
@@ -312,7 +318,7 @@ const HomePage = () => {
               </div>
             }
             {...{ contentStyle, overlayStyle, arrowStyle }}
-            position="top"
+            position="top left"
           >
             <div>
               <div style={{ display: "flex" }}>
@@ -334,7 +340,7 @@ const HomePage = () => {
               </div>
             </div>
           </Popup>
-        </div>
+        </div>''
       </div>
 
       {onComp === "profile" ? (
@@ -366,27 +372,22 @@ const HomePage = () => {
           </label>
         </div>
         <div className="homepage__rightbox">
-          <section className="homepage__headrightbox">
-            <h1 style={{ marginTop: "0" }}>Trends&nbsp;for&nbsp;you</h1>
-            <svg id="setting" style={{ height: "30px", width: "30px" }}>
-              {mySvg.setting}
-            </svg>
-          </section>
-
+          <div className="homepage__headrightbox">
+            <h3 style={{ marginTop: "" }}>Trends&nbsp;for&nbsp;you</h3>
+          </div>
           <div className="homepage__contentright">
             <div className="homepage__contentrighttitle">
               <p style={{}}>Trending in Indonesia</p>
               <svg
                 id="rightmore"
-                style={{ height: "30px", width: "30px", marginRight: "0" }}
+                style={{ height: "25px", width: "25px", marginRight: "0" }}
               >
                 {mySvg.more}
               </svg>
             </div>
-
             <div className="homepage__contentrightdesc">
               <p style={{ fontWeight: "Bold" }}>Ari Lasso</p>
-              <p style={{ marginTop: "-1rem" }}>37.65K Tweets</p>
+              <p style={{fontSize:"small"}}>37.65K Tweets</p>
             </div>
           </div>
 
@@ -395,7 +396,7 @@ const HomePage = () => {
               <p style={{}}>Sport . Trending</p>
               <svg
                 id="rightmore"
-                style={{ height: "30px", width: "30px", marginRight: "0" }}
+                style={{ height: "25px", width: "25px", marginRight: "0" }}
               >
                 {mySvg.more}
               </svg>
@@ -403,7 +404,7 @@ const HomePage = () => {
 
             <div className="homepage__contentrightdesc">
               <p style={{ fontWeight: "Bold" }}>Manchester</p>
-              <p style={{ marginTop: "-1rem" }}>27.57K Tweets</p>
+              <p style={{fontSize:"small"}}>27.57K Tweets</p>
             </div>
           </div>
 
@@ -412,7 +413,7 @@ const HomePage = () => {
               <p style={{}}>Politics . Trending</p>
               <svg
                 id="rightmore"
-                style={{ height: "30px", width: "30px", marginRight: "0" }}
+                style={{ height: "25px", width: "25px", marginRight: "0" }}
               >
                 {mySvg.more}
               </svg>
@@ -420,7 +421,7 @@ const HomePage = () => {
 
             <div className="homepage__contentrightdesc">
               <p style={{ fontWeight: "Bold" }}>Rusia</p>
-              <p style={{ marginTop: "-1rem" }}>45.57K Tweets</p>
+              <p style={{fontSize:"small"}}>45.57K Tweets</p>
             </div>
           </div>
 
@@ -429,7 +430,7 @@ const HomePage = () => {
               <p style={{}}>Trending in Zimbabwe</p>
               <svg
                 id="rightmore"
-                style={{ height: "30px", width: "30px", marginRight: "0" }}
+                style={{ height: "25px", width: "25px", marginRight: "0" }}
               >
                 {mySvg.more}
               </svg>
@@ -437,7 +438,7 @@ const HomePage = () => {
 
             <div className="homepage__contentrightdesc">
               <p style={{ fontWeight: "Bold" }}>Inflasi</p>
-              <p style={{ marginTop: "-1rem" }}>23.52K Tweets</p>
+              <p style={{fontSize:"small"}}>23.52K Tweets</p>
             </div>
           </div>
 
@@ -446,7 +447,7 @@ const HomePage = () => {
               <p style={{}}>Sport . Trending</p>
               <svg
                 id="rightmore"
-                style={{ height: "30px", width: "30px", marginRight: "0" }}
+                style={{ height: "25px", width: "25px", marginRight: "0" }}
               >
                 {mySvg.more}
               </svg>
@@ -454,7 +455,7 @@ const HomePage = () => {
 
             <div className="homepage__contentrightdesc">
               <p style={{ fontWeight: "Bold" }}>Ronaldo</p>
-              <p style={{ marginTop: "-1rem" }}>76.57K Tweets</p>
+              <p style={{fontSize:"small"}}>76.57K Tweets</p>
             </div>
           </div>
 
@@ -463,7 +464,7 @@ const HomePage = () => {
               <p style={{}}>Politics . Trending</p>
               <svg
                 id="rightmore"
-                style={{ height: "30px", width: "30px", marginRight: "0" }}
+                style={{ height: "25px", width: "25px", marginRight: "0" }}
               >
                 {mySvg.more}
               </svg>
@@ -471,7 +472,7 @@ const HomePage = () => {
 
             <div className="homepage__contentrightdesc">
               <p style={{ fontWeight: "Bold" }}>WW3</p>
-              <p style={{ marginTop: "-1rem" }}>65.12K Tweets</p>
+              <p style={{fontSize:"small"}}>65.12K Tweets</p>
             </div>
           </div>
 
@@ -483,33 +484,32 @@ const HomePage = () => {
         </div>
 
         <div className="homepage__rightboxbot">
-          <h2 style={{ padding: "2% 3% 0% 5%" }}>Who to follow</h2>
+          <h3 style={{ padding: "2% 3% 0% 5%" }}>Who to follow</h3>
           <div className="homepage__rightboxbotcontent">
             <img
               className="homepage__avatar"
               style={{
-                borderRadius: "400px",
-                width: "65px",
-                height: "65px",
-                marginTop: "-0.8rem",
+                borderRadius: "55px",
+                width: "55px",
+                height: "55px",
               }}
               src={foto2}
               alt="user1"
             />
 
             <div className="homepage__username">
-              <p style={{ fontWeight: "bold", marginTop: "-0.1rem" }}>
+              <p style={{ fontWeight: "bold", fontSize:"small" }}>
                 Spongebob
               </p>
-              <p style={{ marginTop: "-1rem" }}>@Sponge_bob</p>
+              <p style={{ fontSize:"small" }}>@Sponge_bob</p>
             </div>
 
             <button
               className="homepage__lastbtn"
               style={{
-                borderRadius: "25px",
-                width: "95px",
-                height: "45px",
+                borderRadius: "35px",
+                width: "60px",
+                height: "30px",
                 color: "white",
                 backgroundColor: "black",
               }}
@@ -522,28 +522,27 @@ const HomePage = () => {
             <img
               className="homepage__avatar"
               style={{
-                borderRadius: "400px",
-                width: "65px",
-                height: "65px",
-                marginTop: "-0.8rem",
+                borderRadius: "55px",
+                width: "55px",
+                height: "55px",
               }}
               src={foto1}
               alt="user1"
             />
 
             <div className="homepage__username">
-              <p style={{ fontWeight: "bold", marginTop: "-0.1rem" }}>
+              <p style={{ fontWeight: "bold", fontSize:"small" }}>
                 Syah_Rul
               </p>
-              <p style={{ marginTop: "-1rem" }}>@Syarhru345</p>
+              <p style={{ fontSize:"small"}}>@Syarhru345</p>
             </div>
 
             <button
               className="homepage__lastbtn"
               style={{
-                borderRadius: "25px",
-                width: "95px",
-                height: "45px",
+                borderRadius: "35px",
+                width: "60px",
+                height: "30px",
                 color: "white",
                 backgroundColor: "black",
               }}
@@ -556,26 +555,26 @@ const HomePage = () => {
             <img
               className="homepage__avatar"
               style={{
-                borderRadius: "400px",
-                width: "65px",
-                height: "65px",
-                marginTop: "-0.8rem",
+                borderRadius: "55px",
+                width: "55px",
+                height: "55px",
+                marginTop: "",
               }}
               src={foto3}
               alt="user1"
             />
 
             <div className="homepage__username">
-              <p style={{ fontWeight: "bold", marginTop: "-0.1rem" }}>Pocong</p>
-              <p style={{ marginTop: "-1rem" }}>@Pocong</p>
+              <p style={{ fontWeight: "bold", fontSize:"small" }}>Pocong</p>
+              <p style={{ fontSize:"small" }}>@Pocong</p>
             </div>
 
             <button
               className="homepage__lastbtn"
               style={{
-                borderRadius: "25px",
-                width: "95px",
-                height: "45px",
+                borderRadius: "35px",
+                width: "60px",
+                height: "30px",
                 color: "white",
                 backgroundColor: "black",
               }}
@@ -585,7 +584,7 @@ const HomePage = () => {
           </div>
 
           <div id="smore2">
-            <h3 style={{ padding: "0% 0% 3% 3% ", color: "rgb(29, 108, 255)" }}>
+            <h3 style={{ padding: "", color: "rgb(29, 108, 255)" }}>
               Show more
             </h3>
           </div>

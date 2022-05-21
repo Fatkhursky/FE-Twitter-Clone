@@ -135,6 +135,10 @@ const Signup = ({
     // navigate('/home');
   };
 
+  const noFeature = () => {
+    alert("Fitur belum tersedia")
+  }
+
   return (
     <div>
       <Header />
@@ -160,7 +164,7 @@ const Signup = ({
           />
         </div>
         <div className="loginpage__signup__content">
-          <p style={{ cursor: "pointer", color: "rgb(30, 167, 247)" }}>
+          <p onClick={noFeature} id="email" style={{ cursor: "pointer", color: "rgb(30, 167, 247)" }}>
             Use email instead
           </p>
           <div>
