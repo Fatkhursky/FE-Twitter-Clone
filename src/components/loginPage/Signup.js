@@ -210,7 +210,7 @@ const Signup = ({
           </select>
         </div>
         {
-          <div>
+          <div style={{display:"flex"}}>
             <button
               className="loginpage__signup__button"
               type="submit"

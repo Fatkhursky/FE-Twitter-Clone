@@ -1,9 +1,5 @@
 .loginpage {
-    //justify-content: center;
-    //align-items: center;
-    //background-color: red;
-    //color: red;
-    //font-size: small;
+
     text-align: center;
     max-width: fit-content;
     margin: 0 auto;
@@ -46,12 +42,10 @@
     
     &__login__box,
     &__signup__box {
-      background-color: white;
-      //margin-top: -1rem;
-      //margin-bottom: -2rem;
-      //margin: 0  auto;
-      width: 600px;
+      //background-color: rgb(213, 22, 22);
       //width: 600px;
+      //position: absolute;
+      //position: ab;
       max-height: 70vh;
       overflow-y: auto;
       //border-bottom-left-radius: 1em;
@@ -414,7 +408,7 @@
       //font-size: large;
      // font-weight: bold;
      //background-color: red;
-      width: 450px;
+      //width: 450px;
       margin: 5% 2% 0 0;
     }
   
@@ -439,16 +433,7 @@
       color: rgb(139, 138, 138);
     }
   
-    &__signup__inputs2 {
-      //background-color: red;
-      height: 70px;
-      margin: 3% 0 0 0;
-      width:450px;
-      font-size: larger;
-      display: flex;
-      justify-content: space-between;
-      border-radius: 5px;
-    }
+  
   
     &__signup__button {
       color: white;
@@ -457,7 +442,8 @@
       background-color: rgb(134, 131, 131);
       height: 53px;
       margin: 7% 0 1% 0;
-      width: 450px;
+      flex-grow: 1;
+      //width: 450px;
       font-size: medium;
       font-weight: bold;
       //font-size: 25px;
@@ -471,13 +457,25 @@
         transform: scale(0.99);
       }
     }
+
+    &__signup__inputs2 {
+      //background-color: red;
+      height: 70px;
+      margin: 3% 0 0 0;
+     // width:450px;
+      font-size: larger;
+      display: flex;
+      justify-content: space-between;
+      border-radius: 5px;
+      column-gap: 7px;
+    }
   
     &__signup__month {
       height: 53px;
       border-color: rgb(191, 189, 189);
-      padding-right: 3rem;
-      width: 200px;
-      //font-size: larger;
+      //padding-right: 3rem;
+      //width: 200px;
+      flex-grow: 3;
       border-radius: 7px;
   
       &:focus {
@@ -488,9 +486,9 @@
     &__signup__day {
       height: 53px;
       border-color: rgb(191, 189, 189);
-      padding-right: 3rem;
-      width: 100px;
-      //font-size: larger;
+      //padding-right: 3rem;
+      //width: 100px;
+      flex-grow: 1;
       border-radius: 7px;
   
       &:focus {
@@ -501,26 +499,21 @@
     &__signup__years {
       height: 53px;
       border-color: rgb(191, 189, 189);
-      padding-right: 2rem;
-      width: 140px;
-      //font-size: larger;
+      //padding-right: 2rem;
+      //width: 140px;
+      flex-grow:2;
       border-radius: 7px;
   
       &:focus {
         outline-color: rgb(30, 167, 247);
       }
     }
-    //Phone
+    //Tab
     @media (max-width: 705px) {
-      &__login__box,
+    &__login__box,
     &__signup__box {
       max-height: fit-content;
-      //height: 550px;
-      //background-color: rgba(62, 253, 19);
-      //overflow-y: unset;
-      //overflow-y: unset;
-      //overflow-y: auto;
-      //background-color: red;
+      overflow-y: unset;
     }
       &__head {
         //background-color: red;
@@ -528,7 +521,7 @@
         top: 0;
         position: absolute;
         width: 100%;
-        background-color: rgba(255, 255, 255, 0.15);
+        //background-color: rgba(227, 24, 24, 0.15);
       }
 
       &__footer {
@@ -536,5 +529,43 @@
         display: none;
       }
     }
+    //Phone L
+    @media (max-width: 425px) {
+
+      &__signup__wrap {
+        //background-color: red;
+        padding: 0 7% 0 7%;
+        //width: 390px;
+       margin: 0 auto;
+         
+        }
+    }
+
+     //Phone M
+     @media (max-width: 375px) {
+
+      &__signup__wrap {
+        //background-color: red;
+        padding: 0 12% 0 12%;
+        //width: 390px;
+       margin: 0 auto;
+         
+        }
+    }
+
+     //Phone s
+     @media (max-width: 320px) {
+
+      &__signup__wrap {
+        //background-color: red;
+        padding: 0 19% 0 19%;
+        //width: 390px;
+       margin: 0 auto;
+         
+        }
+    }
+
+
   }
+
 
