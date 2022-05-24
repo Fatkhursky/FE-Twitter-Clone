@@ -44,7 +44,7 @@ const Signup = ({
   let regisMonth = months[dateObj.getMonth()];
   let regisYear = dateObj.getFullYear();
   let regisDate = dateObj.getDate();
-  const regisTime= regisDate + " " + regisMonth + " " + regisYear;
+  const regisTime = regisDate + " " + regisMonth + " " + regisYear;
 
   const isApril = month === "April";
   const isJune = month === "June";
@@ -136,98 +136,105 @@ const Signup = ({
   };
 
   const noFeature = () => {
-    alert("Fitur belum tersedia")
-  }
+    alert("Fitur belum tersedia");
+  };
 
   return (
     <div>
       <Header />
-      <form style={{backgroundColor:""}} className="loginpage__signup__box" onSubmit={handleSubmit}>
+      <form
+        style={{ backgroundColor: "" }}
+        className="loginpage__signup__box"
+        onSubmit={handleSubmit}
+      >
         <div className="loginpage__signup__wrap">
-        <h1 className="loginpage__signup__title">Create your account</h1>
-        <div className="loginpage__signup__inputs1">
-          <input
-            className="loginpage__signup__name"
-            type="text"
-            placeholder="Name"
-            value={name}
-            onChange={onChangeName}
-          />
-        </div>
-        <div className="loginpage__signup__inputs1">
-          <input
-            className="loginpage__signup__phone"
-            type="text"
-            placeholder="Phone"
-            value={phone}
-            onChange={onChangePhone}
-          />
-        </div>
-        <div className="loginpage__signup__content">
-          <p onClick={noFeature} id="email" style={{ cursor: "pointer", color: "rgb(30, 167, 247)" }}>
-            Use email instead
-          </p>
-          <div>
+          <h1 className="loginpage__signup__title">Create your account</h1>
+          <div className="loginpage__signup__inputs1">
+            <input
+              className="loginpage__signup__name"
+              type="text"
+              placeholder="Name"
+              value={name}
+              onChange={onChangeName}
+            />
+          </div>
+          <div className="loginpage__signup__inputs1">
+            <input
+              className="loginpage__signup__phone"
+              type="text"
+              placeholder="Phone"
+              value={phone}
+              onChange={onChangePhone}
+            />
+          </div>
+          <div className="loginpage__signup__content">
             <p
-              className="loginpage__signup__date"
-              style={{ cursor: "pointer" }}
+              onClick={noFeature}
+              id="email"
+              style={{ cursor: "pointer", color: "rgb(30, 167, 247)" }}
             >
-              Date of birth
+              Use email instead
             </p>
-            <p className="loginpage__signup__desc">
-              This will not be shown publicly. Confirm your own age, even if
-              this account is for a business, a pet, or something else.
-            </p>
+            <div>
+              <p
+                className="loginpage__signup__date"
+                style={{ cursor: "pointer" }}
+              >
+                Date of birth
+              </p>
+              <p className="loginpage__signup__desc">
+                This will not be shown publicly. Confirm your own age, even if
+                this account is for a business, a pet, or something else.
+              </p>
+            </div>
           </div>
-        </div>
-        <div className="loginpage__signup__inputs2">
-          <select
-            className="loginpage__signup__month"
-            list="Month"
-            placeholder="Month"
-            value={month}
-            onChange={onChangeMonth}
-          >
-            {monthsDate}
-          </select>
-          <select
-            className="loginpage__signup__day"
-            list="Days"
-            placeholder="Day"
-            value={day}
-            onChange={onChangeDay}
-          >
-            {getDay()}
-          </select>
-          <select
-            className="loginpage__signup__years"
-            list="Years"
-            placeholder="Year"
-            value={year}
-            onChange={onChangeYears}
-          >
-            {getYear()}
-          </select>
-        </div>
-        {
-          <div style={{display:"flex"}}>
-            <button
-              className="loginpage__signup__button"
-              type="submit"
-              style={{
-                textDecoration: "none",
-                backgroundColor: color,
-                cursor: pointer,
-                pointerEvents: event,
-              }}
+          <div className="loginpage__signup__inputs2">
+            <select
+              className="loginpage__signup__month"
+              list="Month"
+              placeholder="Month"
+              value={month}
+              onChange={onChangeMonth}
             >
-              Signup
-            </button>
-            <Toaster />
+              {monthsDate}
+            </select>
+            <select
+              className="loginpage__signup__day"
+              list="Days"
+              placeholder="Day"
+              value={day}
+              onChange={onChangeDay}
+            >
+              {getDay()}
+            </select>
+            <select
+              className="loginpage__signup__years"
+              list="Years"
+              placeholder="Year"
+              value={year}
+              onChange={onChangeYears}
+            >
+              {getYear()}
+            </select>
           </div>
-        }
+          {
+            <div style={{ display: "flex" }}>
+              <button
+                className="loginpage__signup__button"
+                type="submit"
+                style={{
+                  textDecoration: "none",
+                  backgroundColor: color,
+                  cursor: pointer,
+                  pointerEvents: event,
+                }}
+              >
+                Signup
+              </button>
+              <Toaster />
+            </div>
+          }
         </div>
-      
       </form>
       <Footer />
     </div>

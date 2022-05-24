@@ -74,15 +74,14 @@ const LoginTwo = ({ userName, toSignUp }) => {
       }
     );
   };
-
-
   
   return (
     <div>
       <Header />
       <form onSubmit={handleSubmit} className="loginpage__login__box">
+      <div className="loginpage__login__wrap">
         <div className="loginpage__login__body">
-          <h1 className="loginpage__login__title" style={{float:"left"}}>Enter your password</h1>
+          <h2 className="loginpage__login__title" style={{float:"left"}}>Enter your password</h2>
 
           <label htmlFor="" className="loginpage__login__inp2">
             <input
@@ -154,6 +153,7 @@ const LoginTwo = ({ userName, toSignUp }) => {
               </button>
             </span>
           </h1>
+        </div>
         </div>
         <Toaster />
       </form>
