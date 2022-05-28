@@ -548,28 +548,7 @@
     color: rgb(139, 138, 138);
   }
 
-  // &__signup__button {
-  //   color: white;
-  //   border: 1.5px solid rgb(101, 100, 100);
-  //   //border-color: white;
-  //   background-color: rgb(134, 131, 131);
-  //   height: 53px;
-  //   margin: 7% 0 1% 0;
-  //   flex-grow: 1;
-  //   //width: 450px;
-  //   font-size: medium;
-  //   font-weight: bold;
-  //   //font-size: 25px;
-  //   display: flex;
-  //   justify-content: center;
-  //   align-items: center;
-  //   text-align: center;
-  //   border-radius: 35px;
 
-  //   &:active {
-  //     transform: scale(0.99);
-  //   }
-  // }
 
   &__signup__inputs2 {
     //background-color: red;
@@ -630,12 +609,7 @@
       //border-radius: unset;
     }
 
-    &__signup__box {
-     //background-color: rgb(48, 170, 26);
-    //  width: 100vw;
-    //  height: 100vh;
-    }
-
+   
     &__login__box__content {
       width: 320px;
       //background-color: red;
@@ -709,10 +683,7 @@
       //width: 390px;
       margin: 0 auto;
    }
-   &__logintwo{
-    //height: 100vh;
-    //background-color: rgb(236, 216, 214);
-  }
+   
   }
 
   //Phone s

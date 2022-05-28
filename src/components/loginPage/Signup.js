@@ -3,7 +3,6 @@ import api from "../../api/apiUrl";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import Header from "./Header";
-import Footer from "./Footer";
 import { useAtom } from "jotai";
 import { textAtom } from "../../atom/State.js";
 
@@ -25,7 +24,7 @@ const Signup = ({
   email,
   phone,
 }) => {
-  const [date, setDAte] = useAtom(textAtom);
+  const [setDAte] = useAtom(textAtom);
   let dateObj = new Date();
   const months = [
     "January",
