@@ -1,10 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import Header from "./Header";
-import Footer from "./Footer";
 import { useState } from "react";
 import api from "../../api/apiUrl";
 import toast, { Toaster } from "react-hot-toast";
-//import { decodeToken } from "react-jwt";
 
 const LoginTwo = ({ userName, toSignUp }) => {
   const [passNull, setPassNull] = useState(true);
@@ -79,14 +77,14 @@ const LoginTwo = ({ userName, toSignUp }) => {
     <div className="loginpage__logintwo">
       <Header />
       <div className="loginpage__login__wrap2">
-        <form onSubmit={handleSubmit} className="loginpage__login__box">
-          <div className="loginpage__login__wrap">
-            <div className="loginpage__login__body">
-              <h2 className="loginpage__login__title" style={{ float: "left" }}>
-                Enter your password
-              </h2>
+        <div className="loginpage__logintwo__box">
+          <form onSubmit={handleSubmit}>
+            <div className="loginpage__login__title1">
+              <h2 className="loginpage__login__title">Enter your password</h2>
+            </div>
 
-              <label htmlFor="" className="loginpage__login__inp2">
+            <div className="loginpage__login__inp2">
+              <label htmlFor="">
                 <input
                   className="loginpage__login__inpUser"
                   type="text"
@@ -95,8 +93,11 @@ const LoginTwo = ({ userName, toSignUp }) => {
                 />
                 <span className="loginpage__login__label2">username</span>
               </label>
+            </div>
 
-              <label htmlFor="" className="loginpage__login__inpPass">
+            <div className="loginpage__login__inppass">
+              <label htmlFor="">
+              
                 <input
                   autoFocus="autofocus"
                   value={passValue}
@@ -105,6 +106,7 @@ const LoginTwo = ({ userName, toSignUp }) => {
                   type={passNull ? "password" : "text"}
                   placeholder="Password"
                 />
+
                 <svg
                   onClick={tes}
                   viewBox="0 0 24 24"
@@ -124,46 +126,84 @@ const LoginTwo = ({ userName, toSignUp }) => {
                     </g>
                   )}
                 </svg>
+                
               </label>
-
-              <button
-                type="submit"
-                style={{
-                  cursor: "pointer",
-                  pointerEvents: passValue ? "" : "none",
-                  backgroundColor: passValue ? "black" : "",
-                }}
-                className="loginpage__login__buttons3"
-              >
-                Log in
-              </button>
-              <h1 className="loginpage__login__bottom">
-                Don't have account?{""}
-                <span>
-                  <button
-                    onClick={toSignUp}
-                    style={{
-                      cursor: "pointer",
-                      textDecoration: "none",
-                      border: "none",
-                      backgroundColor: "transparent",
-                      color: "rgb(16, 131, 238)",
-                      fontSize: "17px",
-                      fontWeight: "bolder",
-                    }}
-                  >
-                    Sign Up
-                  </button>
-                </span>
-              </h1>
             </div>
-          </div>
-          <Toaster />
-        </form>
+            <Toaster />
+          </form>
+        </div>
       </div>
-      <Footer />
+      <div className="loginpage__logintwo__footer">
+        <div className="loginpage__logintwo__footer__box">
+          <div style={{ backgroundColor: "", padding: "15px 0px" }}>
+            <button
+              type="submit"
+              style={{
+                cursor: "pointer",
+                pointerEvents: passValue ? "" : "none",
+                backgroundColor: passValue ? "black" : "",
+              }}
+              className="loginpage__login__buttons3"
+            >
+              Log in
+            </button>
+          </div>
+          <div style={{ backgroundColor: "", textAlign: "left" }}>
+            <span className="loginpage__login__bottom">
+              Don't have account?{""}
+              <span>
+                <button
+                  onClick={toSignUp}
+                  style={{
+                    cursor: "pointer",
+                    textDecoration: "none",
+                    border: "none",
+                    backgroundColor: "transparent",
+                    color: "rgb(16, 131, 238)",
+                    fontSize: "17px",
+                    fontWeight: "bolder",
+                  }}
+                >
+                  Sign Up
+                </button>
+              </span>
+            </span>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
 
 export default LoginTwo;
+
+// <button
+//                 type="submit"
+//                 style={{
+//                   cursor: "pointer",
+//                   pointerEvents: passValue ? "" : "none",
+//                   backgroundColor: passValue ? "black" : "",
+//                 }}
+//                 className="loginpage__login__buttons3"
+//               >
+//                 Log in
+//               </button>
+// <h1 className="loginpage__login__bottom">
+//   Don't have account?{""}
+//   <span>
+//     <button
+//       onClick={toSignUp}
+//       style={{
+//         cursor: "pointer",
+//         textDecoration: "none",
+//         border: "none",
+//         backgroundColor: "transparent",
+//         color: "rgb(16, 131, 238)",
+//         fontSize: "17px",
+//         fontWeight: "bolder",
+//       }}
+//     >
+//       Sign Up
+//     </button>
+//   </span>
+// </h1>

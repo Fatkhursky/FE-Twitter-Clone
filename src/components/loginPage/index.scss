@@ -1,18 +1,44 @@
 .loginpage {
   text-align: center;
-  max-width: fit-content;
-  margin: 0 auto;
+  //max-width: fit-content;
+  //margin: 0 auto;
   font-size: small;
   //background-color: red;
 
   &__head {
-    height: 60px;
+    height: 50px;
     background-color: rgb(255, 255, 255);
-    //min-width: 600px;
-    width: 600px;
-    // margin-top: -19rem;
+    display: flex;
+    padding: 0 15px;
     border-top-left-radius: 1em;
     border-top-right-radius: 1em;
+  }
+
+  &__headleft {
+    //background-color: yellow;
+   flex-basis: 50%;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+  }
+
+  &__head__close {
+    //flex-grow: 75%;
+    height: 25px;
+    width: 25px;
+    //background-color: green;
+
+    &:hover {
+      border-radius: 15px;
+      background-color: rgb(153, 152, 152);
+    }
+  }
+
+
+  &__headright {
+    //background-color: yellow;
+   flex-basis: 50%;
+   //margin: 7px 7px 7px 7px;
   }
 
   &__footer {
@@ -24,126 +50,199 @@
     border-bottom-right-radius: 1em;
   }
 
-  &__head__close {
-    //margin-left: 0.5em;
-    float: left;
-    //justify-content: center;
-    align-items: center;
-    margin-top: 0.5em;
-
-    &:hover {
-      border-radius: 15px;
-      background-color: rgb(153, 152, 152);
-    }
-  }
-
+  
   &__head__twitter {
     margin-top: 0.3em;
   }
 
 
-  &__signup__box {
+  &__signup__main {
     background-color: rgb(255, 255, 255);
-    
-    max-height: 70vh;
+    //height: 70vh;
+    margin: 0 auto;
+    //width: 600px;
     overflow-y: auto;
+    flex-grow: 1;
   }
 
-  &__login__box {
-    background-color: rgb(255, 255, 255);
-    //align-items: center;
-   max-height: 70vh;
-    overflow-y: auto;
-    //flex-grow: 1;
-    //flex-grow: 1;
-  }
-
-  &__logintwo {
-    //display: flex;
-    //flex-direction: column;
-    //height: 100vh;
-  }
-
-  &__login__wrap2 {
-    // background-color: rgb(234, 81, 39);
-    // position: absolute;
-    // top: 60px;
-    // left: 0;
-    // width: 100vw;
-    //margin-left: auto;
-    //margin-right: auto;
-    //top: 0;
- //flex-grow: 1;
-    //display: flex;
-    //flex-direction: column;
-    //position: relative;
-    // width: 450px;
-    // margin: 0 auto;
-  }
-
-
-  
   &__signup__wrap {
-    //background-color: red;
-    width: 450px;
-    margin: 0 auto;
+    //background-color: yellow;
+    width: 600px;
+    height: 500px;
+    display: flex;
+   flex-direction: column;
   }
 
-  &__login__wrap {
+  &__signup__form {
     //background-color: red;
-    //display: flex;
-    width: 450px;
-    margin: 0 auto;
-  }
-
-  &__login__body {
-    //background-color: red;
-    max-width: 450px;
-    margin: 0 auto;
-  }
-
-  &__login__title {
-    //font-size: px;
-    //font-weight: bold;
-    width: 300px;
-    margin: 0 auto;
-    //color: red;
-    //background-color: red;
-    //background-color: red;
-    //display: flex;
-    justify-content: left;
-    align-items: left;
-    text-align: left;
-    margin-top: 1rem;
-  }
-
-  &__login__buttons1 {
-    //background-color: red;
-    height: 40px;
-    width: 300px;
+    width: 80%;
     margin: 0 auto;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    //column-gap: 5px;
-    margin-top: 1.5rem;
-    outline-style: solid;
-    outline-width: 1px;
-    outline-color: rgb(228, 238, 248);
-    border-radius: 25px;
+    flex-direction: column;
+  }
 
-    &:hover {
-      outline-color: rgb(166, 240, 253);
-      background-color: rgb(241, 247, 252);
+  &__signup__footer{
+    background-color: rgb(255, 255, 255);
+    height: 95px;
+   // width: 100%;
+   border-top: 1px solid rgba(207, 195, 195, 0.75);
+    border-bottom-left-radius: 1em;
+    border-bottom-right-radius: 1em;
+    display: flex;
+    align-items: center;
+    //margin: 0 auto;
+    
+  }
+
+  &__signup__tes {
+    background-color: rgb(80, 196, 63);
+    width: 80%;
+    //margin: auto auto;
+    margin: 0 auto;
+    color: white;
+    border-radius: 35px;
+    //border: 1.5px solid rgb(101, 100, 100);
+    height: 53px;
+  }
+
+   &__signup__button {
+    background-color: rgb(143, 143, 136);
+    //margin-top: 50%;
+    color: white;
+    width: 80%;
+    margin: 0 auto;
+    //margin: auto auto;
+    border: 1.5px solid rgb(3, 2, 2);
+    border-color: white;
+    height: 53px;
+    //margin: 7% 0 1% 0;
+    //flex-grow: 1;
+    //width: 80%;
+    //margin: auto auto;
+    //width: 450px;
+    font-size: medium;
+    font-weight: bold;
+    //font-size: 25px;
+    //display: flex;
+    //justify-content: center;
+    //align-items: center;
+    //text-align: center;
+    border-radius: 35px;
+
+    &:active {
+      transform: scale(0.99);
     }
   }
 
-  &__login__content {
-    //background-color: ;
-    margin: 25px auto;
-    font-size: small;
+
+  &__login__box__content {
+    //background-color: red;
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+  //max-width: 300px;
+    margin: 0 auto;
+  }
+
+  &__login__box__wrap{
     width: 300px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    //background-color: green;
+  }
+
+  &__login__title {
+    //background-color: yellow;
+    text-align: left;
+
+  }
+
+  &__login__box__outer {
+   //width: 600px;
+    overflow-y: hidden;
+    margin: auto auto;
+    border-bottom-left-radius: 1em;
+    border-bottom-right-radius: 1em;
+  }
+  &__login__box__inner {  
+    //background-color: #1670be; 
+    //background-color: red;
+    //height: 528.688px; 
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+
+  &__login__wrap2 {
+    background-color: rgb(255, 255, 255);
+    //padding: 0 80px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    //width: 100%;
+   
+  }
+
+  &__logintwo__box {
+    //background-color: rgb(154, 125, 125);
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    //min-width: 400px;
+    margin: 0 auto;
+  }
+
+ 
+
+  &__logintwo__footer {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 137px;
+    border-bottom-left-radius: 1em;
+    border-bottom-right-radius: 1em;
+    margin: 0 auto;
+  }
+
+  &__logintwo__footer__box {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  &__logintwo{
+    width: 600px;
+    height: 500px;
+    display: flex;
+   flex-direction: column;
+   //background-color: yellow;
+  }
+  
+  
+  &__login__wrap {
+    border-top-left-radius: 1em;
+    border-top-right-radius: 1em;
+    border-bottom-left-radius: 1em;
+    border-bottom-right-radius: 1em;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__login__title1 {
+    //background-color: blue;
+    //width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+ 
+
+  &__login__content {
+   margin: 25px 0px;
+   //padding: 25px 15px;
+    font-size: small;
+    width: 100%;
     text-align: center;
     border-bottom: 1px solid rgb(165, 165, 165);
     line-height: 0.1em;
@@ -157,15 +256,10 @@
 
   &__login__inp {
     position: relative;
-    //background-color: red;
     overflow: hidden;
     align-items: center;
     justify-content: center;
     text-align: center;
-    //color: red;
-    //margin-left: 3%;
-    width: 450px;
-    max-width: 450px;
 
     input:focus + .loginpage__login__label {
       color: #0077ff;
@@ -175,19 +269,10 @@
 
   &__login__form {
     //height: 56px;
-    width: 300px;
+    width: 100%;
     // margin: 5px auto;
     height: 50px;
     padding: 0 0 0 14px;
-    //font-size: 20px;
-    //background-color: red;
-    //font-weight: 5000;
-
-    //display: flex;
-    //justify-content: center;
-    //align-items: center;
-    //text-align: center;
-    //margin-top: 2.5rem;
     border: 1px solid rgb(204, 202, 202);
     border-radius: 7px;
 
@@ -207,7 +292,7 @@
   &__login__label {
     position: absolute;
     //font-size: 20px;
-    top: -8px;
+    top: 7px;
     left: 15px;
     color: rgba(0, 0, 0, 0.5);
     transform-origin: 0 0;
@@ -217,60 +302,48 @@
   }
 
   &__login__inp2 {
-    position: relative;
-    //background-color: blue;
+   position: relative;
+   padding: 7px 0px;
+
   }
 
   &__login__inpUser {
-    //font-size: 20px;
-    //height: 53px;
+    //background-color: red;
     width: 100%;
-    //max-width: 450px;
     font-weight: bold;
-    //margin: 0 0 0 0%;
     height: 53px;
     text-indent: 15px;
     display: flex;
     color: rgba(0, 0, 0, 0.5);
-    background-color: rgb(244, 245, 246);
-    // margin-left: 200px;
     padding: 15px 0 0 0;
-    //justify-content: center;
-    //align-items: center;
-    //text-align: center;
     margin-top: 1.5rem;
     border: none;
     border-radius: 9px;
+    margin: 0 auto;
   }
 
   &__login__label2 {
     position: absolute;
     font-size: 17px;
-    //top: 0em;
-    margin: -50px 0 0 15px ;
+    top: 5px;
+    left: 15px;
     color: rgba(0, 0, 0, 0.5);
-    //transform-origin: 0 0;
-    //transform: translate3d(0, 0, 0);
-    //transition: all 0.2s ease;
-    //pointer-events: none;
   }
 
-  &__login__inpPass {
+  &__login__inppass {
+  //width: 100%;
     position: relative;
-    //background-color: red;
+    padding: 7px 0px;
+    //background-color: greenyellow;
   }
 
   &__login__form__pass {
-    //height: 53px;
     width: 100%;
     //margin: 0 0 0 2%;
     height: 53px;
     //display: flex;
     text-indent: 15px;
-    //justify-content: center;
-    //align-items: center;
-    //text-align: center;
-    margin-top: 1.5rem;
+    //background-color: red;
     border: 1px solid rgb(204, 202, 202);
     border-radius: 9px;
 
@@ -286,29 +359,48 @@
     width: 2em;
     cursor: pointer;
     position: absolute;
-    left: 410px;
-    top: -1px;
-    //color: red;
-    //background-color: red;
+    //background-color: yellow;
+    margin-right: 7px;
+    top: 20px;
+    right: 0px;
     &:hover {
       background-color: rgb(225, 220, 220);
       border-radius: 15px;
     }
   }
 
+  
+
+  &__login__buttons1 {
+    //background-color: red;
+    height: 40px;
+    width: 100%;
+    margin: 11px 2px;
+    padding: 0px 15px;
+   // margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    //margin-top: 1.5rem;
+    outline-style: solid;
+    outline-width: 1px;
+    outline-color: rgb(228, 238, 248);
+    border-radius: 25px;
+
+    &:hover {
+      outline-color: rgb(166, 240, 253);
+      background-color: rgb(241, 247, 252);
+    }
+  }
+
   &__login__buttons2 {
     height: 40px;
+    margin: 11px 0px;
+    padding: 0px 15px;
     //font-size: 20px;
     font-weight: bold;
     color: white;
-    //background-color: rgba(156, 153, 153);
-    width: 300px;
-    //margin: 0 0 0 0%;
-    //display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    margin-top: 1.5rem;
+    //margin-top: 1.5rem;
     outline-style: solid;
     outline-width: 1px;
     outline-color: rgb(252, 252, 252);
@@ -331,6 +423,7 @@
     }
   }
 
+ 
   &__login__buttons3 {
     height: 53px;
     font-size: 20px;
@@ -341,10 +434,10 @@
     //margin-top: 50px;
     //margin: 0 0 0 0%;
     //display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    margin-top: 3.5rem;
+    //justify-content: center;
+    //align-items: center;
+    // /text-align: center;
+    //margin-top: 3.5rem;
     //outline-style: solid;
     outline-width: 1px;
     outline-color: rgb(252, 252, 252);
@@ -369,15 +462,11 @@
   &__login__bottom {
     font-size: larger;
     font-weight: lighter;
+    //background-color: red;
     margin: 45px auto;
-    //text-align: left;
-    // justify-items: left;
-    // justify-content: left;
-    // align-items: left;
-    // background-color: red;
+   //float: left;
+    text-align: left;
     max-width: 450px;
-    //float: left;
-    //display: flex;
     text-decoration: none;
 
     span {
@@ -389,16 +478,16 @@
     }
   }
 
+  &__signup__title1 {
+    //background-color: yellow;
+    display: flex;
+  }
+
   &__signup__title {
     //font-size: 35px;
+    //background-color: blue;
     font-weight: bold;
-    width: 500px;
-    margin: 0 0 5% 0;
-    display: flex;
-    justify-content: left;
-    align-items: center;
-    text-align: center;
-    margin-top: 1.5rem;
+    text-align: left;
   }
 
   &__signup__inputs1 {
@@ -409,7 +498,7 @@
   &__signup__name {
     //background-color: red;
     height: 53px;
-    width: 780px;
+    width: 100%;
     font-size: larger;
     //display: flex;
     border: 1px solid rgba(219, 218, 213, 0.75);
@@ -422,7 +511,7 @@
 
   &__signup__phone {
     height: 53px;
-    width: 780px;
+    width: 100%;
     font-size: larger;
     display: flex;
     border: 1px solid rgba(219, 218, 213, 0.75);
@@ -435,11 +524,7 @@
 
   &__signup__content {
     text-align: left;
-    //font-size: large;
-    // font-weight: bold;
-    //background-color: red;
-    //width: 450px;
-    margin: 5% 2% 0 0;
+    //margin: 5% 2% 0 0;
   }
 
   #email {
@@ -463,28 +548,28 @@
     color: rgb(139, 138, 138);
   }
 
-  &__signup__button {
-    color: white;
-    border: 1.5px solid rgb(101, 100, 100);
-    //border-color: white;
-    background-color: rgb(134, 131, 131);
-    height: 53px;
-    margin: 7% 0 1% 0;
-    flex-grow: 1;
-    //width: 450px;
-    font-size: medium;
-    font-weight: bold;
-    //font-size: 25px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    border-radius: 35px;
+  // &__signup__button {
+  //   color: white;
+  //   border: 1.5px solid rgb(101, 100, 100);
+  //   //border-color: white;
+  //   background-color: rgb(134, 131, 131);
+  //   height: 53px;
+  //   margin: 7% 0 1% 0;
+  //   flex-grow: 1;
+  //   //width: 450px;
+  //   font-size: medium;
+  //   font-weight: bold;
+  //   //font-size: 25px;
+  //   display: flex;
+  //   justify-content: center;
+  //   align-items: center;
+  //   text-align: center;
+  //   border-radius: 35px;
 
-    &:active {
-      transform: scale(0.99);
-    }
-  }
+  //   &:active {
+  //     transform: scale(0.99);
+  //   }
+  // }
 
   &__signup__inputs2 {
     //background-color: red;
@@ -536,73 +621,112 @@
       outline-color: rgb(30, 167, 247);
     }
   }
-  //Tab
-  @media (max-width: 705px) {
-    &__login__box,
-    &__signup__box {
-      max-height: fit-content;
-      overflow-y: unset;
-    }
-    &__head {
-     //background-color: red;
-      left: 0;
-      top: 0;
-      position: absolute;
+  //Tab mini
+  @media (max-width: 715px) {
+    &__signup__wrap {
+      //background-color: #0077ff;
       width: 100vw;
-      //width: 100%;
-      //background-color: rgba(227, 24, 24, 0.15);
+      height: 100vh;
+      //border-radius: unset;
+    }
+
+    &__signup__box {
+     //background-color: rgb(48, 170, 26);
+    //  width: 100vw;
+    //  height: 100vh;
+    }
+
+    &__login__box__content {
+      width: 320px;
+      //background-color: red;
+    }
+    &__login__wrap {
+      border-radius: unset;
+      width:100vw;
+      height: 100vh;
+    }
+
+    &__login__box__inner {   
+      overflow-y: hidden;
+      margin: 0 auto;
     }
 
     &__footer {
       background-color: rgb(254, 254, 254);
       display: none;
     }
+
+    &__logintwo {
+      height: 100vh;
+      width: 100vw;
+      //background-color: rgb(132, 219, 65);
+      //background-color: red;
+    }
   }
   //Phone L
   @media (max-width: 425px) {
-    &__signup__wrap {
+    // &__signup__wrap {
+    //   //background-color: red;
+    //   padding: 0 7% 0 7%;
+    //   //width: 390px;
+    //   margin: 0 auto;
+    // }
+  
+    &__logintwo{
+      margin: 0 auto;
+    
+    }
+
+    &__login__box__wrap{
+      width: 80%;
+      
+    }
+  
+    &__login__box__content {
+      width: 100vw;
+      height: 100vh;
       //background-color: red;
-      padding: 0 7% 0 7%;
-      //width: 390px;
       margin: 0 auto;
     }
-    &__login__wrap {
-       //background-color: red;
-       padding: 0 7% 0 7%;
-       //width: 390px;
-       margin: 0px auto 900px auto;
+
+    &__login__box__inner {   
+      overflow-y: auto;
+      //margin: 0 auto;
     }
   }
 
   //Phone M
   @media (max-width: 375px) {
-    &__signup__wrap {
-      //background-color: red;
-      padding: 0 12% 0 12%;
-      //width: 390px;
-      margin: 0 auto;
-    }
+    // &__signup__wrap {
+    //   //background-color: red;
+    //   padding: 0 12% 0 12%;
+    //   //width: 390px;
+    //   margin: 0 auto;
+    // }
     &__login__wrap {
       //background-color: red;
-      padding: 0 12% 0 12%;
+      //padding: 0 12% 0 12%;
       //width: 390px;
-      margin: 0px auto 900px auto;
+      margin: 0 auto;
    }
+   &__logintwo{
+    //height: 100vh;
+    //background-color: rgb(236, 216, 214);
+  }
   }
 
   //Phone s
   @media (max-width: 320px) {
-    &__signup__wrap {
-      //background-color: red;
-      padding: 0 19% 0 19%;
-      //width: 390px;
-      margin: 0 auto;
-    }
+    // &__signup__wrap {
+    //   //background-color: red;
+    //   padding: 0 19% 0 19%;
+    //   //width: 390px;
+    //   margin: 0 auto;
+    // }
     &__login__wrap {
       //background-color: red;
-      padding: 0 19% 0 19%;
-      margin: 0px auto 900px auto;
-      //margin: 0 auto;
+      //padding: 0 19% 0 19%;
+      margin: 0 auto;
       //background-color: red;
       //position: absolute;
       //top: 0;

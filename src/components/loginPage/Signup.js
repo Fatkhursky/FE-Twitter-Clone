@@ -140,15 +140,18 @@ const Signup = ({
   };
 
   return (
-    <div>
+    <div className="loginpage__signup__wrap">
       <Header />
       <form
         style={{ backgroundColor: "" }}
-        className="loginpage__signup__box"
+        className="loginpage__signup__main"
         onSubmit={handleSubmit}
       >
-        <div className="loginpage__signup__wrap">
-          <h1 className="loginpage__signup__title">Create your account</h1>
+        <div className="loginpage__signup__form">
+          <div className="loginpage__signup__title1">
+            <h1 className="loginpage__signup__title">Create your account</h1>
+          </div>
+
           <div className="loginpage__signup__inputs1">
             <input
               className="loginpage__signup__name"
@@ -217,28 +220,45 @@ const Signup = ({
               {getYear()}
             </select>
           </div>
-          {
-            <div style={{ display: "flex" }}>
-              <button
-                className="loginpage__signup__button"
-                type="submit"
-                style={{
-                  textDecoration: "none",
-                  backgroundColor: color,
-                  cursor: pointer,
-                  pointerEvents: event,
-                }}
-              >
-                Signup
-              </button>
-              <Toaster />
-            </div>
-          }
         </div>
       </form>
-      <Footer />
+
+      <div className="loginpage__signup__footer">
+        <button
+          className="loginpage__signup__button"
+          type="submit"
+          style={{
+            textDecoration: "none",
+            backgroundColor: color,
+            cursor: pointer,
+            pointerEvents: event,
+          }}
+        >
+          Signup
+        </button>
+        <Toaster />
+      </div>
     </div>
   );
 };
 
 export default Signup;
+//<Footer />
+
+// {
+//   <div style={{ display: "flex" }}>
+//     <button
+//       className="loginpage__signup__button"
+//       type="submit"
+//       style={{
+//         textDecoration: "none",
+//         backgroundColor: color,
+//         cursor: pointer,
+//         pointerEvents: event,
+//       }}
+//     >
+//       Signup
+//     </button>
+//     <Toaster />
+//   </div>
+// }

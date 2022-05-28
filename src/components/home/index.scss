@@ -137,7 +137,7 @@ body {
   }
 
   #twitt {
-    padding: 12px 0px 0px 12px;
+    padding: 12px 0px 0px 0px;
   }
 
   #twitter {
@@ -483,4 +483,15 @@ body {
       display: none;
     }
   }
+}
+
+//Mobile L
+@media (max-width: 376px) {
+  .homepage{
+    #addtweet {
+      transform: scale(0.6);
+    }
+
+  }
+  
 }
