@@ -41,7 +41,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="wrap">
+    <div className="wrap" style={{backgroundColor:""}}>
       <div className="loginpage">
         <Routes>
           <Route
