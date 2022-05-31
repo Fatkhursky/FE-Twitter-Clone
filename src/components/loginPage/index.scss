@@ -7,7 +7,7 @@
 
   &__head {
     height: 50px;
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(133, 55, 55);
     display: flex;
     padding: 0 15px;
     border-top-left-radius: 1em;
@@ -136,12 +136,12 @@
 
 
   &__login__box__content {
-    //background-color: red;
+    background-color: red;
     width: 600px;
     display: flex;
     flex-direction: column;
   //max-width: 300px;
-    margin: 0 auto;
+    //margin: 0 auto;
   }
 
   &__login__box__wrap{
@@ -161,7 +161,7 @@
   &__login__box__outer {
    //width: 600px;
     overflow-y: hidden;
-    margin: auto auto;
+    margin: 0 auto;
     border-bottom-left-radius: 1em;
     border-bottom-right-radius: 1em;
   }
@@ -224,7 +224,7 @@
     border-top-right-radius: 1em;
     border-bottom-left-radius: 1em;
     border-bottom-right-radius: 1em;
-    background-color: white;
+    background-color: rgb(73, 198, 62);
     display: flex;
     flex-direction: column;
   }
