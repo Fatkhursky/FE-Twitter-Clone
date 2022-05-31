@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import Header from "./Header";
 import { mySvg } from "../home/svg.js";
+import { useState, useEffect } from "react";
+
 
 const Login = ({
   onChangeUsername,
@@ -13,6 +15,25 @@ const Login = ({
     e.preventDefault();
     alert("Fitur belum tersedia");
   };
+
+
+  
+// const [dimension, updateDimention] = useState();
+  
+// useEffect(() => {
+//   window.addEventListener("resize", () => {
+//       updateDimention({ 
+//           ...dimension, 
+//           width: window.innerWidth, 
+//           height: window.innerHeight 
+//       });
+     
+//   })
+// },[window.innerWidth]);
+
+// console.log(dimension);
+
+
 
   return (
     <div className="loginpage__login__wrap">

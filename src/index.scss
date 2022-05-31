@@ -1,10 +1,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap");
 
-html,
-body {
+html {
  // margin: 0 auto;
-  background-color: rgba(0, 0, 0, 0.4);
+  //background-color: rgba(0, 0, 0, 0.4);
+  //box-sizing: border-box;
+ height: 100%;
   //height: -webkit-fill-available
+}
+
+body {
+  height: 100%;
+  padding: 0;
+  margin: 0;
 }
 
 * {
@@ -21,14 +28,14 @@ body {
    height:100vh;
    justify-content:center;
    align-items:center;
-   //background-color: red;
+   background-color: rgb(185, 185, 185);
    height: -webkit-fill-available
 }
 
 //Phone
-@media (max-width: 705px) {
-  html,
-  body {
-    background-color: white;
-  }
-}
+// @media (max-width: 705px) {
+//   html,
+//   body {
+//     background-color: white;
+//   }
+// }
