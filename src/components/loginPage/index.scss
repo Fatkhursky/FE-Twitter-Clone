@@ -232,10 +232,6 @@
     background-color: rgb(230, 249, 22);
     display: flex;
     flex-direction: column;
-    //height: -webkit-fill-available
-
-   
-   
   }
 
   &__login__title1 {
@@ -621,29 +617,18 @@
    
     &__login__box__content {
       width: 100vw;
-      //width: 320px;
+      //height: 100vh;
       //background-color: red;
     }
     &__login__wrap {
       border-radius: unset;
-      width:100%;
-      height: 100%;
-
-      // margin-bottom: 0px;
-      // margin-left: 0px;
-      // margin-right: 0px;
-      // margin-top: 0px;
-      // min-height: 0px;
-      // min-width: 0px;
-      // padding-bottom: 0px;
-      // padding-left: 0px;
-      // padding-right: 0px;
-      // padding-top: 0px;
+      width:100vw;
+      height: 100vh;
       
     }
 
     &__login__box__inner {   
-      overflow-y: hidden;
+      //overflow-y: hidden;
       margin: 0 auto;
     }
 
