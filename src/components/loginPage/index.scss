@@ -140,8 +140,9 @@
 
 
   &__login__box__content {
-    background-color: rgb(255, 255, 255);
+   background-color: rgb(255, 255, 255);
     width: 600px;
+   //height: 100vh;
     display: flex;
     flex-direction: column;
   //max-width: 300px;
@@ -228,7 +229,7 @@
     border-top-right-radius: 1em;
     border-bottom-left-radius: 1em;
     border-bottom-right-radius: 1em;
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(230, 249, 22);
     display: flex;
     flex-direction: column;
     //height: -webkit-fill-available
@@ -619,13 +620,14 @@
 
    
     &__login__box__content {
-      width: 320px;
+      width: 100vw;
+      //width: 320px;
       //background-color: red;
     }
     &__login__wrap {
       border-radius: unset;
-      width:100vw;
-      height: 100vh;
+      width:100%;
+      height: 100%;
 
       // margin-bottom: 0px;
       // margin-left: 0px;
