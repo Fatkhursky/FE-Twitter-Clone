@@ -11,7 +11,7 @@
 
   &__head {
     height: 50px;
-    background-color: rgb(133, 55, 55);
+    background-color: rgb(254, 254, 254);
     display: flex;
     padding: 0 15px;
     border-top-left-radius: 1em;
@@ -229,7 +229,7 @@
     border-top-right-radius: 1em;
     border-bottom-left-radius: 1em;
     border-bottom-right-radius: 1em;
-    background-color: rgb(230, 249, 22);
+    background-color: white;
     display: flex;
     flex-direction: column;
   }
@@ -628,7 +628,7 @@
     }
 
     &__login__box__inner {   
-      //overflow-y: hidden;
+      overflow-y: hidden;
       margin: 0 auto;
     }
 
