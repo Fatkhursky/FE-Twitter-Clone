@@ -24,7 +24,7 @@ const Signup = ({
   email,
   phone,
 }) => {
-  const [setDAte] = useAtom(textAtom);
+  const [date, setDAte] = useAtom(textAtom);
   let dateObj = new Date();
   const months = [
     "January",
@@ -139,12 +139,12 @@ const Signup = ({
   };
 
   return (
-    <div className="loginpage__signup__wrap">
+    <form className="loginpage__signup__wrap" onSubmit={handleSubmit}>
       <Header />
-      <form
+      <div
         style={{ backgroundColor: "" }}
         className="loginpage__signup__main"
-        onSubmit={handleSubmit}
+        
       >
         <div className="loginpage__signup__form">
           <div className="loginpage__signup__title1">
@@ -220,7 +220,7 @@ const Signup = ({
             </select>
           </div>
         </div>
-      </form>
+      </div>
 
       <div className="loginpage__signup__footer">
         <button
@@ -237,7 +237,7 @@ const Signup = ({
         </button>
         <Toaster />
       </div>
-    </div>
+    </form>
   );
 };
 

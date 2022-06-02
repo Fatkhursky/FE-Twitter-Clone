@@ -74,11 +74,11 @@ const LoginTwo = ({ userName, toSignUp }) => {
   };
 
   return (
-    <div className="loginpage__logintwo">
+    <form className="loginpage__logintwo" onSubmit={handleSubmit}>
       <Header />
       <div className="loginpage__login__wrap2">
         <div className="loginpage__logintwo__box">
-          <form onSubmit={handleSubmit}>
+          <div >
             <div className="loginpage__login__title1">
               <h2 className="loginpage__login__title">Enter your password</h2>
             </div>
@@ -130,7 +130,7 @@ const LoginTwo = ({ userName, toSignUp }) => {
               </label>
             </div>
             <Toaster />
-          </form>
+          </div>
         </div>
       </div>
       <div className="loginpage__logintwo__footer">
@@ -171,7 +171,7 @@ const LoginTwo = ({ userName, toSignUp }) => {
           </div>
         </div>
       </div>
-    </div>
+    </form>
   );
 };
 
