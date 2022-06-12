@@ -4,7 +4,7 @@ import { useState } from 'react'
 import AllTweet from '@/src/components/home/all-tweet'
 import { decodeToken } from 'react-jwt'
 import { useAtom } from 'jotai'
-import { textAtom } from '@/src/stores/jotaiAtom'
+import { textAtom } from '@/src/stores/jotai-atom'
 
 const Profile = ({ setOnComp, tweets, setTweets, setArray, array }) => {
   const [date] = useAtom(textAtom)
