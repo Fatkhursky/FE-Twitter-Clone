@@ -67,7 +67,7 @@ const Login = ({ onChangeUsername, username, onSubmitUserName, pointer, color })
                 Don't have account?&nbsp;{' '}
                 <span>
                   <Link
-                    href="/pages/register"
+                    href="/register"
                     style={{
                       cursor: 'pointer',
                       textDecoration: 'none',
