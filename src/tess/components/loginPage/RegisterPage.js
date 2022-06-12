@@ -1,7 +1,9 @@
 import Login from "./Login";
 import LoginTwo from "./LoginTwo";
 import Signup from "./Signup";
-import { Routes, Route, useNavigate } from "react-router-dom";
+// import { Routes, Route, useNavigate } from "react-router-dom";
+import {useRouter} from'next/router'
+
 import { useState } from "react";
 // import { useAtom } from "jotai";
 // import { textAtom } from "../../atom/State.js";
@@ -33,38 +35,17 @@ const LoginPage = () => {
     setIsNext(true);
   };
 
-  let navigate = useNavigate();
+  let router = useRouter();
 
   const toSignUp = () => {
     setIsNext(false);
-    navigate("/register");
+    router.push("/register.jsx");
   };
 
   return (
     <div className="wrap" style={{backgroundColor:""}}>
       <div className="loginpage">
-        <Routes>
-          <Route
-            path="/"
-            element={
-              isNext ? (
-                <LoginTwo userName={userName} toSignUp={toSignUp} />
-              ) : (
-                <Login
-                  className="loginpage__login"
-                  passName={name}
-                  username={userName}
-                  onChangeUsername={(e) => setUserName(e.target.value)}
-                  onSubmitUserName={isUserName}
-                  pointer={!userName ? "none" : ""}
-                  color={userName ? "black" : "rgba(156, 153, 153)"}
-                />
-              )
-            }
-          />
-          <Route
-            path="/register"
-            element={
+
               <Signup
                 className="loginpage__signup"
                 onChangeName={(e) => setName(e.target.value)}
@@ -84,9 +65,9 @@ const LoginPage = () => {
                 email={email}
                 phone={phone}
               />
-            }
-          />
-        </Routes>
+        {/*//     }*/}
+        {/*//   />*/}
+        {/*// </Routes>*/}
       </div>
     </div>
   );
