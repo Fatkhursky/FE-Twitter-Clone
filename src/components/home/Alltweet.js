@@ -1,7 +1,7 @@
-import { mySvg } from "./svg";
+import { mySvg } from "../../../public/assets/svg";
 import { decodeToken } from "react-jwt";
 import Popup from "reactjs-popup";
-import api from "../../../utilities/apiUrl";
+import api from "../../utilities/apiUrl";
 import {useEffect} from "react"
 
 const Alltweet = ({ item, id, tweets, setTweets, array, setArray }) => {
@@ -35,7 +35,7 @@ const Alltweet = ({ item, id, tweets, setTweets, array, setArray }) => {
     <div className="profile__tweets">
       <img
         style={{ height: "50px", marginLeft: "0px" }}
-        src={"/src/logo193.png"}
+        src={"/assets/logo193.png"}
         alt="joebiden"
       />
       <div className="profile__text">

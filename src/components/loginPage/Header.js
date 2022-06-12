@@ -1,5 +1,5 @@
 import { FaTwitter } from "react-icons/fa";
-import { mySvg } from "../home/svg";
+import { mySvg } from "../../../public/assets/svg";
 
 const Header = () => {
   return (

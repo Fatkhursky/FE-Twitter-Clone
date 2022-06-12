@@ -1,6 +1,6 @@
 import  Link  from "next/link";
 import Header from "./Header";
-import { mySvg } from "../home/svg.js";
+import { mySvg } from "../../../public/assets/svg.js";
 import { useState, useEffect } from "react";
 
 
@@ -104,7 +104,7 @@ const Login = ({
               Don't have account?&nbsp;{" "}
               <span>
                 <Link
-                  href="/register"
+                  href="/pages/register"
                   style={{
                     cursor: "pointer",
                     textDecoration: "none",

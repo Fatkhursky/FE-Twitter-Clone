@@ -1,2 +1,2 @@
-import {default as Page} from './../src/tess/components/loginPage/RegisterPage'
+import {default as Page} from '../src/components/loginPage/RegisterPage'
 export default Page

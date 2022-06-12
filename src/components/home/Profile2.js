@@ -1,9 +1,9 @@
-import { mySvg } from "./svg";
+import { mySvg } from "../../../public/assets/svg";
 import { useState } from "react";
 import Alltweet from "./Alltweet";
 import { decodeToken } from "react-jwt";
 import { useAtom } from "jotai";
-import { textAtom } from "../../../stores/State";
+import { textAtom } from "../../stores/State";
 
 const Profile = ({ setOnComp, tweets, setTweets, setArray, array }) => {
   const [date] = useAtom(textAtom);
@@ -49,11 +49,11 @@ const Profile = ({ setOnComp, tweets, setTweets, setArray, array }) => {
         </div>
       </div>
       <div className="profile__beranda">
-        <img id="backdrop" src={"/src/beranda.jpg"} alt="beranda" />
+        <img id="backdrop" src={"/assets/beranda.jpg"} alt="beranda" />
 
         <div className="profile__desc">
           <div>
-          <img id="user" src={"/src/logo193.png"} alt="userImage" />
+          <img id="user" src={"/assets/logo193.png"} alt="userImage" />
           </div>
           <div style={{ lineHeight: "7px" }}>
             <h2>{myDecodedToken?.name}</h2>

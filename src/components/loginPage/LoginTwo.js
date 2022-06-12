@@ -2,7 +2,7 @@
 import {useRouter} from'next/router'
 import Header from "./Header";
 import { useState } from "react";
-import api from "../../../utilities/apiUrl";
+import api from "../../utilities/apiUrl";
 import toast, { Toaster } from "react-hot-toast";
 
 const LoginTwo = ({ userName, toSignUp }) => {

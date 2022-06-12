@@ -1,6 +1,6 @@
 import { decodeToken } from "react-jwt";
-import { mySvg } from "../home/svg";
-import api from "../../../utilities/apiUrl";
+import { mySvg } from "../../../public/assets/svg";
+import api from "../../utilities/apiUrl";
 import Popup from "reactjs-popup";
 
 const AddTweet = ({ newTweet, id, array, setArray }) => {
@@ -30,7 +30,7 @@ const AddTweet = ({ newTweet, id, array, setArray }) => {
         <div className="addtweet__section" style={{ position: "relative" }}>
           <img
             style={{ height: "45px", marginLeft: "0px" }}
-            src={"/src/logo193.png"}
+            src={"/assets/logo193.png"}
             alt="joebiden"
           />
           <div className="addtweet__text">

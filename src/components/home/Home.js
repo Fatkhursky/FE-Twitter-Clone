@@ -1,4 +1,4 @@
-import { mySvg } from "./svg";
+import { mySvg } from "../../../public/assets/svg";
 import AddTweet from "../addTweet/AddTweet";
 import TextareaAutosize from "react-textarea-autosize";
 
@@ -31,7 +31,7 @@ const Home = ({
             <img
               className="homepage__tophead"
               style={{ height: "45px" }}
-              src={"/src/logo193.png"}
+              src={"/assets/logo193.png"}
               alt="user"
             />
             <TextareaAutosize

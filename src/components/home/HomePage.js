@@ -1,10 +1,10 @@
-import { mySvg } from "./svg";
+import { mySvg } from "../../../public/assets/svg";
 import { useEffect, useState } from "react";
 import { decodeToken } from "react-jwt";
 // import { useNavigate } from "react-router-dom";
 import {useRouter} from'next/router'
 
-import api from "../../../utilities/apiUrl";
+import api from "../../utilities/apiUrl";
 import Popup from "reactjs-popup";
 import Home from "./Home";
 import Profile from "./Profile";
@@ -310,7 +310,7 @@ const HomePage = () => {
                         padding: "0 2% 0 2%",
                         backgroundColor: "",
                       }}
-                      src={"/src/logo193.png"}
+                      src={"/assets/logo193.png"}
                       alt="joebiden"
                     />
                     <div
@@ -344,7 +344,7 @@ const HomePage = () => {
                   <img
                     id="imgjoe"
                     style={{ height: "50px" }}
-                    src={"/src/logo193.png"}
+                    src={"/assets/logo193.png"}
                     alt="joebiden"
                   />
                   <p id="namejoe" style={{ fontSize: "1.3rem" }}>
@@ -514,7 +514,7 @@ const HomePage = () => {
                   width: "55px",
                   height: "55px",
                 }}
-                src={"/src/foto1.jpg"}
+                src={"/assets/foto2.jpg"}
                 alt="user1"
               />
 
@@ -547,7 +547,7 @@ const HomePage = () => {
                   width: "55px",
                   height: "55px",
                 }}
-                src={"/src/foto1.jpg"}
+                src={"/assets/foto1.jpg"}
                 alt="user1"
               />
 
@@ -581,7 +581,7 @@ const HomePage = () => {
                   height: "55px",
                   marginTop: "",
                 }}
-                src={"/src/foto3.jpg"}
+                src={"/assets/foto3.jpg"}
                 alt="user1"
               />
 

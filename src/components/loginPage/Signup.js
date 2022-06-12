@@ -1,12 +1,12 @@
 import { monthsDate, daysDate, yearsDate } from "./valueDate.js";
-import api from "../../../utilities/apiUrl";
+import api from "../../utilities/apiUrl";
 import toast, { Toaster } from "react-hot-toast";
 // import { useNavigate } from "react-router-dom";
 import {useRouter} from'next/router'
 
 import Header from "./Header";
 import { useAtom } from "jotai";
-import { textAtom } from "../../../stores/State.js";
+import { textAtom } from "../../stores/State.js";
 
 const Signup = ({
   onChangeName,
