@@ -1,26 +1,15 @@
-import { mySvg } from "../../../public/assets/svg";
-import AddTweet from "../addTweet/AddTweet";
-import TextareaAutosize from "react-textarea-autosize";
+import { mySvg } from '../../../public/assets/svg'
+import AddTweet from '../addTweet/AddTweet'
+import TextareaAutosize from 'react-textarea-autosize'
 
-
-const Home = ({
-  handleSubmit,
-  tweet,
-  setTweet,
-  newTweet,
-  array,
-  setArray
-}) => {
-  const color = tweet ? "rgb(29, 108, 255)" : "";
-  const isPointer = tweet ? "pointer" : "";
+const Home = ({ handleSubmit, tweet, setTweet, newTweet, array, setArray }) => {
+  const color = tweet ? 'rgb(29, 108, 255)' : ''
+  const isPointer = tweet ? 'pointer' : ''
   return (
     <div className="homepage__home">
       <div className="homepage__header">
         <h2 className="homepage__title">Home</h2>
-        <svg
-          id="stars"
-          style={{ width: "35px", height: "35px", marginTop: "1rem" }}
-        >
+        <svg id="stars" style={{ width: '35px', height: '35px', marginTop: '1rem' }}>
           {mySvg.stars}
         </svg>
       </div>
@@ -30,8 +19,8 @@ const Home = ({
           <div className="homepage__mainhead">
             <img
               className="homepage__tophead"
-              style={{ height: "45px" }}
-              src={"/assets/logo193.png"}
+              style={{ height: '45px' }}
+              src={'/assets/logo193.png'}
               alt="user"
             />
             <TextareaAutosize
@@ -72,7 +61,7 @@ const Home = ({
                     setArray={setArray}
                   />
                 ))
-              : ""}
+              : ''}
           </div>
 
           <div className="homepage__topmain">
@@ -83,18 +72,16 @@ const Home = ({
           </div>
 
           <div className="homepage__botmain">
-            <p style={{ fontSize: "larger", fontWeight:"bold" }}>Welcome to Twitter!</p>
-            <p style={{ marginTop: "-1rem", fontSize: "small" }}>
-              This is the best place to see what’s happening in your world. Find
-              some people and topics to follow now.
+            <p style={{ fontSize: 'larger', fontWeight: 'bold' }}>Welcome to Twitter!</p>
+            <p style={{ marginTop: '-1rem', fontSize: 'small' }}>
+              This is the best place to see what’s happening in your world. Find some people and
+              topics to follow now.
             </p>
             <button id="letsbtn">Let's go</button>
           </div>
         </form>
       </div>
     </div>
-    
-  );
-};
-
-export default Home;
+  )
+}
+export default Home

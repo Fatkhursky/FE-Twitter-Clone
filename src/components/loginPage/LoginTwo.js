@@ -1,85 +1,79 @@
-// import { useNavigate } from "react-router-dom";
-import {useRouter} from'next/router'
-import Header from "./Header";
-import { useState } from "react";
-import api from "../../utilities/apiUrl";
-import toast, { Toaster } from "react-hot-toast";
+import { useRouter } from 'next/router'
+import Header from './Header'
+import { useState } from 'react'
+import api from '../../utilities/axios'
+import toast, { Toaster } from 'react-hot-toast'
 
 const LoginTwo = ({ userName, toSignUp }) => {
-  const [passNull, setPassNull] = useState(true);
-  const [passValue, setPassValue] = useState("");
+  const [passNull, setPassNull] = useState(true)
+  const [passValue, setPassValue] = useState('')
   const tes = (e) => {
-    e.preventDefault();
-    setPassNull(!passNull);
-  };
+    e.preventDefault()
+    setPassNull(!passNull)
+  }
 
   const onChangePass = (e) => {
-    setPassValue(e.target.value);
-  };
+    setPassValue(e.target.value)
+  }
 
   const notify = async () => {
-    const newLogin = { username: userName, password: passValue };
+    const newLogin = { username: userName, password: passValue }
     try {
-      const res = await api.post("auth/login", newLogin);
-      //console.log(333, res.data.access_token)
-      localStorage.setItem("Bearer", res.data.access_token);
-      return res.data.message;
+      const res = await api.post('auth/login', newLogin)
+      localStorage.setItem('Bearer', res.data.access_token)
+      return res.data.message
     } catch (error) {
       if (error.response) {
-        throw new Error(error.response.data.message);
-        // console.log(error.response.status);
-        // console.log(error.response.headers);
+        throw new Error(error.response.data.message)
       } else if (error.request) {
-        throw new Error(error.request);
+        throw new Error(error.request)
       } else {
-        throw new Error(error.message);
+        throw new Error(error.message)
       }
     }
-  };
+  }
 
-  let router = useRouter();
+  let router = useRouter()
   const toHome = () => {
-    router.push("/home");
-  };
+    router.push('/home')
+  }
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     toast.promise(
       notify(),
       {
-        loading: "Loading...",
+        loading: 'Loading...',
         success: (data) => {
-          const token = localStorage.getItem("Bearer");
+          const token = localStorage.getItem('Bearer')
           // console.log(33, token)
           const wait = () => {
             if (token) {
-              return toHome();
+              return toHome()
             }
-          };
-          setTimeout(wait, 1000);
-          // setTimeout(toHome, 3000);
-          return data;
+          }
+          setTimeout(wait, 1000)
+          return data
         },
         error: (error) => `${error}`,
       },
       {
         style: {
-          minWidth: "250px",
+          minWidth: '250px',
         },
         success: {
           duration: 1000,
-          //icon: "🔥",
         },
       }
-    );
-  };
+    )
+  }
 
   return (
     <form className="loginpage__logintwo" onSubmit={handleSubmit}>
       <Header />
       <div className="loginpage__login__wrap2">
         <div className="loginpage__logintwo__box">
-          <div >
+          <div>
             <div className="loginpage__login__title1">
               <h2 className="loginpage__login__title">Enter your password</h2>
             </div>
@@ -98,13 +92,12 @@ const LoginTwo = ({ userName, toSignUp }) => {
 
             <div className="loginpage__login__inppass">
               <label htmlFor="">
-              
                 <input
                   autoFocus="autofocus"
                   value={passValue}
                   onChange={onChangePass}
                   className="loginpage__login__form__pass"
-                  type={passNull ? "password" : "text"}
+                  type={passNull ? 'password' : 'text'}
                   placeholder="Password"
                 />
 
@@ -113,7 +106,7 @@ const LoginTwo = ({ userName, toSignUp }) => {
                   viewBox="0 0 24 24"
                   aria-hidden="true"
                   className="loginpage__login__eye"
-                  style={{ color: "rgb(15, 20, 25)" }}
+                  style={{ color: 'rgb(15, 20, 25)' }}
                 >
                   {passNull ? (
                     <g>
@@ -127,7 +120,6 @@ const LoginTwo = ({ userName, toSignUp }) => {
                     </g>
                   )}
                 </svg>
-                
               </label>
             </div>
             <Toaster />
@@ -136,33 +128,33 @@ const LoginTwo = ({ userName, toSignUp }) => {
       </div>
       <div className="loginpage__logintwo__footer">
         <div className="loginpage__logintwo__footer__box">
-          <div style={{ backgroundColor: "", padding: "15px 0px" }}>
+          <div style={{ backgroundColor: '', padding: '15px 0px' }}>
             <button
               type="submit"
               style={{
-                cursor: "pointer",
-                pointerEvents: passValue ? "" : "none",
-                backgroundColor: passValue ? "black" : "",
+                cursor: 'pointer',
+                pointerEvents: passValue ? '' : 'none',
+                backgroundColor: passValue ? 'black' : '',
               }}
               className="loginpage__login__buttons3"
             >
               Log in
             </button>
           </div>
-          <div style={{ backgroundColor: "", textAlign: "left" }}>
+          <div style={{ backgroundColor: '', textAlign: 'left' }}>
             <span className="loginpage__login__bottom">
-              Don't have account?{""}
+              Don't have account?{''}
               <span>
                 <button
                   onClick={toSignUp}
                   style={{
-                    cursor: "pointer",
-                    textDecoration: "none",
-                    border: "none",
-                    backgroundColor: "transparent",
-                    color: "rgb(16, 131, 238)",
-                    fontSize: "17px",
-                    fontWeight: "bolder",
+                    cursor: 'pointer',
+                    textDecoration: 'none',
+                    border: 'none',
+                    backgroundColor: 'transparent',
+                    color: 'rgb(16, 131, 238)',
+                    fontSize: '17px',
+                    fontWeight: 'bolder',
                   }}
                 >
                   Sign Up
@@ -173,38 +165,7 @@ const LoginTwo = ({ userName, toSignUp }) => {
         </div>
       </div>
     </form>
-  );
-};
+  )
+}
 
-export default LoginTwo;
-
-// <button
-//                 type="submit"
-//                 style={{
-//                   cursor: "pointer",
-//                   pointerEvents: passValue ? "" : "none",
-//                   backgroundColor: passValue ? "black" : "",
-//                 }}
-//                 className="loginpage__login__buttons3"
-//               >
-//                 Log in
-//               </button>
-// <h1 className="loginpage__login__bottom">
-//   Don't have account?{""}
-//   <span>
-//     <button
-//       onClick={toSignUp}
-//       style={{
-//         cursor: "pointer",
-//         textDecoration: "none",
-//         border: "none",
-//         backgroundColor: "transparent",
-//         color: "rgb(16, 131, 238)",
-//         fontSize: "17px",
-//         fontWeight: "bolder",
-//       }}
-//     >
-//       Sign Up
-//     </button>
-//   </span>
-// </h1>
+export default LoginTwo
