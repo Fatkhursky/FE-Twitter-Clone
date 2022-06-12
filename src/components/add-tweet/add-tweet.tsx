@@ -4,6 +4,7 @@ import { decodeToken } from 'react-jwt'
 import { mySvg } from '~/public/assets/svg'
 import api from '@/src/utilities/axios'
 import Popup from 'reactjs-popup'
+import deleteOneTweet from '@/src/requests/delete-one-tweet'
 
 const AddTweet = ({ newTweet, id, array, setArray }) => {
   const token = localStorage.getItem('Bearer')
@@ -15,9 +16,7 @@ const AddTweet = ({ newTweet, id, array, setArray }) => {
   //Delete some tweet
   const handleDelete = async () => {
     try {
-      const res = await api.delete(`tweets/${id}`, {
-        headers: headers,
-      })
+      const res = await deleteOneTweet(id, { Authorization: token })
       setArray((array = array.filter((item) => item.id !== id)))
       return res.data.message
     } catch (error) {}

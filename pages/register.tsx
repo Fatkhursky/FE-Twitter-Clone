@@ -7,6 +7,8 @@ import api from '@/src/utilities/axios'
 import toast, { Toaster } from 'react-hot-toast'
 import Header from '@/src/components/login-page/header'
 import Head from 'next/head'
+import login from '@/src/requests/login'
+import register from '@/src/requests/register'
 
 const LoginPage = () => {
   const [name, setName] = useState('')
@@ -84,7 +86,8 @@ const LoginPage = () => {
   const notify = async () => {
     const newReg = { name, username, password, email, phone }
     try {
-      const res = await api.post('/auth/register', newReg)
+      const [error, res] = await register(newReg)
+      if (error) throw error
       return res.data.message
     } catch (error) {
       if (error.response) {
@@ -144,10 +147,15 @@ const LoginPage = () => {
         <div className="loginpage">
           <form className="loginpage__signup__wrap" onSubmit={handleSubmit}>
             <Header />
-            <div style={{ backgroundColor: '' }} className="loginpage__signup__main">
+            <div
+              style={{ backgroundColor: '' }}
+              className="loginpage__signup__main"
+            >
               <div className="loginpage__signup__form">
                 <div className="loginpage__signup__title1">
-                  <h1 className="loginpage__signup__title">Create your account</h1>
+                  <h1 className="loginpage__signup__title">
+                    Create your account
+                  </h1>
                 </div>
 
                 <div className="loginpage__signup__inputs1">
@@ -177,12 +185,16 @@ const LoginPage = () => {
                     Use email instead
                   </p>
                   <div>
-                    <p className="loginpage__signup__date" style={{ cursor: 'pointer' }}>
+                    <p
+                      className="loginpage__signup__date"
+                      style={{ cursor: 'pointer' }}
+                    >
                       Date of birth
                     </p>
                     <p className="loginpage__signup__desc">
-                      This will not be shown publicly. Confirm your own age, even if this account is
-                      for a business, a pet, or something else.
+                      This will not be shown publicly. Confirm your own age,
+                      even if this account is for a business, a pet, or
+                      something else.
                     </p>
                   </div>
                 </div>

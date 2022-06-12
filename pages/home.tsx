@@ -7,6 +7,8 @@ import api from '@/src/utilities/axios'
 import Popup from 'reactjs-popup'
 import Home from '@/src/components/home/home'
 import Profile from '@/src/components/home/profile'
+import fetchAllTweets from '@/src/requests/fetch-all-tweets'
+import storeOneTweet from '@/src/requests/store-one-tweet'
 
 const HomePage = () => {
   let router = useRouter()
@@ -44,9 +46,7 @@ const HomePage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const res = await api.post('tweets', body, {
-        headers: headers,
-      })
+      const [, res] = await storeOneTweet(body, { Authorization: token })
       const obj = { id: res.data.data.id, text: res.data.data.text }
 
       setTweet('')
@@ -67,8 +67,8 @@ const HomePage = () => {
 
   const getTweets = async () => {
     try {
-      const res = await api.get('tweets', {
-        headers: headers,
+      const [, res] = await fetchAllTweets({
+        Authorization: token,
       })
       const myTweet = res?.data?.data || []
       console.log(33334, myTweet)
@@ -149,9 +149,14 @@ const HomePage = () => {
               {' '}
               <div onClick={() => setOnComp('notifications')} className="homepage__icons">
                 <svg style={{ width: '24px', height: '24px' }}>
-                  {onComp === 'notifications' ? mySvg.notification[1] : mySvg.notification[0]}
+                  {onComp === 'notifications'
+                    ? mySvg.notification[1]
+                    : mySvg.notification[0]}
                 </svg>
-                <p className="homepage__icontitle" style={{ fontWeight: isNotifications }}>
+                <p
+                  className="homepage__icontitle"
+                  style={{ fontWeight: isNotifications }}
+                >
                   Notifications
                 </p>
               </div>
@@ -257,7 +262,10 @@ const HomePage = () => {
                         @{myDecodedToken?.username}
                       </p>
                     </div>
-                    <svg id="morejoe" style={{ height: '25px', weight: '25px', width: '25px' }}>
+                    <svg
+                      id="morejoe"
+                      style={{ height: '25px', weight: '25px', width: '25px' }}
+                    >
                       {mySvg.more}
                     </svg>
                   </div>
@@ -290,7 +298,12 @@ const HomePage = () => {
         </div>
 
         {onComp === 'profile' ? (
-          <Profile setOnComp={setOnComp} tweets={tweets} setArray={setArray} array={array} />
+          <Profile
+            setOnComp={setOnComp}
+            tweets={tweets}
+            setArray={setArray}
+            array={array}
+          />
         ) : (
           <Home
             handleSubmit={handleSubmit}
@@ -319,7 +332,10 @@ const HomePage = () => {
             <div className="homepage__contentright">
               <div className="homepage__contentrighttitle">
                 <p style={{}}>Trending in Indonesia</p>
-                <svg id="rightmore" style={{ height: '25px', width: '25px', marginRight: '0' }}>
+                <svg
+                  id="rightmore"
+                  style={{ height: '25px', width: '25px', marginRight: '0' }}
+                >
                   {mySvg.more}
                 </svg>
               </div>
@@ -332,7 +348,10 @@ const HomePage = () => {
             <div className="homepage__contentright">
               <div className="homepage__contentrighttitle">
                 <p style={{}}>Sport . Trending</p>
-                <svg id="rightmore" style={{ height: '25px', width: '25px', marginRight: '0' }}>
+                <svg
+                  id="rightmore"
+                  style={{ height: '25px', width: '25px', marginRight: '0' }}
+                >
                   {mySvg.more}
                 </svg>
               </div>
@@ -346,7 +365,10 @@ const HomePage = () => {
             <div className="homepage__contentright">
               <div className="homepage__contentrighttitle">
                 <p style={{}}>Politics . Trending</p>
-                <svg id="rightmore" style={{ height: '25px', width: '25px', marginRight: '0' }}>
+                <svg
+                  id="rightmore"
+                  style={{ height: '25px', width: '25px', marginRight: '0' }}
+                >
                   {mySvg.more}
                 </svg>
               </div>
@@ -360,7 +382,10 @@ const HomePage = () => {
             <div className="homepage__contentright">
               <div className="homepage__contentrighttitle">
                 <p style={{}}>Trending in Zimbabwe</p>
-                <svg id="rightmore" style={{ height: '25px', width: '25px', marginRight: '0' }}>
+                <svg
+                  id="rightmore"
+                  style={{ height: '25px', width: '25px', marginRight: '0' }}
+                >
                   {mySvg.more}
                 </svg>
               </div>
@@ -374,7 +399,10 @@ const HomePage = () => {
             <div className="homepage__contentright">
               <div className="homepage__contentrighttitle">
                 <p style={{}}>Sport . Trending</p>
-                <svg id="rightmore" style={{ height: '25px', width: '25px', marginRight: '0' }}>
+                <svg
+                  id="rightmore"
+                  style={{ height: '25px', width: '25px', marginRight: '0' }}
+                >
                   {mySvg.more}
                 </svg>
               </div>
@@ -388,7 +416,10 @@ const HomePage = () => {
             <div className="homepage__contentright">
               <div className="homepage__contentrighttitle">
                 <p style={{}}>Politics . Trending</p>
-                <svg id="rightmore" style={{ height: '25px', width: '25px', marginRight: '0' }}>
+                <svg
+                  id="rightmore"
+                  style={{ height: '25px', width: '25px', marginRight: '0' }}
+                >
                   {mySvg.more}
                 </svg>
               </div>
@@ -400,7 +431,9 @@ const HomePage = () => {
             </div>
 
             <div id="smore">
-              <h3 style={{ padding: '0% 0% 3% 0% ', color: 'rgb(29, 108, 255)' }}>Show more</h3>
+              <h3 style={{ padding: '0% 0% 3% 0% ', color: 'rgb(29, 108, 255)' }}>
+                Show more
+              </h3>
             </div>
           </div>
 

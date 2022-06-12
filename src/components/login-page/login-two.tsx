@@ -4,6 +4,7 @@ import Header from './header'
 import { useState } from 'react'
 import api from '@/src/utilities/axios'
 import toast, { Toaster } from 'react-hot-toast'
+import login from '@/src/requests/login'
 
 const LoginTwo = ({ userName, toSignUp }) => {
   const [passNull, setPassNull] = useState(true)
@@ -20,7 +21,8 @@ const LoginTwo = ({ userName, toSignUp }) => {
   const notify = async () => {
     const newLogin = { username: userName, password: passValue }
     try {
-      const res = await api.post('auth/login', newLogin)
+      const [error, res] = await login(newLogin)
+      if (error) throw error
       localStorage.setItem('Bearer', res.data.access_token)
       return res.data.message
     } catch (error) {
