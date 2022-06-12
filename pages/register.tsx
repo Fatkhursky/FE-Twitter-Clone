@@ -6,6 +6,7 @@ import { textAtom } from '@/src/stores/jotai-atom'
 import api from '@/src/utilities/axios'
 import toast, { Toaster } from 'react-hot-toast'
 import Header from '@/src/components/login-page/header'
+import Head from 'next/head'
 
 const LoginPage = () => {
   const [name, setName] = useState('')
@@ -134,102 +135,108 @@ const LoginPage = () => {
   const onChangeDay = (e) => setDay(e.target.value)
   const onChangeYears = (e) => setYears(e.target.value)
   return (
-    <div className="wrap" style={{ backgroundColor: '' }}>
-      <div className="loginpage">
-        <form className="loginpage__signup__wrap" onSubmit={handleSubmit}>
-          <Header />
-          <div style={{ backgroundColor: '' }} className="loginpage__signup__main">
-            <div className="loginpage__signup__form">
-              <div className="loginpage__signup__title1">
-                <h1 className="loginpage__signup__title">Create your account</h1>
-              </div>
+    <>
+      <Head>
+        <title>Register</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+      <div className="wrap" style={{ backgroundColor: '' }}>
+        <div className="loginpage">
+          <form className="loginpage__signup__wrap" onSubmit={handleSubmit}>
+            <Header />
+            <div style={{ backgroundColor: '' }} className="loginpage__signup__main">
+              <div className="loginpage__signup__form">
+                <div className="loginpage__signup__title1">
+                  <h1 className="loginpage__signup__title">Create your account</h1>
+                </div>
 
-              <div className="loginpage__signup__inputs1">
-                <input
-                  className="loginpage__signup__name"
-                  type="text"
-                  placeholder="Name"
-                  value={name}
-                  onChange={onChangeName}
-                />
-              </div>
-              <div className="loginpage__signup__inputs1">
-                <input
-                  className="loginpage__signup__phone"
-                  type="text"
-                  placeholder="Phone"
-                  value={phone}
-                  onChange={onChangePhone}
-                />
-              </div>
-              <div className="loginpage__signup__content">
-                <p
-                  onClick={noFeature}
-                  id="email"
-                  style={{ cursor: 'pointer', color: 'rgb(30, 167, 247)' }}
-                >
-                  Use email instead
-                </p>
-                <div>
-                  <p className="loginpage__signup__date" style={{ cursor: 'pointer' }}>
-                    Date of birth
+                <div className="loginpage__signup__inputs1">
+                  <input
+                    className="loginpage__signup__name"
+                    type="text"
+                    placeholder="Name"
+                    value={name}
+                    onChange={onChangeName}
+                  />
+                </div>
+                <div className="loginpage__signup__inputs1">
+                  <input
+                    className="loginpage__signup__phone"
+                    type="text"
+                    placeholder="Phone"
+                    value={phone}
+                    onChange={onChangePhone}
+                  />
+                </div>
+                <div className="loginpage__signup__content">
+                  <p
+                    onClick={noFeature}
+                    id="email"
+                    style={{ cursor: 'pointer', color: 'rgb(30, 167, 247)' }}
+                  >
+                    Use email instead
                   </p>
-                  <p className="loginpage__signup__desc">
-                    This will not be shown publicly. Confirm your own age, even if this account is
-                    for a business, a pet, or something else.
-                  </p>
+                  <div>
+                    <p className="loginpage__signup__date" style={{ cursor: 'pointer' }}>
+                      Date of birth
+                    </p>
+                    <p className="loginpage__signup__desc">
+                      This will not be shown publicly. Confirm your own age, even if this account is
+                      for a business, a pet, or something else.
+                    </p>
+                  </div>
+                </div>
+                <div className="loginpage__signup__inputs2">
+                  <select
+                    className="loginpage__signup__month"
+                    list="Month"
+                    placeholder="Month"
+                    value={month}
+                    onChange={onChangeMonth}
+                  >
+                    {monthsDate}
+                  </select>
+                  <select
+                    className="loginpage__signup__day"
+                    list="Days"
+                    placeholder="Day"
+                    value={day}
+                    onChange={onChangeDay}
+                  >
+                    {getDay()}
+                  </select>
+                  <select
+                    className="loginpage__signup__years"
+                    list="Years"
+                    placeholder="Year"
+                    value={years}
+                    onChange={onChangeYears}
+                  >
+                    {getYear()}
+                  </select>
                 </div>
               </div>
-              <div className="loginpage__signup__inputs2">
-                <select
-                  className="loginpage__signup__month"
-                  list="Month"
-                  placeholder="Month"
-                  value={month}
-                  onChange={onChangeMonth}
-                >
-                  {monthsDate}
-                </select>
-                <select
-                  className="loginpage__signup__day"
-                  list="Days"
-                  placeholder="Day"
-                  value={day}
-                  onChange={onChangeDay}
-                >
-                  {getDay()}
-                </select>
-                <select
-                  className="loginpage__signup__years"
-                  list="Years"
-                  placeholder="Year"
-                  value={years}
-                  onChange={onChangeYears}
-                >
-                  {getYear()}
-                </select>
-              </div>
             </div>
-          </div>
 
-          <div className="loginpage__signup__footer">
-            <button
-              className="loginpage__signup__button"
-              type="submit"
-              style={{
-                textDecoration: 'none',
-                backgroundColor: isTrue ? 'rgb(44, 43, 43)' : '',
-                cursor: isTrue ? 'pointer' : '',
-                pointerEvents: isTrue ? '' : 'none',
-              }}
-            >
-              Signup
-            </button>
-            <Toaster />
-          </div>
-        </form>
+            <div className="loginpage__signup__footer">
+              <button
+                className="loginpage__signup__button"
+                type="submit"
+                style={{
+                  textDecoration: 'none',
+                  backgroundColor: isTrue ? 'rgb(44, 43, 43)' : '',
+                  cursor: isTrue ? 'pointer' : '',
+                  pointerEvents: isTrue ? '' : 'none',
+                }}
+              >
+                Signup
+              </button>
+              <Toaster />
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 export default LoginPage
