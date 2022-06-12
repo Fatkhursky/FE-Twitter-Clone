@@ -1,4 +1,3 @@
-import Image from "../home/logo193.png";
 import { decodeToken } from "react-jwt";
 import { mySvg } from "../home/svg";
 import api from "../../../utilities/apiUrl";
@@ -31,7 +30,7 @@ const AddTweet = ({ newTweet, id, array, setArray }) => {
         <div className="addtweet__section" style={{ position: "relative" }}>
           <img
             style={{ height: "45px", marginLeft: "0px" }}
-            src={Image}
+            src={"/src/logo193.png"}
             alt="joebiden"
           />
           <div className="addtweet__text">

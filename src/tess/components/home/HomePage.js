@@ -1,24 +1,32 @@
 import { mySvg } from "./svg";
-import Image from "./logo193.png";
-import foto1 from "./foto1.jpg";
-import foto2 from "./foto2.jpg";
-import foto3 from "./foto3.jpg";
 import { useEffect, useState } from "react";
 import { decodeToken } from "react-jwt";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
+import {useRouter} from'next/router'
+
 import api from "../../../utilities/apiUrl";
 import Popup from "reactjs-popup";
 import Home from "./Home";
 import Profile from "./Profile";
 
 const HomePage = () => {
-  let navigate = useNavigate();
-  const token = localStorage.getItem("Bearer");
+  let router = useRouter();
+  const [token, setToken] = useState("")
+
+  useEffect(()=>{
+    if (window !== undefined) {
+      const token1 = localStorage.getItem("Bearer");
+      setToken(token1)
+    }
+
+  })
   const myDecodedToken = decodeToken(token);
+
+
 
   const logOut = () => {
     localStorage.removeItem("Bearer");
-    navigate("/");
+    router.push("/");
   };
 
   function noFeature() {
@@ -63,7 +71,7 @@ const HomePage = () => {
     }
   };
 
-  let [tweets, setTweets] = useState([]);
+  const [tweets, setTweets] = useState([]);
 
   const getTweets = async () => {
     //e.preventDefault();
@@ -71,7 +79,8 @@ const HomePage = () => {
       const res = await api.get("tweets", {
         headers: headers,
       });
-      const myTweet = res.data.data;
+      const myTweet = res?.data?.data||[];
+      console.log(33334,myTweet)
       setTweets(myTweet.reverse());
     } catch (error) {
       if (error.response) {
@@ -109,9 +118,9 @@ const HomePage = () => {
   useEffect(() => {
     if (onComp === "profile") {
       //console.log("gettweets")
-      return getTweets();
+      getTweets();
     }
-  });
+  },[onComp]);
 
   // useEffect(() => {
   //   console.log(window.matchMedia("(max-width: 1024px)").matches)
@@ -301,7 +310,7 @@ const HomePage = () => {
                         padding: "0 2% 0 2%",
                         backgroundColor: "",
                       }}
-                      src={Image}
+                      src={"/src/logo193.png"}
                       alt="joebiden"
                     />
                     <div
@@ -313,9 +322,9 @@ const HomePage = () => {
                         flexGrow: "1",
                       }}
                     >
-                      <p>{myDecodedToken.name}</p>
+                      <p>{myDecodedToken?.name}</p>
                       <p id="namejoe" style={{}}>
-                        @{myDecodedToken.username}
+                        @{myDecodedToken?.username}
                       </p>
                     </div>
                     <svg
@@ -335,18 +344,18 @@ const HomePage = () => {
                   <img
                     id="imgjoe"
                     style={{ height: "50px" }}
-                    src={Image}
+                    src={"/src/logo193.png"}
                     alt="joebiden"
                   />
                   <p id="namejoe" style={{ fontSize: "1.3rem" }}>
-                    &nbsp;@{myDecodedToken.username}
+                    &nbsp;@{myDecodedToken?.username}
                   </p>
                 </div>
                 <div className="homepage__popupcontent" onClick={noFeature}>
                   <p>Add an existing account</p>
                 </div>
                 <div className="homepage__popupcontent" onClick={logOut}>
-                  <p>Log Out &nbsp;@{myDecodedToken.username}</p>
+                  <p>Log Out &nbsp;@{myDecodedToken?.username}</p>
                 </div>
               </div>
             </Popup>
@@ -505,7 +514,7 @@ const HomePage = () => {
                   width: "55px",
                   height: "55px",
                 }}
-                src={foto2}
+                src={"/src/foto1.jpg"}
                 alt="user1"
               />
 
@@ -538,7 +547,7 @@ const HomePage = () => {
                   width: "55px",
                   height: "55px",
                 }}
-                src={foto1}
+                src={"/src/foto1.jpg"}
                 alt="user1"
               />
 
@@ -572,7 +581,7 @@ const HomePage = () => {
                   height: "55px",
                   marginTop: "",
                 }}
-                src={foto3}
+                src={"/src/foto3.jpg"}
                 alt="user1"
               />
 

@@ -1,5 +1,4 @@
 import { mySvg } from "./svg";
-import userImage from "./logo193.png";
 import { decodeToken } from "react-jwt";
 import Popup from "reactjs-popup";
 import api from "../../../utilities/apiUrl";
@@ -36,7 +35,7 @@ const Alltweet = ({ item, id, tweets, setTweets, array, setArray }) => {
     <div className="profile__tweets">
       <img
         style={{ height: "50px", marginLeft: "0px" }}
-        src={userImage}
+        src={"/src/logo193.png"}
         alt="joebiden"
       />
       <div className="profile__text">
