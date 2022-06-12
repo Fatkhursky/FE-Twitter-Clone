@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { useRouter } from 'next/router'
-import Header from './Header'
+import Header from './header'
 import { useState } from 'react'
 import api from '@/src/utilities/axios'
 import toast, { Toaster } from 'react-hot-toast'

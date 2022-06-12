@@ -1,7 +1,7 @@
 // @ts-nocheck
 import { mySvg } from '~/public/assets/svg'
 import { useState } from 'react'
-import Alltweet from '@/src/components/home/Alltweet'
+import AllTweet from '@/src/components/home/all-tweet'
 import { decodeToken } from 'react-jwt'
 import { useAtom } from 'jotai'
 import { textAtom } from '@/src/stores/jotaiAtom'
@@ -92,7 +92,7 @@ const Profile = ({ setOnComp, tweets, setTweets, setArray, array }) => {
       </div>
       <div>
         {tweets.map((item) => (
-          <Alltweet
+          <AllTweet
             key={item.id}
             item={item.text}
             id={item.id}

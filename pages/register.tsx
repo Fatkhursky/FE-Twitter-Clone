@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import Signup from '@/src/components/loginPage/Signup'
+import Signup from '@/src/components/loginPage/signup'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 

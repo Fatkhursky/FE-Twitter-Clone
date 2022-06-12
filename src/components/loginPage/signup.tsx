@@ -1,11 +1,11 @@
 // @ts-nocheck
 
-import { monthsDate, daysDate, yearsDate } from './valueDate'
+import { monthsDate, daysDate, yearsDate } from './value-date'
 import api from '@/src/utilities/axios'
 import toast, { Toaster } from 'react-hot-toast'
 import { useRouter } from 'next/router'
 
-import Header from './Header'
+import Header from './header'
 import { useAtom } from 'jotai'
 import { textAtom } from '@/src/stores/jotaiAtom.ts'
 

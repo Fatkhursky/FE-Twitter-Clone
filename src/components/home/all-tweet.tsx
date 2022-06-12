@@ -4,7 +4,7 @@ import { decodeToken } from 'react-jwt'
 import Popup from 'reactjs-popup'
 import api from '@/src/utilities/axios'
 
-const Alltweet = ({ item, id, tweets, setTweets, array, setArray }) => {
+const AllTweet = ({ item, id, tweets, setTweets, array, setArray }) => {
   const token = localStorage.getItem('Bearer')
   const myDecodedToken = decodeToken(token)
   const noFeature = () => {
@@ -104,4 +104,4 @@ const Alltweet = ({ item, id, tweets, setTweets, array, setArray }) => {
     </div>
   )
 }
-export default Alltweet
+export default AllTweet

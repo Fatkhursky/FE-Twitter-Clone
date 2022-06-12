@@ -5,8 +5,8 @@ import { decodeToken } from 'react-jwt'
 import { useRouter } from 'next/router'
 import api from '@/src/utilities/axios'
 import Popup from 'reactjs-popup'
-import Home from '@/src/components/home/Home'
-import Profile from '@/src/components/home/Profile'
+import Home from '@/src/components/home/home'
+import Profile from '@/src/components/home/profile'
 
 const HomePage = () => {
   let router = useRouter()
