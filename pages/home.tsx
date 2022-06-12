@@ -3,12 +3,10 @@ import { mySvg } from '~/public/assets/svg'
 import { useEffect, useState } from 'react'
 import { decodeToken } from 'react-jwt'
 import { useRouter } from 'next/router'
-import api from '@/src/utilities/axios'
 import Popup from 'reactjs-popup'
 import Home from '@/src/components/home/home'
 import Profile from '@/src/components/home/profile'
-import fetchAllTweets from '@/src/requests/fetch-all-tweets'
-import storeOneTweet from '@/src/requests/store-one-tweet'
+import { storeOneTweet, fetchAllTweets } from '@/src/requests'
 
 const HomePage = () => {
   let router = useRouter()

@@ -2,8 +2,7 @@
 import { mySvg } from '~/public/assets/svg'
 import { decodeToken } from 'react-jwt'
 import Popup from 'reactjs-popup'
-import api from '@/src/utilities/axios'
-import deleteOneTweet from '@/src/requests/delete-one-tweet'
+import { deleteOneTweet } from '@/src/requests'
 
 const AllTweet = ({ item, id, tweets, setTweets, array, setArray }) => {
   const token = localStorage.getItem('Bearer')
@@ -37,7 +36,9 @@ const AllTweet = ({ item, id, tweets, setTweets, array, setArray }) => {
       <div className="profile__text">
         <p style={{ fontWeight: 'bold' }}>
           {myDecodedToken.name}
-          <span style={{ fontWeight: 'normal' }}>&nbsp;@{myDecodedToken.username}&nbsp;</span>
+          <span style={{ fontWeight: 'normal' }}>
+            &nbsp;@{myDecodedToken.username}&nbsp;
+          </span>
         </p>
         <Popup
           trigger={
@@ -51,37 +52,61 @@ const AllTweet = ({ item, id, tweets, setTweets, array, setArray }) => {
           position="left top"
         >
           <div>
-            <div className="addtweet__popup" onClick={handleDeletet} style={{ display: 'flex' }}>
+            <div
+              className="addtweet__popup"
+              onClick={handleDeletet}
+              style={{ display: 'flex' }}
+            >
               <svg className="addtweet__iconlist" style={{ marginTop: '5px' }}>
                 {mySvg.delete}
               </svg>
               <p>Delete</p>
             </div>
-            <div className="addtweet__popup" onClick={noFeature} style={{ display: 'flex' }}>
+            <div
+              className="addtweet__popup"
+              onClick={noFeature}
+              style={{ display: 'flex' }}
+            >
               <svg className="addtweet__iconlist" style={{ marginTop: '5px' }}>
                 {mySvg.pin}
               </svg>
               <p>Pin to your profile</p>
             </div>
-            <div className="addtweet__popup" onClick={noFeature} style={{ display: 'flex' }}>
+            <div
+              className="addtweet__popup"
+              onClick={noFeature}
+              style={{ display: 'flex' }}
+            >
               <svg className="addtweet__iconlist" style={{ marginTop: '5px' }}>
                 {mySvg.doc}
               </svg>
               <p>Add/remove</p>
             </div>
-            <div className="addtweet__popup" onClick={noFeature} style={{ display: 'flex' }}>
+            <div
+              className="addtweet__popup"
+              onClick={noFeature}
+              style={{ display: 'flex' }}
+            >
               <svg className="addtweet__iconlist" style={{ marginTop: '5px' }}>
                 {mySvg.comment}
               </svg>
               <p>Change who can reply</p>
             </div>
-            <div className="addtweet__popup" onClick={noFeature} style={{ display: 'flex' }}>
+            <div
+              className="addtweet__popup"
+              onClick={noFeature}
+              style={{ display: 'flex' }}
+            >
               <svg className="addtweet__iconlist" style={{ marginTop: '5px' }}>
                 {mySvg.embed}
               </svg>
               <p>Embed Tweet</p>
             </div>
-            <div className="addtweet__popup" onClick={noFeature} style={{ display: 'flex' }}>
+            <div
+              className="addtweet__popup"
+              onClick={noFeature}
+              style={{ display: 'flex' }}
+            >
               <svg className="addtweet__iconlist" style={{ marginTop: '5px' }}>
                 {mySvg.polling}
               </svg>

@@ -2,9 +2,8 @@
 import { useRouter } from 'next/router'
 import Header from './header'
 import { useState } from 'react'
-import api from '@/src/utilities/axios'
 import toast, { Toaster } from 'react-hot-toast'
-import login from '@/src/requests/login'
+import { login } from '@/src/requests'
 
 const LoginTwo = ({ userName, toSignUp }) => {
   const [passNull, setPassNull] = useState(true)

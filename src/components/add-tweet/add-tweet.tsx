@@ -2,9 +2,8 @@
 
 import { decodeToken } from 'react-jwt'
 import { mySvg } from '~/public/assets/svg'
-import api from '@/src/utilities/axios'
 import Popup from 'reactjs-popup'
-import deleteOneTweet from '@/src/requests/delete-one-tweet'
+import { deleteOneTweet } from '@/src/requests'
 
 const AddTweet = ({ newTweet, id, array, setArray }) => {
   const token = localStorage.getItem('Bearer')
@@ -37,49 +36,78 @@ const AddTweet = ({ newTweet, id, array, setArray }) => {
           <div className="addtweet__text">
             <p style={{ fontWeight: 'bold' }}>
               {myDecodedToken.name}
-              <span style={{ fontWeight: 'normal' }}>&nbsp;@{myDecodedToken.username}&nbsp;</span>
+              <span style={{ fontWeight: 'normal' }}>
+                &nbsp;@{myDecodedToken.username}&nbsp;
+              </span>
             </p>
 
             <Popup
               trigger={
-                <svg id="rightmore2" style={{ height: '25px', width: '25px', marginRight: '0' }}>
+                <svg
+                  id="rightmore2"
+                  style={{ height: '25px', width: '25px', marginRight: '0' }}
+                >
                   {mySvg.more}
                 </svg>
               }
               position="left top"
             >
               <div>
-                <div className="addtweet__popup" onClick={handleDelete} style={{ display: 'flex' }}>
+                <div
+                  className="addtweet__popup"
+                  onClick={handleDelete}
+                  style={{ display: 'flex' }}
+                >
                   <svg className="addtweet__iconlist" style={{ marginTop: '5px' }}>
                     {mySvg.delete}
                   </svg>
                   <p>Delete</p>
                 </div>
-                <div className="addtweet__popup" onClick={noFeature} style={{ display: 'flex' }}>
+                <div
+                  className="addtweet__popup"
+                  onClick={noFeature}
+                  style={{ display: 'flex' }}
+                >
                   <svg className="addtweet__iconlist" style={{ marginTop: '5px' }}>
                     {mySvg.pin}
                   </svg>
                   <p>Pin to your profile</p>
                 </div>
-                <div className="addtweet__popup" onClick={noFeature} style={{ display: 'flex' }}>
+                <div
+                  className="addtweet__popup"
+                  onClick={noFeature}
+                  style={{ display: 'flex' }}
+                >
                   <svg className="addtweet__iconlist" style={{ marginTop: '5px' }}>
                     {mySvg.doc}
                   </svg>
                   <p>Add/remove</p>
                 </div>
-                <div className="addtweet__popup" onClick={noFeature} style={{ display: 'flex' }}>
+                <div
+                  className="addtweet__popup"
+                  onClick={noFeature}
+                  style={{ display: 'flex' }}
+                >
                   <svg className="addtweet__iconlist" style={{ marginTop: '5px' }}>
                     {mySvg.comment}
                   </svg>
                   <p>Change who can reply</p>
                 </div>
-                <div className="addtweet__popup" onClick={noFeature} style={{ display: 'flex' }}>
+                <div
+                  className="addtweet__popup"
+                  onClick={noFeature}
+                  style={{ display: 'flex' }}
+                >
                   <svg className="addtweet__iconlist" style={{ marginTop: '5px' }}>
                     {mySvg.embed}
                   </svg>
                   <p>Embed Tweet</p>
                 </div>
-                <div className="addtweet__popup" onClick={noFeature} style={{ display: 'flex' }}>
+                <div
+                  className="addtweet__popup"
+                  onClick={noFeature}
+                  style={{ display: 'flex' }}
+                >
                   <svg className="addtweet__iconlist" style={{ marginTop: '5px' }}>
                     {mySvg.polling}
                   </svg>
