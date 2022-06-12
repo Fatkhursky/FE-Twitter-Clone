@@ -1,9 +1,10 @@
-import { mySvg } from '../../../public/assets/svg'
+// @ts-nocheck
+import { mySvg } from '~/public/assets/svg'
 import { useState } from 'react'
-import Alltweet from './Alltweet'
+import Alltweet from '@/src/components/home/Alltweet'
 import { decodeToken } from 'react-jwt'
 import { useAtom } from 'jotai'
-import { textAtom } from '../../stores/jotaiAtom'
+import { textAtom } from '@/src/stores/jotaiAtom'
 
 const Profile = ({ setOnComp, tweets, setTweets, setArray, array }) => {
   const [date] = useAtom(textAtom)

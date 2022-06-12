@@ -1,11 +1,13 @@
-import { monthsDate, daysDate, yearsDate } from './valueDate.js'
-import api from '../../utilities/axios'
+// @ts-nocheck
+
+import { monthsDate, daysDate, yearsDate } from './valueDate'
+import api from '@/src/utilities/axios'
 import toast, { Toaster } from 'react-hot-toast'
 import { useRouter } from 'next/router'
 
 import Header from './Header'
 import { useAtom } from 'jotai'
-import { textAtom } from '../../stores/jotaiAtom.js'
+import { textAtom } from '@/src/stores/jotaiAtom.ts'
 
 const Signup = ({
   onChangeName,

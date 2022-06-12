@@ -1,5 +1,6 @@
+// @ts-nocheck
 import { FaTwitter } from 'react-icons/fa'
-import { mySvg } from '../../../public/assets/svg'
+import { mySvg } from '~/public/assets/svg'
 
 const Header = () => {
   return (

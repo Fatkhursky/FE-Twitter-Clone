@@ -1,11 +1,12 @@
-import { mySvg } from '../../../public/assets/svg'
+// @ts-nocheck
+import { mySvg } from '~/public/assets/svg'
 import { useEffect, useState } from 'react'
 import { decodeToken } from 'react-jwt'
 import { useRouter } from 'next/router'
-import api from '../../utilities/axios'
+import api from '@/src/utilities/axios'
 import Popup from 'reactjs-popup'
-import Home from './Home'
-import Profile from './Profile'
+import Home from '@/src/components/home/Home'
+import Profile from '@/src/components/home/Profile'
 
 const HomePage = () => {
   let router = useRouter()

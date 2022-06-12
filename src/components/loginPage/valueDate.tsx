@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 const monthsDate = [
   <option key={1} value="" hidden>
     Month

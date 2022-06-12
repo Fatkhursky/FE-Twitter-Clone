@@ -1,7 +1,8 @@
+// @ts-nocheck
 import { useRouter } from 'next/router'
 import Header from './Header'
 import { useState } from 'react'
-import api from '../../utilities/axios'
+import api from '@/src/utilities/axios'
 import toast, { Toaster } from 'react-hot-toast'
 
 const LoginTwo = ({ userName, toSignUp }) => {

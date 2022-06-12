@@ -1,7 +1,8 @@
-import { mySvg } from '../../../public/assets/svg'
+// @ts-nocheck
+import { mySvg } from '~/public/assets/svg'
 import { decodeToken } from 'react-jwt'
 import Popup from 'reactjs-popup'
-import api from '../../utilities/axios'
+import api from '@/src/utilities/axios'
 
 const Alltweet = ({ item, id, tweets, setTweets, array, setArray }) => {
   const token = localStorage.getItem('Bearer')

@@ -1,6 +1,8 @@
+// @ts-nocheck
+
 import { decodeToken } from 'react-jwt'
-import { mySvg } from '../../../public/assets/svg'
-import api from '../../utilities/axios'
+import { mySvg } from '~/public/assets/svg'
+import api from '@/src/utilities/axios'
 import Popup from 'reactjs-popup'
 
 const AddTweet = ({ newTweet, id, array, setArray }) => {

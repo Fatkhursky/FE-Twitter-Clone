@@ -1,6 +1,6 @@
-import Login from './Login'
-import LoginTwo from './LoginTwo'
-import Signup from './Signup'
+// @ts-nocheck
+
+import Signup from '@/src/components/loginPage/Signup'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 

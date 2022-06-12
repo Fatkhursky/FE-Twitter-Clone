@@ -1,5 +1,6 @@
-import { mySvg } from '../../../public/assets/svg'
-import AddTweet from '../addTweet/AddTweet'
+// @ts-nocheck
+import { mySvg } from '~/public/assets/svg'
+import AddTweet from '@/src/components/addTweet/AddTweet'
 import TextareaAutosize from 'react-textarea-autosize'
 
 const Home = ({ handleSubmit, tweet, setTweet, newTweet, array, setArray }) => {

@@ -1,5 +1,7 @@
-import Login from './Login'
-import LoginTwo from './LoginTwo'
+// @ts-nocheck
+
+import Login from '@/src/components/loginPage/Login'
+import LoginTwo from '@/src/components/loginPage/LoginTwo'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 

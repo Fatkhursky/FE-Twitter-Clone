@@ -1,6 +1,7 @@
+// @ts-nocheck
 import Link from 'next/link'
 import Header from './Header'
-import { mySvg } from '../../../public/assets/svg.js'
+import { mySvg } from '~/public/assets/svg.js'
 
 const Login = ({ onChangeUsername, username, onSubmitUserName, pointer, color }) => {
   const forgot = (e) => {
