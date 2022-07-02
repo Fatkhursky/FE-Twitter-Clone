@@ -7,44 +7,56 @@ import toast, { Toaster } from 'react-hot-toast'
 import Header from '@/src/components/login-page/header'
 import Head from 'next/head'
 import { register } from '@/src/requests'
+import { uniqueUsernameGenerator } from 'unique-username-generator'
 
 const LoginPage = () => {
-  const [name, setName] = useState('')
-  const [phone, setPhone] = useState('')
+  const [fullname, setfullName] = useState('')
   const [month, setMonth] = useState('')
   const [day, setDay] = useState('')
   const [years, setYears] = useState('')
-  const isTrue = name && phone && month && day && years ? true : false
-  const username = `user${name}`
-  const password = `pass${name}`
-  const email = `${name}@gmail.com`
+  const dateOfBirth = JSON.stringify(years.concat('-', month, '-', day))
 
-  const [date, setDAte] = useAtom(textAtom)
-  let dateObj = new Date()
-  const months = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ]
-  let regisMonth = months[dateObj.getMonth()]
-  let regisYear = dateObj.getFullYear()
-  let regisDate = dateObj.getDate()
-  const regisTime = regisDate + ' ' + regisMonth + ' ' + regisYear
+  function getUsername(name) {
+    let username = name.replace(' ', '_')
+    return '@' + username + Math.random().toString().slice(2, 5)
+  }
 
-  const isApril = month === 'April'
-  const isJune = month === 'June'
-  const isSeptember = month === 'September'
-  const isNovember = month === 'November'
-  const isFebruary = month === 'February'
+  let username = getUsername(fullname)
+  const [phone, setPhone] = useState('')
+  const [password, setPassword] = useState('')
+  const isTrue = fullname && phone && month && day && years ? true : false
+  const [stepNum, setStepNum] = useState(0)
+  console.log(password)
+  //const username = `user${name}`
+  //const password = `pass${name}`
+  //const email = `${name}@gmail.com`
+
+  // const [date, setDAte] = useAtom(textAtom)
+  // let dateObj = new Date()
+  // const months = [
+  //   'January',
+  //   'February',
+  //   'March',
+  //   'April',
+  //   'May',
+  //   'June',
+  //   'July',
+  //   'August',
+  //   'September',
+  //   'October',
+  //   'November',
+  //   'December',
+  // ]
+  // let regisMonth = months[dateObj.getMonth()]
+  // let regisYear = dateObj.getFullYear()
+  // let regisDate = dateObj.getDate()
+  // const regisTime = regisDate + ' ' + regisMonth + ' ' + regisYear
+
+  const isApril = month === '4'
+  const isJune = month === '6'
+  const isSeptember = month === '9'
+  const isNovember = month === '11'
+  const isFebruary = month === '2'
   const yearNotNull = years !== ''
   const isLeapYear = () =>
     yearNotNull && years % 100 === 0
@@ -82,7 +94,7 @@ const LoginPage = () => {
   let router = useRouter()
 
   const notify = async () => {
-    const newReg = { name, username, password, email, phone }
+    const newReg = { fullname, dateOfBirth, username, phone, password }
     try {
       const [error, res] = await register(newReg)
       if (error) throw error
@@ -110,7 +122,7 @@ const LoginPage = () => {
         loading: 'Loading...',
         success: (data) => {
           setTimeout(toSign, 1200)
-          setDAte(regisTime)
+          //setDAte(regisTime)
           return data
         },
         error: (error) => `${error}`,
@@ -130,115 +142,137 @@ const LoginPage = () => {
     alert('Fitur belum tersedia')
   }
 
-  const onChangeName = (e) => setName(e.target.value)
+  const onChangeName = (e) => setfullName(e.target.value)
   const onChangePhone = (e) => setPhone(e.target.value)
   const onChangeMonth = (e) => setMonth(e.target.value)
   const onChangeDay = (e) => setDay(e.target.value)
   const onChangeYears = (e) => setYears(e.target.value)
-  return (
-    <>
-      <Head>
-        <title>Register</title>
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-      </Head>
-      <div className="wrap" style={{ backgroundColor: '' }}>
-        <div className="loginpage">
-          <form className="loginpage__signup__wrap" onSubmit={handleSubmit}>
-            <Header />
-            <div style={{ backgroundColor: '' }} className="loginpage__signup__main">
-              <div className="loginpage__signup__form">
-                <div className="loginpage__signup__title1">
-                  <h1 className="loginpage__signup__title">Create your account</h1>
-                </div>
-
-                <div className="loginpage__signup__inputs1">
-                  <input
-                    className="loginpage__signup__name"
-                    type="text"
-                    placeholder="Name"
-                    value={name}
-                    onChange={onChangeName}
-                  />
-                </div>
-                <div className="loginpage__signup__inputs1">
-                  <input
-                    className="loginpage__signup__phone"
-                    type="text"
-                    placeholder="Phone"
-                    value={phone}
-                    onChange={onChangePhone}
-                  />
-                </div>
-                <div className="loginpage__signup__content">
-                  <p
-                    onClick={noFeature}
-                    id="email"
-                    style={{ cursor: 'pointer', color: 'rgb(30, 167, 247)' }}
-                  >
-                    Use email instead
-                  </p>
-                  <div>
-                    <p className="loginpage__signup__date" style={{ cursor: 'pointer' }}>
-                      Date of birth
-                    </p>
-                    <p className="loginpage__signup__desc">
-                      This will not be shown publicly. Confirm your own age, even if this
-                      account is for a business, a pet, or something else.
-                    </p>
-                  </div>
-                </div>
-                <div className="loginpage__signup__inputs2">
-                  <select
-                    className="loginpage__signup__month"
-                    list="Month"
-                    placeholder="Month"
-                    value={month}
-                    onChange={onChangeMonth}
-                  >
-                    {monthsDate}
-                  </select>
-                  <select
-                    className="loginpage__signup__day"
-                    list="Days"
-                    placeholder="Day"
-                    value={day}
-                    onChange={onChangeDay}
-                  >
-                    {getDay()}
-                  </select>
-                  <select
-                    className="loginpage__signup__years"
-                    list="Years"
-                    placeholder="Year"
-                    value={years}
-                    onChange={onChangeYears}
-                  >
-                    {getYear()}
-                  </select>
-                </div>
-              </div>
-            </div>
-
-            <div className="loginpage__signup__footer">
-              <button
-                className="loginpage__signup__button"
-                type="submit"
-                style={{
-                  textDecoration: 'none',
-                  backgroundColor: isTrue ? 'rgb(44, 43, 43)' : '',
-                  cursor: isTrue ? 'pointer' : '',
-                  pointerEvents: isTrue ? '' : 'none',
-                }}
-              >
-                Signup
-              </button>
-              <Toaster />
-            </div>
+  const onChangePassword = (e) => setPassword(e.target.value)
+  if (stepNum === 1) {
+    return (
+      <>
+        <Head>
+          <title>Register</title>
+          <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        </Head>
+        <div>
+          <h1>This step 1</h1>
+          <form onSubmit={handleSubmit}>
+            <input type="password" placeholder='password' value={password} onChange={onChangePassword} />
+            <button type='submit'>submit</button>
           </form>
         </div>
-      </div>
-    </>
-  )
+      </>
+    )
+  } else {
+    return (
+      <>
+        <Head>
+          <title>Register</title>
+          <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        </Head>
+        <div className="wrap" style={{ backgroundColor: '' }}>
+          <div className="loginpage">
+            <form className="loginpage__signup__wrap" onSubmit={() => setStepNum(1)}>
+              <Header />
+              <div style={{ backgroundColor: '' }} className="loginpage__signup__main">
+                <div className="loginpage__signup__form">
+                  <div className="loginpage__signup__title1">
+                    <h1 className="loginpage__signup__title">Create your account</h1>
+                  </div>
+
+                  <div className="loginpage__signup__inputs1">
+                    <input
+                      className="loginpage__signup__name"
+                      type="text"
+                      placeholder="Name"
+                      value={fullname}
+                      onChange={onChangeName}
+                    />
+                  </div>
+                  <div className="loginpage__signup__inputs1">
+                    <input
+                      className="loginpage__signup__phone"
+                      type="text"
+                      placeholder="Phone"
+                      value={phone}
+                      onChange={onChangePhone}
+                    />
+                  </div>
+                  <div className="loginpage__signup__content">
+                    <p
+                      onClick={noFeature}
+                      id="email"
+                      style={{ cursor: 'pointer', color: 'rgb(30, 167, 247)' }}
+                    >
+                      Use email instead
+                    </p>
+                    <div>
+                      <p
+                        className="loginpage__signup__date"
+                        style={{ cursor: 'pointer' }}
+                      >
+                        Date of birth
+                      </p>
+                      <p className="loginpage__signup__desc">
+                        This will not be shown publicly. Confirm your own age, even if
+                        this account is for a business, a pet, or something else.
+                      </p>
+                    </div>
+                  </div>
+                  <div className="loginpage__signup__inputs2">
+                    <select
+                      className="loginpage__signup__month"
+                      list="Month"
+                      placeholder="Month"
+                      value={month}
+                      onChange={onChangeMonth}
+                    >
+                      {monthsDate}
+                    </select>
+                    <select
+                      className="loginpage__signup__day"
+                      list="Days"
+                      placeholder="Day"
+                      value={day}
+                      onChange={onChangeDay}
+                    >
+                      {getDay()}
+                    </select>
+                    <select
+                      className="loginpage__signup__years"
+                      list="Years"
+                      placeholder="Year"
+                      value={years}
+                      onChange={onChangeYears}
+                    >
+                      {getYear()}
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div className="loginpage__signup__footer">
+                <button
+                  className="loginpage__signup__button"
+                  type="submit"
+                  style={{
+                    textDecoration: 'none',
+                    backgroundColor: isTrue ? 'rgb(44, 43, 43)' : '',
+                    cursor: isTrue ? 'pointer' : '',
+                    pointerEvents: isTrue ? '' : 'none',
+                  }}
+                >
+                  Next
+                </button>
+                <Toaster />
+              </div>
+            </form>
+          </div>
+        </div>
+      </>
+    )
+  }
 }
 export default LoginPage
 
@@ -246,40 +280,40 @@ const monthsDate = [
   <option key={1} value="" hidden>
     Month
   </option>,
-  <option key={2} value="January">
+  <option key={2} value="1">
     January
   </option>,
-  <option key={3} value="February">
+  <option key={3} value="2">
     February
   </option>,
-  <option key={4} value="March">
+  <option key={4} value="3">
     March
   </option>,
-  <option key={5} value="April">
+  <option key={5} value="4">
     April
   </option>,
-  <option key={6} value="May">
+  <option key={6} value="5">
     May
   </option>,
-  <option key={7} value="June">
+  <option key={7} value="6">
     June
   </option>,
-  <option key={8} value="July">
+  <option key={8} value="7">
     July
   </option>,
-  <option key={9} value="August">
+  <option key={9} value="8">
     August
   </option>,
-  <option key={10} value="September">
+  <option key={10} value="9">
     September
   </option>,
-  <option key={11} value="October">
+  <option key={11} value="10">
     October
   </option>,
-  <option key={12} value="November">
+  <option key={12} value="11">
     November
   </option>,
-  <option key={13} value="December">
+  <option key={13} value="12">
     December
   </option>,
 ]

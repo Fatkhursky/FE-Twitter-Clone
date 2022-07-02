@@ -7,7 +7,7 @@ import { useAtom } from 'jotai'
 import { textAtom } from '@/src/stores/jotai-atom'
 
 const Profile = ({ setOnComp, tweets, setTweets, setArray, array }) => {
-  const [date] = useAtom(textAtom)
+  //const [date] = useAtom(textAtom)
   const [onSection, setOnSection] = useState('')
   const isTweet = onSection === 'tweet' || onSection === '' ? 'bold' : ''
   const isTweetAndReply = onSection === 'tweetandreply' ? 'bold' : ''
@@ -64,7 +64,7 @@ const Profile = ({ setOnComp, tweets, setTweets, setArray, array }) => {
             <svg onClick={tes} style={{ width: '30px', height: '30px' }}>
               {mySvg.date}
             </svg>
-            <p>Join {date}</p>
+            <p>Join </p>
           </div>
 
           <p>475 Following&nbsp;&nbsp;&nbsp;105 Follower</p>
