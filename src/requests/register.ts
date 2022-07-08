@@ -14,20 +14,23 @@ type RegisterFn = (data: {
   dateOfBirth: string
   username: string
   phone: string
+  password: string
 }) => Promise<[error: any, data: any]>
 
 const register: RegisterFn = async ({
   fullname,
   dateOfBirth,
   username,
-  phone
+  phone,
+  password
 }) => {
   try {
     const response = await api.post(`auth/register`, {
       fullname,
       dateOfBirth,
       username,
-      phone
+      phone,
+      password
     })
     console.log(33333, response)
     return [null, response]

@@ -1,3 +1,3 @@
 import { atom } from 'jotai'
 
-export const textAtom = atom('')
+export const stepAtom = atom(0)

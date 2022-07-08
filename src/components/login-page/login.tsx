@@ -3,12 +3,13 @@ import Link from 'next/link'
 import Header from './header'
 import { mySvg } from '~/public/assets/svg.js'
 
+
 const Login = ({ onChangeUsername, username, onSubmitUserName, pointer, color }) => {
   const forgot = (e) => {
     e.preventDefault()
     alert('Fitur belum tersedia')
   }
-
+  
   return (
     <div className="loginpage__login__wrap">
       <Header />
@@ -40,7 +41,6 @@ const Login = ({ onChangeUsername, username, onSubmitUserName, pointer, color })
                   onChange={onChangeUsername}
                 />
                 <span className="loginpage__login__label">Phone, email or username</span>
-                <span className="focus-bg"></span>
               </label>
 
               <button

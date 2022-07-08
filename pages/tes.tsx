@@ -1,102 +1,85 @@
 //@ts-nocheck
-import React from 'react'
-import { useEffect, useState } from 'react'
-import Head from 'next/head'
+import { authentication } from '.././firebase-config/firebase'
+import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth'
+import { useState } from 'react'
+
 const Tes = () => {
-  const [stepNum, setStepNum] = useState(0)
-  console.log(stepNum)
-  if (stepNum === 1) {
-    return (
-      <>
-        <Head>
-          <title>tes</title>
-          <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        </Head>
-        <div>
-          <h1>stepnum 1</h1>
-          <button onClick={() => setStepNum(2)}>change to step 2</button>
-        </div>
-      </>
-    )
-  } else if (stepNum === 2) {
-    return (
-      <div>
-        <h1>step num 2 </h1>
-        <button onClick={() => setStepNum(0)}>back to step default</button>
-      </div>
-    )
-  } else {
-    return (
-      <div>
-        <h1> stepnum default</h1>
-        <button onClick={() => setStepNum(1)}>change to step 1</button>
-      </div>
+  const countryCode = '+62'
+  const [phoneNumber, setPhoneNumber] = useState(countryCode)
+  const [OTP, setOTP] = useState('')
+  const [expandForm, setExpandForm] = useState(false)
+
+  const generateRecaptcha = () => {
+    window.recaptchaVerifier = new RecaptchaVerifier(
+      'recaptcha-container',
+      {
+        size: 'invisible',
+        callback: (response) => {
+          // reCAPTCHA solved, allow signInWithPhoneNumber.
+        },
+      },
+      authentication
     )
   }
 
-  //return <div>{Tes()}</div>
+  const requestOTP = (e) => {
+    e.preventDefault()
+    if (phoneNumber.length >= 12) {
+      setExpandForm(true)
+      generateRecaptcha()
+      let appVerifier = window.recaptchaVerifier
+      signInWithPhoneNumber(authentication, phoneNumber, appVerifier)
+        .then((confirmationResult) => {
+          window.confirmationResult = confirmationResult
+        })
+        .catch((error) => {
+          // Error; SMS not sent
+          // ...
+          console.log(error)
+        })
+    }
+  }
+
+  const verifyOTP = (e) => {
+    let otp = e.target.value
+    setOTP(otp)
+    if (otp.length === 6) {
+      let confirmationResult = window.confirmationResult
+      confirmationResult
+        .confirm(otp)
+        .then((result) => {
+          // User signed in successfully.
+          const user = result.user
+          console.log(user)
+          // ...
+        })
+        .catch((error) => {
+          // User couldn't sign in (bad verification code?)
+          // ...
+          console.log(error)
+        })
+    }
+  }
+
+  return (
+    <div>
+      <form onSubmit={requestOTP}>
+        <input
+          type="tel"
+          value={phoneNumber}
+          onChange={(e) => setPhoneNumber(e.target.value)}
+        />
+        <button placeholder="phone">submit</button>
+      </form>
+      <div id="recaptcha-container"></div>
+      {expandForm ? (
+        <div>
+          <input type="text" inputMode="number" onChange={verifyOTP} value={OTP} />
+          <button>Send OTP</button>
+        </div>
+      ) : null}
+    </div>
+  )
 }
 
 export default Tes
-
-// if (stepNum === 1) {
-//     return <div>
-//         <h1>stepnum 1</h1>
-//         <button onClick={()=> setStepNum(2)}>change to step 2</button>
-//     </div>
-//   } else if (stepNum === 2) {
-//     return <div>stepnum 2</div>
-//   } else {
-//     return (
-//       <div>
-//         <h1> stepnum default</h1>
-//         <button onClick={()=> setStepNum(1)}>change to step 1</button>
-//       </div>
-//     )
-//   }
-
-// switch (stepNum) {
-//     case stepNum === 1:
-//       return (
-//         <div>
-//           <h1>stepnum 1</h1>
-//           <button onClick={() => setStepNum(2)}>change ti step 2</button>
-//         </div>
-//       )
-//       break
-
-//     default:
-//       return (
-//         <div>
-//           <h1>default step</h1>
-//           <button onClick={() => setStepNum(1)}>change to step 1</button>
-//         </div>
-//       )
-//       break
-//   }
-
-// import Link from 'next/link'
-
-// function Home() {
-//   return (
-//     <ul>
-//       <li>
-//         <Link href="/post/abc">
-//           <a>Go to pages/post/[pid].js</a>
-//         </Link>
-//       </li>
-//       <li>
-//         <Link href="/post/abc?foo=bar">
-//           <a>Also goes to pages/post/[pid].js</a>
-//         </Link>
-//       </li>
-//       <li>
-//         <Link href="/post/abc/a-comment">
-//           <a>Go to pages/post/[pid]/[comment].js</a>
-//         </Link>
-//       </li>
-//     </ul>
-//   )
-// }
-
-// export default Home

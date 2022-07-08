@@ -2,56 +2,33 @@
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { useAtom } from 'jotai'
-import { textAtom } from '@/src/stores/jotai-atom'
+import { stepAtom } from '@/src/stores/jotai-atom'
 import toast, { Toaster } from 'react-hot-toast'
 import Header from '@/src/components/login-page/header'
 import Head from 'next/head'
 import { register } from '@/src/requests'
-import { uniqueUsernameGenerator } from 'unique-username-generator'
+
 
 const LoginPage = () => {
   const [fullname, setfullName] = useState('')
   const [month, setMonth] = useState('')
   const [day, setDay] = useState('')
   const [years, setYears] = useState('')
-  const dateOfBirth = JSON.stringify(years.concat('-', month, '-', day))
+  const dateOfBirth = years.concat('-', month, '-', day)
 
-  function getUsername(name) {
-    let username = name.replace(' ', '_')
-    return '@' + username + Math.random().toString().slice(2, 5)
+  function getUserName(name) {
+    return name = '@' + name + Math.random().toString(36).slice(2, 5);
+    
   }
+  
 
-  let username = getUsername(fullname)
+  let username = getUserName(fullname)
+  console.log(username)
   const [phone, setPhone] = useState('')
   const [password, setPassword] = useState('')
   const isTrue = fullname && phone && month && day && years ? true : false
-  const [stepNum, setStepNum] = useState(0)
-  console.log(password)
-  //const username = `user${name}`
-  //const password = `pass${name}`
-  //const email = `${name}@gmail.com`
-
-  // const [date, setDAte] = useAtom(textAtom)
-  // let dateObj = new Date()
-  // const months = [
-  //   'January',
-  //   'February',
-  //   'March',
-  //   'April',
-  //   'May',
-  //   'June',
-  //   'July',
-  //   'August',
-  //   'September',
-  //   'October',
-  //   'November',
-  //   'December',
-  // ]
-  // let regisMonth = months[dateObj.getMonth()]
-  // let regisYear = dateObj.getFullYear()
-  // let regisDate = dateObj.getDate()
-  // const regisTime = regisDate + ' ' + regisMonth + ' ' + regisYear
-
+  const [stepNum, setStepNum] = useAtom(stepAtom)
+ 
   const isApril = month === '4'
   const isJune = month === '6'
   const isSeptember = month === '9'
@@ -94,9 +71,11 @@ const LoginPage = () => {
   let router = useRouter()
 
   const notify = async () => {
-    const newReg = { fullname, dateOfBirth, username, phone, password }
+    const newReg = { fullname, dateOfBirth, username, password, phone }
+    //console.log(newReg)
     try {
       const [error, res] = await register(newReg)
+      console.log(99, password)
       if (error) throw error
       return res.data.message
     } catch (error) {
@@ -148,6 +127,9 @@ const LoginPage = () => {
   const onChangeDay = (e) => setDay(e.target.value)
   const onChangeYears = (e) => setYears(e.target.value)
   const onChangePassword = (e) => setPassword(e.target.value)
+
+  const [check, setCheck] = useState(false)
+  const checkbox = () => setCheck(!check)
   if (stepNum === 1) {
     return (
       <>
@@ -155,12 +137,136 @@ const LoginPage = () => {
           <title>Register</title>
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         </Head>
-        <div>
-          <h1>This step 1</h1>
-          <form onSubmit={handleSubmit}>
-            <input type="password" placeholder='password' value={password} onChange={onChangePassword} />
-            <button type='submit'>submit</button>
-          </form>
+
+        <div className="wrap">
+          <div className="loginpage">
+            <div className="loginpage__signup__wrap">
+              <Header />
+              <div style={{ backgroundColor: '' }} className="loginpage__signup__main">
+                <div className="loginpage__signup__form">
+                  <div className="loginpage__signup__step2">
+                    <h1>Customize your experience</h1>
+                    <h2>Track where you see Twitter content across the web</h2>
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                      <p>
+                        Twitter uses this data to personalize your experience. This web
+                        browsing history will never be stored with your name, email, or
+                        phone number.
+                      </p>
+                      <input type="checkbox" onChange={checkbox} />
+                    </div>
+                    <p>
+                      By signing up, you agree to our Terms, Privacy Policy, and Cookie
+                      Use. Twitter may use your contact information, including your email
+                      address and phone number for purposes outlined in our Privacy
+                      Policy. Learn more
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="loginpage__signup__footer">
+                <button
+                  className="loginpage__signup__button"
+                  type="submit"
+                  onClick={() => setStepNum(2)}
+                  style={{
+                    textDecoration: 'none',
+                    backgroundColor: check ? 'rgb(44, 43, 43)' : '',
+                    cursor: check ? 'pointer' : '',
+                    pointerEvents: check ? '' : 'none',
+                  }}
+                >
+                  Next
+                </button>
+                <Toaster />
+              </div>
+            </div>
+          </div>
+        </div>
+      </>
+    )
+  } else if (stepNum === 2) {
+    return (
+      <>
+        <Head>
+          <title>Register</title>
+          <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        </Head>
+        <div className="wrap">
+          <div className="loginpage">
+            <div className="loginpage__signup__wrap">
+              <Header />
+              <div style={{ backgroundColor: '' }} className="loginpage__signup__main">
+                <div className="loginpage__signup__form">
+                  <div className="loginpage__signup__title1">
+                    <h1 className="loginpage__signup__title">Create oyur account</h1>
+                  </div>
+
+                  <label htmlFor="" className="loginpage__signup__inp">
+                    <input
+                      className="loginpage__signup__form__animation"
+                      type="text"
+                      placeholder="&nbsp;&nbsp;"
+                      value={fullname}
+                      //onChange={onChangeName}
+                    />
+                    <span className="loginpage__signup__label">Name</span>
+                  </label>
+
+                  <label htmlFor="" className="loginpage__signup__inp">
+                    <input
+                      className="loginpage__signup__form__animation"
+                      type="text"
+                      placeholder="&nbsp;&nbsp;"
+                      value={phone}
+                      //onChange={onChangeName}
+                    />
+                    <span className="loginpage__signup__label">Phone</span>
+                  </label>
+
+                  <label htmlFor="" className="loginpage__signup__inp">
+                    <input
+                      className="loginpage__signup__form__animation"
+                      type="text"
+                      placeholder="&nbsp;&nbsp;"
+                      value={dateOfBirth}
+                      //onChange={onChangeName}
+                    />
+                    <span className="loginpage__signup__label">Birth date</span>
+                  </label>
+                 
+                </div>
+              </div>
+
+              <div className="loginpage__signup__footer__step3">
+                <p style={{ textAlign: 'left', padding: '5px 45px', fontSize: '11px' }}>
+                  By signing up, you agree to the Terms of Service and Privacy Policy,
+                  including Cookie Use. Twitter may use your contact information,
+                  including your email address and phone number for purposes outlined in
+                  our Privacy Policy, like keeping your account secure and personalizing
+                  our services, including ads. Learn more. Others will be able to find you
+                  by email or phone number, when provided, unless you choose otherwise
+                  here.
+                </p>
+                <button
+                  className="loginpage__signup2__button"
+                  type="submit"
+                  onClick={handleSubmit}
+                  //onClick={() => setStepNum(1)}
+                  // style={{
+                  //   textDecoration: 'none',
+                  //   backgroundColor: isTrue ? 'rgb(44, 43, 43)' : '',
+                  //   cursor: isTrue ? 'pointer' : '',
+                  //   pointerEvents: isTrue ? '' : 'none',
+                  // }}
+                >
+                  Sign up
+                </button>
+                <Toaster />
+              </div>
+            </div>
+          </div>
         </div>
       </>
     )
@@ -171,9 +277,9 @@ const LoginPage = () => {
           <title>Register</title>
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         </Head>
-        <div className="wrap" style={{ backgroundColor: '' }}>
+        <div className="wrap">
           <div className="loginpage">
-            <form className="loginpage__signup__wrap" onSubmit={() => setStepNum(1)}>
+            <div className="loginpage__signup__wrap">
               <Header />
               <div style={{ backgroundColor: '' }} className="loginpage__signup__main">
                 <div className="loginpage__signup__form">
@@ -181,7 +287,7 @@ const LoginPage = () => {
                     <h1 className="loginpage__signup__title">Create your account</h1>
                   </div>
 
-                  <div className="loginpage__signup__inputs1">
+                  {/* <div className="loginpage__signup__inputs1">
                     <input
                       className="loginpage__signup__name"
                       type="text"
@@ -189,8 +295,30 @@ const LoginPage = () => {
                       value={fullname}
                       onChange={onChangeName}
                     />
-                  </div>
-                  <div className="loginpage__signup__inputs1">
+                  </div> */}
+                  <label htmlFor="" className="loginpage__signup__inp">
+                    <input
+                      className="loginpage__signup__form__animation"
+                      type="text"
+                      placeholder="&nbsp;&nbsp;"
+                      value={fullname}
+                      onChange={onChangeName}
+                    />
+                    <span className="loginpage__signup__label">Name</span>
+                  </label>
+
+                  <label htmlFor="" className="loginpage__signup__inp">
+                    <input
+                      className="loginpage__signup__form__animation"
+                      type="text"
+                      placeholder="&nbsp;&nbsp;"
+                      value={phone}
+                      onChange={onChangePhone}
+                    />
+                    <span className="loginpage__signup__label">Phone</span>
+                  </label>
+
+                  {/* <div className="loginpage__signup__inputs1">
                     <input
                       className="loginpage__signup__phone"
                       type="text"
@@ -198,7 +326,7 @@ const LoginPage = () => {
                       value={phone}
                       onChange={onChangePhone}
                     />
-                  </div>
+                  </div> */}
                   <div className="loginpage__signup__content">
                     <p
                       onClick={noFeature}
@@ -256,6 +384,7 @@ const LoginPage = () => {
                 <button
                   className="loginpage__signup__button"
                   type="submit"
+                  onClick={() => setStepNum(1)}
                   style={{
                     textDecoration: 'none',
                     backgroundColor: isTrue ? 'rgb(44, 43, 43)' : '',
@@ -267,7 +396,7 @@ const LoginPage = () => {
                 </button>
                 <Toaster />
               </div>
-            </form>
+            </div>
           </div>
         </div>
       </>
