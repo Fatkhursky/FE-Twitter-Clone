@@ -69,9 +69,9 @@ const Login = ({ onChangeUsername, username, onSubmitUserName, pointer, color })
                   <Link
                     href="/register"
                     style={{
-                      cursor: 'pointer',
-                      textDecoration: 'none',
-                      color: 'rgb(16, 131, 238)',
+                     // cursor: 'pointer',
+                      //textDecoration: 'none',
+                      //color: 'rgb(16, 131, 238)',
                     }}
                   >
                     Sign up

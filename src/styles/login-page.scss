@@ -154,6 +154,26 @@
     }
   }
 
+  &__signup__backlink{
+    cursor: pointer;
+    color: #0077ff;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__signup__checkbox{
+    display: flex;
+    cursor: pointer;
+    padding: 2px;
+    border-radius: 25px;
+    //background-color: rgb(47, 217, 255);
+    //padding: 5px 5px 5px 5px ;
+    &:hover {
+      background-color: rgba(162, 212, 240, 0.25);
+    }
+  }
+
   &__signup2__button {
     background-color: rgb(29, 155, 240);
     //margin-top: 50%;
@@ -522,11 +542,12 @@
    //float: left;
     text-align: left;
     max-width: 450px;
-    text-decoration: none;
+    //text-decoration: none;
 
-    span {
+    a {
       font-weight: bold;
-      color: rgb(16, 131, 238);
+      color: rgb(18, 133, 240);
+      text-decoration: none;
       &:hover {
         text-decoration: underline;
       }
@@ -558,6 +579,7 @@
     justify-content: center;
     text-align: center;
     margin: 5% 0 0 0;
+    //-webkit-appearance: none;
 
     input:focus + .loginpage__signup__label {
       color: #0077ff;
@@ -573,6 +595,7 @@
     padding: 0 0 0 14px;
     border: 1px solid rgb(204, 202, 202);
     border-radius: 7px;
+    
 
     &:focus {
       border: 2px solid #1885e5;
@@ -598,6 +621,21 @@
     transition: all 0.2s ease;
     pointer-events: none;
   }
+
+  &__signup__eye {
+    width: 2em;
+    cursor: pointer;
+    position: absolute;
+    //background-color: yellow;
+    margin-right: 7px;
+    top: 13px;
+    right: 0px;
+    &:hover {
+      background-color: rgb(225, 220, 220);
+      border-radius: 15px;
+    }
+  }
+
 
 
   &__signup__name {
@@ -625,11 +663,6 @@
     &:focus {
       outline-color: rgb(30, 167, 247);
     }
-  }
-
-  &__signup__content {
-    text-align: left;
-    //margin: 5% 2% 0 0;
   }
 
   #email {

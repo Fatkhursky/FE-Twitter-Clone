@@ -7,7 +7,7 @@ import { useAtom } from 'jotai'
 import { stepAtom } from '@/src/stores/jotai-atom'
 
 const Header = () => {
-const [stepNum] = useAtom(stepAtom)
+const [stepNum, setStepNum] = useAtom(stepAtom)
 
   const { asPath } = useRouter()
   let router = useRouter()
@@ -37,14 +37,21 @@ const [stepNum] = useAtom(stepAtom)
       <div>
         <div className="loginpage__head">
           <div className="loginpage__headleft">
-            <div
+            {+stepNum === 0 ? <div
               style={{ cursor: 'pointer' }}
               className="loginpage__head__close"
               onClick={toLogin}
             >
               {mySvg.close}
               
-            </div>
+            </div> : <div
+              style={{ cursor: 'pointer' }}
+              className="loginpage__head__close"
+              onClick={() => setStepNum(+stepNum - 1)}
+            >
+              {mySvg.arrow}
+            </div>}
+            
             <h2 style={{paddingLeft: "5%"}}>Step {+stepNum + 1} of 5</h2>
           </div>
           <div className="loginpage__headright"></div>

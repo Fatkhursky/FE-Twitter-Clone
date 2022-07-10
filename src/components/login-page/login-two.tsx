@@ -8,7 +8,7 @@ import { login } from '@/src/requests'
 const LoginTwo = ({ userName, toSignUp }) => {
   const [passNull, setPassNull] = useState(true)
   const [passValue, setPassValue] = useState('')
-  const tes = (e) => {
+  const isPassNull = (e) => {
     e.preventDefault()
     setPassNull(!passNull)
   }
@@ -104,7 +104,7 @@ const LoginTwo = ({ userName, toSignUp }) => {
                 />
 
                 <svg
-                  onClick={tes}
+                  onClick={isPassNull}
                   viewBox="0 0 24 24"
                   aria-hidden="true"
                   className="loginpage__login__eye"
