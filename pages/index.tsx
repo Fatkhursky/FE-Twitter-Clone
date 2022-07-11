@@ -5,21 +5,24 @@ import LoginTwo from '@/src/components/login-page/login-two'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import Head from 'next/head'
+import { useAtom } from 'jotai'
+import { stepLoginAtom } from '@/src/stores/jotai-atom' 
 
 const LoginPage = () => {
   const [name, setName] = useState('')
   const [isNext, setIsNext] = useState(false)
   const [userName, setUserName] = useState('')
+  const [stepLogin, setStepLogin] = useAtom(stepLoginAtom)
 
   const isUserName = (e) => {
     e.preventDefault()
-    setIsNext(true)
+    setStepLogin(1)
   }
 
   let router = useRouter()
 
   const toSignUp = () => {
-    setIsNext(false)
+    setStepLogin(0)
     router.push('/register')
   }
 
@@ -31,7 +34,7 @@ const LoginPage = () => {
       </Head>
       <div className="wrap" style={{ backgroundColor: '' }}>
         <div className="loginpage">
-          {isNext ? (
+          {stepLogin ? (
             <LoginTwo userName={userName} toSignUp={toSignUp} />
           ) : (
             <Login

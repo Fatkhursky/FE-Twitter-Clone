@@ -5,9 +5,9 @@ import { mySvg } from '~/public/assets/svg.js'
 
 
 const Login = ({ onChangeUsername, username, onSubmitUserName, pointer, color }) => {
-  const forgot = (e) => {
+  const noFeature = (e) => {
     e.preventDefault()
-    alert('Fitur belum tersedia')
+    alert('Fitur belum tersedia, klik "Sign up" untuk mendaftar')
   }
   
   return (
@@ -20,11 +20,11 @@ const Login = ({ onChangeUsername, username, onSubmitUserName, pointer, color })
               <div className="loginpage__login__title">
                 <h2>Sign in to Twitter</h2>
               </div>
-              <div style={{ cursor: 'pointer' }} className="loginpage__login__buttons1">
+              <div onClick={noFeature} style={{ cursor: 'pointer' }} className="loginpage__login__buttons1">
                 {mySvg.google}
                 <p>Sign in with Google</p>
               </div>
-              <div style={{ cursor: 'pointer' }} className="loginpage__login__buttons1">
+              <div onClick={noFeature} style={{ cursor: 'pointer' }} className="loginpage__login__buttons1">
                 {mySvg.apple}
                 <span>Sign in with Apple</span>
               </div>
@@ -56,7 +56,7 @@ const Login = ({ onChangeUsername, username, onSubmitUserName, pointer, color })
               </button>
 
               <button
-                onClick={forgot}
+                onClick={noFeature}
                 style={{ cursor: 'pointer', pointerEvents: '' }}
                 className="loginpage__login__buttons2 loginpage__login__buttons2--second"
               >
