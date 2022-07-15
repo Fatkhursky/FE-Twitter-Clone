@@ -7,20 +7,53 @@ import Popup from 'reactjs-popup'
 import Home from '@/src/components/home/home'
 import Profile from '@/src/components/home/profile'
 import { storeOneTweet, fetchAllTweets } from '@/src/requests'
+import {
+  fieldPhone,
+  fieldUserName,
+  fieldEmail,
+  fieldPhoneCode,
+} from '@/src/stores/jotai-atom'
+import { useAtom } from 'jotai'
+import { stepLoginAtom, stepRegisterAtom } from '@/src/stores/jotai-atom'
+import { ApolloClient, gql, InMemoryCache } from '@apollo/client'
 
-const HomePage = () => {
+const HomePage = (results) => {
   let router = useRouter()
   const [token, setToken] = useState('')
-
+  const [myDecodeToken, setMyDecodetoken] = useState('')
+  const [stepLogin, setStepLogin] = useAtom(stepLoginAtom)
+  //const [userName, setUserName] = useAtom(fieldUserName)
+  //const [userId, setUserId] = useState('')
   useEffect(() => {
-    if (window !== undefined) {
-      const token1 = localStorage.getItem('Bearer')
-      setToken(token1)
+    const item = localStorage.getItem('Bearer')
+    if (!item) {
+      router.push('/')
+    } else {
+      setToken(item)
+      const myDecodeToken = decodeToken(item)
+      setMyDecodetoken(myDecodeToken)
     }
-  })
-  const myDecodedToken = decodeToken(token)
+    //setData(data.filter((e) =>e.id===myDecodeToken.id))
+}, [router])
+
+
+  //get data Graphql
+  const initialState = results
+  const [data, setData] = useState(initialState.data)
+  const user = data.filter((e) =>e?.id===myDecodeToken?.id || undefined)
+  const userName = user?.[0]?.username
+
+
+
+  // useEffect(() => {
+  //   // Perform localStorage action
+  //   const item = localStorage.getItem('Bearer')
+  //   const myDecodeToken = decodeToken(item)
+  //   setToken(myDecodeToken)
+  // }, [])
 
   const logOut = () => {
+    setStepLogin(0)
     localStorage.removeItem('Bearer')
     router.push('/')
   }
@@ -116,7 +149,7 @@ const HomePage = () => {
             <div id="twitt">
               <div id="twitter">{mySvg.twitter}</div>
             </div>
-            <div style={{ backgroundColor: '' }}>
+            <div>
               <div
                 onClick={() => {
                   setOnComp('home')
@@ -234,7 +267,7 @@ const HomePage = () => {
             <Popup
               style={{ backgroundColor: 'red' }}
               trigger={
-                <div style={{ backgroundColor: '', width: '' }}>
+                <div>
                   <div className="homepage__accuser">
                     <img
                       id="imgjoe"
@@ -255,9 +288,9 @@ const HomePage = () => {
                         flexGrow: '1',
                       }}
                     >
-                      <p>{myDecodedToken?.name}</p>
-                      <p id="namejoe" style={{}}>
-                        @{myDecodedToken?.username}
+                      <p>tes1</p>
+                      <p id="namejoe" >
+                        {userName}
                       </p>
                     </div>
                     <svg
@@ -280,15 +313,15 @@ const HomePage = () => {
                     src={'/assets/logo193.png'}
                     alt="joebiden"
                   />
-                  <p id="namejoe" style={{ fontSize: '1.3rem' }}>
-                    &nbsp;@{myDecodedToken?.username}
+                  <p id="namejoe" style={{ fontSize: "15px" }}>
+                    &nbsp;{userName}
                   </p>
                 </div>
                 <div className="homepage__popupcontent" onClick={noFeature}>
                   <p>Add an existing account</p>
                 </div>
                 <div className="homepage__popupcontent" onClick={logOut}>
-                  <p>Log Out &nbsp;@{myDecodedToken?.username}</p>
+                  <p>Log Out &nbsp;{userName}</p>
                 </div>
               </div>
             </Popup>
@@ -317,7 +350,7 @@ const HomePage = () => {
           <div className="homepage__header2">
             <label>
               <input
-                style={{ fontSize: 'larger', backgroundColor: '' }}
+                style={{ fontSize: 'larger'}}
                 type="text"
                 placeholder="Search Twitter"
               />
@@ -325,11 +358,11 @@ const HomePage = () => {
           </div>
           <div className="homepage__rightbox">
             <div className="homepage__headrightbox">
-              <h3 style={{ marginTop: '' }}>Trends&nbsp;for&nbsp;you</h3>
+              <h3 >Trends&nbsp;for&nbsp;you</h3>
             </div>
             <div className="homepage__contentright">
               <div className="homepage__contentrighttitle">
-                <p style={{}}>Trending in Indonesia</p>
+                <p >Trending in Indonesia</p>
                 <svg
                   id="rightmore"
                   style={{ height: '25px', width: '25px', marginRight: '0' }}
@@ -345,7 +378,7 @@ const HomePage = () => {
 
             <div className="homepage__contentright">
               <div className="homepage__contentrighttitle">
-                <p style={{}}>Sport . Trending</p>
+                <p >Sport . Trending</p>
                 <svg
                   id="rightmore"
                   style={{ height: '25px', width: '25px', marginRight: '0' }}
@@ -362,7 +395,7 @@ const HomePage = () => {
 
             <div className="homepage__contentright">
               <div className="homepage__contentrighttitle">
-                <p style={{}}>Politics . Trending</p>
+                <p >Politics . Trending</p>
                 <svg
                   id="rightmore"
                   style={{ height: '25px', width: '25px', marginRight: '0' }}
@@ -379,7 +412,7 @@ const HomePage = () => {
 
             <div className="homepage__contentright">
               <div className="homepage__contentrighttitle">
-                <p style={{}}>Trending in Zimbabwe</p>
+                <p >Trending in Zimbabwe</p>
                 <svg
                   id="rightmore"
                   style={{ height: '25px', width: '25px', marginRight: '0' }}
@@ -396,7 +429,7 @@ const HomePage = () => {
 
             <div className="homepage__contentright">
               <div className="homepage__contentrighttitle">
-                <p style={{}}>Sport . Trending</p>
+                <p >Sport . Trending</p>
                 <svg
                   id="rightmore"
                   style={{ height: '25px', width: '25px', marginRight: '0' }}
@@ -413,7 +446,7 @@ const HomePage = () => {
 
             <div className="homepage__contentright">
               <div className="homepage__contentrighttitle">
-                <p style={{}}>Politics . Trending</p>
+                <p >Politics . Trending</p>
                 <svg
                   id="rightmore"
                   style={{ height: '25px', width: '25px', marginRight: '0' }}
@@ -550,3 +583,28 @@ const HomePage = () => {
   )
 }
 export default HomePage
+
+
+// fetching Graphql
+export async function getStaticProps() {
+  const client = new ApolloClient({
+    uri: 'https://l210526-twitter-app-be.herokuapp.com/graphql',
+    cache: new InMemoryCache(),
+  })
+  const { data } = await client.query({
+    query: gql`
+      query {
+        users {
+          id
+          username
+          createdAt
+        }
+      }
+    `,
+  })
+  return {
+    props: {
+      data: data.users,
+    },
+  }
+}

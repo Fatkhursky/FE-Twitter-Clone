@@ -4,10 +4,17 @@ import Header from './header'
 import { useState } from 'react'
 import toast, { Toaster } from 'react-hot-toast'
 import { login } from '@/src/requests'
+import { useAtom } from 'jotai'
+import { fieldUserName, fieldPhone, fieldEmail, fieldPhoneCode } from '@/src/stores/jotai-atom'
 
-const LoginTwo = ({ userName, toSignUp }) => {
+//userName, toSignUp, phone 
+const LoginTwo = ({ toSignUp }) => {
   const [passNull, setPassNull] = useState(true)
   const [passValue, setPassValue] = useState('')
+  const [phone, setPhone] = useAtom(fieldPhone)
+  const [userName, setUserName] = useAtom(fieldUserName)
+  const [phoneCode, setPhonecode] = useAtom(fieldPhoneCode)
+  
   const isPassNull = (e) => {
     e.preventDefault()
     setPassNull(!passNull)
@@ -18,15 +25,16 @@ const LoginTwo = ({ userName, toSignUp }) => {
   }
 
   const notify = async () => {
-    const newLogin = { username: userName, password: passValue }
+    const newLogin = { username: userName, phone: phoneCode,  password: passValue }
     try {
       const [error, res] = await login(newLogin)
       if (error) throw error
-      localStorage.setItem('Bearer', res.data.access_token)
+      localStorage.setItem('Bearer', res.data.data.accessToken)
+      //console.log(999, res.data.data.accessToken)
       return res.data.message
     } catch (error) {
       if (error.response) {
-        throw new Error(error.response.data.message)
+        throw new Error(error.response.data.data.message)
       } else if (error.request) {
         throw new Error(error.request)
       } else {
@@ -48,7 +56,6 @@ const LoginTwo = ({ userName, toSignUp }) => {
         loading: 'Loading...',
         success: (data) => {
           const token = localStorage.getItem('Bearer')
-          // console.log(33, token)
           const wait = () => {
             if (token) {
               return toHome()
@@ -69,8 +76,6 @@ const LoginTwo = ({ userName, toSignUp }) => {
       }
     )
   }
-  const [passFocus, setPassFocus] = useState(false)
-
   return (
     <form className="loginpage__logintwo" onSubmit={handleSubmit}>
       <Header />
@@ -86,10 +91,10 @@ const LoginTwo = ({ userName, toSignUp }) => {
                 <input
                   className="loginpage__login__inpUser"
                   type="text"
-                  placeholder={userName}
+                  placeholder={userName || phone}
                   disabled={true}
                 />
-                <span className="loginpage__login__label2">username</span>
+                <span className="loginpage__login__label2">{userName? 'username' : 'phone'}</span>
               </label>
             </div>
 
@@ -100,7 +105,6 @@ const LoginTwo = ({ userName, toSignUp }) => {
                 placeholder="&nbsp;&nbsp;"
                 value={passValue}
                 onChange={onChangePass}
-                onMouseEnter={() => setPassFocus(true)}
               />
               <span className="loginpage__logintwo__label">Password</span>
               <svg

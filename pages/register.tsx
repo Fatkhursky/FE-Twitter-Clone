@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useAtom } from 'jotai'
 import { stepRegisterAtom } from '@/src/stores/jotai-atom'
 import toast, { Toaster } from 'react-hot-toast'
@@ -20,6 +20,18 @@ const LoginPage = () => {
   const birthDate = toMonthName(month).concat(' ', day, ',', ' ', years)
   const [phone, setPhone] = useState('')
   const [inpPhone, setInpPhone] = useState('')
+  const [invalidPass, setInvalidPass] = useState(false)
+  const [OTP, setOTP] = useState('')
+  const [passNull, setPassNull] = useState(true)
+  const [isInvalidNumber, setIsInvalidNumber] = useState(false)
+  const [modalIsOpen, setIsOpen] = useState(false)
+  const [password, setPassword] = useState('')
+  const isTrue = fullname && phone && month && day && years ? true : false
+  const [stepNum, setStepNum] = useAtom(stepRegisterAtom)
+  const [passFocus, setPassFocus] = useState(false)
+  let router = useRouter()
+
+  //generate date to birth date input form
   function toMonthName(month) {
     const date = new Date()
     date.setMonth(month - 1)
@@ -30,8 +42,7 @@ const LoginPage = () => {
   }
 
   //Firebase OTP sms Auth
-  const [OTP, setOTP] = useState('')
-  const generateRecaptcha = () => {
+  function generateRecaptcha() {
     window.recaptchaVerifier = new RecaptchaVerifier(
       'recaptcha-container',
       {
@@ -73,35 +84,49 @@ const LoginPage = () => {
         .then((result) => {
           // User signed in successfully.
           const user = result.user
-          console.log(user)
           setStepNum(4)
           // ...
         })
         .catch((error) => {
           // User couldn't sign in (bad verification code?)
           // ...
-          console.log('masuk catcth')
           console.log(error)
         })
     }
   }
-
+const [customStyles, setCustomStyle] = useState('')
   //Modal
   Modal.setAppElement('*')
-  const customStyles = {
-    overlay: { background: 'rgba(112, 110, 110, 0.65)' },
-    content: {
-      borderRadius: '15px',
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
-      //border: '1px solid rgba(204, 202, 202, 0.75)'
-    },
-  }
-  const [modalIsOpen, setIsOpen] = useState(false)
+  useEffect(() => {
+    setCustomStyle({
+      overlay: { background: 'rgba(112, 110, 110, 0.65)' },
+      content: {
+        borderRadius: '15px',
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
+        //border: '1px solid rgba(204, 202, 202, 0.75)'
+      },
+    }
+  )
+  }, [])
+
+  // const customStyles = {
+  //   overlay: { background: 'rgba(112, 110, 110, 0.65)' },
+  //   content: {
+  //     borderRadius: '15px',
+  //     top: '50%',
+  //     left: '50%',
+  //     right: 'auto',
+  //     bottom: 'auto',
+  //     marginRight: '-50%',
+  //     transform: 'translate(-50%, -50%)',
+  //     //border: '1px solid rgba(204, 202, 202, 0.75)'
+  //   },
+  // }
 
   function openModal() {
     setIsOpen(true)
@@ -111,23 +136,24 @@ const LoginPage = () => {
     setIsOpen(false)
   }
 
-  const [passNull, setPassNull] = useState(true)
   const isPassNull = (e) => {
     e.preventDefault()
     setPassNull(!passNull)
   }
 
-  const [isInvalidNumber, setIsInvalidNumber] = useState(false)
-
   function getUserName(name) {
-    return (name = '@' + name + Math.random().toString(36).slice(2, 5))
+    return (name =
+      '@' + name.replaceAll(' ', '_') + Math.random().toString(36).slice(2, 5))
   }
 
-  let username = getUserName(fullname)
+  //let username = getUserName(fullname)
+  const [username, setusername] = useState('')
 
-  const [password, setPassword] = useState('')
-  const isTrue = fullname && phone && month && day && years ? true : false
-  const [stepNum, setStepNum] = useAtom(stepRegisterAtom)
+  const onChangeName = (e) => {
+    let fullname = e.target.value
+    setfullName(fullname)
+    setusername(getUserName(fullname))
+  }
 
   const isApril = month === '4'
   const isJune = month === '6'
@@ -135,10 +161,13 @@ const LoginPage = () => {
   const isNovember = month === '11'
   const isFebruary = month === '2'
   const yearNotNull = years !== ''
-  const isLeapYear = () =>
+
+  const isLeapYear = () => {
     yearNotNull && years % 100 === 0
       ? yearNotNull && years % 400 === 0
       : yearNotNull && years % 4 === 0
+  }
+
   const yearComp = yearsDate.map((obj) => obj.component)
 
   const yearFilter = yearsDate.map((obj) => {
@@ -168,8 +197,6 @@ const LoginPage = () => {
     }
   }
 
-  let router = useRouter()
-
   const notify = async () => {
     const newReg = { fullname, dateOfBirth, username, password, phone }
     try {
@@ -189,6 +216,7 @@ const LoginPage = () => {
 
   const toSign = () => {
     router.push('/')
+    setStepNum(0)
   }
 
   const handleSubmit = (e) => {
@@ -199,6 +227,7 @@ const LoginPage = () => {
         loading: 'Loading...',
         success: (data) => {
           setTimeout(toSign, 1200)
+
           //setDAte(regisTime)
           return data
         },
@@ -218,8 +247,6 @@ const LoginPage = () => {
   const noFeature = () => {
     alert('Fitur belum tersedia')
   }
-
-  const onChangeName = (e) => setfullName(e.target.value)
 
   const onChangePhone = (e) => {
     let phone = e.target.value
@@ -253,7 +280,6 @@ const LoginPage = () => {
   const onChangeDay = (e) => setDay(e.target.value)
   const onChangeYears = (e) => setYears(e.target.value)
 
-  const [invalidPass, setInvalidPass] = useState(false)
   const onChangePassword = (e) => {
     let pass = e.target.value
     setPassword(pass)
@@ -263,9 +289,6 @@ const LoginPage = () => {
       setInvalidPass(false)
     }
   }
-  const [passFocus, setPassFocus] = useState(false)
-  //const [verifFocus, setVerifFocus] = useState(false)
-
   if (stepNum === 1) {
     return (
       <>
@@ -278,7 +301,7 @@ const LoginPage = () => {
           <div className="loginpage">
             <div className="loginpage__signup__wrap">
               <Header />
-              <div style={{ backgroundColor: '' }} className="loginpage__signup__main">
+              <div  className="loginpage__signup__main">
                 <div className="loginpage__signup__form">
                   <div className="loginpage__signup__step2">
                     <h1>Customize your experience</h1>
@@ -338,7 +361,7 @@ const LoginPage = () => {
           <div className="loginpage">
             <div className="loginpage__signup__wrap">
               <Header />
-              <div style={{ backgroundColor: '' }} className="loginpage__signup__main">
+              <div className="loginpage__signup__main">
                 <div className="loginpage__signup__form">
                   <div className="loginpage__signup__title1">
                     <h1 className="loginpage__signup__title">Create your account</h1>
@@ -349,8 +372,9 @@ const LoginPage = () => {
                       className="loginpage__signup__form__animation"
                       type="text"
                       placeholder="&nbsp;&nbsp;"
-                      value={fullname}
+                      value={fullname || ''}
                       onClick={() => setStepNum(0)}
+                      readOnly
                       //onChange={onChangeName}
                     />
                     <span className="loginpage__signup__label">Name</span>
@@ -361,8 +385,10 @@ const LoginPage = () => {
                       className="loginpage__signup__form__animation"
                       type="text"
                       placeholder="&nbsp;&nbsp;"
-                      value={inpPhone}
+                      value={inpPhone || ''}
                       onClick={() => setStepNum(0)}
+                      readOnly
+                      //onChange={onChangePhone}
                     />
                     <span className="loginpage__signup__label">Phone</span>
                   </label>
@@ -371,9 +397,10 @@ const LoginPage = () => {
                       className="loginpage__signup__form__animation"
                       type="text"
                       placeholder="&nbsp;&nbsp;"
-                      value={birthDate}
+                      value={birthDate || ''}
                       onClick={() => setStepNum(0)}
-                      //onChange={onChangeName}
+                      readOnly
+                      //onChange={onChangeMonth}
                     />
                     <span className="loginpage__signup__label">Birth date</span>
                   </label>
@@ -417,8 +444,8 @@ const LoginPage = () => {
                   >
                     <h2 style={{ marginTop: '0px' }}>Verify phone</h2>
                     <p style={{ marginTop: '-10px' }}>
-                      We'll text your verification code to {inpPhone}. Standard SMS fees may
-                      apply.
+                      We'll text your verification code to {inpPhone}. Standard SMS fees
+                      may apply.
                     </p>
                     <button
                       onClick={requestOTP}
@@ -434,7 +461,10 @@ const LoginPage = () => {
                       Ok
                     </button>
                     <button
-                      onClick={() => setStepNum(0)}
+                      onClick={() => {
+                        closeModal()
+                        setStepNum(0)
+                      } }
                       style={{
                         borderRadius: '25px',
                         border: '1px solid rgb(204, 202, 202)',
@@ -479,7 +509,7 @@ const LoginPage = () => {
                   <div>
                     <h1 style={{ textAlign: 'left' }}>We sent you a code</h1>
                     <p style={{ textAlign: 'left', marginTop: '-15px' }}>
-                      Enter it below to verify {phone}
+                      Enter it below to verify {inpPhone}
                     </p>
                   </div>
 
@@ -514,7 +544,7 @@ const LoginPage = () => {
                   onClick={submitOTP}
                   style={{
                     textDecoration: 'none',
-                    backgroundColor: isTrue ? 'rgb(44, 43, 43)' : '',
+                    backgroundColor: isTrue ? 'rgb(44, 43, 43)' : null,
                     cursor: isTrue ? 'pointer' : '',
                     pointerEvents: isTrue ? '' : 'none',
                   }}
@@ -528,6 +558,57 @@ const LoginPage = () => {
       </>
     )
   } else if (stepNum === 4) {
+    return (
+      <>
+        <Head>
+          <title>Register</title>
+          <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        </Head>
+        <div className="wrap">
+          <div className="loginpage">
+            <div className="loginpage__signup__wrap">
+              <Header />
+              <div className="loginpage__signup__main">
+                <div className="loginpage__signup__form">
+                  <div>
+                    <h1 style={{ textAlign: 'left' }}>You're username</h1>
+                    <p style={{ textAlign: 'left', marginTop: '-15px' }}>
+                      Use username/phone for login.
+                    </p>
+                  </div>
+
+                  <label htmlFor="" className="loginpage__signup__inp">
+                    <input
+                    disabled
+                      className="loginpage__signup__form__animation"
+                      type='text'
+                      placeholder="&nbsp;&nbsp;"
+                      value={username}
+                    />
+                    <span className="loginpage__signup__label">Username</span>
+                  </label>
+                </div>
+              </div>
+              <div className="loginpage__signup__footer">
+                <button
+                  className="loginpage__signup__button"
+                  onClick={() => setStepNum(5)}
+                  style={{
+                    textDecoration: 'none',
+                    backgroundColor: 'rgb(44, 43, 43)',
+                    cursor: 'pointer',
+                  }}
+                >
+                  Next
+                </button>
+                <Toaster />
+              </div>
+            </div>
+          </div>
+        </div>
+      </>
+    )
+  } else if (stepNum === 5) {
     return (
       <>
         <Head>
@@ -604,9 +685,9 @@ const LoginPage = () => {
                   onClick={handleSubmit}
                   style={{
                     textDecoration: 'none',
-                    backgroundColor: password ? 'rgb(44, 43, 43)' : '',
-                    cursor: isTrue ? 'pointer' : '',
-                    pointerEvents: password ? '' : 'none',
+                    backgroundColor: password ? 'rgb(44, 43, 43)' : null,
+                    cursor: isTrue ? 'pointer' : null,
+                    pointerEvents: password ? null : 'none',
                   }}
                 >
                   Submit
@@ -629,7 +710,7 @@ const LoginPage = () => {
           <div className="loginpage">
             <div className="loginpage__signup__wrap">
               <Header />
-              <div style={{ backgroundColor: '' }} className="loginpage__signup__main">
+              <div className="loginpage__signup__main">
                 <div className="loginpage__signup__form">
                   <div className="loginpage__signup__title1">
                     <h1 className="loginpage__signup__title">Create your account</h1>
@@ -652,14 +733,14 @@ const LoginPage = () => {
                       className="loginpage__signup__form__animation"
                       type="text"
                       placeholder="&nbsp;&nbsp;"
-                      //value={phone}
+                      value={inpPhone}
                       onChange={onChangePhone}
                       //onMouseEnter=
                     />
                     <span className="loginpage__signup__label">Phone</span>
                   </label>
 
-                  <div style={{ display: '' }}>
+                  <div>
                     {isInvalidNumber ? (
                       <p
                         style={{
@@ -734,9 +815,9 @@ const LoginPage = () => {
                   onClick={() => setStepNum(1)}
                   style={{
                     textDecoration: 'none',
-                    backgroundColor: isTrue ? 'rgb(44, 43, 43)' : '',
-                    cursor: isTrue ? 'pointer' : '',
-                    pointerEvents: isTrue ? '' : 'none',
+                    backgroundColor: isTrue ? 'rgb(44, 43, 43)' : null,
+                    cursor: isTrue ? 'pointer' : null,
+                    pointerEvents: isTrue ? null : 'none',
                   }}
                 >
                   Next

@@ -68,7 +68,7 @@ const Header = () => {
               </div>
             )}
 
-            <h2 style={{ paddingLeft: '5%' }}>Step {+stepRegister + 1} of 5</h2>
+            <h2 style={{ paddingLeft: '5%' }}>Step {+stepRegister + 1} of 6</h2>
           </div>
           <div className="loginpage__headright"></div>
         </div>
