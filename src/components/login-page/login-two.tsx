@@ -63,13 +63,14 @@ const LoginTwo = ({ toSignUp }) => {
       {
         loading: 'Loading...',
         success: (data) => {
-          const token = localStorage.getItem('Bearer')
-          const wait = () => {
-            if (token) {
-              return toHome()
-            }
-          }
-          setTimeout(wait, 1000)
+          //const token = localStorage.getItem('Bearer')
+          // const wait = () => {
+          //   if (token) {
+          //     return toHome()
+          //   }
+          // }
+          // setTimeout(wait, 1000)
+          toHome()
           return data
         },
         error: (error) => `${error}`,
