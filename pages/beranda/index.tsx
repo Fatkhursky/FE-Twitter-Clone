@@ -51,6 +51,7 @@ const HomePage = (results) => {
   const [data, setData] = useState(initialState.data)
   const user = data.filter((e) => e?.id === myDecodeToken?.id || undefined)
   const userName = user?.[0]?.username
+  console.log(userName)
 
   const logOut = async () => {
     setStepLogin(0)
@@ -285,7 +286,7 @@ const HomePage = (results) => {
                         flexGrow: '1',
                       }}
                     >
-                      <p>tes1</p>
+                      {/* <p>tes1</p> */}
                       <p id="namejoe">{userName}</p>
                     </div>
                     <svg
