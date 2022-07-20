@@ -1,5 +1,6 @@
 // @ts-nocheck
 import { useRouter } from 'next/router'
+import { signIn } from 'next-auth/react'
 import Header from './header'
 import { useState } from 'react'
 import toast, { Toaster } from 'react-hot-toast'
@@ -31,6 +32,13 @@ const LoginTwo = ({ toSignUp }) => {
       if (error) throw error
       localStorage.setItem('Bearer', res.data.data.accessToken)
       //console.log(999, res.data.data.accessToken)
+      const setSession = await signIn('credentials', {
+        username: userName || phoneCode,
+        password: passValue,
+        redirect: false
+      })
+      //console.log(77, setSession)
+
       return res.data.message
     } catch (error) {
       if (error.response) {
@@ -45,7 +53,7 @@ const LoginTwo = ({ toSignUp }) => {
 
   let router = useRouter()
   const toHome = () => {
-    router.push('/home')
+    router.push('/beranda')
   }
 
   const handleSubmit = (e) => {

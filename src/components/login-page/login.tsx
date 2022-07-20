@@ -4,6 +4,8 @@ import Header from './header'
 import { mySvg } from '~/public/assets/svg.js'
 import { useRouter } from 'next/router'
 import { useAtom, atom } from 'jotai'
+import { useSession } from 'next-auth/react'
+
 import {
   stepLoginAtom,
   fieldPhone,
@@ -21,6 +23,8 @@ const Login = ({
   color,
 }) => {
   const [stepRegister, setStepRegister] = useAtom(stepLoginAtom)
+
+  const { data:sesssion } = useSession()
 
   const noFeature = (e) => {
     e.preventDefault()

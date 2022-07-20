@@ -1,4 +1,5 @@
 // @ts-nocheck
+//import { config } from 'dotenv'; 
 import { mySvg } from '~/public/assets/svg'
 import { useEffect, useState } from 'react'
 import { decodeToken } from 'react-jwt'
@@ -7,6 +8,7 @@ import Popup from 'reactjs-popup'
 import Home from '@/src/components/home/home'
 import Profile from '@/src/components/home/profile'
 import { storeOneTweet, fetchAllTweets } from '@/src/requests'
+
 import {
   fieldPhone,
   fieldUserName,
@@ -16,6 +18,7 @@ import {
 import { useAtom } from 'jotai'
 import { stepLoginAtom, stepRegisterAtom } from '@/src/stores/jotai-atom'
 import { ApolloClient, gql, InMemoryCache } from '@apollo/client'
+import { signOut } from 'next-auth/react'
 
 const HomePage = (results) => {
   let router = useRouter()
@@ -24,47 +27,45 @@ const HomePage = (results) => {
   const [stepLogin, setStepLogin] = useAtom(stepLoginAtom)
   //const [userName, setUserName] = useAtom(fieldUserName)
   //const [userId, setUserId] = useState('')
+  const [tweet, setTweet] = useState('')
+  const [newTweet, setNewTweet] = useState('')
+  const [onComp, setOnComp] = useState('')
+
   useEffect(() => {
     const item = localStorage.getItem('Bearer')
-    if (!item) {
-      router.push('/')
-    } else {
-      setToken(item)
-      const myDecodeToken = decodeToken(item)
-      setMyDecodetoken(myDecodeToken)
-    }
-    //setData(data.filter((e) =>e.id===myDecodeToken.id))
-}, [router])
+    setToken(item)
+    const myDecodeToken = decodeToken(item)
+    setMyDecodetoken(myDecodeToken)
 
+    //setData(data.filter((e) =>e.id===myDecodeToken.id))
+  }, [])
+
+  useEffect(() => {
+    if (onComp === 'profile') {
+      getTweets()
+    }
+  }, [onComp])
 
   //get data Graphql
   const initialState = results
   const [data, setData] = useState(initialState.data)
-  const user = data.filter((e) =>e?.id===myDecodeToken?.id || undefined)
+  const user = data.filter((e) => e?.id === myDecodeToken?.id || undefined)
   const userName = user?.[0]?.username
 
-
-
-  // useEffect(() => {
-  //   // Perform localStorage action
-  //   const item = localStorage.getItem('Bearer')
-  //   const myDecodeToken = decodeToken(item)
-  //   setToken(myDecodeToken)
-  // }, [])
-
-  const logOut = () => {
+  const logOut = async () => {
     setStepLogin(0)
-    localStorage.removeItem('Bearer')
-    router.push('/')
+    const data = await signOut({ redirect: false, callbackUrl: `${process.env.NEXT_AUTH_URL}/api/auth/signin` })
+    //localStorage.removeItem('Bearer')
+    router.push(data.url)
   }
+
+  // const onLogout = () => {
+  //   signOut({ callbackUrl: `${process.env.NEXTAUTH_URL}/api/auth/signin` })
+  // }
 
   function noFeature() {
     alert('Fitur belum tersedia')
   }
-
-  const [tweet, setTweet] = useState('')
-  const [newTweet, setNewTweet] = useState('')
-  const [onComp, setOnComp] = useState('')
 
   let headers = {
     'Content-Type': 'application/json',
@@ -123,23 +124,18 @@ const HomePage = (results) => {
   }
 
   //Pop Up style
-  const contentStyle = { backgroundColor: '', position: 'fixed' }
-  const overlayStyle = { background: '' }
-  const arrowStyle = { color: '' }
+  const contentStyle = { position: 'fixed' }
+  //const overlayStyle = { }
+  //const arrowStyle = {  }
 
-  const isHome = onComp === 'home' ? 'bold' : ''
-  const isExplore = onComp === 'explore' ? 'bold' : ''
-  const isNotifications = onComp === 'notifications' ? 'bold' : ''
-  const isMessages = onComp === 'messages' ? 'bold' : ''
-  const isBookmarks = onComp === 'bookmarks' ? 'bold' : ''
-  const isLists = onComp === 'lists' ? 'bold' : ''
-  const isProfile = onComp === 'profile' ? 'bold' : ''
-  const isMore = onComp === 'more' ? 'bold' : ''
-  useEffect(() => {
-    if (onComp === 'profile') {
-      getTweets()
-    }
-  }, [onComp])
+  const isHome = onComp === 'home' ? 'bold' : null
+  const isExplore = onComp === 'explore' ? 'bold' : null
+  const isNotifications = onComp === 'notifications' ? 'bold' : null
+  const isMessages = onComp === 'messages' ? 'bold' : null
+  const isBookmarks = onComp === 'bookmarks' ? 'bold' : null
+  const isLists = onComp === 'lists' ? 'bold' : null
+  const isProfile = onComp === 'profile' ? 'bold' : null
+  const isMore = onComp === 'more' ? 'bold' : null
 
   return (
     <div id="homewrapper">
@@ -263,7 +259,7 @@ const HomePage = (results) => {
                 <div id="addtweet">{mySvg.addTweet}</div>
               </div>
             </div>
-            <div style={{ backgroundColor: '', flexGrow: '1' }}></div>
+            <div style={{ flexGrow: '1' }}></div>
             <Popup
               style={{ backgroundColor: 'red' }}
               trigger={
@@ -274,7 +270,6 @@ const HomePage = (results) => {
                       style={{
                         height: '45px',
                         padding: '0 2% 0 2%',
-                        backgroundColor: '',
                       }}
                       src={'/assets/logo193.png'}
                       alt="joebiden"
@@ -282,16 +277,13 @@ const HomePage = (results) => {
                     <div
                       id="leftusername"
                       style={{
-                        backgroundColor: '',
                         lineHeight: '3px',
                         padding: '0 0 0 5px',
                         flexGrow: '1',
                       }}
                     >
                       <p>tes1</p>
-                      <p id="namejoe" >
-                        {userName}
-                      </p>
+                      <p id="namejoe">{userName}</p>
                     </div>
                     <svg
                       id="morejoe"
@@ -302,7 +294,7 @@ const HomePage = (results) => {
                   </div>
                 </div>
               }
-              {...{ contentStyle, overlayStyle, arrowStyle }}
+              {...{ contentStyle }}
               position="top left"
             >
               <div>
@@ -313,7 +305,7 @@ const HomePage = (results) => {
                     src={'/assets/logo193.png'}
                     alt="joebiden"
                   />
-                  <p id="namejoe" style={{ fontSize: "15px" }}>
+                  <p id="namejoe" style={{ fontSize: '15px' }}>
                     &nbsp;{userName}
                   </p>
                 </div>
@@ -350,7 +342,7 @@ const HomePage = (results) => {
           <div className="homepage__header2">
             <label>
               <input
-                style={{ fontSize: 'larger'}}
+                style={{ fontSize: 'larger' }}
                 type="text"
                 placeholder="Search Twitter"
               />
@@ -358,11 +350,11 @@ const HomePage = (results) => {
           </div>
           <div className="homepage__rightbox">
             <div className="homepage__headrightbox">
-              <h3 >Trends&nbsp;for&nbsp;you</h3>
+              <h3>Trends&nbsp;for&nbsp;you</h3>
             </div>
             <div className="homepage__contentright">
               <div className="homepage__contentrighttitle">
-                <p >Trending in Indonesia</p>
+                <p>Trending in Indonesia</p>
                 <svg
                   id="rightmore"
                   style={{ height: '25px', width: '25px', marginRight: '0' }}
@@ -378,7 +370,7 @@ const HomePage = (results) => {
 
             <div className="homepage__contentright">
               <div className="homepage__contentrighttitle">
-                <p >Sport . Trending</p>
+                <p>Sport . Trending</p>
                 <svg
                   id="rightmore"
                   style={{ height: '25px', width: '25px', marginRight: '0' }}
@@ -395,7 +387,7 @@ const HomePage = (results) => {
 
             <div className="homepage__contentright">
               <div className="homepage__contentrighttitle">
-                <p >Politics . Trending</p>
+                <p>Politics . Trending</p>
                 <svg
                   id="rightmore"
                   style={{ height: '25px', width: '25px', marginRight: '0' }}
@@ -412,7 +404,7 @@ const HomePage = (results) => {
 
             <div className="homepage__contentright">
               <div className="homepage__contentrighttitle">
-                <p >Trending in Zimbabwe</p>
+                <p>Trending in Zimbabwe</p>
                 <svg
                   id="rightmore"
                   style={{ height: '25px', width: '25px', marginRight: '0' }}
@@ -429,7 +421,7 @@ const HomePage = (results) => {
 
             <div className="homepage__contentright">
               <div className="homepage__contentrighttitle">
-                <p >Sport . Trending</p>
+                <p>Sport . Trending</p>
                 <svg
                   id="rightmore"
                   style={{ height: '25px', width: '25px', marginRight: '0' }}
@@ -446,7 +438,7 @@ const HomePage = (results) => {
 
             <div className="homepage__contentright">
               <div className="homepage__contentrighttitle">
-                <p >Politics . Trending</p>
+                <p>Politics . Trending</p>
                 <svg
                   id="rightmore"
                   style={{ height: '25px', width: '25px', marginRight: '0' }}
@@ -539,7 +531,6 @@ const HomePage = (results) => {
                   borderRadius: '55px',
                   width: '55px',
                   height: '55px',
-                  marginTop: '',
                 }}
                 src={'/assets/foto3.jpg'}
                 alt="user1"
@@ -565,7 +556,7 @@ const HomePage = (results) => {
             </div>
 
             <div id="smore2">
-              <h3 style={{ padding: '', color: 'rgb(29, 108, 255)' }}>Show more</h3>
+              <h3 style={{ color: 'rgb(29, 108, 255)' }}>Show more</h3>
             </div>
           </div>
           <p className="homepage__tos" style={{ cursor: 'pointer' }}>
@@ -583,7 +574,6 @@ const HomePage = (results) => {
   )
 }
 export default HomePage
-
 
 // fetching Graphql
 export async function getStaticProps() {
