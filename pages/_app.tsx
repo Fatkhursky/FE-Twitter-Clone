@@ -1,3 +1,4 @@
+import '@/src/styles/globals.scss'
 import '@/src/styles/global.scss'
 import '@/src/styles/index-1.scss'
 import '@/src/styles/login-page.scss'
