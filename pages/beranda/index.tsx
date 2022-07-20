@@ -54,7 +54,7 @@ const HomePage = (results) => {
 
   const logOut = async () => {
     setStepLogin(0)
-    const data = await signOut({ redirect: false, callbackUrl: `${process.env.NEXT_AUTH_URL}/api/auth/signin` })
+    const data = await signOut({ redirect: false, callbackUrl: `/api/auth/signin` })
     //localStorage.removeItem('Bearer')
     router.push(data.url)
   }
