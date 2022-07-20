@@ -30,7 +30,7 @@ const LoginTwo = ({ toSignUp }) => {
     try {
       const [error, res] = await login(newLogin)
       if (error) throw error
-      localStorage.setItem('Bearer', res.data.data.accessToken)
+      //localStorage.setItem('Bearer', res.data.data.accessToken)
       //console.log(999, res.data.data.accessToken)
       const setSession = await signIn('credentials', {
         username: userName || phoneCode,
