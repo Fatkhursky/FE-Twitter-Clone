@@ -36,8 +36,6 @@ const HomePage = (results) => {
     setToken(item)
     const myDecodeToken = decodeToken(item)
     setMyDecodetoken(myDecodeToken)
-
-    //setData(data.filter((e) =>e.id===myDecodeToken.id))
   }, [])
 
   useEffect(() => {
@@ -56,11 +54,9 @@ const HomePage = (results) => {
   const logOut = async () => {
     setStepLogin(0)
     const data = await signOut({ redirect: false, callbackUrl: `/api/auth/signin` })
-    //localStorage.removeItem('Bearer')
+    localStorage.removeItem('Bearer')
     console.log(5, data)
-    console.log(6, process.env.NEXTAUTH_URL)
-    console.log(7, process.env.NEXT_PUBLIC_URL_BACKEND)
-    //router.push(data.url)
+    router.push(data.url)
   }
 
   // const onLogout = () => {

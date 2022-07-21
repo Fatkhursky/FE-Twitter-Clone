@@ -10,7 +10,7 @@ export default NextAuth({
         password: { label: 'Password', type: 'password' },
       },
       authorize: (credentials: any) => {
-        //console.log(111, credentials)
+        console.log(111, credentials)
         //database look up
         // if (credentials.username === 'john' && credentials.password === 'test') {
         //   return {

@@ -2,7 +2,7 @@
 import { useRouter } from 'next/router'
 import { signIn } from 'next-auth/react'
 import Header from './header'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import toast, { Toaster } from 'react-hot-toast'
 import { login } from '@/src/requests'
 import { useAtom } from 'jotai'
@@ -30,14 +30,14 @@ const LoginTwo = ({ toSignUp }) => {
     try {
       const [error, res] = await login(newLogin)
       if (error) throw error
-      //localStorage.setItem('Bearer', res.data.data.accessToken)
+      localStorage.setItem('Bearer', res.data.data.accessToken)
       //console.log(999, res.data.data.accessToken)
       const setSession = await signIn('credentials', {
         username: userName || phoneCode,
         password: passValue,
         redirect: false
       })
-      //console.log(77, setSession)
+      console.log(77, setSession)
 
       return res.data.message
     } catch (error) {
@@ -63,7 +63,8 @@ const LoginTwo = ({ toSignUp }) => {
       {
         loading: 'Loading...',
         success: (data) => {
-          //const token = localStorage.getItem('Bearer')
+          const token = localStorage.getItem('Bearer')
+          console.log(999, token)
           // const wait = () => {
           //   if (token) {
           //     return toHome()
