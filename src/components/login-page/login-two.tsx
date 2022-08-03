@@ -153,7 +153,6 @@ const LoginTwo = ({ toSignUp }) => {
             </div>
           </div>
         </div>
-        <button type='submit'>okeee</button>
       </div>
       <div className="footer bg-white flex items-center justify-center rounded-b-xl w-600">
         <div className="wrapper w-3/4 flex flex-col">
