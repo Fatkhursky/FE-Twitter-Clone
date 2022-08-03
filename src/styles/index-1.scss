@@ -1,43 +1,44 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap");
+// @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap");
 
 html {
+    //overflow-x: hidden;
   //height: -webkit-fill-available;
-  background-color: rgb(197, 197, 197);
-  height: 100vh;
+  //background-color: rgb(197, 197, 197);
+  //height: 100vh;
 }
 
 body {
-
-  margin: 0 auto;
-  display:flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: -webkit-fill-available;
+    overflow-x: hidden;
+//   margin: 0 auto;
+//   display:flex;
+//   flex-direction: column;
+//   align-items: center;
+//   justify-content: center;
+//   height: -webkit-fill-available;
 }
 
-* {
-  font-family: "Poppins", sans-serif;
-  box-sizing: border-box;
-}
-
-// .wrap {
-//    display:flex;
-//    position:fixed;
-//    left:0px;
-//    top:0px;
-//    width:100vw;
-//    height:100vh;
-//    justify-content:center;
-//    align-items:center;
-//   //background-color: rgb(185, 185, 185);
-//    height: -webkit-fill-available
+// * {
+//   font-family: "Poppins", sans-serif;
+//   box-sizing: border-box;
 // }
 
-//Phone
-// @media (max-width: 705px) {
-//   html,
-//   body {
-//     background-color: white;
-//   }
-// }
+// // .wrap {
+// //    display:flex;
+// //    position:fixed;
+// //    left:0px;
+// //    top:0px;
+// //    width:100vw;
+// //    height:100vh;
+// //    justify-content:center;
+// //    align-items:center;
+// //   //background-color: rgb(185, 185, 185);
+// //    height: -webkit-fill-available
+// // }
+
+// //Phone
+// // @media (max-width: 705px) {
+// //   html,
+// //   body {
+// //     background-color: white;
+// //   }
+// // }

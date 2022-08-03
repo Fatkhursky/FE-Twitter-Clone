@@ -1,62 +1,60 @@
 // @ts-nocheck
 import { FaTwitter } from 'react-icons/fa'
 import { mySvg } from '~/public/assets/svg'
-import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { useAtom } from 'jotai'
 import { stepRegisterAtom, stepLoginAtom } from '@/src/stores/jotai-atom'
+import { useRouter } from 'next/router'
 
 const Header = () => {
   const [stepRegister, setStepRegister] = useAtom(stepRegisterAtom)
   const [stepLogin, setStepLogin] = useAtom(stepLoginAtom)
 
-  const { asPath } = useRouter()
-  let router = useRouter()
-
   const toLogin = () => router.push('/')
 
-  if (asPath === '/') {
+  const router = useRouter()
+
+  if (router.pathname === '/login')
     return (
       <div>
-        <div className="loginpage__head">
-          <div className="loginpage__headleft">
+        <div className="bg-white flex items-center rounded-t-xl p-2 w-600 ">
+          <div className="w-1/2">
             {stepLogin ? (
-              <div
-                onClick={() => setStepLogin(0)}
-                className="loginpage__head__close"
-                style={{ cursor: 'pointer' }}
-              >
-                {mySvg.close}
+              <div className="p-2">
+                <div
+                  onClick={() => setStepLogin(0)}
+                  className="cursor-pointer p-2 hover:bg-slate-200 rounded-full w-fit"
+                >
+                  <svg className="h-5 w-5 ">{mySvg.close}</svg>
+                </div>
               </div>
             ) : (
               <Link href={'https://www.google.com/'}>
-                <div className="loginpage__head__close" style={{ cursor: 'pointer' }}>
-                  {mySvg.close}
+                <div className="p-2">
+                  <div className="cursor-pointer p-2 hover:bg-slate-200 rounded-full w-fit">
+                    <svg className="h-5 w-5 ">{mySvg.close}</svg>
+                  </div>
                 </div>
               </Link>
             )}
           </div>
 
-          <FaTwitter
-            className="loginpage__head__twitter"
-            style={{ color: 'rgb(16, 131, 238)', fontSize: '35px' }}
-          />
+          <FaTwitter className="w-7 h-7 text-blue-500" />
           <div className="loginpage__headright"></div>
         </div>
       </div>
     )
-  } else {
+  if (router.pathname === '/register')
     return (
       <div>
-        <div className="loginpage__head">
-          <div className="loginpage__headleft">
-            {+stepRegister === 0 ? (
+        <div className="bg-white flex items-center rounded-t-xl p-2 w-600">
+          <div className="p-2 flex items-center justify-center gap-2">
+            {+stepRegister === 1 ? (
               <div
-                style={{ cursor: 'pointer' }}
-                className="loginpage__head__close"
+                className="cursor-pointer p-2 hover:bg-slate-200 rounded-full w-fit"
                 onClick={toLogin}
               >
-                {mySvg.close}
+                <svg className="h-5 w-5">{mySvg.close}</svg>
               </div>
             ) : (
               <div
@@ -64,17 +62,17 @@ const Header = () => {
                 className="loginpage__head__close"
                 onClick={() => setStepRegister(+stepRegister - 1)}
               >
-                {mySvg.arrow}
+                <></>
+                <svg className="h-5 w-5">{mySvg.arrow}</svg>
               </div>
             )}
 
-            <h2 style={{ paddingLeft: '5%' }}>Step {+stepRegister + 1} of 6</h2>
+            <h2 className="font-bold">Step {stepRegister} of 6</h2>
           </div>
           <div className="loginpage__headright"></div>
         </div>
       </div>
     )
-  }
 }
 
 export default Header

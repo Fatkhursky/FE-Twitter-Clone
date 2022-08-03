@@ -7,48 +7,58 @@ const Home = ({ handleSubmit, tweet, setTweet, newTweet, array, setArray }) => {
   const color = tweet ? 'rgb(29, 108, 255)' : ''
   const isPointer = tweet ? 'pointer' : ''
   return (
-    <div className="homepage__home">
-      <div className="homepage__header">
-        <h2 className="homepage__title">Home</h2>
-        <svg id="stars" style={{ width: '35px', height: '35px', marginTop: '1rem' }}>
-          {mySvg.stars}
-        </svg>
+    <div className="h-full">
+      <div className="bg-white flex items-center justify-between px-2 py-2 sticky top-0 relative">
+        <strong>Home</strong>
+        <div className="rounded-full hover:bg-[#f3f4f6] cursor-pointer p-2">
+          <svg className="w-6 h-6">{mySvg.stars}</svg>
+        </div>
       </div>
 
       <div id="main" className="homepage__section">
         <form onSubmit={handleSubmit}>
-          <div className="homepage__mainhead">
-            <img
-              className="homepage__tophead"
-              style={{ height: '45px' }}
-              src={'/assets/logo193.png'}
-              alt="user"
-            />
-            <TextareaAutosize
-              maxLength={280}
-              value={tweet}
-              onChange={(e) => setTweet(e.target.value)}
-              className="homepage__tophead"
-              placeholder="What's Happening?"
-              id="textarea"
-            />
-          </div>
-          <div className="homepage__mainhead2">
-            <div className="homepage__iconmainhead">
-              <svg className="homepage__icon2">{mySvg.img}</svg>
-              <svg className="homepage__icon2">{mySvg.gif}</svg>
-              <svg className="homepage__icon2">{mySvg.poll}</svg>
-              <svg className="homepage__icon2">{mySvg.emot}</svg>
-              <svg className="homepage__icon2">{mySvg.time}</svg>
-              <svg className="homepage__icon2">{mySvg.location}</svg>
+          <div className="flex p-2  border-b">
+            <div>
+              <img className="w-14 h-12" src={'/assets/logo193.png'} alt="user" />
             </div>
-            <button
-              type="submit"
-              id="tweetbtnmain"
-              style={{ backgroundColor: color, cursor: isPointer }}
-            >
-              Tweet
-            </button>
+
+            <div className="py-2 pl-3 w-full">
+              <TextareaAutosize
+                maxLength={280}
+                value={tweet}
+                onChange={(e) => setTweet(e.target.value)}
+                className="w-full border-none outline-none resize-none"
+                placeholder="What's Happening?"
+                id="textarea"
+              />
+              <div className="flex justify-between pt-5">
+                <div className="flex gap-2">
+                  <div className="hover:bg-[#DBEAFE] cursor-pointer flex items-center justify-center rounded-full p-1.5">
+                    <svg className="w-7 h-7">{mySvg.img}</svg>
+                  </div>
+                  <div className="hover:bg-[#DBEAFE] cursor-pointer flex items-center justify-center rounded-full p-1.5">
+                    <svg className="w-7 h-7">{mySvg.gif}</svg>
+                  </div>
+                  <div className="hover:bg-[#DBEAFE] cursor-pointer flex items-center justify-center rounded-full p-1.5">
+                    <svg className="w-7 h-7">{mySvg.poll}</svg>
+                  </div>
+                  <div className="hover:bg-[#DBEAFE] cursor-pointer flex items-center justify-center rounded-full p-1.5">
+                    <svg className="w-7 h-7">{mySvg.emot}</svg>
+                  </div>
+                  <div className="hover:bg-[#DBEAFE] cursor-pointer flex items-center justify-center rounded-full p-1.5">
+                    <svg className="w-7 h-7">{mySvg.time}</svg>
+                  </div>
+                  <div className="hover:bg-[#DBEAFE] cursor-pointer flex items-center justify-center rounded-full p-1.5">
+                    <svg className="w-7 h-7">{mySvg.location}</svg>
+                  </div>
+                </div>
+                <div className="rounded-full px-1 flex items-center justify-center bg-[#1D9BF0] hover:bg-[#197FC5] cursor-pointer">
+                  <button className="text-white px-5" type="submit">
+                    Tweet
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div>
@@ -65,20 +75,27 @@ const Home = ({ handleSubmit, tweet, setTweet, newTweet, array, setArray }) => {
               : ''}
           </div>
 
-          <div className="homepage__topmain">
-            <p className="homepage__topmainitem">Digitals creators &gt;</p>
-            <p className="homepage__topmainitem">K-Pop &gt;</p>
-            <p className="homepage__topmainitem">Cats &gt;</p>
-            <p className="homepage__topmainitem">Viral &gt;</p>
+          <div className="flex justify-between p-2">
+            <div className="border rounded-2xl p-2 px-10 cursor-pointer hover:bg-[#f1f5f9]">
+              <p>Digitals creators</p>
+            </div>
+            <div className="border rounded-2xl p-2 px-10 cursor-pointer hover:bg-[#f1f5f9]">
+              <p>K-Pop</p>
+            </div>
+            <div className="border rounded-2xl p-2 px-10 cursor-pointer hover:bg-[#f1f5f9]">
+              <p>Cats</p>
+            </div>
+            <div className="border rounded-2xl p-2 px-10 cursor-pointer hover:bg-[#f1f5f9]">
+              <p>Viral</p>
+            </div>
           </div>
 
-          <div className="homepage__botmain">
-            <p style={{ fontSize: 'larger', fontWeight: 'bold' }}>Welcome to Twitter!</p>
-            <p style={{ marginTop: '-1rem', fontSize: 'small' }}>
-              This is the best place to see what’s happening in your world. Find some people and
-              topics to follow now.
+          <div className="px-2">
+            <strong className='text-xl'>Welcome to Twitter!</strong>
+            <p>
+              This is the best place to see what’s happening in your world. Find some
+              people and topics to follow now.
             </p>
-            <button id="letsbtn">Let's go</button>
           </div>
         </form>
       </div>

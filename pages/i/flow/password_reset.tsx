@@ -3,7 +3,7 @@ import { IoMdClose, IoLogoTwitter } from 'react-icons/io'
 export default function PagePasswordReset() {
   return (
     <div className="w-[600px] h-[90vh] rounded-2xl bg-white relative">
-      <div className="absolute top-2 left-2 w-9 h-9 hover:bg-[#0f14191a] active:bg-[#0f14192b] flex justify-center items-center rounded-full transition-all">
+      <div className="absolute top-2 left-2 w-9 h-9 hover:bg-[#0f14191a] active:bg-[#0f14192b] flex justify-center items-center rounded-full transition-all cursor-pointer">
         <IoMdClose className="text-xl" />
       </div>
       <div className="flex py-3 px-20 flex-col items-center h-full">
