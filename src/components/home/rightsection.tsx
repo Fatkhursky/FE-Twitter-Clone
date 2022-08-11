@@ -39,14 +39,27 @@ const Rightsection = () => {
   return (
     <div className="flex flex-col h-fit">
       <div className="p-2 top-0 sticky bg-white">
-        <label htmlFor="" className="relative">
+      <div className='relative tes'>
+      <input
+            id='none'
+            className="rounded-full border active:border-sky-400 p-2 pl-[calc(46-450-8] gap-2 "
+            type="text"
+            placeholder="Search Twitter"
+          />
+          <label htmlFor="one" className='absolute left-1 top-2'>
+            <svg className="h-6 w-6 absolute ">{mySvg.search}</svg>
+          </label>
+      </div>
+      
+        
+        {/* <label htmlFor="" className="relative">
           <svg className="h-6 w-6 absolute ">{mySvg.search}</svg>
           <input
             className="rounded-full border active:border-sky-400 p-2 pl-[calc(46-450-8] gap-2 "
             type="text"
             placeholder="Search Twitter"
           />
-        </label>
+        </label> */}
       </div>
       <div className="bg-[#f3f4f6] rounded-lg">
         <div className="p-2">

@@ -31,6 +31,20 @@
     }
 }
 
+.mainMenu {
+    &:hover div {
+        @apply bg-[#f4f4f5]
+    }
+}
+
+.tes {
+    input {
+        //background-color: red;
+        padding-left: 2em;
+    }
+}
+
+
 // .search-menu {
 //     @apply relative bg-green-400
 

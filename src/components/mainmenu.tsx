@@ -6,6 +6,8 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { useAtom } from 'jotai'
 import { currentMenu } from '../stores/jotai-atom'
+import Popup from 'reactjs-popup'
+import { signOut } from 'next-auth/react'
 
 const listMenuIcon = [
   {
@@ -43,19 +45,29 @@ const listMenuIcon = [
 ]
 
 const Mainmenu = () => {
+  //const contentStyle = { position: 'fixed' }
   const [activeMenu, setActiveMenu] = useAtom(currentMenu)
   const [currentRouter, setCurrentRouter] = useState('')
   const router = useRouter()
 
-useEffect(() => {
-  setCurrentRouter(router.pathname)
-}, [router.pathname])
+  useEffect(() => {
+    setCurrentRouter(router.pathname)
+  }, [router.pathname])
 
   const handleChangeMenu = (menu: any) => {
     const currentMenu = menu
     setActiveMenu(menu)
     router.push(`/${currentMenu}`)
-   
+  }
+  function noFeature() {
+    alert('Fitur belum tersedia')
+  }
+  const logOut = async () => {
+    //setStepLogin(0)
+    const data = await signOut({ redirect: false, callbackUrl: `/api/auth/signin` })
+    localStorage.removeItem('Bearer')
+    //console.log(5, data)
+    router.push(data.url)
   }
 
   return (
@@ -67,16 +79,23 @@ useEffect(() => {
 
         {listMenuIcon.map((menu, i) => (
           <div key={i} className="pt-1.5 items-center flex hover:cursor-pointer">
+            <div className=' w-full mainMenu'>
             <div
               onClick={() => handleChangeMenu(menu.label)}
-              className="text-1xs flex items-center w-fit p-2 hover:bg-[#f4f4f5] cursor-pointer rounded-full  transtiton-all"
+              className="text-1xs flex items-center w-fit p-2  cursor-pointer rounded-full  transtiton-all"
             >
               <svg className="w-7 h-7">
                 {menu.label == currentRouter.substring(1) ? menu.icon[1] : menu.icon[0]}
               </svg>
-              <h1 className={clsx('pl-2', menu.label == currentRouter.substring(1) ? 'font-bold' : null)}>
+              <h1
+                className={clsx(
+                  'pl-2',
+                  menu.label == currentRouter.substring(1) ? 'font-bold' : null
+                )}
+              >
                 {menu.label}
               </h1>
+            </div>
             </div>
           </div>
         ))}
@@ -90,7 +109,7 @@ useEffect(() => {
 
       <div className="grow"></div>
 
-      <div className="flex hover:bg-[#e5e7eb] cursor-pointer p-2 rounded-full justify-center items-center w-56">
+      {/* <div className="flex hover:bg-[#e5e7eb] cursor-pointer p-2 rounded-full justify-center items-center w-56">
         <img className="h-12 w-12" src={'/assets/logo193.png'} alt="" />
         <div className="grow pl-2">
           <p>name</p>
@@ -99,9 +118,85 @@ useEffect(() => {
         <div>
           <svg className="h-7 w-7">{mySvg.more}</svg>
         </div>
-      </div>
+      </div> */}
+      <Popup
+        trigger={
+          <div className="flex hover:bg-[#e5e7eb] cursor-pointer p-2 rounded-full justify-center items-center w-56">
+            <img className="h-12 w-12" src={'/assets/logo193.png'} alt="" />
+            <div className="grow pl-2">
+              <p>name</p>
+              <p>@name</p>
+            </div>
+            <div>
+              <svg className="h-7 w-7">{mySvg.more}</svg>
+            </div>
+          </div>
+        }
+        {...{  }}
+        position="top left"
+      >
+        <div className='flex flex-col'>
+          <div className='flex items-center p-2'>
+            <img
+              id="imgjoe"
+              style={{ height: '50px' }}
+              src={'/assets/logo193.png'}
+              alt="joebiden"
+            />
+            <p id="namejoe" style={{ fontSize: '15px' }}>
+              &nbsp;@name
+            </p>
+          </div>
+        <div className="cursor-pointer hover:bg-[#f1f5f9] p-2" onClick={noFeature}>
+            <p>Add an existing account</p>
+          </div>
+          <div className="cursor-pointer hover:bg-[#f1f5f9] p-2 rounded-b-xl" onClick={logOut}>
+            <p>Log Out &nbsp;@name</p>
+          </div>
+        </div>
+      </Popup>
     </div>
   )
 }
 
 export default Mainmenu
+
+{
+  /* <Popup
+                style={{ backgroundColor: 'red' }}
+                trigger={
+                  <div className="flex hover:bg-[#e5e7eb] cursor-pointer p-2 rounded-full justify-center items-center w-56">
+                  <img className="h-12 w-12" src={'/assets/logo193.png'} alt="" />
+                  <div className="grow pl-2">
+                    <p>name</p>
+                    <p>@name</p>
+                  </div>
+                  <div>
+                    <svg className="h-7 w-7">{mySvg.more}</svg>
+                  </div>
+                </div>
+                }
+                {...{ contentStyle }}
+                position="top left"
+              >
+                <div>
+                  <div style={{ display: 'flex' }}>
+                    <img
+                      id="imgjoe"
+                      style={{ height: '50px' }}
+                      src={'/assets/logo193.png'}
+                      alt="joebiden"
+                    />
+                    <p id="namejoe" style={{ fontSize: '15px' }}>
+                      &nbsp;{userName}
+                    </p>
+                  </div>
+                  <div className="homepage__popupcontent" onClick={noFeature}>
+                    <p>Add an existing account</p>
+                  </div>
+                  <div className="homepage__popupcontent" onClick={logOut}>
+                    <p>Log Out &nbsp;{userName}</p>
+                  </div>
+                </div>
+              </Popup> */
+}

@@ -329,63 +329,63 @@ export async function getStaticProps() {
 //                 </div>
 //               </div>
 //               <div style={{ flexGrow: '1' }}></div>
-//               <Popup
-//                 style={{ backgroundColor: 'red' }}
-//                 trigger={
-//                   <div>
-//                     <div className="homepage__accuser">
-//                       <img
-//                         id="imgjoe"
-//                         style={{
-//                           height: '45px',
-//                           padding: '0 2% 0 2%',
-//                         }}
-//                         src={'/assets/logo193.png'}
-//                         alt="joebiden"
-//                       />
-//                       <div
-//                         id="leftusername"
-//                         style={{
-//                           lineHeight: '3px',
-//                           padding: '0 0 0 5px',
-//                           flexGrow: '1',
-//                         }}
-//                       >
-//                         {/* <p>tes1</p> */}
-//                         <p id="namejoe">{userName}</p>
-//                       </div>
-//                       <svg
-//                         id="morejoe"
-//                         style={{ height: '25px', weight: '25px', width: '25px' }}
-//                       >
-//                         {mySvg.more}
-//                       </svg>
-//                     </div>
-//                   </div>
-//                 }
-//                 {...{ contentStyle }}
-//                 position="top left"
-//               >
-//                 <div>
-//                   <div style={{ display: 'flex' }}>
-//                     <img
-//                       id="imgjoe"
-//                       style={{ height: '50px' }}
-//                       src={'/assets/logo193.png'}
-//                       alt="joebiden"
-//                     />
-//                     <p id="namejoe" style={{ fontSize: '15px' }}>
-//                       &nbsp;{userName}
-//                     </p>
-//                   </div>
-//                   <div className="homepage__popupcontent" onClick={noFeature}>
-//                     <p>Add an existing account</p>
-//                   </div>
-//                   <div className="homepage__popupcontent" onClick={logOut}>
-//                     <p>Log Out &nbsp;{userName}</p>
-//                   </div>
-//                 </div>
-//               </Popup>
+              // <Popup
+              //   style={{ backgroundColor: 'red' }}
+              //   trigger={
+              //     <div>
+              //       <div className="homepage__accuser">
+              //         <img
+              //           id="imgjoe"
+              //           style={{
+              //             height: '45px',
+              //             padding: '0 2% 0 2%',
+              //           }}
+              //           src={'/assets/logo193.png'}
+              //           alt="joebiden"
+              //         />
+              //         <div
+              //           id="leftusername"
+              //           style={{
+              //             lineHeight: '3px',
+              //             padding: '0 0 0 5px',
+              //             flexGrow: '1',
+              //           }}
+              //         >
+              //           {/* <p>tes1</p> */}
+              //           <p id="namejoe">{userName}</p>
+              //         </div>
+              //         <svg
+              //           id="morejoe"
+              //           style={{ height: '25px', weight: '25px', width: '25px' }}
+              //         >
+              //           {mySvg.more}
+              //         </svg>
+              //       </div>
+              //     </div>
+              //   }
+              //   {...{ contentStyle }}
+              //   position="top left"
+              // >
+              //   <div>
+              //     <div style={{ display: 'flex' }}>
+              //       <img
+              //         id="imgjoe"
+              //         style={{ height: '50px' }}
+              //         src={'/assets/logo193.png'}
+              //         alt="joebiden"
+              //       />
+              //       <p id="namejoe" style={{ fontSize: '15px' }}>
+              //         &nbsp;{userName}
+              //       </p>
+              //     </div>
+              //     <div className="homepage__popupcontent" onClick={noFeature}>
+              //       <p>Add an existing account</p>
+              //     </div>
+              //     <div className="homepage__popupcontent" onClick={logOut}>
+              //       <p>Log Out &nbsp;{userName}</p>
+              //     </div>
+              //   </div>
+              // </Popup>
 //             </div>
 //           </div>
 
