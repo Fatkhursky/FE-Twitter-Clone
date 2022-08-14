@@ -14,11 +14,12 @@ import {
   fieldEmail,
   fieldPhoneCode,
   invalidField,
-  stepRegisterAtom
+  stepRegisterAtom,
 } from '@/src/stores/jotai-atom'
 import { useEffect } from 'react'
 
 const Login = ({ onChangePhoneEmailOrUsername, onSubmitUserName, pointer, color }) => {
+  const router = useRouter()
   const [stepRegister, setStepRegister] = useAtom(stepRegisterAtom)
 
   const { data: sesssion } = useSession()
@@ -32,6 +33,10 @@ const Login = ({ onChangePhoneEmailOrUsername, onSubmitUserName, pointer, color 
   const [username] = useAtom(fieldUserName)
   const [email] = useAtom(fieldEmail)
   const [invalid, setInvalid] = useAtom(invalidField)
+
+  const handleButtonForgotPassword = () => {
+    router.push('/i/flow/password_reset')
+  }
 
   return (
     <div className="background bg-zinc-400 h-screen flex flex-col items-center justify-center">
@@ -79,13 +84,18 @@ const Login = ({ onChangePhoneEmailOrUsername, onSubmitUserName, pointer, color 
 
           <button
             type="submit"
-            className={clsx("py-2 rounded-full   text-white hover:bg-[#27272a]", username || phone ? 'cursor-pointer bg-[#18181b]' : 'pointer-events-none bg-[#71717a]')}
+            className={clsx(
+              'py-2 rounded-full   text-white hover:bg-[#27272a]',
+              username || phone
+                ? 'cursor-pointer bg-[#18181b]'
+                : 'pointer-events-none bg-[#71717a]'
+            )}
           >
             Next
           </button>
 
           <button
-            onClick={noFeature}
+            onClick={handleButtonForgotPassword}
             className="border rounded-full py-2 hover:bg-[#d1d5db]"
           >
             Forgot Password?

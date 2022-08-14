@@ -11,7 +11,7 @@ import {
   fieldUserName,
   fieldEmail,
   fieldPhoneCode,
-  invalidField
+  invalidField,
 } from '@/src/stores/jotai-atom'
 import { stepLoginAtom, stepRegisterAtom } from '@/src/stores/jotai-atom'
 
@@ -28,7 +28,6 @@ const LoginPage = () => {
   //   const item = localStorage.getItem('Bearer')
   //   console.log(111,item)
   // }, [])
-
 
   const isUserName = (e) => {
     e.preventDefault()
@@ -61,23 +60,24 @@ const LoginPage = () => {
       field = field.split('')
       if (field[0] === '0') {
         field.splice(0, 1, '+', '6', '2')
-        return field = field.join('')
+        return (field = field.join(''))
       }
     }
     function invalidField(field) {
       field = field.split('')
       if (field[0] !== '0' && field[0] !== '@') {
         //field.splice(0, 1, '+', '6', '2')
-        return field = field.join('')
-      } 
+        return (field = field.join(''))
+      }
     }
 
     setUserName(isUserName(field))
     setPhone(isNumber(field))
     setPhonecode(addPhoneCode(field))
     setInvalid(invalidField(field))
-    
   }
+
+  const [v, setV] = useState(false)
 
   return (
     <>
@@ -85,7 +85,7 @@ const LoginPage = () => {
         <title>Login</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <div className="wrap" >
+      <div className="wrap">
         <div className="loginpage">
           {stepLogin ? (
             <LoginTwo userName={userName} toSignUp={toSignUp} phone={phone} />
