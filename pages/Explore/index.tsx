@@ -1,7 +1,7 @@
 // @ts-nocheck
 import { useQuery, gql, useMutation } from '@apollo/client'
 
-const ADD_TODO = gql`
+const LOGIN_MUTATION = gql`
   mutation Mutation($data: GetAccessTokenInput!) {
     getAccessToken(data: $data) {
       username
@@ -12,8 +12,8 @@ const ADD_TODO = gql`
 `
 
 export default function Countries() {
-  const [addTodo, { data, loading, error }] = useMutation(ADD_TODO)
-  console.log(data, loading, error)
+  const [login, { data, loading, error }] = useMutation(LOGIN_MUTATION)
+  console.log(data?.getAccessToken)
   if (loading) {
     return <h2>Loading...</h2>
   }
@@ -28,7 +28,7 @@ export default function Countries() {
       <button
         onClick={() => {
           // addTodo()
-          addTodo({
+          login({
             variables: {
               data: {
                 username: 'pansy_murphy',
@@ -43,3 +43,5 @@ export default function Countries() {
     </div>
   )
 }
+
+//0832 896 214

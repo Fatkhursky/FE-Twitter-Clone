@@ -11,6 +11,8 @@ import Modal from 'react-modal'
 import { authentication } from '.././firebase-config/firebase'
 import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth'
 import clsx from 'clsx'
+import { useQuery, gql, useMutation } from '@apollo/client'
+import REGISTER_MUTATION from '@/src/requests/register-gql'
 
 const LoginPage = () => {
   const [fullname, setfullName] = useState('')
@@ -31,9 +33,6 @@ const LoginPage = () => {
   const [stepNum, setStepNum] = useAtom(stepRegisterAtom)
   const [passFocus, setPassFocus] = useState(false)
   let router = useRouter()
-
-  console.log(router.pathname)
-  console.log(33, stepNum)
 
   //generate date to birth date input form
   function toMonthName(month) {
@@ -200,12 +199,26 @@ const LoginPage = () => {
     }
   }
 
+  const [registerGql, { data, loading, error }] = useMutation(REGISTER_MUTATION)
+
   const notify = async () => {
-    const newReg = { fullname, dateOfBirth, username, password, phone }
+    //const newReg = { fullname, dateOfBirth, username, password, phone }
+
     try {
-      const [error, res] = await register(newReg)
+      //const [error, res] = await register(newReg)
+      const data = await registerGql({
+        variables: {
+          data: {
+            name: fullname,
+            date_of_birth: dateOfBirth,
+            username: username,
+            phone: phone,
+            password: password,
+          },
+        },
+      })
       if (error) throw error
-      return res.data.message
+      return ('Register success')
     } catch (error) {
       if (error.response) {
         throw new Error(error.response.data.message)
@@ -216,7 +229,6 @@ const LoginPage = () => {
       }
     }
   }
-
   const toSign = () => {
     router.push('/')
     setStepNum(0)
@@ -792,7 +804,6 @@ const LoginPage = () => {
                   password ? 'cursor-pointer' : 'pointer-events-none'
                 )}
                 type="submit"
-             
               >
                 Submit
               </button>

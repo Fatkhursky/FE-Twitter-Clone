@@ -1,4 +1,4 @@
-// @ts-nocheck
+//@ts-nocheck
 //import { config } from 'dotenv';
 import { mySvg } from '~/public/assets/svg'
 import { useEffect, useState } from 'react'
@@ -11,7 +11,6 @@ import { storeOneTweet, fetchAllTweets } from '@/src/requests'
 import Head from 'next/head'
 import Mainmenu from '@/src/components/mainmenu'
 import Rightsection from '@/src/components/home/rightsection'
-
 import {
   fieldPhone,
   fieldUserName,
@@ -20,8 +19,10 @@ import {
 } from '@/src/stores/jotai-atom'
 import { useAtom } from 'jotai'
 import { stepLoginAtom, stepRegisterAtom, DateOfRegister } from '@/src/stores/jotai-atom'
-import { ApolloClient, gql, InMemoryCache } from '@apollo/client'
+import { ApolloClient, gql, InMemoryCache, useQuery } from '@apollo/client'
 import { signOut } from 'next-auth/react'
+import { httpLink } from '@/src/utilities/apollo'
+import authLink from '@/src/requests/get-user-gql'
 
 const HomePage = (results) => {
   let router = useRouter()
@@ -33,35 +34,103 @@ const HomePage = (results) => {
   const [onComp, setOnComp] = useState('')
 
   //get data Graphql
-  const initialState = results
-  const [data, setData] = useState(initialState.data)
+  // const initialState = results
+  // const [data, setData] = useState(initialState.data)
   const [userName, setUserName] = useAtom(fieldUserName)
   const [dateRegister, setDateRegister] = useAtom(DateOfRegister)
+
+  const tes = async () => {
+    const client = new ApolloClient({
+      link: authLink.concat(httpLink),
+      cache: new InMemoryCache(),
+    })
+
+    const query = gql`
+      query User($where: UserWhereUniqueInput!) {
+        user(where: $where) {
+          username
+          created_at
+          id
+        }
+      }
+    `
+
+    const data = await client.query({
+      query: query,
+      variables: {
+        where: {
+          id: myDecodeToken.data.id,
+        },
+      },
+    })
+    console.log(data, 999)
+    return data
+  }
 
   useEffect(() => {
     const item = localStorage.getItem('Bearer')
     setToken(item)
     const myDecodeToken = decodeToken(item)
     setMyDecodetoken(myDecodeToken)
-    const user = data.filter((e) => e?.id === myDecodeToken?.id || undefined)
-    //console.log('user:', user)
-    setUserName(user?.[0]?.username)
-    const convertDate = Number(user?.[0]?.createdAt)
-    //console.log(39283, tes)
-    const date = new Date(convertDate).toLocaleDateString('de-DE', {
-      //weekday: 'long',
-      // day: '2-digit',
-      month: 'long',
-      year: 'numeric',
+
+   async function fetchData () {
+    const client = new ApolloClient({
+      link: authLink.concat(httpLink),
+      cache: new InMemoryCache(),
     })
-    setDateRegister(date)
+
+    const query = gql`
+      query User($where: UserWhereUniqueInput!) {
+        user(where: $where) {
+          username
+          created_at
+          id
+        }
+      }
+    `
+
+    const data = await client.query({
+      query: query,
+      variables: {
+        where: {
+          id: myDecodeToken.data.id,
+        },
+      },
+    })
+
+    console.log(77, data)
+   }
+
+    //const user = data.filter((e) => e?.id === myDecodeToken?.id || undefined)
+    //setUserName(user?.[0]?.username)
+    //const convertDate = Number(user?.[0]?.createdAt)
+    // const date = new Date(convertDate).toLocaleDateString('de-DE', {
+    //   //weekday: 'long',
+    //   // day: '2-digit',
+    //   month: 'long',
+    //   year: 'numeric',
+    // })
+    // setDateRegister(date)
   }, [])
 
-  useEffect(() => {
-    if (onComp === 'profile') {
-      getTweets()
-    }
-  }, [onComp])
+  // useEffect(() => {
+  //   if (onComp === 'profile') {
+  //     getTweets()
+  //   }
+  // }, [onComp])
+
+  //Fetch user Graphql
+  // const authLink = setContext((_, { headers }) => {
+  //   // get the authentication token from local storage if it exists
+  //   const token = localStorage.getItem('token');
+  //   // return the headers to the context so httpLink can read them
+  //   return {
+  //     headers: {
+  //       ...headers,
+  //       authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjo3LCJuYW1lIjoiSmVhbmllIFdhZWxjaGkiLCJlbWFpbCI6ImplYW5pZS53YWVsY2hpQGV4YW1wbGUuY29tIn0sImlhdCI6MTY2MDM4NDE0MiwiZXhwIjoxNjYwNDcwNTQyfQ.3idFSFq330D48HvcFZtX3C5PCBVXBuDfwOwDPVEJu9E`
+  //     }
+  //   }
+  // });
 
   const logOut = async () => {
     setStepLogin(0)
@@ -160,6 +229,9 @@ const HomePage = (results) => {
           <div className="grow"></div>
           <Mainmenu />
         </div>
+        <div>
+          <button onClick={tes}>CLICK</button>
+        </div>
 
         <div className="flex flex-row  w-screen gap-3">
           <div className="w-3/5 border">
@@ -183,26 +255,33 @@ const HomePage = (results) => {
 export default HomePage
 
 // fetching Graphql
-export async function getStaticProps() {
-  const client = new ApolloClient({
-    uri: 'https://l210526-twitter-app-be.herokuapp.com/graphql',
-    cache: new InMemoryCache(),
-  })
-  const { data } = await client.query({
-    query: gql`
-      query {
-        users {
-          id
-          username
-          createdAt
-        }
-      }
-    `,
-  })
-  return {
-    props: {
-      data: data.users,
-    },
-  }
-}
+// export async function getStaticProps() {
+//   const client = new ApolloClient({
+//     uri: 'https://l210526-twitter-app-be.herokuapp.com/graphql',
+//     cache: new InMemoryCache(),
+//   })
+//   const { data } = await client.query({
+//     query: gql`
+//     query User($where: UserWhereUniqueInput!) {
+//       user(where: $where) {
+//         username
+//         created_at
+//       }
+//     }
+//     `,
 
+//   })
+//   client.query({
+//     query: query,
+//     variables: {
+//       username: 'shank'
+//     }
+//   })
+//   return {
+//     props: {
+//       data: data.users,
+//     },
+//   }
+// }
+
+//@danil2c2

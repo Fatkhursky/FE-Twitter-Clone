@@ -1,4 +1,4 @@
-// @ts-nocheck
+//@ts-nocheck
 import { useRouter } from 'next/router'
 import { signIn } from 'next-auth/react'
 import Header from './header'
@@ -13,6 +13,8 @@ import {
   fieldPhoneCode,
 } from '@/src/stores/jotai-atom'
 import clsx from 'clsx'
+import { useQuery, gql, useMutation } from '@apollo/client'
+import LOGIN_MUTATION from '@/src/requests/login-gql'
 
 //userName, toSignUp, phone
 const LoginTwo = ({ toSignUp }) => {
@@ -31,14 +33,15 @@ const LoginTwo = ({ toSignUp }) => {
     setPassValue(e.target.value)
   }
 
+  const [loginGql, { data, loading, error }] = useMutation(LOGIN_MUTATION)
   const notify = async () => {
-    const newLogin = { username: userName, phone: phoneCode, password: passValue }
-    //console.log(99, newLogin)
     try {
-      const [error, res] = await login(newLogin)
-      if (error) throw error
-      localStorage.setItem('Bearer', res.data.data.accessToken)
-      //console.log(999, res.data.data.accessToken)
+      const  data   = await loginGql({variables: {data: {phone: phoneCode, password: passValue}}})
+      //const [error, res] = await login(newLogin)
+      //if (error) throw error
+      const token = data.data.getAccessToken.accessToken
+      localStorage.setItem('Bearer', token)
+      //auth signIN
       const setSession = await signIn('credentials', {
         username: userName || phoneCode,
         password: passValue,
@@ -46,7 +49,7 @@ const LoginTwo = ({ toSignUp }) => {
       })
       //console.log(77, setSession)
 
-      return res.data.message
+      return ('Login sucess')
     } catch (error) {
       //console.log(666, error)
       if (error.response) {
@@ -72,7 +75,6 @@ const LoginTwo = ({ toSignUp }) => {
         loading: 'Loading...',
         success: (data) => {
           const token = localStorage.getItem('Bearer')
-          //console.log(999, token)
           // const wait = () => {
           //   if (token) {
           //     return toHome()
@@ -89,7 +91,7 @@ const LoginTwo = ({ toSignUp }) => {
           minWidth: '250px',
         },
         success: {
-          duration: 1000,
+          duration: 500,
         },
       }
     )
@@ -156,15 +158,10 @@ const LoginTwo = ({ toSignUp }) => {
       </div>
       <div className="footer bg-white flex items-center justify-center rounded-b-xl w-600">
         <div className="wrapper w-3/4 flex flex-col">
-          <div
-            className={clsx(
-              'rounded-full py-3 flex justify-center',
-              passValue ? 'bg-slate-800 cursor-pointer' : 'bg-slate-400'
-            )}
-          >
+          <div>
             <button
               type="submit"
-              className="flex justify-center items-center text-white font-bold text-xl"
+              className={clsx("flex justify-center rounded-full py-3 w-full items-center text-white font-bold text-xl", passValue ? 'bg-slate-800 cursor-pointer': 'bg-slate-400 pointer-events-none')}
             >
               Log in
             </button>
@@ -184,3 +181,32 @@ const LoginTwo = ({ toSignUp }) => {
 }
 
 export default LoginTwo
+
+//0832 896 214
+// const notify = async () => {
+//   const newLogin = { username: userName, phone: phoneCode, password: passValue }
+//   try {
+//     const [error, res] = await login(newLogin)
+//     if (error) throw error
+
+//     localStorage.setItem('Bearer', res.data.data.accessToken)
+//     //auth signIN
+//     const setSession = await signIn('credentials', {
+//       username: userName || phoneCode,
+//       password: passValue,
+//       redirect: false,
+//     })
+//     //console.log(77, setSession)
+
+//     return res.data.message
+//   } catch (error) {
+//     //console.log(666, error)
+//     if (error.response) {
+//       throw new Error(error.response.data.data.message)
+//     } else if (error.request) {
+//       throw new Error(error.request)
+//     } else {
+//       throw new Error(error.message)
+//     }
+//   }
+// }

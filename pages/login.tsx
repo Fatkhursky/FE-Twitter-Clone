@@ -1,5 +1,4 @@
-// @ts-nocheck
-
+//@ts-nocheck
 import Login from '@/src/components/login-page/login'
 import LoginTwo from '@/src/components/login-page/login-two'
 import { useRouter } from 'next/router'
@@ -36,7 +35,7 @@ const LoginPage = () => {
 
   let router = useRouter()
 
-  const toSignUp = () => {
+  const toSignUp = ()=> {
     setStepLogin(0)
     router.push('/register')
   }
