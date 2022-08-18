@@ -38,6 +38,8 @@ const LoginTwo = ({ toSignUp }) => {
     try {
       const  data   = await loginGql({variables: {data: {phone: phoneCode, password: passValue}}})
       //const [error, res] = await login(newLogin)
+      con
+      console.log(77, data)
       //if (error) throw error
       const token = data.data.getAccessToken.accessToken
       localStorage.setItem('Bearer', token)

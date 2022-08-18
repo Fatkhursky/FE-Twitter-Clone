@@ -63,7 +63,7 @@ const HomePage = (results) => {
         },
       },
     })
-    console.log(data, 999)
+    console.log(data.data.user.username, 999)
     return data
   }
 
