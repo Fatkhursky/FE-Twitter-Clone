@@ -5,7 +5,7 @@ import AllTweet from '@/src/components/home/all-tweet'
 import { decodeToken } from 'react-jwt'
 import { useAtom } from 'jotai'
 
-import { fieldUserName, DateOfRegister } from '@/src/stores/jotai-atom'
+import { fieldUserName, DateOfRegister, globalCreateAccDate, globalName } from '@/src/stores/jotai-atom'
 
 const Profile = ({ setOnComp, tweets, setTweets, setArray, array }) => {
   //const [date] = useAtom(textAtom)
@@ -16,6 +16,8 @@ const Profile = ({ setOnComp, tweets, setTweets, setArray, array }) => {
   const isLike = onSection === 'like' ? 'bold' : null
   // const token = 'localStorage.getItem("Bearer")'
   // const myDecodedToken = decodeToken(token)
+  const [name] = useAtom(globalName)
+  const [dateCreateAcc] = useAtom(globalCreateAccDate)
   const [userName, setUserName] = useAtom(fieldUserName)
   const [dateRegister, setDateRegister] = useAtom(DateOfRegister)
   //console.log( dateRegister)
@@ -42,7 +44,7 @@ const Profile = ({ setOnComp, tweets, setTweets, setArray, array }) => {
           {mySvg.arrow}
         </svg>
         <div>
-          <strong>Username</strong>
+          <strong>{userName}</strong>
           <p>{tweets.length} Tweets</p>
         </div>
       </div>
@@ -64,8 +66,8 @@ const Profile = ({ setOnComp, tweets, setTweets, setArray, array }) => {
       <div>
         <div className='px-2.5'>
           <div>
-            <strong>name</strong>
-            <p>username</p>
+            <strong>{name}</strong>
+            <p>{userName}</p>
           </div>
           <div className="flex items-center">
             <svg className="w-6 h-6">{mySvg.date}</svg>

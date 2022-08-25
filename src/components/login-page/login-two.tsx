@@ -11,10 +11,12 @@ import {
   fieldPhone,
   fieldEmail,
   fieldPhoneCode,
+  globalCreateAccDate
 } from '@/src/stores/jotai-atom'
 import clsx from 'clsx'
 import { useQuery, gql, useMutation } from '@apollo/client'
-import LOGIN_MUTATION from '@/src/requests/login-gql'
+import { LOGIN_MUTATION } from '@/src/requests/graphql'
+import { FaProjectDiagram } from 'react-icons/fa'
 
 //userName, toSignUp, phone
 const LoginTwo = ({ toSignUp }) => {
@@ -22,6 +24,7 @@ const LoginTwo = ({ toSignUp }) => {
   const [passValue, setPassValue] = useState('')
   const [phone, setPhone] = useAtom(fieldPhone)
   const [userName, setUserName] = useAtom(fieldUserName)
+  const [createAccDate, setCreateAccDate] = useAtom(globalCreateAccDate)
   const [phoneCode, setPhonecode] = useAtom(fieldPhoneCode)
 
   const isPassNull = (e) => {
@@ -34,16 +37,22 @@ const LoginTwo = ({ toSignUp }) => {
   }
 
   const [loginGql, { data, loading, error }] = useMutation(LOGIN_MUTATION)
+
   const notify = async () => {
+  
+    const varGql = phoneCode ? {data: {phone: phoneCode , password: passValue}} : {data: {username:userName , password: passValue}}
     try {
-      const  data   = await loginGql({variables: {data: {phone: phoneCode, password: passValue}}})
+     if (error) throw error
+      const  data   = await loginGql({variables: varGql})
       //const [error, res] = await login(newLogin)
-      con
-      console.log(77, data)
-      //if (error) throw error
+      console.log( 564, data.data.getAccessToken.username)
+      //setCreateAccDate(data.data.getAccessToken.created_at)
+      //setName(data.data.getAccessToken.name)
+      //setUserName(data.data.getAccessToken.username)
+      console.log(123, userName)
       const token = data.data.getAccessToken.accessToken
       localStorage.setItem('Bearer', token)
-      //auth signIN
+      //auth signIn
       const setSession = await signIn('credentials', {
         username: userName || phoneCode,
         password: passValue,

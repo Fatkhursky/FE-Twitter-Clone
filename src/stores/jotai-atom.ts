@@ -3,6 +3,8 @@ import { atom } from 'jotai'
 export const stepRegisterAtom = atom(1)
 export const stepLoginAtom = atom(0)
 
+export const globalName = atom('')
+export const globalCreateAccDate = atom(0)
 export const fieldUserName= atom('')
 export const fieldPhone= atom('')
 export const fieldPhoneCode= atom('')

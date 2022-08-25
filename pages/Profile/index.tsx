@@ -5,11 +5,14 @@ import Mainmenu from '@/src/components/mainmenu'
 import Profile from '@/src/components/home/profile'
 import { useState } from 'react'
 import Rightsection from '@/src/components/home/rightsection'
+import { fieldUserName, globalName, globalCreateAccDate } from '@/src/stores/jotai-atom'
+import { useAtom } from 'jotai'
 
 const Index = () => {
   const [onComp, setOnComp] = useState('')
   const [tweets, setTweets] = useState('')
   const [array, setArray] = useState('')
+
   return (
     <>
       <Head>
@@ -23,7 +26,7 @@ const Index = () => {
         </div>
 
         <div className=" flex flex-row  w-screen gap-3">
-          <div className="w-3/5 border" >
+          <div className="w-3/5 border">
             <Profile
               setOnComp={setOnComp}
               tweets={tweets}

@@ -16,13 +16,16 @@ import {
   fieldUserName,
   fieldEmail,
   fieldPhoneCode,
+  globalName,
 } from '@/src/stores/jotai-atom'
 import { useAtom } from 'jotai'
 import { stepLoginAtom, stepRegisterAtom, DateOfRegister } from '@/src/stores/jotai-atom'
-import { ApolloClient, gql, InMemoryCache, useQuery } from '@apollo/client'
+import { ApolloClient, gql, InMemoryCache, useMutation, useQuery } from '@apollo/client'
 import { signOut } from 'next-auth/react'
-import { httpLink } from '@/src/utilities/apollo'
-import authLink from '@/src/requests/get-user-gql'
+//import { httpLink } from '@/src/utilities/apollo'
+// import authLink from '@/src/requests/get-user-gql'
+import { authLink, client } from '@/src/utilities/apollo'
+import { createOneTweet } from '@/src/requests/graphql'
 
 const HomePage = (results) => {
   let router = useRouter()
@@ -37,80 +40,38 @@ const HomePage = (results) => {
   // const initialState = results
   // const [data, setData] = useState(initialState.data)
   const [userName, setUserName] = useAtom(fieldUserName)
+  const [name, setName] = useAtom(globalName)
   const [dateRegister, setDateRegister] = useAtom(DateOfRegister)
-
-  const tes = async () => {
-    const client = new ApolloClient({
-      link: authLink.concat(httpLink),
-      cache: new InMemoryCache(),
-    })
-
-    const query = gql`
-      query User($where: UserWhereUniqueInput!) {
-        user(where: $where) {
-          username
-          created_at
-          id
-        }
-      }
-    `
-
-    const data = await client.query({
-      query: query,
-      variables: {
-        where: {
-          id: myDecodeToken.data.id,
-        },
-      },
-    })
-    console.log(data.data.user.username, 999)
-    return data
-  }
 
   useEffect(() => {
     const item = localStorage.getItem('Bearer')
     setToken(item)
     const myDecodeToken = decodeToken(item)
     setMyDecodetoken(myDecodeToken)
-
-   async function fetchData () {
-    const client = new ApolloClient({
-      link: authLink.concat(httpLink),
-      cache: new InMemoryCache(),
-    })
-
-    const query = gql`
-      query User($where: UserWhereUniqueInput!) {
-        user(where: $where) {
-          username
-          created_at
-          id
+    async function fetchData() {
+      const query = gql`
+        query User($where: UserWhereUniqueInput!) {
+          user(where: $where) {
+            username
+            created_at
+            id
+            name
+          }
         }
-      }
-    `
-
-    const data = await client.query({
-      query: query,
-      variables: {
-        where: {
-          id: myDecodeToken.data.id,
+      `
+      const data = await client.query({
+        query: query,
+        variables: {
+          where: {
+            id: myDecodeToken?.data?.id,
+          },
         },
-      },
-    })
-
-    console.log(77, data)
-   }
-
-    //const user = data.filter((e) => e?.id === myDecodeToken?.id || undefined)
-    //setUserName(user?.[0]?.username)
-    //const convertDate = Number(user?.[0]?.createdAt)
-    // const date = new Date(convertDate).toLocaleDateString('de-DE', {
-    //   //weekday: 'long',
-    //   // day: '2-digit',
-    //   month: 'long',
-    //   year: 'numeric',
-    // })
-    // setDateRegister(date)
+      })
+      setUserName(data.data.user.username)
+      setName(data.data.user.name)
+      setDateRegister(data.data.user.created_at.split('-').splice(0, 2).join(' '))
+    }
+    fetchData()
   }, [])
 
   // useEffect(() => {
@@ -118,19 +79,6 @@ const HomePage = (results) => {
   //     getTweets()
   //   }
   // }, [onComp])
-
-  //Fetch user Graphql
-  // const authLink = setContext((_, { headers }) => {
-  //   // get the authentication token from local storage if it exists
-  //   const token = localStorage.getItem('token');
-  //   // return the headers to the context so httpLink can read them
-  //   return {
-  //     headers: {
-  //       ...headers,
-  //       authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjo3LCJuYW1lIjoiSmVhbmllIFdhZWxjaGkiLCJlbWFpbCI6ImplYW5pZS53YWVsY2hpQGV4YW1wbGUuY29tIn0sImlhdCI6MTY2MDM4NDE0MiwiZXhwIjoxNjYwNDcwNTQyfQ.3idFSFq330D48HvcFZtX3C5PCBVXBuDfwOwDPVEJu9E`
-  //     }
-  //   }
-  // });
 
   const logOut = async () => {
     setStepLogin(0)
@@ -148,30 +96,41 @@ const HomePage = (results) => {
     'Content-Type': 'application/json',
     Authorization: token,
   }
-  //console.log("tokenx", token)
 
   const body = { content: tweet, image: 'default' }
   let [array, setArray] = useState([])
 
-  const handleSubmit = async (e) => {
-    console.log('token', token)
-    e.preventDefault()
-    try {
-      const [, res] = await storeOneTweet(body, { Authorization: `Bearer ${token}` })
-      //console.log('res:', res)
-      const obj = { id: res.data.data.id, text: res.data.data.text }
 
-      setTweet('')
-      setNewTweet(res.data.data.text)
-      setArray((array) => [obj, ...array])
+  const [addTweet, {data, loading, error}] = useMutation(createOneTweet)
+
+  const handleSubmit = async (e) => {
+    
+    e.preventDefault()
+    console.log(3333, myDecodeToken)
+    console.log(tweet, 'tweet')
+    try {
+      const data = await addTweet({
+        variables: {
+          data: {
+            content: tweet,
+            user: {
+              connect: {
+                id:myDecodeToken?.data?.id
+              }
+            }
+          }
+        }
+       })
+      console.log(data, 9999)
+     const obj = { id: "31", text: data.data.createOneTweet.content}
+     console.log(obj, 'objek') 
+     //setTweet('')
+      //setNewTweet(data.createOneTweet.content)
+     // setArray((prev) => [obj, ...prev])
+      if (error) throw error
     } catch (error) {
-      if (error.response) {
-        throw new Error(error.response.data.message)
-      } else if (error.request) {
-        throw new Error(error.request)
-      } else {
-        throw new Error(error.message)
-      }
+      console.log('error ges')
+      console.log(error)
     }
   }
 
@@ -223,16 +182,11 @@ const HomePage = (results) => {
         <title>Home</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-
       <div className="w-screen flex flex-row gap-2 bg-white">
         <div className="flex top-0 sticky h-screen w-2/4 ">
           <div className="grow"></div>
           <Mainmenu />
         </div>
-        <div>
-          <button onClick={tes}>CLICK</button>
-        </div>
-
         <div className="flex flex-row  w-screen gap-3">
           <div className="w-3/5 border">
             <Home

@@ -12,7 +12,7 @@ import { authentication } from '.././firebase-config/firebase'
 import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth'
 import clsx from 'clsx'
 import { useQuery, gql, useMutation } from '@apollo/client'
-import REGISTER_MUTATION from '@/src/requests/register-gql'
+import { REGISTER_MUTATION } from '@/src/requests/graphql'
 
 const LoginPage = () => {
   const [fullname, setfullName] = useState('')

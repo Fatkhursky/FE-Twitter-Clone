@@ -5,7 +5,7 @@ import clsx from 'clsx'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { useAtom } from 'jotai'
-import { currentMenu } from '../stores/jotai-atom'
+import { currentMenu, fieldUserName, globalName, globalCreateAccDate } from '../stores/jotai-atom'
 import Popup from 'reactjs-popup'
 import { signOut } from 'next-auth/react'
 
@@ -45,10 +45,13 @@ const listMenuIcon = [
 ]
 
 const Mainmenu = () => {
+  const [name] = useAtom(globalName)
   //const contentStyle = { position: 'fixed' }
   const [activeMenu, setActiveMenu] = useAtom(currentMenu)
   const [currentRouter, setCurrentRouter] = useState('')
   const router = useRouter()
+ 
+  const [userName] = useAtom (fieldUserName)
 
   useEffect(() => {
     setCurrentRouter(router.pathname)
@@ -124,8 +127,8 @@ const Mainmenu = () => {
           <div className="flex hover:bg-[#e5e7eb] cursor-pointer p-2 rounded-full justify-center items-center w-56">
             <img className="h-12 w-12" src={'/assets/logo193.png'} alt="" />
             <div className="grow pl-2">
-              <p>name</p>
-              <p>@name</p>
+              <p>{name}</p>
+              <p>{userName}</p>
             </div>
             <div>
               <svg className="h-7 w-7">{mySvg.more}</svg>
@@ -144,14 +147,14 @@ const Mainmenu = () => {
               alt="joebiden"
             />
             <p id="namejoe" style={{ fontSize: '15px' }}>
-              &nbsp;@name
+              &nbsp;{name}
             </p>
           </div>
         <div className="cursor-pointer hover:bg-[#f1f5f9] p-2" onClick={noFeature}>
             <p>Add an existing account</p>
           </div>
           <div className="cursor-pointer hover:bg-[#f1f5f9] p-2 rounded-b-xl" onClick={logOut}>
-            <p>Log Out &nbsp;@name</p>
+            <p>Log Out &nbsp;{userName}</p>
           </div>
         </div>
       </Popup>
