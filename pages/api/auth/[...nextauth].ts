@@ -13,8 +13,6 @@ export default NextAuth({
       },
       authorize: async (credentials: any) => {
         try {
-          console.log(33334444, credentials)
-
           const { data } = await client.mutate({
             mutation: gql`
               mutation fdsdf($data: GetAccessTokenInput!) {
@@ -29,8 +27,8 @@ export default NextAuth({
             `,
             variables: {
               data: {
-                password: 'qweqweqwe',
-                phone: '+6289510011398',
+                password: credentials?.password || '',
+                phone: credentials?.username || '',
               },
             },
           })
@@ -47,7 +45,7 @@ export default NextAuth({
           }
         } catch (e) {
           console.log(3333399, e)
-          throw 'error auth'
+          throw new Error('error auth')
         }
       },
     }),

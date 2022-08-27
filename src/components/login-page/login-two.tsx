@@ -57,20 +57,25 @@ const LoginTwo = ({ toSignUp }) => {
       const setSession = await signIn('credentials', {
         username: userName || phoneCode,
         password: passValue,
-        redirect: true,
+        redirect: false,
         callbackUrl: '/Home',
       })
+      if (setSession?.error) {
+        throw setSession?.error
+      }
       console.log(3333377, setSession)
 
       return 'Login sucess'
     } catch (error) {
       console.log(3333666, error)
-      if (error.response) {
-        throw new Error(error.response.data.data.message)
-      } else if (error.request) {
-        throw new Error(error.request)
+      if (typeof error === 'string') {
+        throw error
+      } else if (error?.response) {
+        throw new Error(error?.response?.data?.data?.message)
+      } else if (error?.request) {
+        throw new Error(error?.request)
       } else {
-        throw new Error(error.message)
+        throw new Error(error?.message)
       }
     }
   }
@@ -87,14 +92,7 @@ const LoginTwo = ({ toSignUp }) => {
       {
         loading: 'Loading...',
         success: (data) => {
-          const token = localStorage.getItem('Bearer')
-          // const wait = () => {
-          //   if (token) {
-          //     return toHome()
-          //   }
-          // }
-          // setTimeout(wait, 1000)
-          // toHome()
+          toHome()
           return data
         },
         error: (error) => `${error}`,

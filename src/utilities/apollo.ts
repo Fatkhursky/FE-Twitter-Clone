@@ -13,7 +13,7 @@ const authLink = setContext(async (_, { headers }) => {
   return {
     headers: {
       ...headers,
-      authorization: session.accessToken,
+      authorization: session?.accessToken || '',
     },
   }
 })
