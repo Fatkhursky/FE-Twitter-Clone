@@ -3,9 +3,12 @@ import { mySvg } from '~/public/assets/svg'
 import AddTweet from '@/src/components/add-tweet/add-tweet'
 import TextareaAutosize from 'react-textarea-autosize'
 
+import { useState } from 'react'
+
 const Home = ({ handleSubmit, tweet, setTweet, newTweet, array, setArray }) => {
   const color = tweet ? 'rgb(29, 108, 255)' : ''
   const isPointer = tweet ? 'pointer' : ''
+
   return (
     <div className="h-full">
       <div className="bg-white flex items-center justify-between px-2 py-2 sticky top-0 relative">
@@ -17,12 +20,9 @@ const Home = ({ handleSubmit, tweet, setTweet, newTweet, array, setArray }) => {
 
       <div id="main" className="homepage__section">
         <form onSubmit={handleSubmit}>
-          <div className="flex p-2  border-b">
-            <div>
+          <div className=" p-2 border-b">
+            <div className="flex flex-row items-center gap-2">
               <img className="w-14 h-12" src={'/assets/logo193.png'} alt="user" />
-            </div>
-
-            <div className="py-2 pl-3 w-full">
               <TextareaAutosize
                 maxLength={280}
                 value={tweet}
@@ -31,7 +31,10 @@ const Home = ({ handleSubmit, tweet, setTweet, newTweet, array, setArray }) => {
                 placeholder="What's Happening?"
                 id="textarea"
               />
-              <div className="flex justify-between pt-5">
+            </div>
+
+            <div className="w-full py-2">
+              <div className="flex justify-between">
                 <div className="flex gap-2">
                   <div className="hover:bg-[#DBEAFE] cursor-pointer flex items-center justify-center rounded-full p-1.5">
                     <svg className="w-7 h-7">{mySvg.img}</svg>
@@ -62,40 +65,27 @@ const Home = ({ handleSubmit, tweet, setTweet, newTweet, array, setArray }) => {
           </div>
 
           <div>
-            {newTweet
-              ? array.map((item) => (
-                  <AddTweet
-                    key={item.id}
-                    newTweet={item.text}
-                    id={item.id}
-                    array={array}
-                    setArray={setArray}
-                  />
-                ))
-              : ''}
-          </div>
-
-          <div className="flex justify-between p-2">
-            <div className="border rounded-2xl p-2 px-10 cursor-pointer hover:bg-[#f1f5f9]">
-              <p>Digitals creators</p>
-            </div>
-            <div className="border rounded-2xl p-2 px-10 cursor-pointer hover:bg-[#f1f5f9]">
-              <p>K-Pop</p>
-            </div>
-            <div className="border rounded-2xl p-2 px-10 cursor-pointer hover:bg-[#f1f5f9]">
-              <p>Cats</p>
-            </div>
-            <div className="border rounded-2xl p-2 px-10 cursor-pointer hover:bg-[#f1f5f9]">
-              <p>Viral</p>
-            </div>
-          </div>
-
-          <div className="px-2">
-            <strong className='text-xl'>Welcome to Twitter!</strong>
-            <p>
-              This is the best place to see what’s happening in your world. Find some
-              people and topics to follow now.
-            </p>
+            {newTweet ? (
+              array.map((e, i) => (
+                <AddTweet
+                  key={i}
+                  newTweet={e.content}
+                  id={e.id}
+                  array={array}
+                  setArray={setArray}
+                  name={e.user.name}
+                  userName={e.user.username}
+                />
+              ))
+            ) : (
+              <div className="px-2">
+                <strong className="text-xl">Welcome to Twitter!</strong>
+                <p>
+                  This is the best place to see what’s happening in your world. Find some
+                  people and topics to follow now.
+                </p>
+              </div>
+            )}
           </div>
         </form>
       </div>
@@ -103,3 +93,18 @@ const Home = ({ handleSubmit, tweet, setTweet, newTweet, array, setArray }) => {
   )
 }
 export default Home
+
+// <div className="flex justify-between p-2">
+// <div className="border rounded-2xl p-2 px-10 cursor-pointer hover:bg-[#f1f5f9]">
+//   <p>Digitals creators</p>
+// </div>
+// <div className="border rounded-2xl p-2 px-10 cursor-pointer hover:bg-[#f1f5f9]">
+//   <p>K-Pop</p>
+// </div>
+// <div className="border rounded-2xl p-2 px-10 cursor-pointer hover:bg-[#f1f5f9]">
+//   <p>Cats</p>
+// </div>
+// <div className="border rounded-2xl p-2 px-10 cursor-pointer hover:bg-[#f1f5f9]">
+//   <p>Viral</p>
+// </div>
+// </div>

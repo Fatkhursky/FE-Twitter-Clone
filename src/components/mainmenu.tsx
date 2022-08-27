@@ -1,3 +1,4 @@
+//@ts-nocheck
 import React, { useEffect, useState } from 'react'
 import { mySvg } from '~/public/assets/svg'
 import { IoLogoTwitter } from 'react-icons/io'
@@ -5,10 +6,17 @@ import clsx from 'clsx'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { useAtom } from 'jotai'
-import { currentMenu, fieldUserName, globalName, globalCreateAccDate } from '../stores/jotai-atom'
+import {
+  currentMenu,
+  fieldUserName,
+  globalName,
+  globalCreateAccDate,
+} from '../stores/jotai-atom'
 import Popup from 'reactjs-popup'
 import { signOut } from 'next-auth/react'
-
+import { decodeToken } from 'react-jwt'
+import { DATAUSER_QUERY } from '../requests/graphql'
+import { useQuery } from '@apollo/client'
 const listMenuIcon = [
   {
     label: 'Home',
@@ -45,17 +53,34 @@ const listMenuIcon = [
 ]
 
 const Mainmenu = () => {
-  const [name] = useAtom(globalName)
+  const [name, setName] = useAtom(globalName)
   //const contentStyle = { position: 'fixed' }
   const [activeMenu, setActiveMenu] = useAtom(currentMenu)
   const [currentRouter, setCurrentRouter] = useState('')
   const router = useRouter()
- 
-  const [userName] = useAtom (fieldUserName)
+  const [token, setToken] = useState()
+  const [userName, setUserName] = useAtom(fieldUserName)
 
   useEffect(() => {
+    const item = localStorage.getItem('Bearer')
+    setToken(decodeToken(item))
     setCurrentRouter(router.pathname)
-  }, [router.pathname])
+  }, [])
+
+  const { loading, error, data } = useQuery(DATAUSER_QUERY, {
+    variables: {
+      where: {
+        id: token?.data?.id,
+      },
+    },
+    onCompleted(data) {
+      setUserName(data?.user?.username)
+      setName(data?.user?.name)
+    },
+  })
+
+  // if (loading) return 'Loading...'
+  // if (error) return `Error! ${error.message}`
 
   const handleChangeMenu = (menu: any) => {
     const currentMenu = menu
@@ -82,23 +107,23 @@ const Mainmenu = () => {
 
         {listMenuIcon.map((menu, i) => (
           <div key={i} className="pt-1.5 items-center flex hover:cursor-pointer">
-            <div className=' w-full mainMenu'>
-            <div
-              onClick={() => handleChangeMenu(menu.label)}
-              className="text-1xs flex items-center w-fit p-2  cursor-pointer rounded-full  transtiton-all"
-            >
-              <svg className="w-7 h-7">
-                {menu.label == currentRouter.substring(1) ? menu.icon[1] : menu.icon[0]}
-              </svg>
-              <h1
-                className={clsx(
-                  'pl-2',
-                  menu.label == currentRouter.substring(1) ? 'font-bold' : null
-                )}
+            <div className=" w-full mainMenu">
+              <div
+                onClick={() => handleChangeMenu(menu.label)}
+                className="text-1xs flex items-center w-fit p-2  cursor-pointer rounded-full  transtiton-all"
               >
-                {menu.label}
-              </h1>
-            </div>
+                <svg className="w-7 h-7">
+                  {menu.label == currentRouter.substring(1) ? menu.icon[1] : menu.icon[0]}
+                </svg>
+                <h1
+                  className={clsx(
+                    'pl-2',
+                    menu.label == currentRouter.substring(1) ? 'font-bold' : null
+                  )}
+                >
+                  {menu.label}
+                </h1>
+              </div>
             </div>
           </div>
         ))}
@@ -111,35 +136,24 @@ const Mainmenu = () => {
       </div>
 
       <div className="grow"></div>
-
-      {/* <div className="flex hover:bg-[#e5e7eb] cursor-pointer p-2 rounded-full justify-center items-center w-56">
-        <img className="h-12 w-12" src={'/assets/logo193.png'} alt="" />
-        <div className="grow pl-2">
-          <p>name</p>
-          <p>@name</p>
-        </div>
-        <div>
-          <svg className="h-7 w-7">{mySvg.more}</svg>
-        </div>
-      </div> */}
       <Popup
         trigger={
           <div className="flex hover:bg-[#e5e7eb] cursor-pointer p-2 rounded-full justify-center items-center w-56">
             <img className="h-12 w-12" src={'/assets/logo193.png'} alt="" />
             <div className="grow pl-2">
-              <p>{name}</p>
-              <p>{userName}</p>
+              <p>{data?.user?.name}</p>
+              <p>{data?.user?.username}</p>
             </div>
             <div>
               <svg className="h-7 w-7">{mySvg.more}</svg>
             </div>
           </div>
         }
-        {...{  }}
+        {...{}}
         position="top left"
       >
-        <div className='flex flex-col'>
-          <div className='flex items-center p-2'>
+        <div className="flex flex-col">
+          <div className="flex items-center p-2">
             <img
               id="imgjoe"
               style={{ height: '50px' }}
@@ -150,10 +164,13 @@ const Mainmenu = () => {
               &nbsp;{name}
             </p>
           </div>
-        <div className="cursor-pointer hover:bg-[#f1f5f9] p-2" onClick={noFeature}>
+          <div className="cursor-pointer hover:bg-[#f1f5f9] p-2" onClick={noFeature}>
             <p>Add an existing account</p>
           </div>
-          <div className="cursor-pointer hover:bg-[#f1f5f9] p-2 rounded-b-xl" onClick={logOut}>
+          <div
+            className="cursor-pointer hover:bg-[#f1f5f9] p-2 rounded-b-xl"
+            onClick={logOut}
+          >
             <p>Log Out &nbsp;{userName}</p>
           </div>
         </div>

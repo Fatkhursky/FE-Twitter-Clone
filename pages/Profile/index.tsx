@@ -29,7 +29,6 @@ const Index = () => {
           <div className="w-3/5 border">
             <Profile
               setOnComp={setOnComp}
-              tweets={tweets}
               setArray={setArray}
               array={array}
             />

@@ -26,12 +26,51 @@ mutation Mutation($data: UserCreateInput!) {
   }
 `
 
+// Get user data
+export const DATAUSER_QUERY = gql `
+query User($where: UserWhereUniqueInput!) {
+  user(where: $where) {
+    username
+    created_at
+    id
+    name
+  }
+}
+` 
+
 // Add new tweet
 export const createOneTweet = gql `
 mutation CreateOneTweet($data: TweetCreateInput!) {
   createOneTweet(data: $data) {
+    id
     content
+    user {
+      username
+      name
+    }
   }
 }
 ` 
+//Delete some tweet
+export const deleteSomeTweet = gql `
+mutation DeleteOneTweet($where: TweetWhereUniqueInput!) {
+  deleteOneTweet(where: $where) {
+    id
+  }
+}
+`
+
+//Get all tweet 
+export const GET_TWEETS = gql`
+  query Tweets($where: TweetWhereInput) {
+    tweets(where: $where) {
+      id
+      content
+      user {
+        name
+        username
+      }
+    }
+  }
+`
 

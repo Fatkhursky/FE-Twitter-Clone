@@ -116,20 +116,6 @@ const LoginPage = () => {
     })
   }, [])
 
-  // const customStyles = {
-  //   overlay: { background: 'rgba(112, 110, 110, 0.65)' },
-  //   content: {
-  //     borderRadius: '15px',
-  //     top: '50%',
-  //     left: '50%',
-  //     right: 'auto',
-  //     bottom: 'auto',
-  //     marginRight: '-50%',
-  //     transform: 'translate(-50%, -50%)',
-  //     //border: '1px solid rgba(204, 202, 202, 0.75)'
-  //   },
-  // }
-
   function openModal() {
     setIsOpen(true)
   }
@@ -200,10 +186,7 @@ const LoginPage = () => {
   }
 
   const [registerGql, { data, loading, error }] = useMutation(REGISTER_MUTATION)
-
   const notify = async () => {
-    //const newReg = { fullname, dateOfBirth, username, password, phone }
-
     try {
       //const [error, res] = await register(newReg)
       const data = await registerGql({
@@ -218,7 +201,7 @@ const LoginPage = () => {
         },
       })
       if (error) throw error
-      return ('Register success')
+      return 'Register success'
     } catch (error) {
       if (error.response) {
         throw new Error(error.response.data.message)
@@ -229,6 +212,7 @@ const LoginPage = () => {
       }
     }
   }
+  
   const toSign = () => {
     router.push('/')
     setStepNum(0)

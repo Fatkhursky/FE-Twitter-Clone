@@ -3,128 +3,134 @@
 import { decodeToken } from 'react-jwt'
 import { mySvg } from '~/public/assets/svg'
 import Popup from 'reactjs-popup'
-import { deleteOneTweet } from '@/src/requests'
+import LoadingBar from 'react-top-loading-bar'
+import { deleteSomeTweet } from '@/src/requests/graphql'
+import { ApolloClient, gql, InMemoryCache, useMutation, useQuery } from '@apollo/client'
+import { useRef } from 'react'
 
-const AddTweet = ({ newTweet, id, array, setArray }) => {
-  const token = localStorage.getItem('Bearer')
-  const myDecodedToken = decodeToken(token)
-  let headers = {
-    'Content-Type': 'application/json',
-    Authorization: token,
-  }
+const AddTweet = ({ newTweet, id, array, setArray, name, userName }) => {
+  const ref = useRef(null)
   //Delete some tweet
+  const [deleteTweet, { data, loading, error }] = useMutation(deleteSomeTweet)
   const handleDelete = async () => {
     try {
-      const res = await deleteOneTweet(id, { Authorization: token })
-      setArray((array = array.filter((item) => item.id !== id)))
-      return res.data.message
+      ref.current.continuousStart()
+      const res = await deleteTweet({
+        variables: {
+          where: {
+            id: id,
+          },
+        },
+      })
+      ref.current.complete()
+      setArray((array = array.filter((e) => e.id !== id)))
+      return res.data.deleteOneTweet !== null ? 'success' : 'Failed'
     } catch (error) {}
+    console.log(error)
   }
-
   const noFeature = () => {
     alert('Fitur belum tersedia')
   }
   return (
-    <div className="addtweet">
-      <div className="addtweet__content">
-        <div className="addtweet__section" style={{ position: 'relative' }}>
-          <img
-            style={{ height: '45px', marginLeft: '0px' }}
-            src={'/assets/logo193.png'}
-            alt="joebiden"
-          />
-          <div className="addtweet__text">
-            <p style={{ fontWeight: 'bold' }}>
-              {myDecodedToken.name}
-              <span style={{ fontWeight: 'normal' }}>
-                &nbsp;@{myDecodedToken.username}&nbsp;
-              </span>
-            </p>
+    <div className="pt-5 border-b cursor-pointer">
+      <LoadingBar className="" color="#be123c" ref={ref} />
+      <div className="px-2">
+        <div className="">
+          <div className="flex flex-row">
+            <img
+              style={{ height: '45px', marginLeft: '0px' }}
+              src={'/assets/logo193.png'}
+              alt="joebiden"
+            />
+            <div className="w-full flex flex-col px-2">
+              <div className=" flex justify-between items-center">
+                <p style={{ fontWeight: 'bold' }}>
+                  {name}
+                  <span style={{ fontWeight: 'normal' }}>&nbsp;{userName}&nbsp;</span>
+                </p>
 
-            <Popup
-              trigger={
-                <svg
-                  id="rightmore2"
-                  style={{ height: '25px', width: '25px', marginRight: '0' }}
+                <Popup
+                  trigger={
+                    <div className=" p-1 rounded-full cursor-pointer hover:bg-slate-300">
+                      <svg className=" h-6 w-6">{mySvg.more}</svg>
+                    </div>
+                  }
+                  position="left top"
                 >
-                  {mySvg.more}
-                </svg>
-              }
-              position="left top"
-            >
-              <div>
-                <div
-                  className="addtweet__popup"
-                  onClick={handleDelete}
-                  style={{ display: 'flex' }}
-                >
-                  <svg className="addtweet__iconlist" style={{ marginTop: '5px' }}>
-                    {mySvg.delete}
-                  </svg>
-                  <p>Delete</p>
-                </div>
-                <div
-                  className="addtweet__popup"
-                  onClick={noFeature}
-                  style={{ display: 'flex' }}
-                >
-                  <svg className="addtweet__iconlist" style={{ marginTop: '5px' }}>
-                    {mySvg.pin}
-                  </svg>
-                  <p>Pin to your profile</p>
-                </div>
-                <div
-                  className="addtweet__popup"
-                  onClick={noFeature}
-                  style={{ display: 'flex' }}
-                >
-                  <svg className="addtweet__iconlist" style={{ marginTop: '5px' }}>
-                    {mySvg.doc}
-                  </svg>
-                  <p>Add/remove</p>
-                </div>
-                <div
-                  className="addtweet__popup"
-                  onClick={noFeature}
-                  style={{ display: 'flex' }}
-                >
-                  <svg className="addtweet__iconlist" style={{ marginTop: '5px' }}>
-                    {mySvg.comment}
-                  </svg>
-                  <p>Change who can reply</p>
-                </div>
-                <div
-                  className="addtweet__popup"
-                  onClick={noFeature}
-                  style={{ display: 'flex' }}
-                >
-                  <svg className="addtweet__iconlist" style={{ marginTop: '5px' }}>
-                    {mySvg.embed}
-                  </svg>
-                  <p>Embed Tweet</p>
-                </div>
-                <div
-                  className="addtweet__popup"
-                  onClick={noFeature}
-                  style={{ display: 'flex' }}
-                >
-                  <svg className="addtweet__iconlist" style={{ marginTop: '5px' }}>
-                    {mySvg.polling}
-                  </svg>
-                  <p>View Tweets analythics</p>
-                </div>
+                  <div>
+                    <div
+                      className="flex gap-2 flex-row items-center p-2 hover:bg-slate-100 cursor-pointer rounded-t-xl"
+                      onClick={handleDelete}
+                    >
+                      <svg className="w-4 h-4">{mySvg.delete}</svg>
+                      <p>Delete</p>
+                    </div>
+                    <div
+                      className="flex gap-2 flex-row items-center p-2 hover:bg-slate-100 cursor-pointer "
+                      onClick={noFeature}
+                      style={{ display: 'flex' }}
+                    >
+                      <svg className="w-4 h-4">{mySvg.pin}</svg>
+                      <p>Pin to your profile</p>
+                    </div>
+                    <div
+                      className="flex gap-2 flex-row items-center p-2 hover:bg-slate-100 cursor-pointer "
+                      onClick={noFeature}
+                      style={{ display: 'flex' }}
+                    >
+                      <svg className="w-4 h-4">{mySvg.doc}</svg>
+                      <p>Add/remove</p>
+                    </div>
+                    <div
+                      className="flex gap-2 flex-row items-center p-2 hover:bg-slate-100 cursor-pointer "
+                      onClick={noFeature}
+                      style={{ display: 'flex' }}
+                    >
+                      <svg className="w-4 h-4">{mySvg.comment}</svg>
+                      <p>Change who can reply</p>
+                    </div>
+                    <div
+                      className="flex gap-2 flex-row items-center p-2 hover:bg-slate-100 cursor-pointer "
+                      onClick={noFeature}
+                      style={{ display: 'flex' }}
+                    >
+                      <svg className="w-4 h-4">{mySvg.embed}</svg>
+                      <p>Embed Tweet</p>
+                    </div>
+                    <div
+                      className="flex gap-2 flex-row items-center p-2 hover:bg-slate-100 cursor-pointer rounded-b-xl"
+                      onClick={noFeature}
+                      style={{ display: 'flex' }}
+                    >
+                      <svg className="w-4 h-4">{mySvg.polling}</svg>
+                      <p>View Tweets analythics</p>
+                    </div>
+                  </div>
+                </Popup>
               </div>
-            </Popup>
+              <div>{newTweet}</div>
+            </div>
           </div>
-          <div style={{ marginLeft: '57px' }}>{newTweet}</div>
-          <div className="addtweet__icon">
-            <svg className="addtweet__iconlist">{mySvg.comment}</svg>
-            <svg className="addtweet__iconlist">{mySvg.retweet}</svg>
-            <svg className="addtweet__iconlist" id="iconlike">
-              {mySvg.like}
-            </svg>
-            <svg className="addtweet__iconlist">{mySvg.up}</svg>
-            <svg className="addtweet__iconlist">{mySvg.polling}</svg>
+
+          <div className="flex flex-row py-1 justify-between w-3/4 mx-auto">
+            <div className="p-1 hover:bg-blue-200 hover:fill-blue-600 cursor-pointer flex items-center rounded-full">
+              <svg className="h-4 w-4 ">{mySvg.comment}</svg>
+            </div>
+            <div className="p-1 hover:bg-blue-200 hover:fill-blue-600 cursor-pointer flex items-center rounded-full">
+              <svg className="h-4 w-4 ">{mySvg.retweet}</svg>
+            </div>
+            <div className="p-1 hover:bg-pink-200 hover:fill-pink-600 cursor-pointer flex items-center rounded-full">
+              <svg className="h-4 w-4 ">{mySvg.like}</svg>
+            </div>
+            <div className="p-1 hover:bg-blue-200 hover:fill-blue-600 cursor-pointer flex items-center rounded-full">
+              <svg className="h-4 w-4 ">{mySvg.comment}</svg>
+            </div>
+            <div className="p-1 hover:bg-blue-200 hover:fill-blue-600 cursor-pointer flex items-center rounded-full">
+              <svg className="h-4 w-4 ">{mySvg.up}</svg>
+            </div>
+            <div className="p-1 hover:bg-blue-200 hover:fill-blue-600 cursor-pointer flex items-center rounded-full">
+              <svg className="h-4 w-4 ">{mySvg.polling}</svg>
+            </div>
           </div>
         </div>
       </div>

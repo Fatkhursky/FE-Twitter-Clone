@@ -16,3 +16,6 @@ export const moreSection = atom(false)
 
 // global atom state Menu
 export const currentMenu = atom('')
+
+// global tweets
+export const allTweet = atom('')
