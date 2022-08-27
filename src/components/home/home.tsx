@@ -8,6 +8,7 @@ import { useState } from 'react'
 const Home = ({ handleSubmit, tweet, setTweet, newTweet, array, setArray }) => {
   const color = tweet ? 'rgb(29, 108, 255)' : ''
   const isPointer = tweet ? 'pointer' : ''
+  console.log(3333444, { array })
 
   return (
     <div className="h-full">
@@ -65,7 +66,7 @@ const Home = ({ handleSubmit, tweet, setTweet, newTweet, array, setArray }) => {
           </div>
 
           <div>
-            {newTweet ? (
+            {array.length > 0 ? (
               array.map((e, i) => (
                 <AddTweet
                   key={i}

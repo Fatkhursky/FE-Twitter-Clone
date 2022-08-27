@@ -9,7 +9,9 @@ import { useState, useEffect } from 'react'
 import { deleteSomeTweet } from '@/src/requests/graphql'
 import LoadingBar from 'react-top-loading-bar'
 import { useRef } from 'react'
+import { useSession } from 'next-auth/react'
 const AllTweet = () => {
+  const { data: session, status } = useSession()
   const [token, setToken] = useState()
 
   const [deleteTweet] = useMutation(deleteSomeTweet)
@@ -40,7 +42,7 @@ const AllTweet = () => {
     variables: {
       where: {
         user_id: {
-          equals: token?.data?.id,
+          equals: session?.id,
         },
       },
     },
@@ -55,7 +57,7 @@ const AllTweet = () => {
     alert('Fitur belum tersedia')
   }
 
-  return [...data.tweets].reverse().map((e, i) => (
+  return (data?.tweets || []).map((e, i) => (
     <div key={i} className="pt-5 border-b cursor-pointer">
       <div className="px-2">
         <div className="">
@@ -66,7 +68,7 @@ const AllTweet = () => {
               alt="joebiden"
             />
             <div className="w-full flex flex-col px-2">
-            <LoadingBar className="" color="#be123c" ref={ref} />
+              <LoadingBar className="" color="#be123c" ref={ref} />
               <div className=" flex justify-between items-center">
                 <p style={{ fontWeight: 'bold' }}>
                   {e.user.name}

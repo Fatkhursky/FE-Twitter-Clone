@@ -11,7 +11,7 @@ import {
   fieldPhone,
   fieldEmail,
   fieldPhoneCode,
-  globalCreateAccDate
+  globalCreateAccDate,
 } from '@/src/stores/jotai-atom'
 import clsx from 'clsx'
 import { useQuery, gql, useMutation } from '@apollo/client'
@@ -39,30 +39,32 @@ const LoginTwo = ({ toSignUp }) => {
   const [loginGql, { data, loading, error }] = useMutation(LOGIN_MUTATION)
 
   const notify = async () => {
-  
-    const varGql = phoneCode ? {data: {phone: phoneCode , password: passValue}} : {data: {username:userName , password: passValue}}
+    const varGql = phoneCode
+      ? { data: { phone: phoneCode, password: passValue } }
+      : { data: { username: userName, password: passValue } }
     try {
-     if (error) throw error
-      const  data   = await loginGql({variables: varGql})
+      if (error) throw error
+      // const data = await loginGql({ variables: varGql })
       //const [error, res] = await login(newLogin)
-      console.log( 564, data.data.getAccessToken.username)
+      // console.log(564, data.data.getAccessToken.username)
       //setCreateAccDate(data.data.getAccessToken.created_at)
       //setName(data.data.getAccessToken.name)
       //setUserName(data.data.getAccessToken.username)
       console.log(123, userName)
-      const token = data.data.getAccessToken.accessToken
-      localStorage.setItem('Bearer', token)
+      // const token = data.data.getAccessToken.accessToken
+      // localStorage.setItem('Bearer', token)
       //auth signIn
       const setSession = await signIn('credentials', {
         username: userName || phoneCode,
         password: passValue,
-        redirect: false,
+        redirect: true,
+        callbackUrl: '/Home',
       })
-      //console.log(77, setSession)
+      console.log(3333377, setSession)
 
-      return ('Login sucess')
+      return 'Login sucess'
     } catch (error) {
-      //console.log(666, error)
+      console.log(3333666, error)
       if (error.response) {
         throw new Error(error.response.data.data.message)
       } else if (error.request) {
@@ -92,7 +94,7 @@ const LoginTwo = ({ toSignUp }) => {
           //   }
           // }
           // setTimeout(wait, 1000)
-          toHome()
+          // toHome()
           return data
         },
         error: (error) => `${error}`,
@@ -108,13 +110,12 @@ const LoginTwo = ({ toSignUp }) => {
     )
   }
   return (
-    <form onSubmit={handleSubmit} className="background bg-zinc-400 h-screen flex flex-col items-center justify-center">
+    <form
+      onSubmit={handleSubmit}
+      className="background bg-zinc-400 h-screen flex flex-col items-center justify-center"
+    >
       <Header />
-      <div
-      
-        className="wrapper overflow-y-auto overflow-hidden bg-white h-410 w-600  flex flex-col"
-        
-      >
+      <div className="wrapper overflow-y-auto overflow-hidden bg-white h-410 w-600  flex flex-col">
         <div className="content flex flex-col w-3/4 mx-auto  gap-5 p-5">
           <div className="">
             <div className="loginpage__logintwo__box">
@@ -123,12 +124,7 @@ const LoginTwo = ({ toSignUp }) => {
                   <h2 className="text-3xl">Enter your password</h2>
                 </div>
                 <div className="textfield-outlined">
-                  <input
-                    id="one"
-                    type="text"
-                    value={userName || phone}
-                    disabled={true}
-                  />
+                  <input id="one" type="text" value={userName || phone} disabled={true} />
                   <label htmlFor="one">{userName ? 'username' : 'phone'}</label>
                 </div>
 
@@ -172,7 +168,12 @@ const LoginTwo = ({ toSignUp }) => {
           <div>
             <button
               type="submit"
-              className={clsx("flex justify-center rounded-full py-3 w-full items-center text-white font-bold text-xl", passValue ? 'bg-slate-800 cursor-pointer': 'bg-slate-400 pointer-events-none')}
+              className={clsx(
+                'flex justify-center rounded-full py-3 w-full items-center text-white font-bold text-xl',
+                passValue
+                  ? 'bg-slate-800 cursor-pointer'
+                  : 'bg-slate-400 pointer-events-none'
+              )}
             >
               Log in
             </button>

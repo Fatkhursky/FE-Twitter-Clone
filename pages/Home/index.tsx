@@ -25,15 +25,34 @@ import {
   currentMenu,
 } from '@/src/stores/jotai-atom'
 import { ApolloClient, gql, InMemoryCache, useMutation, useQuery } from '@apollo/client'
-import { signOut } from 'next-auth/react'
+import { signOut, useSession } from 'next-auth/react'
 //import { httpLink } from '@/src/utilities/apollo'
 // import authLink from '@/src/requests/get-user-gql'
 import { authLink, client } from '@/src/utilities/apollo'
-import { createOneTweet } from '@/src/requests/graphql'
+import { createOneTweet, GET_TWEETS } from '@/src/requests/graphql'
 import { useRef } from 'react'
 import LoadingBar from 'react-top-loading-bar'
 
 const HomePage = (results) => {
+  const { data: session, status } = useSession()
+  console.log(3333444, { session, status })
+
+  const {
+    loading: loadingox,
+    error: errorox,
+    data: dataox,
+  } = useQuery(GET_TWEETS, {
+    variables: {
+      where: {
+        user_id: {
+          equals: session?.id,
+        },
+      },
+    },
+
+    // pollInterval: 5000,
+  })
+  console.log(3333444, { loadingox, errorox, dataox })
   let router = useRouter()
   const [token, setToken] = useState('')
   const [myDecodeToken, setMyDecodetoken] = useState('')
@@ -82,6 +101,7 @@ const HomePage = (results) => {
   }, [])
 
   let [array, setArray] = useState([])
+  console.log(33334444, array)
 
   const [addTweet, { data, loading, error }] = useMutation(createOneTweet)
 
@@ -139,7 +159,7 @@ const HomePage = (results) => {
               tweet={tweet}
               setTweet={setTweet}
               newTweet={newTweet}
-              array={array}
+              array={dataox?.tweets || []}
               setArray={setArray}
             />
           </div>

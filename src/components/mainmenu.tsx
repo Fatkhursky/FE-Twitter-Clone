@@ -13,7 +13,7 @@ import {
   globalCreateAccDate,
 } from '../stores/jotai-atom'
 import Popup from 'reactjs-popup'
-import { signOut } from 'next-auth/react'
+import { signOut, useSession } from 'next-auth/react'
 import { decodeToken } from 'react-jwt'
 import { DATAUSER_QUERY } from '../requests/graphql'
 import { useQuery } from '@apollo/client'
@@ -53,6 +53,8 @@ const listMenuIcon = [
 ]
 
 const Mainmenu = () => {
+  const { data: session, status } = useSession()
+
   const [name, setName] = useAtom(globalName)
   //const contentStyle = { position: 'fixed' }
   const [activeMenu, setActiveMenu] = useAtom(currentMenu)
@@ -70,7 +72,7 @@ const Mainmenu = () => {
   const { loading, error, data } = useQuery(DATAUSER_QUERY, {
     variables: {
       where: {
-        id: token?.data?.id,
+        id: session?.id,
       },
     },
     onCompleted(data) {
