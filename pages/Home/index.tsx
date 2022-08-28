@@ -3,18 +3,17 @@ import Home from '@/src/components/home/home'
 import Head from 'next/head'
 import Mainmenu from '@/src/components/mainmenu'
 import Rightsection from '@/src/components/home/rightsection'
-// import { useMutation } from '@apollo/client'
-
 import { useSession } from 'next-auth/react'
 import { createOneTweet, GET_TWEETS } from '@/src/requests/graphql'
 import { useRef } from 'react'
 import LoadingBar from 'react-top-loading-bar'
 import { graphQLClient } from '@/src/libraries/graphql-request'
-import { gql } from 'graphql-request'
-import { useQuery, useMutation } from '@tanstack/react-query'
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 
 const HomePage = () => {
   const { data: session, status } = useSession()
+  const queryClient = useQueryClient()
+
   const [filterGetTweets, setFilterGetTweets] = useState<any>(null)
 
   useEffect(() => {
@@ -45,8 +44,34 @@ const HomePage = () => {
       return data?.tweets || []
     },
     {
+      onMutate: (newData: any) => {
+        // @ts-ignore
+        ref.current.continuousStart()
+        const previousTodos = queryClient.getQueryData([
+          '/home',
+          'tweets',
+          filterGetTweets,
+        ])
+
+        queryClient.setQueryData(['/home', 'tweets', filterGetTweets], (old) => [
+          {
+            id: 'new-id',
+            content: newData?.data?.content,
+            user: {
+              name: session?.user?.name,
+              username: session?.username,
+            },
+          },
+          //  @ts-ignore
+          ...old,
+        ])
+
+        return { previousTodos }
+      },
       onSuccess: () => {
         refetch()
+        // @ts-ignore
+        ref.current.complete()
       },
     }
   )
@@ -59,8 +84,6 @@ const HomePage = () => {
     e.preventDefault()
     try {
       // @ts-ignore
-      ref.current.continuousStart()
-      // @ts-ignore
       const res = mutateAsync({
         data: {
           content: tweet,
@@ -71,13 +94,8 @@ const HomePage = () => {
           },
         },
       })
-      // @ts-ignore
-      ref.current.complete()
-      // @ts-ignore
-      const { data } = res
-      const obj = data.createOneTweet
+
       setTweet('')
-      setNewTweet(obj.content)
       if (error) throw error
     } catch (error) {
       console.log(error)
