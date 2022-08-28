@@ -1,5 +1,4 @@
-
-import { useQuery, gql, useMutation } from '@apollo/client'
+import { gql } from '@apollo/client'
 //Login
 export const LOGIN_MUTATION = gql`
   mutation Mutation($data: GetAccessTokenInput!) {
@@ -13,9 +12,9 @@ export const LOGIN_MUTATION = gql`
     }
   }
 `
-// Register 
+// Register
 export const REGISTER_MUTATION = gql`
-mutation Mutation($data: UserCreateInput!) {
+  mutation Mutation($data: UserCreateInput!) {
     register(data: $data) {
       name
       date_of_birth
@@ -27,40 +26,40 @@ mutation Mutation($data: UserCreateInput!) {
 `
 
 // Get user data
-export const DATAUSER_QUERY = gql `
-query User($where: UserWhereUniqueInput!) {
-  user(where: $where) {
-    username
-    created_at
-    id
-    name
-  }
-}
-` 
-
-// Add new tweet
-export const createOneTweet = gql `
-mutation CreateOneTweet($data: TweetCreateInput!) {
-  createOneTweet(data: $data) {
-    id
-    content
-    user {
+export const DATAUSER_QUERY = gql`
+  query User($where: UserWhereUniqueInput!) {
+    user(where: $where) {
       username
+      created_at
+      id
       name
     }
   }
-}
-` 
-//Delete some tweet
-export const deleteSomeTweet = gql `
-mutation DeleteOneTweet($where: TweetWhereUniqueInput!) {
-  deleteOneTweet(where: $where) {
-    id
-  }
-}
 `
 
-//Get all tweet 
+// Add new tweet
+export const createOneTweet = gql`
+  mutation CreateOneTweet($data: TweetCreateInput!) {
+    createOneTweet(data: $data) {
+      id
+      content
+      user {
+        username
+        name
+      }
+    }
+  }
+`
+//Delete some tweet
+export const deleteSomeTweet = gql`
+  mutation DeleteOneTweet($where: TweetWhereUniqueInput!) {
+    deleteOneTweet(where: $where) {
+      id
+    }
+  }
+`
+
+//Get all tweet
 export const GET_TWEETS = gql`
   query Tweets($where: TweetWhereInput) {
     tweets(where: $where) {
@@ -74,3 +73,14 @@ export const GET_TWEETS = gql`
   }
 `
 
+export const GET_ACCESS_TOKEN = gql`
+  mutation fdsdf($data: GetAccessTokenInput!) {
+    getAccessToken(data: $data) {
+      id
+      name
+      email
+      accessToken
+      refreshToken
+    }
+  }
+`

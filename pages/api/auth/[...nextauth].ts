@@ -1,7 +1,7 @@
 import NextAuth from 'next-auth'
 import CredentialProvider from 'next-auth/providers/credentials'
-import { authLink, client } from '@/src/utilities/apollo'
-import { ApolloClient, createHttpLink, gql, InMemoryCache } from '@apollo/client'
+import { graphQLClient } from '@/src/libraries/graphql-request'
+import { GET_ACCESS_TOKEN } from '@/src/requests/graphql'
 
 export default NextAuth({
   providers: [
@@ -13,28 +13,13 @@ export default NextAuth({
       },
       authorize: async (credentials: any) => {
         try {
-          const { data } = await client.mutate({
-            mutation: gql`
-              mutation fdsdf($data: GetAccessTokenInput!) {
-                getAccessToken(data: $data) {
-                  id
-                  name
-                  email
-                  accessToken
-                  refreshToken
-                }
-              }
-            `,
-            variables: {
-              data: {
-                password: credentials?.password || '',
-                phone: credentials?.username || '',
-              },
+          const data = await graphQLClient.request(GET_ACCESS_TOKEN, {
+            data: {
+              password: credentials?.password || '',
+              phone: credentials?.username || '',
             },
           })
-          console.log(333344441, data, credentials)
-          console.log(111, credentials)
-          //database look up
+
           const user = data?.getAccessToken || {}
           return {
             id: user?.id,
@@ -72,7 +57,6 @@ export default NextAuth({
   secret: 'test',
   jwt: {
     secret: 'test',
-    //encryption: true,
   },
   pages: {
     signIn: '/login',

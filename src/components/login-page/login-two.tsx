@@ -39,9 +39,6 @@ const LoginTwo = ({ toSignUp }) => {
   const [loginGql, { data, loading, error }] = useMutation(LOGIN_MUTATION)
 
   const notify = async () => {
-    const varGql = phoneCode
-      ? { data: { phone: phoneCode, password: passValue } }
-      : { data: { username: userName, password: passValue } }
     try {
       if (error) throw error
       // const data = await loginGql({ variables: varGql })
