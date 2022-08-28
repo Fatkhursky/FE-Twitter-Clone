@@ -2,21 +2,11 @@
 import { useRouter } from 'next/router'
 import { signIn } from 'next-auth/react'
 import Header from './header'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import toast, { Toaster } from 'react-hot-toast'
-import { login } from '@/src/requests'
 import { useAtom } from 'jotai'
-import {
-  fieldUserName,
-  fieldPhone,
-  fieldEmail,
-  fieldPhoneCode,
-  globalCreateAccDate,
-} from '@/src/stores/jotai-atom'
+import { fieldUserName, fieldPhone, fieldPhoneCode } from '@/src/stores/jotai-atom'
 import clsx from 'clsx'
-import { useQuery, gql, useMutation } from '@apollo/client'
-import { LOGIN_MUTATION } from '@/src/requests/graphql'
-import { FaProjectDiagram } from 'react-icons/fa'
 
 //userName, toSignUp, phone
 const LoginTwo = ({ toSignUp }) => {
@@ -24,7 +14,6 @@ const LoginTwo = ({ toSignUp }) => {
   const [passValue, setPassValue] = useState('')
   const [phone, setPhone] = useAtom(fieldPhone)
   const [userName, setUserName] = useAtom(fieldUserName)
-  const [createAccDate, setCreateAccDate] = useAtom(globalCreateAccDate)
   const [phoneCode, setPhonecode] = useAtom(fieldPhoneCode)
 
   const isPassNull = (e) => {
@@ -36,21 +25,8 @@ const LoginTwo = ({ toSignUp }) => {
     setPassValue(e.target.value)
   }
 
-  const [loginGql, { data, loading, error }] = useMutation(LOGIN_MUTATION)
-
   const notify = async () => {
     try {
-      if (error) throw error
-      // const data = await loginGql({ variables: varGql })
-      //const [error, res] = await login(newLogin)
-      // console.log(564, data.data.getAccessToken.username)
-      //setCreateAccDate(data.data.getAccessToken.created_at)
-      //setName(data.data.getAccessToken.name)
-      //setUserName(data.data.getAccessToken.username)
-      console.log(123, userName)
-      // const token = data.data.getAccessToken.accessToken
-      // localStorage.setItem('Bearer', token)
-      //auth signIn
       const setSession = await signIn('credentials', {
         username: userName || phoneCode,
         password: passValue,
@@ -188,32 +164,3 @@ const LoginTwo = ({ toSignUp }) => {
 }
 
 export default LoginTwo
-
-//0832 896 214
-// const notify = async () => {
-//   const newLogin = { username: userName, phone: phoneCode, password: passValue }
-//   try {
-//     const [error, res] = await login(newLogin)
-//     if (error) throw error
-
-//     localStorage.setItem('Bearer', res.data.data.accessToken)
-//     //auth signIN
-//     const setSession = await signIn('credentials', {
-//       username: userName || phoneCode,
-//       password: passValue,
-//       redirect: false,
-//     })
-//     //console.log(77, setSession)
-
-//     return res.data.message
-//   } catch (error) {
-//     //console.log(666, error)
-//     if (error.response) {
-//       throw new Error(error.response.data.data.message)
-//     } else if (error.request) {
-//       throw new Error(error.request)
-//     } else {
-//       throw new Error(error.message)
-//     }
-//   }
-// }

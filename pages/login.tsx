@@ -2,31 +2,23 @@
 import Login from '@/src/components/login-page/login'
 import LoginTwo from '@/src/components/login-page/login-two'
 import { useRouter } from 'next/router'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Head from 'next/head'
 import { useAtom } from 'jotai'
 import {
   fieldPhone,
   fieldUserName,
-  fieldEmail,
   fieldPhoneCode,
   invalidField,
 } from '@/src/stores/jotai-atom'
-import { stepLoginAtom, stepRegisterAtom } from '@/src/stores/jotai-atom'
+import { stepLoginAtom } from '@/src/stores/jotai-atom'
 
 const LoginPage = () => {
   const [phone, setPhone] = useAtom(fieldPhone)
-  const [email, setEmail] = useAtom(fieldEmail)
   const [userName, setUserName] = useAtom(fieldUserName)
   const [stepLogin, setStepLogin] = useAtom(stepLoginAtom)
   const [phoneCode, setPhonecode] = useAtom(fieldPhoneCode)
   const [invalid, setInvalid] = useAtom(invalidField)
-
-  // useEffect(() => {
-  //   // Perform localStorage action
-  //   const item = localStorage.getItem('Bearer')
-  //   console.log(111,item)
-  // }, [])
 
   const isUserName = (e) => {
     e.preventDefault()
@@ -35,7 +27,7 @@ const LoginPage = () => {
 
   let router = useRouter()
 
-  const toSignUp = ()=> {
+  const toSignUp = () => {
     setStepLogin(0)
     router.push('/register')
   }

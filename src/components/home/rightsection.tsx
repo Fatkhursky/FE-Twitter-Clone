@@ -25,41 +25,31 @@ const trendsItem = [
 
 const otherUser = [
   {
-    username : "Juki",
+    username: 'Juki',
   },
   {
-    username : "Rojali",
+    username: 'Rojali',
   },
   {
-    username : "Jeki",
-  }
+    username: 'Jeki',
+  },
 ]
 
 const Rightsection = () => {
   return (
     <div className="flex flex-col h-fit">
       <div className="p-2 top-0 sticky bg-white">
-      <div className='relative tes'>
-      <input
-            id='none'
+        <div className="relative tes">
+          <input
+            id="none"
             className="rounded-full border active:border-sky-400 p-2 pl-[calc(46-450-8] gap-2 "
             type="text"
             placeholder="Search Twitter"
           />
-          <label htmlFor="one" className='absolute left-1 top-2'>
+          <label htmlFor="one" className="absolute left-1 top-2">
             <svg className="h-6 w-6 absolute ">{mySvg.search}</svg>
           </label>
-      </div>
-      
-        
-        {/* <label htmlFor="" className="relative">
-          <svg className="h-6 w-6 absolute ">{mySvg.search}</svg>
-          <input
-            className="rounded-full border active:border-sky-400 p-2 pl-[calc(46-450-8] gap-2 "
-            type="text"
-            placeholder="Search Twitter"
-          />
-        </label> */}
+        </div>
       </div>
       <div className="bg-[#f3f4f6] rounded-lg">
         <div className="p-2">
@@ -96,9 +86,11 @@ const Rightsection = () => {
           </h2>
         </div>
 
-        {
-          otherUser.map((user, i) => (
-            <div key={i} className="p-2 flex flex-col justify-center hover:bg-[#e5e7eb] cursor-pointer">
+        {otherUser.map((user, i) => (
+          <div
+            key={i}
+            className="p-2 flex flex-col justify-center hover:bg-[#e5e7eb] cursor-pointer"
+          >
             <div className="flex items-center justify-between">
               <div className="flex gap-2">
                 <img className="w-9 h-9" src="/assets/logo193.png" alt="" />
@@ -112,8 +104,7 @@ const Rightsection = () => {
               </button>
             </div>
           </div>
-          ))
-        }
+        ))}
 
         <div className="p-2 flex flex-col justify-center rounded-b-lg hover:bg-[#e5e7eb] cursor-pointer">
           <h2>Show more</h2>

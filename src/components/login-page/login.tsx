@@ -3,26 +3,17 @@ import Link from 'next/link'
 import Header from './header'
 import { mySvg } from '~/public/assets/svg.js'
 import { useRouter } from 'next/router'
-import { useAtom, atom } from 'jotai'
-import { useSession } from 'next-auth/react'
+import { useAtom } from 'jotai'
 import clsx from 'clsx'
-
 import {
-  stepLoginAtom,
   fieldPhone,
   fieldUserName,
   fieldEmail,
-  fieldPhoneCode,
   invalidField,
-  stepRegisterAtom,
 } from '@/src/stores/jotai-atom'
-import { useEffect } from 'react'
 
-const Login = ({ onChangePhoneEmailOrUsername, onSubmitUserName, pointer, color }) => {
+const Login = ({ onChangePhoneEmailOrUsername, onSubmitUserName }) => {
   const router = useRouter()
-  const [stepRegister, setStepRegister] = useAtom(stepRegisterAtom)
-
-  const { data: sesssion } = useSession()
 
   const noFeature = (e) => {
     e.preventDefault()

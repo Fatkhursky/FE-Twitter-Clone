@@ -4,14 +4,8 @@ import { mySvg } from '~/public/assets/svg'
 import { IoLogoTwitter } from 'react-icons/io'
 import clsx from 'clsx'
 import { useRouter } from 'next/router'
-import Link from 'next/link'
 import { useAtom } from 'jotai'
-import {
-  currentMenu,
-  fieldUserName,
-  globalName,
-  globalCreateAccDate,
-} from '../stores/jotai-atom'
+import { currentMenu, fieldUserName, globalName } from '../stores/jotai-atom'
 import Popup from 'reactjs-popup'
 import { signOut, useSession } from 'next-auth/react'
 import { decodeToken } from 'react-jwt'
@@ -53,19 +47,14 @@ const listMenuIcon = [
 ]
 
 const Mainmenu = () => {
-  const { data: session, status } = useSession()
+  const { data: session } = useSession()
 
   const [name, setName] = useAtom(globalName)
-  //const contentStyle = { position: 'fixed' }
-  const [activeMenu, setActiveMenu] = useAtom(currentMenu)
   const [currentRouter, setCurrentRouter] = useState('')
   const router = useRouter()
-  const [token, setToken] = useState()
   const [userName, setUserName] = useAtom(fieldUserName)
 
   useEffect(() => {
-    const item = localStorage.getItem('Bearer')
-    setToken(decodeToken(item))
     setCurrentRouter(router.pathname)
   }, [])
 
@@ -81,22 +70,16 @@ const Mainmenu = () => {
     },
   })
 
-  // if (loading) return 'Loading...'
-  // if (error) return `Error! ${error.message}`
-
   const handleChangeMenu = (menu: any) => {
     const currentMenu = menu
-    setActiveMenu(menu)
     router.push(`/${currentMenu}`)
   }
   function noFeature() {
     alert('Fitur belum tersedia')
   }
   const logOut = async () => {
-    //setStepLogin(0)
     const data = await signOut({ redirect: false, callbackUrl: `/api/auth/signin` })
     localStorage.removeItem('Bearer')
-    //console.log(5, data)
     router.push(data.url)
   }
 
@@ -182,43 +165,3 @@ const Mainmenu = () => {
 }
 
 export default Mainmenu
-
-{
-  /* <Popup
-                style={{ backgroundColor: 'red' }}
-                trigger={
-                  <div className="flex hover:bg-[#e5e7eb] cursor-pointer p-2 rounded-full justify-center items-center w-56">
-                  <img className="h-12 w-12" src={'/assets/logo193.png'} alt="" />
-                  <div className="grow pl-2">
-                    <p>name</p>
-                    <p>@name</p>
-                  </div>
-                  <div>
-                    <svg className="h-7 w-7">{mySvg.more}</svg>
-                  </div>
-                </div>
-                }
-                {...{ contentStyle }}
-                position="top left"
-              >
-                <div>
-                  <div style={{ display: 'flex' }}>
-                    <img
-                      id="imgjoe"
-                      style={{ height: '50px' }}
-                      src={'/assets/logo193.png'}
-                      alt="joebiden"
-                    />
-                    <p id="namejoe" style={{ fontSize: '15px' }}>
-                      &nbsp;{userName}
-                    </p>
-                  </div>
-                  <div className="homepage__popupcontent" onClick={noFeature}>
-                    <p>Add an existing account</p>
-                  </div>
-                  <div className="homepage__popupcontent" onClick={logOut}>
-                    <p>Log Out &nbsp;{userName}</p>
-                  </div>
-                </div>
-              </Popup> */
-}

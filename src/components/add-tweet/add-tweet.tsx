@@ -8,7 +8,6 @@ import { graphQLClient } from '@/src/libraries/graphql-request'
 import { useSession } from 'next-auth/react'
 
 const AddTweet = ({ newTweet, id, name, userName, filterGetTweets, refetch }: any) => {
-  const { data: session, status } = useSession()
   const queryClient = useQueryClient()
 
   const ref = useRef(null)

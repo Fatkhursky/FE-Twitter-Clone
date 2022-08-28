@@ -1,18 +1,14 @@
 // @ts-nocheck
 import { mySvg } from '~/public/assets/svg'
-import { decodeToken } from 'react-jwt'
 import Popup from 'reactjs-popup'
-import { deleteOneTweet } from '@/src/requests'
 import { GET_TWEETS } from '@/src/requests/graphql'
 import { useQuery, useMutation } from '@apollo/client'
-import { useState, useEffect } from 'react'
 import { deleteSomeTweet } from '@/src/requests/graphql'
 import LoadingBar from 'react-top-loading-bar'
 import { useRef } from 'react'
 import { useSession } from 'next-auth/react'
 const AllTweet = () => {
-  const { data: session, status } = useSession()
-  const [token, setToken] = useState()
+  const { data: session } = useSession()
 
   const [deleteTweet] = useMutation(deleteSomeTweet)
   const ref = useRef(null)
@@ -32,11 +28,6 @@ const AllTweet = () => {
     } catch (error) {}
     console.log(error)
   }
-
-  useEffect(() => {
-    const item = localStorage.getItem('Bearer')
-    setToken(decodeToken(item))
-  }, [])
 
   const { loading, error, data } = useQuery(GET_TWEETS, {
     variables: {
