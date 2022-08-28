@@ -27,6 +27,8 @@ export default NextAuth({
             email: user?.email,
             accessToken: user?.accessToken,
             refreshToken: user?.refreshToken,
+            username: user?.username,
+            created_at: user?.created_at,
           }
         } catch (e) {
           console.log(3333399, e)
@@ -42,6 +44,8 @@ export default NextAuth({
         token.id = user.id
         token.accessToken = user.accessToken
         token.refreshToken = user.refreshToken
+        token.username = user.username
+        token.created_at = user.created_at
       }
       return token
     },
@@ -50,6 +54,8 @@ export default NextAuth({
         session.id = token.id
         session.accessToken = token.accessToken
         session.refreshToken = token.refreshToken
+        session.username = token.username
+        session.created_at = token.created_at
       }
       return session
     },

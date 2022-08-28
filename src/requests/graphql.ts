@@ -79,6 +79,8 @@ export const GET_ACCESS_TOKEN = gql`
       id
       name
       email
+      username
+      created_at
       accessToken
       refreshToken
     }
