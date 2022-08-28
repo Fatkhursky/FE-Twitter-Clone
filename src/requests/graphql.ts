@@ -62,7 +62,7 @@ export const deleteSomeTweet = gql`
 //Get all tweet
 export const GET_TWEETS = gql`
   query Tweets($where: TweetWhereInput) {
-    tweets(where: $where) {
+    tweets(where: $where, orderBy: { created_at: desc }) {
       id
       content
       user {

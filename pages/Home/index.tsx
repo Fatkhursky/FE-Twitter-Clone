@@ -1,27 +1,56 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Home from '@/src/components/home/home'
 import Head from 'next/head'
 import Mainmenu from '@/src/components/mainmenu'
 import Rightsection from '@/src/components/home/rightsection'
-import { useMutation, useQuery } from '@apollo/client'
+// import { useMutation } from '@apollo/client'
+
 import { useSession } from 'next-auth/react'
 import { createOneTweet, GET_TWEETS } from '@/src/requests/graphql'
 import { useRef } from 'react'
 import LoadingBar from 'react-top-loading-bar'
+import { graphQLClient } from '@/src/libraries/graphql-request'
+import { gql } from 'graphql-request'
+import { useQuery, useMutation } from '@tanstack/react-query'
 
 const HomePage = () => {
   const { data: session, status } = useSession()
+  const [filterGetTweets, setFilterGetTweets] = useState<any>(null)
 
-  const [addTweet, { error }] = useMutation(createOneTweet)
-  const { data: dataox } = useQuery(GET_TWEETS, {
-    variables: {
-      where: {
-        user_id: {
-          equals: session?.id,
+  useEffect(() => {
+    if (status !== 'loading') {
+      setFilterGetTweets({
+        where: {
+          user_id: {
+            equals: session?.id,
+          },
         },
-      },
+      })
+    }
+  }, [status])
+
+  const { data: tweets, refetch } = useQuery(
+    ['/home', 'tweets', filterGetTweets],
+    async () => {
+      const data = await graphQLClient.request(GET_TWEETS, filterGetTweets)
+      return data?.tweets || []
     },
-  })
+    { initialData: [], enabled: filterGetTweets !== null }
+  )
+
+  const { mutateAsync, error } = useMutation(
+    async (variables) => {
+      const data = await graphQLClient.request(createOneTweet, variables)
+      console.log(3333444123, { data, variables })
+      return data?.tweets || []
+    },
+    {
+      onSuccess: () => {
+        refetch()
+      },
+    }
+  )
+
   const [tweet, setTweet] = useState('')
   const [newTweet, setNewTweet] = useState('')
   const ref = useRef(null)
@@ -31,20 +60,20 @@ const HomePage = () => {
     try {
       // @ts-ignore
       ref.current.continuousStart()
-      const res = await addTweet({
-        variables: {
-          data: {
-            content: tweet,
-            user: {
-              connect: {
-                id: session?.id,
-              },
+      // @ts-ignore
+      const res = mutateAsync({
+        data: {
+          content: tweet,
+          user: {
+            connect: {
+              id: session?.id,
             },
           },
         },
       })
       // @ts-ignore
       ref.current.complete()
+      // @ts-ignore
       const { data } = res
       const obj = data.createOneTweet
       setTweet('')
@@ -74,7 +103,7 @@ const HomePage = () => {
               tweet={tweet}
               setTweet={setTweet}
               newTweet={newTweet}
-              array={dataox?.tweets || []}
+              array={tweets}
               setArray={() => {}}
             />
           </div>
