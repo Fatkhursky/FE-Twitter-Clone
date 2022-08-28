@@ -28,11 +28,6 @@ const AddTweet = ({ newTweet, id, name, userName, filterGetTweets, refetch }: an
         ])
 
         queryClient.setQueryData(['/home', 'tweets', filterGetTweets], (old) => {
-          console.log(
-            33334444,
-            old,
-            old.filter((v: any) => v.id !== deleteData?.where?.id)
-          )
           //@ts-ignore
           return old.filter((v: any) => v.id !== deleteData?.where?.id)
         })
