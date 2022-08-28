@@ -1,14 +1,15 @@
-// @ts-nocheck
 import { mySvg } from '~/public/assets/svg'
 import AddTweet from '@/src/components/add-tweet/add-tweet'
 import TextareaAutosize from 'react-textarea-autosize'
 
-import { useState } from 'react'
-
-const Home = ({ handleSubmit, tweet, setTweet, newTweet, array, setArray }) => {
-  const color = tweet ? 'rgb(29, 108, 255)' : ''
-  const isPointer = tweet ? 'pointer' : ''
-
+const Home = ({
+  handleSubmit,
+  tweet,
+  setTweet,
+  array,
+  filterGetTweets,
+  refetch,
+}: any) => {
   return (
     <div className="h-full">
       <div className="bg-white flex items-center justify-between px-2 py-2 sticky top-0 relative">
@@ -66,15 +67,15 @@ const Home = ({ handleSubmit, tweet, setTweet, newTweet, array, setArray }) => {
 
           <div>
             {array.length > 0 ? (
-              array.map((e, i) => (
+              array.map((e: any, i: number) => (
                 <AddTweet
                   key={i}
                   newTweet={e.content}
                   id={e.id}
-                  array={array}
-                  setArray={setArray}
                   name={e.user.name}
                   userName={e.user.username}
+                  filterGetTweets={filterGetTweets}
+                  refetch={refetch}
                 />
               ))
             ) : (
@@ -93,18 +94,3 @@ const Home = ({ handleSubmit, tweet, setTweet, newTweet, array, setArray }) => {
   )
 }
 export default Home
-
-// <div className="flex justify-between p-2">
-// <div className="border rounded-2xl p-2 px-10 cursor-pointer hover:bg-[#f1f5f9]">
-//   <p>Digitals creators</p>
-// </div>
-// <div className="border rounded-2xl p-2 px-10 cursor-pointer hover:bg-[#f1f5f9]">
-//   <p>K-Pop</p>
-// </div>
-// <div className="border rounded-2xl p-2 px-10 cursor-pointer hover:bg-[#f1f5f9]">
-//   <p>Cats</p>
-// </div>
-// <div className="border rounded-2xl p-2 px-10 cursor-pointer hover:bg-[#f1f5f9]">
-//   <p>Viral</p>
-// </div>
-// </div>

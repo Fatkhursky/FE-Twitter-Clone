@@ -37,7 +37,7 @@ const HomePage = () => {
     { initialData: [], enabled: filterGetTweets !== null }
   )
 
-  const { mutateAsync, error } = useMutation(
+  const { mutate, error } = useMutation(
     async (variables) => {
       const data = await graphQLClient.request(createOneTweet, variables)
       console.log(3333444123, { data, variables })
@@ -77,14 +77,13 @@ const HomePage = () => {
   )
 
   const [tweet, setTweet] = useState('')
-  const [newTweet, setNewTweet] = useState('')
   const ref = useRef(null)
 
   const handleSubmit = async (e: any) => {
     e.preventDefault()
     try {
       // @ts-ignore
-      const res = mutateAsync({
+      mutate({
         data: {
           content: tweet,
           user: {
@@ -120,9 +119,9 @@ const HomePage = () => {
               handleSubmit={handleSubmit}
               tweet={tweet}
               setTweet={setTweet}
-              newTweet={newTweet}
               array={tweets}
-              setArray={() => {}}
+              filterGetTweets={filterGetTweets}
+              refetch={refetch}
             />
           </div>
           <div className="h-fit w-1/4 sticky -top-3/4">

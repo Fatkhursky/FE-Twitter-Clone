@@ -1,30 +1,64 @@
-// @ts-nocheck
-
-import { decodeToken } from 'react-jwt'
 import { mySvg } from '~/public/assets/svg'
 import Popup from 'reactjs-popup'
 import LoadingBar from 'react-top-loading-bar'
 import { deleteSomeTweet } from '@/src/requests/graphql'
-import { ApolloClient, gql, InMemoryCache, useMutation, useQuery } from '@apollo/client'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useRef } from 'react'
+import { graphQLClient } from '@/src/libraries/graphql-request'
+import { useSession } from 'next-auth/react'
 
-const AddTweet = ({ newTweet, id, array, setArray, name, userName }) => {
+const AddTweet = ({ newTweet, id, name, userName, filterGetTweets, refetch }: any) => {
+  const { data: session, status } = useSession()
+  const queryClient = useQueryClient()
+
   const ref = useRef(null)
-  //Delete some tweet
-  const [deleteTweet, { data, loading, error }] = useMutation(deleteSomeTweet)
+  const { mutate, error } = useMutation(
+    async (variables) => {
+      const data = await graphQLClient.request(deleteSomeTweet, variables)
+      return data?.tweets || []
+    },
+    {
+      onMutate: (deleteData: any) => {
+        // @ts-ignore
+        ref.current.continuousStart()
+        const previousTodos = queryClient.getQueryData([
+          '/home',
+          'tweets',
+          filterGetTweets,
+        ])
+
+        queryClient.setQueryData(['/home', 'tweets', filterGetTweets], (old) => {
+          console.log(
+            33334444,
+            old,
+            old.filter((v: any) => v.id !== deleteData?.where?.id)
+          )
+          //@ts-ignore
+          return old.filter((v: any) => v.id !== deleteData?.where?.id)
+        })
+
+        return { previousTodos }
+      },
+      onSuccess: () => {
+        refetch()
+        // @ts-ignore
+        ref.current.complete()
+      },
+    }
+  )
+  console.log(3333444, error)
   const handleDelete = async () => {
     try {
+      //@ts-ignore
       ref.current.continuousStart()
-      const res = await deleteTweet({
-        variables: {
-          where: {
-            id: id,
-          },
+      await mutate({
+        where: {
+          id: id,
         },
       })
+      //@ts-ignore
       ref.current.complete()
-      setArray((array = array.filter((e) => e.id !== id)))
-      return res.data.deleteOneTweet !== null ? 'success' : 'Failed'
+      // return res.data.deleteOneTweet !== null ? 'success' : 'Failed'
     } catch (error) {}
     console.log(error)
   }
