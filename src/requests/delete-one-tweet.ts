@@ -1,6 +1,9 @@
-import api from '@/src/utilities/axios'
+import api from '@/src/libraries/axios'
 
-type DeleteOneTweetFn = (id: string, config: { Authorization: string }) => Promise<[error: any]>
+type DeleteOneTweetFn = (
+  id: string,
+  config: { Authorization: string }
+) => Promise<[error: any]>
 
 const deleteOneTweet: DeleteOneTweetFn = async (id, { Authorization }) => {
   try {

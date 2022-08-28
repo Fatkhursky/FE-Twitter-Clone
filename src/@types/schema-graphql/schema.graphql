@@ -1,0 +1,1486 @@
+type Query {
+    aggregateFollow(where: FollowWhereInput, orderBy: [FollowOrderByWithRelationInput!], cursor: FollowWhereUniqueInput, take: Int, skip: Int): AggregateFollow!
+    findFirstFollow(where: FollowWhereInput, orderBy: [FollowOrderByWithRelationInput!], cursor: FollowWhereUniqueInput, take: Int, skip: Int, distinct: [FollowScalarFieldEnum!]): Follow
+    follows(where: FollowWhereInput, orderBy: [FollowOrderByWithRelationInput!], cursor: FollowWhereUniqueInput, take: Int, skip: Int, distinct: [FollowScalarFieldEnum!]): [Follow!]!
+    follow(where: FollowWhereUniqueInput!): Follow
+    groupByFollow(where: FollowWhereInput, orderBy: [FollowOrderByWithAggregationInput!], by: [FollowScalarFieldEnum!]!, having: FollowScalarWhereWithAggregatesInput, take: Int, skip: Int): [FollowGroupBy!]!
+    aggregateTweet(where: TweetWhereInput, orderBy: [TweetOrderByWithRelationInput!], cursor: TweetWhereUniqueInput, take: Int, skip: Int): AggregateTweet!
+    findFirstTweet(where: TweetWhereInput, orderBy: [TweetOrderByWithRelationInput!], cursor: TweetWhereUniqueInput, take: Int, skip: Int, distinct: [TweetScalarFieldEnum!]): Tweet
+    tweets(where: TweetWhereInput, orderBy: [TweetOrderByWithRelationInput!], cursor: TweetWhereUniqueInput, take: Int, skip: Int, distinct: [TweetScalarFieldEnum!]): [Tweet!]!
+    tweet(where: TweetWhereUniqueInput!): Tweet
+    groupByTweet(where: TweetWhereInput, orderBy: [TweetOrderByWithAggregationInput!], by: [TweetScalarFieldEnum!]!, having: TweetScalarWhereWithAggregatesInput, take: Int, skip: Int): [TweetGroupBy!]!
+    aggregateUser(where: UserWhereInput, orderBy: [UserOrderByWithRelationInput!], cursor: UserWhereUniqueInput, take: Int, skip: Int): AggregateUser!
+    findFirstUser(where: UserWhereInput, orderBy: [UserOrderByWithRelationInput!], cursor: UserWhereUniqueInput, take: Int, skip: Int, distinct: [UserScalarFieldEnum!]): User
+    users(where: UserWhereInput, orderBy: [UserOrderByWithRelationInput!], cursor: UserWhereUniqueInput, take: Int, skip: Int, distinct: [UserScalarFieldEnum!]): [User!]!
+    user(where: UserWhereUniqueInput!): User
+    groupByUser(where: UserWhereInput, orderBy: [UserOrderByWithAggregationInput!], by: [UserScalarFieldEnum!]!, having: UserScalarWhereWithAggregatesInput, take: Int, skip: Int): [UserGroupBy!]!
+}
+
+type AggregateFollow {
+    _count: FollowCountAggregate
+    _avg: FollowAvgAggregate
+    _sum: FollowSumAggregate
+    _min: FollowMinAggregate
+    _max: FollowMaxAggregate
+}
+
+type FollowCountAggregate {
+    created_at: Int!
+    updated_at: Int!
+    follower_id: Int!
+    following_id: Int!
+    _all: Int!
+}
+
+type FollowAvgAggregate {
+    follower_id: Float
+    following_id: Float
+}
+
+type FollowSumAggregate {
+    follower_id: Int
+    following_id: Int
+}
+
+type FollowMinAggregate {
+    created_at: DateTime
+    updated_at: DateTime
+    follower_id: Int
+    following_id: Int
+}
+
+"""
+The javascript `Date` as string. Type represents date and time as the ISO Date string.
+"""
+scalar DateTime
+
+type FollowMaxAggregate {
+    created_at: DateTime
+    updated_at: DateTime
+    follower_id: Int
+    following_id: Int
+}
+
+input FollowWhereInput {
+    AND: [FollowWhereInput!]
+    OR: [FollowWhereInput!]
+    NOT: [FollowWhereInput!]
+    created_at: DateTimeNullableFilter
+    updated_at: DateTimeNullableFilter
+    follower: UserRelationFilter
+    follower_id: IntFilter
+    following: UserRelationFilter
+    following_id: IntFilter
+}
+
+input DateTimeNullableFilter {
+    equals: DateTime
+    in: [DateTime!]
+    notIn: [DateTime!]
+    lt: DateTime
+    lte: DateTime
+    gt: DateTime
+    gte: DateTime
+    not: NestedDateTimeNullableFilter
+}
+
+input NestedDateTimeNullableFilter {
+    equals: DateTime
+    in: [DateTime!]
+    notIn: [DateTime!]
+    lt: DateTime
+    lte: DateTime
+    gt: DateTime
+    gte: DateTime
+    not: NestedDateTimeNullableFilter
+}
+
+input UserRelationFilter {
+    is: UserWhereInput
+    isNot: UserWhereInput
+}
+
+input UserWhereInput {
+    AND: [UserWhereInput!]
+    OR: [UserWhereInput!]
+    NOT: [UserWhereInput!]
+    id: IntFilter
+    created_at: DateTimeNullableFilter
+    updated_at: DateTimeNullableFilter
+    picture: StringNullableFilter
+    name: StringFilter
+    date_of_birth: DateTimeFilter
+    username: StringNullableFilter
+    email: StringNullableFilter
+    phone: StringNullableFilter
+    password: StringFilter
+    Tweets: TweetListRelationFilter
+    followers: FollowListRelationFilter
+    followings: FollowListRelationFilter
+}
+
+input IntFilter {
+    equals: Int
+    in: [Int!]
+    notIn: [Int!]
+    lt: Int
+    lte: Int
+    gt: Int
+    gte: Int
+    not: NestedIntFilter
+}
+
+input NestedIntFilter {
+    equals: Int
+    in: [Int!]
+    notIn: [Int!]
+    lt: Int
+    lte: Int
+    gt: Int
+    gte: Int
+    not: NestedIntFilter
+}
+
+input StringNullableFilter {
+    equals: String
+    in: [String!]
+    notIn: [String!]
+    lt: String
+    lte: String
+    gt: String
+    gte: String
+    contains: String
+    startsWith: String
+    endsWith: String
+    mode: QueryMode
+    not: NestedStringNullableFilter
+}
+
+enum QueryMode {
+    default
+    insensitive
+}
+
+input NestedStringNullableFilter {
+    equals: String
+    in: [String!]
+    notIn: [String!]
+    lt: String
+    lte: String
+    gt: String
+    gte: String
+    contains: String
+    startsWith: String
+    endsWith: String
+    not: NestedStringNullableFilter
+}
+
+input StringFilter {
+    equals: String
+    in: [String!]
+    notIn: [String!]
+    lt: String
+    lte: String
+    gt: String
+    gte: String
+    contains: String
+    startsWith: String
+    endsWith: String
+    mode: QueryMode
+    not: NestedStringFilter
+}
+
+input NestedStringFilter {
+    equals: String
+    in: [String!]
+    notIn: [String!]
+    lt: String
+    lte: String
+    gt: String
+    gte: String
+    contains: String
+    startsWith: String
+    endsWith: String
+    not: NestedStringFilter
+}
+
+input DateTimeFilter {
+    equals: DateTime
+    in: [DateTime!]
+    notIn: [DateTime!]
+    lt: DateTime
+    lte: DateTime
+    gt: DateTime
+    gte: DateTime
+    not: NestedDateTimeFilter
+}
+
+input NestedDateTimeFilter {
+    equals: DateTime
+    in: [DateTime!]
+    notIn: [DateTime!]
+    lt: DateTime
+    lte: DateTime
+    gt: DateTime
+    gte: DateTime
+    not: NestedDateTimeFilter
+}
+
+input TweetListRelationFilter {
+    every: TweetWhereInput
+    some: TweetWhereInput
+    none: TweetWhereInput
+}
+
+input TweetWhereInput {
+    AND: [TweetWhereInput!]
+    OR: [TweetWhereInput!]
+    NOT: [TweetWhereInput!]
+    id: IntFilter
+    created_at: DateTimeNullableFilter
+    updated_at: DateTimeNullableFilter
+    content: StringFilter
+    attachment: JsonNullableFilter
+    user: UserRelationFilter
+    user_id: IntFilter
+}
+
+input JsonNullableFilter {
+    equals: JSON
+    path: [String!]
+    string_contains: String
+    string_starts_with: String
+    string_ends_with: String
+    array_contains: JSON
+    array_starts_with: JSON
+    array_ends_with: JSON
+    lt: JSON
+    lte: JSON
+    gt: JSON
+    gte: JSON
+    not: JSON
+}
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON
+
+input FollowListRelationFilter {
+    every: FollowWhereInput
+    some: FollowWhereInput
+    none: FollowWhereInput
+}
+
+input FollowOrderByWithRelationInput {
+    created_at: SortOrder
+    updated_at: SortOrder
+    follower: UserOrderByWithRelationInput
+    follower_id: SortOrder
+    following: UserOrderByWithRelationInput
+    following_id: SortOrder
+}
+
+enum SortOrder {
+    asc
+    desc
+}
+
+input UserOrderByWithRelationInput {
+    id: SortOrder
+    created_at: SortOrder
+    updated_at: SortOrder
+    picture: SortOrder
+    name: SortOrder
+    date_of_birth: SortOrder
+    username: SortOrder
+    email: SortOrder
+    phone: SortOrder
+    password: SortOrder
+    Tweets: TweetOrderByRelationAggregateInput
+    followers: FollowOrderByRelationAggregateInput
+    followings: FollowOrderByRelationAggregateInput
+}
+
+input TweetOrderByRelationAggregateInput {
+    _count: SortOrder
+}
+
+input FollowOrderByRelationAggregateInput {
+    _count: SortOrder
+}
+
+input FollowWhereUniqueInput {
+    follower_id_following_id: FollowFollower_idFollowing_idCompoundUniqueInput
+}
+
+input FollowFollower_idFollowing_idCompoundUniqueInput {
+    follower_id: Int!
+    following_id: Int!
+}
+
+type Follow {
+    created_at: DateTime
+    updated_at: DateTime
+    follower_id: Int!
+    following_id: Int!
+    follower: User!
+    following: User!
+}
+
+type User {
+    id: Int!
+    created_at: DateTime
+    updated_at: DateTime
+    picture: String
+    name: String!
+    date_of_birth: DateTime!
+    username: String
+    email: String
+    phone: String
+    password: String!
+    _count: UserCount
+    Tweets(where: TweetWhereInput, orderBy: [TweetOrderByWithRelationInput!], cursor: TweetWhereUniqueInput, take: Int, skip: Int, distinct: [TweetScalarFieldEnum!]): [Tweet!]!
+    followers(where: FollowWhereInput, orderBy: [FollowOrderByWithRelationInput!], cursor: FollowWhereUniqueInput, take: Int, skip: Int, distinct: [FollowScalarFieldEnum!]): [Follow!]!
+    followings(where: FollowWhereInput, orderBy: [FollowOrderByWithRelationInput!], cursor: FollowWhereUniqueInput, take: Int, skip: Int, distinct: [FollowScalarFieldEnum!]): [Follow!]!
+}
+
+type UserCount {
+    Tweets: Int!
+    followers: Int!
+    followings: Int!
+}
+
+type Tweet {
+    id: Int!
+    created_at: DateTime
+    updated_at: DateTime
+    content: String!
+    attachment: JSON
+    user_id: Int!
+    user: User!
+}
+
+input TweetOrderByWithRelationInput {
+    id: SortOrder
+    created_at: SortOrder
+    updated_at: SortOrder
+    content: SortOrder
+    attachment: SortOrder
+    user: UserOrderByWithRelationInput
+    user_id: SortOrder
+}
+
+input TweetWhereUniqueInput {
+    id: Int
+}
+
+enum TweetScalarFieldEnum {
+    id
+    created_at
+    updated_at
+    content
+    attachment
+    user_id
+}
+
+enum FollowScalarFieldEnum {
+    created_at
+    updated_at
+    follower_id
+    following_id
+}
+
+type FollowGroupBy {
+    created_at: DateTime
+    updated_at: DateTime
+    follower_id: Int!
+    following_id: Int!
+    _count: FollowCountAggregate
+    _avg: FollowAvgAggregate
+    _sum: FollowSumAggregate
+    _min: FollowMinAggregate
+    _max: FollowMaxAggregate
+}
+
+input FollowOrderByWithAggregationInput {
+    created_at: SortOrder
+    updated_at: SortOrder
+    follower_id: SortOrder
+    following_id: SortOrder
+    _count: FollowCountOrderByAggregateInput
+    _avg: FollowAvgOrderByAggregateInput
+    _max: FollowMaxOrderByAggregateInput
+    _min: FollowMinOrderByAggregateInput
+    _sum: FollowSumOrderByAggregateInput
+}
+
+input FollowCountOrderByAggregateInput {
+    created_at: SortOrder
+    updated_at: SortOrder
+    follower_id: SortOrder
+    following_id: SortOrder
+}
+
+input FollowAvgOrderByAggregateInput {
+    follower_id: SortOrder
+    following_id: SortOrder
+}
+
+input FollowMaxOrderByAggregateInput {
+    created_at: SortOrder
+    updated_at: SortOrder
+    follower_id: SortOrder
+    following_id: SortOrder
+}
+
+input FollowMinOrderByAggregateInput {
+    created_at: SortOrder
+    updated_at: SortOrder
+    follower_id: SortOrder
+    following_id: SortOrder
+}
+
+input FollowSumOrderByAggregateInput {
+    follower_id: SortOrder
+    following_id: SortOrder
+}
+
+input FollowScalarWhereWithAggregatesInput {
+    AND: [FollowScalarWhereWithAggregatesInput!]
+    OR: [FollowScalarWhereWithAggregatesInput!]
+    NOT: [FollowScalarWhereWithAggregatesInput!]
+    created_at: DateTimeNullableWithAggregatesFilter
+    updated_at: DateTimeNullableWithAggregatesFilter
+    follower_id: IntWithAggregatesFilter
+    following_id: IntWithAggregatesFilter
+}
+
+input DateTimeNullableWithAggregatesFilter {
+    equals: DateTime
+    in: [DateTime!]
+    notIn: [DateTime!]
+    lt: DateTime
+    lte: DateTime
+    gt: DateTime
+    gte: DateTime
+    not: NestedDateTimeNullableWithAggregatesFilter
+    _count: NestedIntNullableFilter
+    _min: NestedDateTimeNullableFilter
+    _max: NestedDateTimeNullableFilter
+}
+
+input NestedDateTimeNullableWithAggregatesFilter {
+    equals: DateTime
+    in: [DateTime!]
+    notIn: [DateTime!]
+    lt: DateTime
+    lte: DateTime
+    gt: DateTime
+    gte: DateTime
+    not: NestedDateTimeNullableWithAggregatesFilter
+    _count: NestedIntNullableFilter
+    _min: NestedDateTimeNullableFilter
+    _max: NestedDateTimeNullableFilter
+}
+
+input NestedIntNullableFilter {
+    equals: Int
+    in: [Int!]
+    notIn: [Int!]
+    lt: Int
+    lte: Int
+    gt: Int
+    gte: Int
+    not: NestedIntNullableFilter
+}
+
+input IntWithAggregatesFilter {
+    equals: Int
+    in: [Int!]
+    notIn: [Int!]
+    lt: Int
+    lte: Int
+    gt: Int
+    gte: Int
+    not: NestedIntWithAggregatesFilter
+    _count: NestedIntFilter
+    _avg: NestedFloatFilter
+    _sum: NestedIntFilter
+    _min: NestedIntFilter
+    _max: NestedIntFilter
+}
+
+input NestedIntWithAggregatesFilter {
+    equals: Int
+    in: [Int!]
+    notIn: [Int!]
+    lt: Int
+    lte: Int
+    gt: Int
+    gte: Int
+    not: NestedIntWithAggregatesFilter
+    _count: NestedIntFilter
+    _avg: NestedFloatFilter
+    _sum: NestedIntFilter
+    _min: NestedIntFilter
+    _max: NestedIntFilter
+}
+
+input NestedFloatFilter {
+    equals: Float
+    in: [Float!]
+    notIn: [Float!]
+    lt: Float
+    lte: Float
+    gt: Float
+    gte: Float
+    not: NestedFloatFilter
+}
+
+type AggregateTweet {
+    _count: TweetCountAggregate
+    _avg: TweetAvgAggregate
+    _sum: TweetSumAggregate
+    _min: TweetMinAggregate
+    _max: TweetMaxAggregate
+}
+
+type TweetCountAggregate {
+    id: Int!
+    created_at: Int!
+    updated_at: Int!
+    content: Int!
+    attachment: Int!
+    user_id: Int!
+    _all: Int!
+}
+
+type TweetAvgAggregate {
+    id: Float
+    user_id: Float
+}
+
+type TweetSumAggregate {
+    id: Int
+    user_id: Int
+}
+
+type TweetMinAggregate {
+    id: Int
+    created_at: DateTime
+    updated_at: DateTime
+    content: String
+    user_id: Int
+}
+
+type TweetMaxAggregate {
+    id: Int
+    created_at: DateTime
+    updated_at: DateTime
+    content: String
+    user_id: Int
+}
+
+type TweetGroupBy {
+    id: Int!
+    created_at: DateTime
+    updated_at: DateTime
+    content: String!
+    attachment: JSON
+    user_id: Int!
+    _count: TweetCountAggregate
+    _avg: TweetAvgAggregate
+    _sum: TweetSumAggregate
+    _min: TweetMinAggregate
+    _max: TweetMaxAggregate
+}
+
+input TweetOrderByWithAggregationInput {
+    id: SortOrder
+    created_at: SortOrder
+    updated_at: SortOrder
+    content: SortOrder
+    attachment: SortOrder
+    user_id: SortOrder
+    _count: TweetCountOrderByAggregateInput
+    _avg: TweetAvgOrderByAggregateInput
+    _max: TweetMaxOrderByAggregateInput
+    _min: TweetMinOrderByAggregateInput
+    _sum: TweetSumOrderByAggregateInput
+}
+
+input TweetCountOrderByAggregateInput {
+    id: SortOrder
+    created_at: SortOrder
+    updated_at: SortOrder
+    content: SortOrder
+    attachment: SortOrder
+    user_id: SortOrder
+}
+
+input TweetAvgOrderByAggregateInput {
+    id: SortOrder
+    user_id: SortOrder
+}
+
+input TweetMaxOrderByAggregateInput {
+    id: SortOrder
+    created_at: SortOrder
+    updated_at: SortOrder
+    content: SortOrder
+    user_id: SortOrder
+}
+
+input TweetMinOrderByAggregateInput {
+    id: SortOrder
+    created_at: SortOrder
+    updated_at: SortOrder
+    content: SortOrder
+    user_id: SortOrder
+}
+
+input TweetSumOrderByAggregateInput {
+    id: SortOrder
+    user_id: SortOrder
+}
+
+input TweetScalarWhereWithAggregatesInput {
+    AND: [TweetScalarWhereWithAggregatesInput!]
+    OR: [TweetScalarWhereWithAggregatesInput!]
+    NOT: [TweetScalarWhereWithAggregatesInput!]
+    id: IntWithAggregatesFilter
+    created_at: DateTimeNullableWithAggregatesFilter
+    updated_at: DateTimeNullableWithAggregatesFilter
+    content: StringWithAggregatesFilter
+    attachment: JsonNullableWithAggregatesFilter
+    user_id: IntWithAggregatesFilter
+}
+
+input StringWithAggregatesFilter {
+    equals: String
+    in: [String!]
+    notIn: [String!]
+    lt: String
+    lte: String
+    gt: String
+    gte: String
+    contains: String
+    startsWith: String
+    endsWith: String
+    mode: QueryMode
+    not: NestedStringWithAggregatesFilter
+    _count: NestedIntFilter
+    _min: NestedStringFilter
+    _max: NestedStringFilter
+}
+
+input NestedStringWithAggregatesFilter {
+    equals: String
+    in: [String!]
+    notIn: [String!]
+    lt: String
+    lte: String
+    gt: String
+    gte: String
+    contains: String
+    startsWith: String
+    endsWith: String
+    not: NestedStringWithAggregatesFilter
+    _count: NestedIntFilter
+    _min: NestedStringFilter
+    _max: NestedStringFilter
+}
+
+input JsonNullableWithAggregatesFilter {
+    equals: JSON
+    path: [String!]
+    string_contains: String
+    string_starts_with: String
+    string_ends_with: String
+    array_contains: JSON
+    array_starts_with: JSON
+    array_ends_with: JSON
+    lt: JSON
+    lte: JSON
+    gt: JSON
+    gte: JSON
+    not: JSON
+    _count: NestedIntNullableFilter
+    _min: NestedJsonNullableFilter
+    _max: NestedJsonNullableFilter
+}
+
+input NestedJsonNullableFilter {
+    equals: JSON
+    path: [String!]
+    string_contains: String
+    string_starts_with: String
+    string_ends_with: String
+    array_contains: JSON
+    array_starts_with: JSON
+    array_ends_with: JSON
+    lt: JSON
+    lte: JSON
+    gt: JSON
+    gte: JSON
+    not: JSON
+}
+
+type AggregateUser {
+    _count: UserCountAggregate
+    _avg: UserAvgAggregate
+    _sum: UserSumAggregate
+    _min: UserMinAggregate
+    _max: UserMaxAggregate
+}
+
+type UserCountAggregate {
+    id: Int!
+    created_at: Int!
+    updated_at: Int!
+    picture: Int!
+    name: Int!
+    date_of_birth: Int!
+    username: Int!
+    email: Int!
+    phone: Int!
+    password: Int!
+    _all: Int!
+}
+
+type UserAvgAggregate {
+    id: Float
+}
+
+type UserSumAggregate {
+    id: Int
+}
+
+type UserMinAggregate {
+    id: Int
+    created_at: DateTime
+    updated_at: DateTime
+    picture: String
+    name: String
+    date_of_birth: DateTime
+    username: String
+    email: String
+    phone: String
+    password: String
+}
+
+type UserMaxAggregate {
+    id: Int
+    created_at: DateTime
+    updated_at: DateTime
+    picture: String
+    name: String
+    date_of_birth: DateTime
+    username: String
+    email: String
+    phone: String
+    password: String
+}
+
+input UserWhereUniqueInput {
+    id: Int
+    username: String
+    email: String
+}
+
+enum UserScalarFieldEnum {
+    id
+    created_at
+    updated_at
+    picture
+    name
+    date_of_birth
+    username
+    email
+    phone
+    password
+}
+
+type UserGroupBy {
+    id: Int!
+    created_at: DateTime
+    updated_at: DateTime
+    picture: String
+    name: String!
+    date_of_birth: DateTime!
+    username: String
+    email: String
+    phone: String
+    password: String!
+    _count: UserCountAggregate
+    _avg: UserAvgAggregate
+    _sum: UserSumAggregate
+    _min: UserMinAggregate
+    _max: UserMaxAggregate
+}
+
+input UserOrderByWithAggregationInput {
+    id: SortOrder
+    created_at: SortOrder
+    updated_at: SortOrder
+    picture: SortOrder
+    name: SortOrder
+    date_of_birth: SortOrder
+    username: SortOrder
+    email: SortOrder
+    phone: SortOrder
+    password: SortOrder
+    _count: UserCountOrderByAggregateInput
+    _avg: UserAvgOrderByAggregateInput
+    _max: UserMaxOrderByAggregateInput
+    _min: UserMinOrderByAggregateInput
+    _sum: UserSumOrderByAggregateInput
+}
+
+input UserCountOrderByAggregateInput {
+    id: SortOrder
+    created_at: SortOrder
+    updated_at: SortOrder
+    picture: SortOrder
+    name: SortOrder
+    date_of_birth: SortOrder
+    username: SortOrder
+    email: SortOrder
+    phone: SortOrder
+    password: SortOrder
+}
+
+input UserAvgOrderByAggregateInput {
+    id: SortOrder
+}
+
+input UserMaxOrderByAggregateInput {
+    id: SortOrder
+    created_at: SortOrder
+    updated_at: SortOrder
+    picture: SortOrder
+    name: SortOrder
+    date_of_birth: SortOrder
+    username: SortOrder
+    email: SortOrder
+    phone: SortOrder
+    password: SortOrder
+}
+
+input UserMinOrderByAggregateInput {
+    id: SortOrder
+    created_at: SortOrder
+    updated_at: SortOrder
+    picture: SortOrder
+    name: SortOrder
+    date_of_birth: SortOrder
+    username: SortOrder
+    email: SortOrder
+    phone: SortOrder
+    password: SortOrder
+}
+
+input UserSumOrderByAggregateInput {
+    id: SortOrder
+}
+
+input UserScalarWhereWithAggregatesInput {
+    AND: [UserScalarWhereWithAggregatesInput!]
+    OR: [UserScalarWhereWithAggregatesInput!]
+    NOT: [UserScalarWhereWithAggregatesInput!]
+    id: IntWithAggregatesFilter
+    created_at: DateTimeNullableWithAggregatesFilter
+    updated_at: DateTimeNullableWithAggregatesFilter
+    picture: StringNullableWithAggregatesFilter
+    name: StringWithAggregatesFilter
+    date_of_birth: DateTimeWithAggregatesFilter
+    username: StringNullableWithAggregatesFilter
+    email: StringNullableWithAggregatesFilter
+    phone: StringNullableWithAggregatesFilter
+    password: StringWithAggregatesFilter
+}
+
+input StringNullableWithAggregatesFilter {
+    equals: String
+    in: [String!]
+    notIn: [String!]
+    lt: String
+    lte: String
+    gt: String
+    gte: String
+    contains: String
+    startsWith: String
+    endsWith: String
+    mode: QueryMode
+    not: NestedStringNullableWithAggregatesFilter
+    _count: NestedIntNullableFilter
+    _min: NestedStringNullableFilter
+    _max: NestedStringNullableFilter
+}
+
+input NestedStringNullableWithAggregatesFilter {
+    equals: String
+    in: [String!]
+    notIn: [String!]
+    lt: String
+    lte: String
+    gt: String
+    gte: String
+    contains: String
+    startsWith: String
+    endsWith: String
+    not: NestedStringNullableWithAggregatesFilter
+    _count: NestedIntNullableFilter
+    _min: NestedStringNullableFilter
+    _max: NestedStringNullableFilter
+}
+
+input DateTimeWithAggregatesFilter {
+    equals: DateTime
+    in: [DateTime!]
+    notIn: [DateTime!]
+    lt: DateTime
+    lte: DateTime
+    gt: DateTime
+    gte: DateTime
+    not: NestedDateTimeWithAggregatesFilter
+    _count: NestedIntFilter
+    _min: NestedDateTimeFilter
+    _max: NestedDateTimeFilter
+}
+
+input NestedDateTimeWithAggregatesFilter {
+    equals: DateTime
+    in: [DateTime!]
+    notIn: [DateTime!]
+    lt: DateTime
+    lte: DateTime
+    gt: DateTime
+    gte: DateTime
+    not: NestedDateTimeWithAggregatesFilter
+    _count: NestedIntFilter
+    _min: NestedDateTimeFilter
+    _max: NestedDateTimeFilter
+}
+
+type Mutation {
+    createManyFollow(data: [FollowCreateManyInput!]!, skipDuplicates: Boolean): AffectedRowsOutput!
+    createOneFollow(data: FollowCreateInput!): Follow!
+    deleteManyFollow(where: FollowWhereInput): AffectedRowsOutput!
+    deleteOneFollow(where: FollowWhereUniqueInput!): Follow
+    updateManyFollow(data: FollowUpdateManyMutationInput!, where: FollowWhereInput): AffectedRowsOutput!
+    updateOneFollow(data: FollowUpdateInput!, where: FollowWhereUniqueInput!): Follow
+    upsertOneFollow(where: FollowWhereUniqueInput!, create: FollowCreateInput!, update: FollowUpdateInput!): Follow!
+    createManyTweet(data: [TweetCreateManyInput!]!, skipDuplicates: Boolean): AffectedRowsOutput!
+    createOneTweet(data: TweetCreateInput!): Tweet!
+    deleteManyTweet(where: TweetWhereInput): AffectedRowsOutput!
+    deleteOneTweet(where: TweetWhereUniqueInput!): Tweet
+    updateManyTweet(data: TweetUpdateManyMutationInput!, where: TweetWhereInput): AffectedRowsOutput!
+    updateOneTweet(data: TweetUpdateInput!, where: TweetWhereUniqueInput!): Tweet
+    upsertOneTweet(where: TweetWhereUniqueInput!, create: TweetCreateInput!, update: TweetUpdateInput!): Tweet!
+    register(data: UserCreateInput!): RegisterReturnType!
+    getAccessToken(data: GetAccessTokenInput!): RegisterReturnType!
+    getNewAccessToken(data: GetNewAccessTokenInput!): RegisterReturnType!
+}
+
+type AffectedRowsOutput {
+    count: Int!
+}
+
+input FollowCreateManyInput {
+    created_at: DateTime
+    updated_at: DateTime
+    follower_id: Int!
+    following_id: Int!
+}
+
+input FollowCreateInput {
+    created_at: DateTime
+    updated_at: DateTime
+    follower: UserCreateNestedOneWithoutFollowersInput!
+    following: UserCreateNestedOneWithoutFollowingsInput!
+}
+
+input UserCreateNestedOneWithoutFollowersInput {
+    create: UserCreateWithoutFollowersInput
+    connectOrCreate: UserCreateOrConnectWithoutFollowersInput
+    connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutFollowersInput {
+    created_at: DateTime
+    updated_at: DateTime
+    picture: String
+    name: String!
+    date_of_birth: DateTime!
+    username: String
+    email: String
+    phone: String
+    password: String!
+    Tweets: TweetCreateNestedManyWithoutUserInput
+    followings: FollowCreateNestedManyWithoutFollowingInput
+}
+
+input TweetCreateNestedManyWithoutUserInput {
+    create: [TweetCreateWithoutUserInput!]
+    connectOrCreate: [TweetCreateOrConnectWithoutUserInput!]
+    createMany: TweetCreateManyUserInputEnvelope
+    connect: [TweetWhereUniqueInput!]
+}
+
+input TweetCreateWithoutUserInput {
+    created_at: DateTime
+    updated_at: DateTime
+    content: String!
+    attachment: JSON
+}
+
+input TweetCreateOrConnectWithoutUserInput {
+    where: TweetWhereUniqueInput!
+    create: TweetCreateWithoutUserInput!
+}
+
+input TweetCreateManyUserInputEnvelope {
+    data: [TweetCreateManyUserInput!]!
+    skipDuplicates: Boolean
+}
+
+input TweetCreateManyUserInput {
+    id: Int
+    created_at: DateTime
+    updated_at: DateTime
+    content: String!
+    attachment: JSON
+}
+
+input FollowCreateNestedManyWithoutFollowingInput {
+    create: [FollowCreateWithoutFollowingInput!]
+    connectOrCreate: [FollowCreateOrConnectWithoutFollowingInput!]
+    createMany: FollowCreateManyFollowingInputEnvelope
+    connect: [FollowWhereUniqueInput!]
+}
+
+input FollowCreateWithoutFollowingInput {
+    created_at: DateTime
+    updated_at: DateTime
+    follower: UserCreateNestedOneWithoutFollowersInput!
+}
+
+input FollowCreateOrConnectWithoutFollowingInput {
+    where: FollowWhereUniqueInput!
+    create: FollowCreateWithoutFollowingInput!
+}
+
+input FollowCreateManyFollowingInputEnvelope {
+    data: [FollowCreateManyFollowingInput!]!
+    skipDuplicates: Boolean
+}
+
+input FollowCreateManyFollowingInput {
+    created_at: DateTime
+    updated_at: DateTime
+    follower_id: Int!
+}
+
+input UserCreateOrConnectWithoutFollowersInput {
+    where: UserWhereUniqueInput!
+    create: UserCreateWithoutFollowersInput!
+}
+
+input UserCreateNestedOneWithoutFollowingsInput {
+    create: UserCreateWithoutFollowingsInput
+    connectOrCreate: UserCreateOrConnectWithoutFollowingsInput
+    connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutFollowingsInput {
+    created_at: DateTime
+    updated_at: DateTime
+    picture: String
+    name: String!
+    date_of_birth: DateTime!
+    username: String
+    email: String
+    phone: String
+    password: String!
+    Tweets: TweetCreateNestedManyWithoutUserInput
+    followers: FollowCreateNestedManyWithoutFollowerInput
+}
+
+input FollowCreateNestedManyWithoutFollowerInput {
+    create: [FollowCreateWithoutFollowerInput!]
+    connectOrCreate: [FollowCreateOrConnectWithoutFollowerInput!]
+    createMany: FollowCreateManyFollowerInputEnvelope
+    connect: [FollowWhereUniqueInput!]
+}
+
+input FollowCreateWithoutFollowerInput {
+    created_at: DateTime
+    updated_at: DateTime
+    following: UserCreateNestedOneWithoutFollowingsInput!
+}
+
+input FollowCreateOrConnectWithoutFollowerInput {
+    where: FollowWhereUniqueInput!
+    create: FollowCreateWithoutFollowerInput!
+}
+
+input FollowCreateManyFollowerInputEnvelope {
+    data: [FollowCreateManyFollowerInput!]!
+    skipDuplicates: Boolean
+}
+
+input FollowCreateManyFollowerInput {
+    created_at: DateTime
+    updated_at: DateTime
+    following_id: Int!
+}
+
+input UserCreateOrConnectWithoutFollowingsInput {
+    where: UserWhereUniqueInput!
+    create: UserCreateWithoutFollowingsInput!
+}
+
+input FollowUpdateManyMutationInput {
+    created_at: NullableDateTimeFieldUpdateOperationsInput
+    updated_at: NullableDateTimeFieldUpdateOperationsInput
+}
+
+input NullableDateTimeFieldUpdateOperationsInput {
+    set: DateTime
+}
+
+input FollowUpdateInput {
+    created_at: NullableDateTimeFieldUpdateOperationsInput
+    updated_at: NullableDateTimeFieldUpdateOperationsInput
+    follower: UserUpdateOneRequiredWithoutFollowersNestedInput
+    following: UserUpdateOneRequiredWithoutFollowingsNestedInput
+}
+
+input UserUpdateOneRequiredWithoutFollowersNestedInput {
+    create: UserCreateWithoutFollowersInput
+    connectOrCreate: UserCreateOrConnectWithoutFollowersInput
+    upsert: UserUpsertWithoutFollowersInput
+    connect: UserWhereUniqueInput
+    update: UserUpdateWithoutFollowersInput
+}
+
+input UserUpsertWithoutFollowersInput {
+    update: UserUpdateWithoutFollowersInput!
+    create: UserCreateWithoutFollowersInput!
+}
+
+input UserUpdateWithoutFollowersInput {
+    created_at: NullableDateTimeFieldUpdateOperationsInput
+    updated_at: NullableDateTimeFieldUpdateOperationsInput
+    picture: NullableStringFieldUpdateOperationsInput
+    name: StringFieldUpdateOperationsInput
+    date_of_birth: DateTimeFieldUpdateOperationsInput
+    username: NullableStringFieldUpdateOperationsInput
+    email: NullableStringFieldUpdateOperationsInput
+    phone: NullableStringFieldUpdateOperationsInput
+    password: StringFieldUpdateOperationsInput
+    Tweets: TweetUpdateManyWithoutUserNestedInput
+    followings: FollowUpdateManyWithoutFollowingNestedInput
+}
+
+input NullableStringFieldUpdateOperationsInput {
+    set: String
+}
+
+input StringFieldUpdateOperationsInput {
+    set: String
+}
+
+input DateTimeFieldUpdateOperationsInput {
+    set: DateTime
+}
+
+input TweetUpdateManyWithoutUserNestedInput {
+    create: [TweetCreateWithoutUserInput!]
+    connectOrCreate: [TweetCreateOrConnectWithoutUserInput!]
+    upsert: [TweetUpsertWithWhereUniqueWithoutUserInput!]
+    createMany: TweetCreateManyUserInputEnvelope
+    set: [TweetWhereUniqueInput!]
+    disconnect: [TweetWhereUniqueInput!]
+    delete: [TweetWhereUniqueInput!]
+    connect: [TweetWhereUniqueInput!]
+    update: [TweetUpdateWithWhereUniqueWithoutUserInput!]
+    updateMany: [TweetUpdateManyWithWhereWithoutUserInput!]
+    deleteMany: [TweetScalarWhereInput!]
+}
+
+input TweetUpsertWithWhereUniqueWithoutUserInput {
+    where: TweetWhereUniqueInput!
+    update: TweetUpdateWithoutUserInput!
+    create: TweetCreateWithoutUserInput!
+}
+
+input TweetUpdateWithoutUserInput {
+    created_at: NullableDateTimeFieldUpdateOperationsInput
+    updated_at: NullableDateTimeFieldUpdateOperationsInput
+    content: StringFieldUpdateOperationsInput
+    attachment: JSON
+}
+
+input TweetUpdateWithWhereUniqueWithoutUserInput {
+    where: TweetWhereUniqueInput!
+    data: TweetUpdateWithoutUserInput!
+}
+
+input TweetUpdateManyWithWhereWithoutUserInput {
+    where: TweetScalarWhereInput!
+    data: TweetUpdateManyMutationInput!
+}
+
+input TweetScalarWhereInput {
+    AND: [TweetScalarWhereInput!]
+    OR: [TweetScalarWhereInput!]
+    NOT: [TweetScalarWhereInput!]
+    id: IntFilter
+    created_at: DateTimeNullableFilter
+    updated_at: DateTimeNullableFilter
+    content: StringFilter
+    attachment: JsonNullableFilter
+    user_id: IntFilter
+}
+
+input TweetUpdateManyMutationInput {
+    created_at: NullableDateTimeFieldUpdateOperationsInput
+    updated_at: NullableDateTimeFieldUpdateOperationsInput
+    content: StringFieldUpdateOperationsInput
+    attachment: JSON
+}
+
+input FollowUpdateManyWithoutFollowingNestedInput {
+    create: [FollowCreateWithoutFollowingInput!]
+    connectOrCreate: [FollowCreateOrConnectWithoutFollowingInput!]
+    upsert: [FollowUpsertWithWhereUniqueWithoutFollowingInput!]
+    createMany: FollowCreateManyFollowingInputEnvelope
+    set: [FollowWhereUniqueInput!]
+    disconnect: [FollowWhereUniqueInput!]
+    delete: [FollowWhereUniqueInput!]
+    connect: [FollowWhereUniqueInput!]
+    update: [FollowUpdateWithWhereUniqueWithoutFollowingInput!]
+    updateMany: [FollowUpdateManyWithWhereWithoutFollowingInput!]
+    deleteMany: [FollowScalarWhereInput!]
+}
+
+input FollowUpsertWithWhereUniqueWithoutFollowingInput {
+    where: FollowWhereUniqueInput!
+    update: FollowUpdateWithoutFollowingInput!
+    create: FollowCreateWithoutFollowingInput!
+}
+
+input FollowUpdateWithoutFollowingInput {
+    created_at: NullableDateTimeFieldUpdateOperationsInput
+    updated_at: NullableDateTimeFieldUpdateOperationsInput
+    follower: UserUpdateOneRequiredWithoutFollowersNestedInput
+}
+
+input FollowUpdateWithWhereUniqueWithoutFollowingInput {
+    where: FollowWhereUniqueInput!
+    data: FollowUpdateWithoutFollowingInput!
+}
+
+input FollowUpdateManyWithWhereWithoutFollowingInput {
+    where: FollowScalarWhereInput!
+    data: FollowUpdateManyMutationInput!
+}
+
+input FollowScalarWhereInput {
+    AND: [FollowScalarWhereInput!]
+    OR: [FollowScalarWhereInput!]
+    NOT: [FollowScalarWhereInput!]
+    created_at: DateTimeNullableFilter
+    updated_at: DateTimeNullableFilter
+    follower_id: IntFilter
+    following_id: IntFilter
+}
+
+input UserUpdateOneRequiredWithoutFollowingsNestedInput {
+    create: UserCreateWithoutFollowingsInput
+    connectOrCreate: UserCreateOrConnectWithoutFollowingsInput
+    upsert: UserUpsertWithoutFollowingsInput
+    connect: UserWhereUniqueInput
+    update: UserUpdateWithoutFollowingsInput
+}
+
+input UserUpsertWithoutFollowingsInput {
+    update: UserUpdateWithoutFollowingsInput!
+    create: UserCreateWithoutFollowingsInput!
+}
+
+input UserUpdateWithoutFollowingsInput {
+    created_at: NullableDateTimeFieldUpdateOperationsInput
+    updated_at: NullableDateTimeFieldUpdateOperationsInput
+    picture: NullableStringFieldUpdateOperationsInput
+    name: StringFieldUpdateOperationsInput
+    date_of_birth: DateTimeFieldUpdateOperationsInput
+    username: NullableStringFieldUpdateOperationsInput
+    email: NullableStringFieldUpdateOperationsInput
+    phone: NullableStringFieldUpdateOperationsInput
+    password: StringFieldUpdateOperationsInput
+    Tweets: TweetUpdateManyWithoutUserNestedInput
+    followers: FollowUpdateManyWithoutFollowerNestedInput
+}
+
+input FollowUpdateManyWithoutFollowerNestedInput {
+    create: [FollowCreateWithoutFollowerInput!]
+    connectOrCreate: [FollowCreateOrConnectWithoutFollowerInput!]
+    upsert: [FollowUpsertWithWhereUniqueWithoutFollowerInput!]
+    createMany: FollowCreateManyFollowerInputEnvelope
+    set: [FollowWhereUniqueInput!]
+    disconnect: [FollowWhereUniqueInput!]
+    delete: [FollowWhereUniqueInput!]
+    connect: [FollowWhereUniqueInput!]
+    update: [FollowUpdateWithWhereUniqueWithoutFollowerInput!]
+    updateMany: [FollowUpdateManyWithWhereWithoutFollowerInput!]
+    deleteMany: [FollowScalarWhereInput!]
+}
+
+input FollowUpsertWithWhereUniqueWithoutFollowerInput {
+    where: FollowWhereUniqueInput!
+    update: FollowUpdateWithoutFollowerInput!
+    create: FollowCreateWithoutFollowerInput!
+}
+
+input FollowUpdateWithoutFollowerInput {
+    created_at: NullableDateTimeFieldUpdateOperationsInput
+    updated_at: NullableDateTimeFieldUpdateOperationsInput
+    following: UserUpdateOneRequiredWithoutFollowingsNestedInput
+}
+
+input FollowUpdateWithWhereUniqueWithoutFollowerInput {
+    where: FollowWhereUniqueInput!
+    data: FollowUpdateWithoutFollowerInput!
+}
+
+input FollowUpdateManyWithWhereWithoutFollowerInput {
+    where: FollowScalarWhereInput!
+    data: FollowUpdateManyMutationInput!
+}
+
+input TweetCreateManyInput {
+    id: Int
+    created_at: DateTime
+    updated_at: DateTime
+    content: String!
+    attachment: JSON
+    user_id: Int!
+}
+
+input TweetCreateInput {
+    created_at: DateTime
+    updated_at: DateTime
+    content: String!
+    attachment: JSON
+    user: UserCreateNestedOneWithoutTweetsInput!
+}
+
+input UserCreateNestedOneWithoutTweetsInput {
+    create: UserCreateWithoutTweetsInput
+    connectOrCreate: UserCreateOrConnectWithoutTweetsInput
+    connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutTweetsInput {
+    created_at: DateTime
+    updated_at: DateTime
+    picture: String
+    name: String!
+    date_of_birth: DateTime!
+    username: String
+    email: String
+    phone: String
+    password: String!
+    followers: FollowCreateNestedManyWithoutFollowerInput
+    followings: FollowCreateNestedManyWithoutFollowingInput
+}
+
+input UserCreateOrConnectWithoutTweetsInput {
+    where: UserWhereUniqueInput!
+    create: UserCreateWithoutTweetsInput!
+}
+
+input TweetUpdateInput {
+    created_at: NullableDateTimeFieldUpdateOperationsInput
+    updated_at: NullableDateTimeFieldUpdateOperationsInput
+    content: StringFieldUpdateOperationsInput
+    attachment: JSON
+    user: UserUpdateOneRequiredWithoutTweetsNestedInput
+}
+
+input UserUpdateOneRequiredWithoutTweetsNestedInput {
+    create: UserCreateWithoutTweetsInput
+    connectOrCreate: UserCreateOrConnectWithoutTweetsInput
+    upsert: UserUpsertWithoutTweetsInput
+    connect: UserWhereUniqueInput
+    update: UserUpdateWithoutTweetsInput
+}
+
+input UserUpsertWithoutTweetsInput {
+    update: UserUpdateWithoutTweetsInput!
+    create: UserCreateWithoutTweetsInput!
+}
+
+input UserUpdateWithoutTweetsInput {
+    created_at: NullableDateTimeFieldUpdateOperationsInput
+    updated_at: NullableDateTimeFieldUpdateOperationsInput
+    picture: NullableStringFieldUpdateOperationsInput
+    name: StringFieldUpdateOperationsInput
+    date_of_birth: DateTimeFieldUpdateOperationsInput
+    username: NullableStringFieldUpdateOperationsInput
+    email: NullableStringFieldUpdateOperationsInput
+    phone: NullableStringFieldUpdateOperationsInput
+    password: StringFieldUpdateOperationsInput
+    followers: FollowUpdateManyWithoutFollowerNestedInput
+    followings: FollowUpdateManyWithoutFollowingNestedInput
+}
+
+type RegisterReturnType {
+    id: Int!
+    created_at: DateTime
+    updated_at: DateTime
+    picture: String
+    name: String!
+    date_of_birth: DateTime!
+    username: String
+    email: String
+    phone: String
+    password: String!
+    _count: UserCount
+    Tweets(where: TweetWhereInput, orderBy: [TweetOrderByWithRelationInput!], cursor: TweetWhereUniqueInput, take: Int, skip: Int, distinct: [TweetScalarFieldEnum!]): [Tweet!]!
+    followers(where: FollowWhereInput, orderBy: [FollowOrderByWithRelationInput!], cursor: FollowWhereUniqueInput, take: Int, skip: Int, distinct: [FollowScalarFieldEnum!]): [Follow!]!
+    followings(where: FollowWhereInput, orderBy: [FollowOrderByWithRelationInput!], cursor: FollowWhereUniqueInput, take: Int, skip: Int, distinct: [FollowScalarFieldEnum!]): [Follow!]!
+    accessToken: String!
+    refreshToken: String!
+}
+
+input UserCreateInput {
+    created_at: DateTime
+    updated_at: DateTime
+    picture: String
+    name: String!
+    date_of_birth: DateTime!
+    username: String
+    email: String
+    phone: String
+    password: String!
+    Tweets: TweetCreateNestedManyWithoutUserInput
+    followers: FollowCreateNestedManyWithoutFollowerInput
+    followings: FollowCreateNestedManyWithoutFollowingInput
+}
+
+input GetAccessTokenInput {
+    username: String
+    phone: String
+    email: String
+    password: String!
+}
+
+input GetNewAccessTokenInput {
+    accessToken: String!
+    refreshToken: String!
+}

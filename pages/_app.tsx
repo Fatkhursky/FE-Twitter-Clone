@@ -6,7 +6,7 @@ import '@/src/styles/index-2.scss'
 import type { AppProps } from 'next/app'
 import { SessionProvider } from 'next-auth/react'
 import { ApolloProvider } from '@apollo/client'
-import { client } from '@/src/utilities/apollo'
+import { client } from '@/src/libraries/apollo'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 

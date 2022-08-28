@@ -8,7 +8,7 @@ import Header from '@/src/components/login-page/header'
 import Head from 'next/head'
 import { register } from '@/src/requests'
 import Modal from 'react-modal'
-import { authentication } from '.././firebase-config/firebase'
+import { authentication } from '@/src/libraries/firebase'
 import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth'
 import clsx from 'clsx'
 import { useQuery, gql, useMutation } from '@apollo/client'
@@ -212,7 +212,7 @@ const LoginPage = () => {
       }
     }
   }
-  
+
   const toSign = () => {
     router.push('/')
     setStepNum(0)

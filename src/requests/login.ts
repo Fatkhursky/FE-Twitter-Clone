@@ -1,6 +1,10 @@
-import api from '@/src/utilities/axios'
+import api from '@/src/libraries/axios'
 
-type LoginFn = (data: { username: string; phone: string; password: string }) => Promise<[error: any, data: any]>
+type LoginFn = (data: {
+  username: string
+  phone: string
+  password: string
+}) => Promise<[error: any, data: any]>
 
 const login: LoginFn = async ({ username, phone, password }) => {
   try {

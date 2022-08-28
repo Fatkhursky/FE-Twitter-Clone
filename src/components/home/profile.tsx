@@ -14,7 +14,7 @@ import {
   globalName,
 } from '@/src/stores/jotai-atom'
 import { gql, useQuery } from '@apollo/client'
-import { client } from '@/src/utilities/apollo'
+import { client } from '@/src/libraries/apollo'
 import { GET_TWEETS } from '@/src/requests/graphql'
 
 const Profile = ({ setOnComp, setArray, array }) => {

@@ -1,4 +1,4 @@
-import api from '@/src/utilities/axios'
+import api from '@/src/libraries/axios'
 
 type FetchAllTweetsFn = (config: {
   Authorization: string

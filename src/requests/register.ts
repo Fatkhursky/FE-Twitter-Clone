@@ -7,7 +7,7 @@
 //   "phone": "0812461274341q111"
 // }
 
-import api from '@/src/utilities/axios'
+import api from '@/src/libraries/axios'
 
 type RegisterFn = (data: {
   fullname: string
@@ -22,7 +22,7 @@ const register: RegisterFn = async ({
   dateOfBirth,
   username,
   phone,
-  password
+  password,
 }) => {
   try {
     const response = await api.post(`auth/register`, {
@@ -30,7 +30,7 @@ const register: RegisterFn = async ({
       dateOfBirth,
       username,
       phone,
-      password
+      password,
     })
     console.log(33333, response)
     return [null, response]
