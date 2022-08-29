@@ -53,7 +53,7 @@ const HomePage = () => {
           filterGetTweets,
         ])
 
-        queryClient.setQueryData(['/home', 'tweets', filterGetTweets], (old) => [
+        queryClient.setQueryData(['/home', 'tweets', filterGetTweets], (old:any) => [
           {
             id: 'new-id',
             content: newData?.data?.content,

@@ -26,7 +26,7 @@ const AddTweet = ({ newTweet, id, name, userName, filterGetTweets, refetch }: an
           filterGetTweets,
         ])
 
-        queryClient.setQueryData(['/home', 'tweets', filterGetTweets], (old) => {
+        queryClient.setQueryData(['/home', 'tweets', filterGetTweets], (old:any) => {
           //@ts-ignore
           return old.filter((v: any) => v.id !== deleteData?.where?.id)
         })
@@ -50,6 +50,7 @@ const AddTweet = ({ newTweet, id, name, userName, filterGetTweets, refetch }: an
           id: id,
         },
       })
+      console.log(id, 777)
       //@ts-ignore
       ref.current.complete()
       // return res.data.deleteOneTweet !== null ? 'success' : 'Failed'

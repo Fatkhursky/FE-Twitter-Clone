@@ -1,54 +1,137 @@
-// @ts-nocheck
 import { mySvg } from '~/public/assets/svg'
 import Popup from 'reactjs-popup'
 import { GET_TWEETS } from '@/src/requests/graphql'
-import { useQuery, useMutation } from '@apollo/client'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useState, useEffect } from 'react'
 import { deleteSomeTweet } from '@/src/requests/graphql'
 import LoadingBar from 'react-top-loading-bar'
 import { useRef } from 'react'
 import { useSession } from 'next-auth/react'
+import { graphQLClient } from '@/src/libraries/graphql-request'
 const AllTweet = () => {
-  const { data: session } = useSession()
 
-  const [deleteTweet] = useMutation(deleteSomeTweet)
+
   const ref = useRef(null)
-  const handleDelete = async (id) => {
-    try {
-      ref.current.continuousStart()
-      const res = await deleteTweet({
-        variables: {
-          where: {
-            id: id,
+  const { data: session, status } = useSession()
+  const [filterGetTweets, setFilterGetTweets] = useState<any>(null)
+  const queryClient = useQueryClient()
+
+  useEffect(() => {
+    if (status !== 'loading') {
+      setFilterGetTweets({
+        where: {
+          user_id: {
+            equals: session?.id,
           },
         },
       })
+    }
+  }, [status])
+
+  const { data: tweets, refetch } = useQuery(
+    ['/profile', 'tweets', filterGetTweets],
+    async () => {
+      const data = await graphQLClient.request(GET_TWEETS, filterGetTweets)
+      return data?.tweets || []
+    },
+    { initialData: [], enabled: filterGetTweets !== null }
+  )
+
+  const { mutate, error } = useMutation(
+    async (variables) => {
+      const data = await graphQLClient.request(deleteSomeTweet, variables)
+      return data?.tweets || []
+    },
+    {
+      onMutate: (deleteData: any) => {
+        // @ts-ignore
+        ref.current.continuousStart()
+        const prevData = queryClient.getQueryData(['/profile', 'tweets', filterGetTweets])
+        queryClient.setQueryData(['/profile', 'tweets', filterGetTweets], (old: any) => {
+          return old.filter((v: any) => v.id !== deleteData?.where?.id)
+        })
+        return {prevData}
+      },
+      onSuccess: () => {
+        refetch()
+        // @ts-ignore
+        ref.current.complete()
+      },
+    }
+  )
+
+  const handleDelete = async (id:any) => {
+    try {
+      //@ts-ignore
+      ref.current.continuousStart()
+      await mutate({
+        where: {
+          id: id
+        },
+      })
+      //@ts-ignore
       ref.current.complete()
-      console.log(res)
-      return res.data.deleteOneTweet !== null ? 'success' : 'Failed'
+      // return res.data.deleteOneTweet !== null ? 'success' : 'Failed'
     } catch (error) {}
     console.log(error)
   }
 
-  const { loading, error, data } = useQuery(GET_TWEETS, {
-    variables: {
-      where: {
-        user_id: {
-          equals: session?.id,
-        },
-      },
-    },
-    // pollInterval: 5000,
-  })
 
-  if (loading) return 'Loading...'
-  if (error) return `Error! ${error.message}`
-  console.log(data)
+
+  // const { loading, error, data } = useQuery(GET_TWEETS, {
+  //   variables: {
+  //     where: {
+  //       user_id: {
+  //         equals: session?.id,
+  //       },
+  //     },
+  //   },
+  //   // pollInterval: 5000,
+  // })
+
+  // if (loading) return 'Loading...'
+  // if (error) return `Error! ${error.message}`
+  // console.log(data)
+
+
+  //const [token, setToken] = useState()
+
+  // @ts-ignore
+  //const [deleteTweet] = useMutation(deleteSomeTweet)
+
+  // const handleDelete = async (id) => {
+  //   try {
+  //     // @ts-ignore
+  //     ref.current.continuousStart()
+  //     const res = await deleteTweet({
+  //       variables: {
+  //         where: {
+  //           id: id,
+  //         },
+  //       },
+  //     })
+  //     // @ts-ignore
+  //     ref.current.complete()
+  //     console.log(res)
+  //     return res.data.deleteOneTweet !== null ? 'success' : 'Failed'
+  //   } catch (error) {}
+  //   console.log(error)
+  // }
+
+  // useEffect(() => {
+  //   const item = localStorage.getItem('Bearer')
+  //   // @ts-ignore
+  //   setToken(decodeToken(item))
+  // }, [])
 
   const noFeature = () => {
     alert('Fitur belum tersedia')
   }
+  // return (
+  //   <div onClick={() => console.log(tweets, 99)}>cek all tweet</div>
+  // )
 
-  return (data?.tweets || []).map((e, i) => (
+  return (tweets || []).map((e: any, i: any) => (
     <div key={i} className="pt-5 border-b cursor-pointer">
       <div className="px-2">
         <div className="">

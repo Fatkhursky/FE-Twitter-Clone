@@ -47,7 +47,9 @@ const listMenuIcon = [
 ]
 
 const Mainmenu = () => {
+
   const { data: session } = useSession()
+
 
   const [name, setName] = useAtom(globalName)
   const [currentRouter, setCurrentRouter] = useState('')
@@ -55,20 +57,32 @@ const Mainmenu = () => {
   const [userName, setUserName] = useAtom(fieldUserName)
 
   useEffect(() => {
+    setUserName(session?.username)
+    setName(session?.user?.name)
     setCurrentRouter(router.pathname)
   }, [])
 
-  const { loading, error, data } = useQuery(DATAUSER_QUERY, {
-    variables: {
-      where: {
-        id: session?.id,
-      },
-    },
-    onCompleted(data) {
-      setUserName(data?.user?.username)
-      setName(data?.user?.name)
-    },
-  })
+
+  // useEffect(() => {
+  //   const item = localStorage.getItem('Bearer')
+  //   setToken(decodeToken(item))
+  //   setCurrentRouter(router.pathname)
+  // }, [])
+
+  // const { loading, error, data } = useQuery(DATAUSER_QUERY, {
+  //   variables: {
+  //     where: {
+  //       id: session?.id,
+  //     },
+  //   },
+  //   onCompleted(data) {
+  //     setUserName(data?.user?.username)
+  //     setName(data?.user?.name)
+  //   },
+  // })
+
+  // if (loading) return 'Loading...'
+  // if (error) return `Error! ${error.message}`
 
   const handleChangeMenu = (menu: any) => {
     const currentMenu = menu
@@ -126,8 +140,8 @@ const Mainmenu = () => {
           <div className="flex hover:bg-[#e5e7eb] cursor-pointer p-2 rounded-full justify-center items-center w-56">
             <img className="h-12 w-12" src={'/assets/logo193.png'} alt="" />
             <div className="grow pl-2">
-              <p>{data?.user?.name}</p>
-              <p>{data?.user?.username}</p>
+              <p>{session?.user?.name}</p>
+              <p>{session?.username}</p>
             </div>
             <div>
               <svg className="h-7 w-7">{mySvg.more}</svg>
