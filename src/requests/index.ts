@@ -1,5 +1,0 @@
-export { default as login } from './login'
-export { default as deleteOneTweet } from './delete-one-tweet'
-export { default as fetchAllTweets } from './fetch-all-tweets'
-export { default as register } from './register'
-export { default as storeOneTweet } from './store-one-tweet'

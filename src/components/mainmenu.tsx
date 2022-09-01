@@ -57,32 +57,11 @@ const Mainmenu = () => {
   const [userName, setUserName] = useAtom(fieldUserName)
 
   useEffect(() => {
+    console.log(session, 789)
     setUserName(session?.username)
     setName(session?.user?.name)
     setCurrentRouter(router.pathname)
   }, [])
-
-
-  // useEffect(() => {
-  //   const item = localStorage.getItem('Bearer')
-  //   setToken(decodeToken(item))
-  //   setCurrentRouter(router.pathname)
-  // }, [])
-
-  // const { loading, error, data } = useQuery(DATAUSER_QUERY, {
-  //   variables: {
-  //     where: {
-  //       id: session?.id,
-  //     },
-  //   },
-  //   onCompleted(data) {
-  //     setUserName(data?.user?.username)
-  //     setName(data?.user?.name)
-  //   },
-  // })
-
-  // if (loading) return 'Loading...'
-  // if (error) return `Error! ${error.message}`
 
   const handleChangeMenu = (menu: any) => {
     const currentMenu = menu

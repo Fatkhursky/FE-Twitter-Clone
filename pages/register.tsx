@@ -297,7 +297,7 @@ const LoginPage = () => {
         </Head>
         <div className="background bg-zinc-400 h-screen flex flex-col items-center justify-center">
           <Header />
-          <div className="wrapper overflow-y-auto overflow-hidden bg-white h-410 w-600  flex flex-col">
+          <div className="wrapper overflow-y-auto overflow-hidden bg-white lg:h-410 lg:w-600 h-screen w-screen  flex flex-col">
             <div className="content flex flex-col w-11/12 mx-auto gap-5 p-5">
               <div className="loginpage__signup__title1">
                 <h1 className="text-2xl font-bold">Create your account</h1>
@@ -392,7 +392,7 @@ const LoginPage = () => {
             </div>
           </div>
 
-          <div className="footer bg-white p-5 w-600 flex items-center justify-center rounded-b-xl">
+          <div className="footer bg-white p-5 w-screen lg:w-600 flex items-center justify-center rounded-b-xl">
             <div
               onClick={() => setStepNum(stepNum + 1)}
               className={clsx(
@@ -424,7 +424,7 @@ const LoginPage = () => {
 
         <div className="background bg-zinc-400 h-screen flex flex-col items-center justify-center">
           <Header />
-          <div className="wrapper overflow-y-auto overflow-hidden bg-white h-410 w-600  flex flex-col">
+          <div className="wrapper overflow-y-auto overflow-hidden bg-white lg:h-410 lg:w-600 h-screen w-screen flex flex-col">
             <div className="content flex flex-col w-11/12 mx-auto gap-5 p-5">
               <div className="loginpage__signup__step2 flex flex-col gap-3">
                 <div className="text-3xl font-bold">
@@ -457,7 +457,7 @@ const LoginPage = () => {
               </div>
             </div>
           </div>
-          <div className="footer bg-white p-5 w-600 flex items-center justify-center rounded-b-xl">
+          <div className="footer bg-white p-5 lg:w-600 w-screen flex items-center justify-center rounded-b-xl">
             <div
               onClick={() => setStepNum(stepNum + 1)}
               className="cursor-pointer p-3 w-11/12 bg flex bg-[#1f2937]  items-center justify-center rounded-full"
@@ -479,7 +479,7 @@ const LoginPage = () => {
         </Head>
         <div className="background bg-zinc-400 h-screen flex flex-col items-center justify-center">
           <Header />
-          <div className="wrapper overflow-y-auto overflow-hidden bg-white h-300 w-600 flex flex-col">
+          <div className="wrapper overflow-y-auto overflow-hidden bg-white lg:h-300 lg:w-600 w-screen h-screen flex flex-col">
             <div className="content flex flex-col w-11/12 mx-auto gap-5 p-5">
               <div className="text-3xl font-bold">
                 <h1>Create your account</h1>
@@ -520,7 +520,7 @@ const LoginPage = () => {
               </div>
             </div>
           </div>
-          <div className="footer bg-white p-5 w-600 flex flex-col items-center justify-center rounded-b-xl gap-3">
+          <div className="footer bg-white p-5 lg:w-600 w-screen flex flex-col items-center justify-center rounded-b-xl gap-3">
             <div className="w-11/12">
               <p>
                 By signing up, you agree to the{' '}
@@ -610,7 +610,7 @@ const LoginPage = () => {
         </Head>
         <div className="background bg-zinc-400 h-screen flex flex-col items-center justify-center">
           <Header />
-          <div className="wrapper overflow-y-auto overflow-hidden bg-white h-410 w-600 flex flex-col">
+          <div className="wrapper overflow-y-auto overflow-hidden bg-white lg:h-410 lg:w-600 h-screen w-screen flex flex-col">
             <div className="content flex flex-col w-11/12 mx-auto gap-5 p-5">
               <div className="flex flex-col gap-3">
                 <div className="flex flex-col gap-5">
@@ -635,7 +635,7 @@ const LoginPage = () => {
               </div>
             </div>
           </div>
-          <div className="footer p-5 w-600 bg-white flex flex-col items-center justify-center rounded-b-xl gap-3">
+          <div className="footer p-5 lg:w-600 w-screen bg-white flex flex-col items-center justify-center rounded-b-xl gap-3">
             <div
               onClick={submitOTP}
               className={clsx(
@@ -665,7 +665,7 @@ const LoginPage = () => {
         </Head>
         <div className="background bg-zinc-400 h-screen flex flex-col items-center justify-center">
           <Header />
-          <div className="wrapper overflow-y-auto overflow-hidden bg-white h-410 w-600 flex flex-col">
+          <div className="wrapper overflow-y-auto overflow-hidden bg-white lg:h-410 lg:w-600 w-screen h-screen flex flex-col">
             <div className="content flex flex-col w-11/12 mx-auto gap-5 p-5">
               <div className="flex flex-col gap-3">
                 <div className="font-bold text-xl">
@@ -693,7 +693,7 @@ const LoginPage = () => {
               </div>
             </div>
           </div>
-          <div className="footer p-5 w-600 bg-white flex flex-col items-center justify-center rounded-b-xl gap-3">
+          <div className="footer p-5 lg:w-600 w-screen bg-white flex flex-col items-center justify-center rounded-b-xl gap-3">
             <div
               onClick={() => setStepNum(stepNum + 1)}
               className="cursor-pointer w-11/12 items-center justify-center flex rounded-full p-3 bg-zinc-800"
@@ -715,7 +715,7 @@ const LoginPage = () => {
         </Head>
         <form className="background bg-zinc-400 h-screen flex flex-col items-center justify-center">
           <Header />
-          <div className="wrapper overflow-y-auto overflow-hidden bg-white h-410 w-600 flex flex-col">
+          <div className="wrapper overflow-y-auto overflow-hidden bg-white lg:h-410 lg:w-600 h-screen w-screen flex flex-col">
             <div className="content flex flex-col w-11/12 mx-auto gap-5 p-5">
               <div className="flex flex-col gap-2">
                 <div className="font-bold text-2xl">
@@ -774,7 +774,7 @@ const LoginPage = () => {
               </div>
             </div>
           </div>
-          <div className="footer p-5 w-600 bg-white flex flex-col items-center justify-center rounded-b-xl gap-3">
+          <div className="footer p-5 lg:w-600 w-screen bg-white flex flex-col items-center justify-center rounded-b-xl gap-3">
             <div
               onClick={handleSubmit}
               className={clsx(

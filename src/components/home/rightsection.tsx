@@ -1,5 +1,10 @@
 import React from 'react'
 import { mySvg } from '~/public/assets/svg'
+import { useEffect, useState } from 'react'
+import { useSession } from 'next-auth/react'
+import { useQuery } from '@tanstack/react-query'
+import { graphQLClient } from '@/src/libraries/graphql-request'
+import { GET_USERS } from '@/src/requests/graphql'
 const trendsItem = [
   {
     title: 'Politics. Trending',
@@ -36,6 +41,51 @@ const otherUser = [
 ]
 
 const Rightsection = () => {
+  const { data: session, status } = useSession()
+  const [filterUsers, setFilterUsers] = useState<any>(null)
+  
+  useEffect(() => {
+    if (status !== 'loading') {
+      setFilterUsers({
+        where: {
+          id: {
+            not: {
+              equals: session?.id,
+            },
+          },
+          AND: [
+            {
+              followers: {
+                every: {
+                  follower: {
+                    isNot: {
+                      id: {
+                        equals: session?.id,
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          ],
+        },
+      })
+    }
+  }, [status])
+
+  // prototipe
+  const { data: users, refetch } = useQuery(
+    ['rightsection', 'users', filterUsers],
+    async () => {
+      const data = await graphQLClient.request(GET_USERS, filterUsers)
+      //console.log(data?.users)
+      return data?.users || []
+    },
+    { initialData: [], enabled: filterUsers !== null }
+  )
+
+  //
+
   return (
     <div className="flex flex-col h-fit">
       <div className="p-2 top-0 sticky bg-white">
@@ -86,7 +136,7 @@ const Rightsection = () => {
           </h2>
         </div>
 
-        {otherUser.map((user, i) => (
+        {users.map((e:any, i:number) => (
           <div
             key={i}
             className="p-2 flex flex-col justify-center hover:bg-[#e5e7eb] cursor-pointer"
@@ -95,11 +145,11 @@ const Rightsection = () => {
               <div className="flex gap-2">
                 <img className="w-9 h-9" src="/assets/logo193.png" alt="" />
                 <div className="flex flex-col">
-                  <strong>{user.username}</strong>
-                  <p>@{user.username}</p>
+                  <strong>{e.name}</strong>
+                  <p>@{e.username}</p>
                 </div>
               </div>
-              <button className="rounded-full bg-black p-2 text-white font-bold">
+              <button onClick={()=> console.log(e.id)} className="rounded-full bg-black p-2 text-white font-bold">
                 Follow
               </button>
             </div>

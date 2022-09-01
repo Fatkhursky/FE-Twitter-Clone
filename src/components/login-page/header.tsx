@@ -17,7 +17,7 @@ const Header = () => {
   if (router.pathname === '/login')
     return (
       <div>
-        <div className="bg-white flex items-center rounded-t-xl p-2 w-600 ">
+        <div className="bg-white flex items-center lg:rounded-t-xl p-2 w-screen lg:w-600 ">
           <div className="w-1/2">
             {stepLogin ? (
               <div className="p-2">
@@ -47,7 +47,7 @@ const Header = () => {
   if (router.pathname === '/register')
     return (
       <div>
-        <div className="bg-white flex items-center rounded-t-xl p-2 w-600">
+        <div className="bg-white flex items-center lg:rounded-t-xl p-2 lg:w-600 w-screen">
           <div className="p-2 flex items-center justify-center gap-2">
             {+stepRegister === 1 ? (
               <div

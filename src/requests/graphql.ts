@@ -86,3 +86,13 @@ export const GET_ACCESS_TOKEN = gql`
     }
   }
 `
+
+export const GET_USERS = gql`
+query Query($where: UserWhereInput) {
+  users(where: $where) {
+    username
+    name
+    id
+  }
+}
+`

@@ -11,10 +11,12 @@ import {
   fieldEmail,
   invalidField,
 } from '@/src/stores/jotai-atom'
-
+import useBreakpoint from '@/src/shared-hooks/use-breakpoint'
+import { useEffect } from 'react'
 const Login = ({ onChangePhoneEmailOrUsername, onSubmitUserName }) => {
   const router = useRouter()
-
+const [breakpoint] = useBreakpoint()
+  // useEffect(() => console.log(breakpoint, 88))
   const noFeature = (e) => {
     e.preventDefault()
     alert('Fitur belum tersedia, klik "Sign up" untuk mendaftar')
@@ -35,7 +37,7 @@ const Login = ({ onChangePhoneEmailOrUsername, onSubmitUserName }) => {
 
       <form
         onSubmit={onSubmitUserName}
-        className="wrapper overflow-y-auto overflow-hidden  bg-white rounded-b-xl h-505 w-600  flex flex-col"
+        className="wrapper overflow-y-auto overflow-hidden bg-white lg:rounded-b-xl h-screen lg:h-505 lg:w-600 w-screen  flex flex-col"
       >
         <div className="content flex flex-col w-96 mx-auto my-auto gap-5 p-5 ">
           <div className="font-bold text-2xl ">

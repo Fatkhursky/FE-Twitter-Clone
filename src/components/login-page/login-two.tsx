@@ -86,7 +86,7 @@ const LoginTwo = ({ toSignUp }) => {
       className="background bg-zinc-400 h-screen flex flex-col items-center justify-center"
     >
       <Header />
-      <div className="wrapper overflow-y-auto overflow-hidden bg-white h-410 w-600  flex flex-col">
+      <div className="wrapper overflow-y-auto overflow-hidden bg-white h-screen w-screen lg:h-410 lg:w-600  flex flex-col">
         <div className="content flex flex-col w-3/4 mx-auto  gap-5 p-5">
           <div className="">
             <div className="loginpage__logintwo__box">
@@ -134,7 +134,7 @@ const LoginTwo = ({ toSignUp }) => {
           </div>
         </div>
       </div>
-      <div className="footer bg-white flex items-center justify-center rounded-b-xl w-600">
+      <div className="footer bg-white flex items-center justify-center rounded-b-xl w-screen lg:w-600">
         <div className="wrapper w-3/4 flex flex-col">
           <div>
             <button

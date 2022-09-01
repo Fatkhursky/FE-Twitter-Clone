@@ -76,60 +76,9 @@ const AllTweet = () => {
     console.log(error)
   }
 
-
-
-  // const { loading, error, data } = useQuery(GET_TWEETS, {
-  //   variables: {
-  //     where: {
-  //       user_id: {
-  //         equals: session?.id,
-  //       },
-  //     },
-  //   },
-  //   // pollInterval: 5000,
-  // })
-
-  // if (loading) return 'Loading...'
-  // if (error) return `Error! ${error.message}`
-  // console.log(data)
-
-
-  //const [token, setToken] = useState()
-
-  // @ts-ignore
-  //const [deleteTweet] = useMutation(deleteSomeTweet)
-
-  // const handleDelete = async (id) => {
-  //   try {
-  //     // @ts-ignore
-  //     ref.current.continuousStart()
-  //     const res = await deleteTweet({
-  //       variables: {
-  //         where: {
-  //           id: id,
-  //         },
-  //       },
-  //     })
-  //     // @ts-ignore
-  //     ref.current.complete()
-  //     console.log(res)
-  //     return res.data.deleteOneTweet !== null ? 'success' : 'Failed'
-  //   } catch (error) {}
-  //   console.log(error)
-  // }
-
-  // useEffect(() => {
-  //   const item = localStorage.getItem('Bearer')
-  //   // @ts-ignore
-  //   setToken(decodeToken(item))
-  // }, [])
-
   const noFeature = () => {
     alert('Fitur belum tersedia')
   }
-  // return (
-  //   <div onClick={() => console.log(tweets, 99)}>cek all tweet</div>
-  // )
 
   return (tweets || []).map((e: any, i: any) => (
     <div key={i} className="pt-5 border-b cursor-pointer">
