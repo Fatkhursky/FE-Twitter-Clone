@@ -51,7 +51,7 @@ const listMenuIconBot = [
     icon: [mySvg.home[0], mySvg.home[1]],
   },
   {
-    label: 'Search',
+    label: 'Explore',
     icon: [mySvg.search[0], mySvg.search[1]],
   },
   {
@@ -97,12 +97,9 @@ const Mainmenu = () => {
   return (
     <div className='bg-white flex gap-2 justify-between px-6 flex-row bottom-0 fixed w-full'>
       {listMenuIconBot.map((menu, i) => (
-        <div key={i} className='w-6 py-2 cursor-default'>{menu.label == currentRouter.substring(1) ? menu.icon[1] : menu.icon[0]}</div>
+        <div onClick={() => handleChangeMenu(menu.label)} key={i} className='w-6 py-2 cursor-default'>{menu.label == currentRouter.substring(1) ? menu.icon[1] : menu.icon[0]}</div>
       ))}
     </div>
-    // {listMenuIconBot.map((e, i) => (
-    //   <div>tes</div>
-    // ))}
   )
  } else {
   return (
