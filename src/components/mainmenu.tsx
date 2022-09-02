@@ -74,7 +74,7 @@ const Mainmenu = () => {
   const [userName, setUserName] = useAtom(fieldUserName)
 
   useEffect(() => {
-    console.log(session, 789)
+    // console.log(session, 789)
     setUserName(session?.username)
     setName(session?.user?.name)
     setCurrentRouter(router.pathname)
@@ -97,9 +97,12 @@ const Mainmenu = () => {
   return (
     <div className='bg-white flex gap-2 justify-between px-6 flex-row bottom-0 fixed w-full'>
       {listMenuIconBot.map((menu, i) => (
-        <div key={i} className='w-6 py-2'>{menu.icon[0]}</div>
+        <div key={i} className='w-6 py-2 cursor-default'>{menu.label == currentRouter.substring(1) ? menu.icon[1] : menu.icon[0]}</div>
       ))}
     </div>
+    // {listMenuIconBot.map((e, i) => (
+    //   <div>tes</div>
+    // ))}
   )
  } else {
   return (

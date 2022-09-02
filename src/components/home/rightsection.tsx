@@ -97,7 +97,7 @@ const Rightsection = () => {
             placeholder="Search Twitter"
           />
           <label htmlFor="one" className="absolute left-1 top-2">
-            <svg className="h-6 w-6 absolute ">{mySvg.search}</svg>
+            <svg className="h-6 w-6 absolute ">{mySvg.search[0]}</svg>
           </label>
         </div>
       </div>
@@ -108,7 +108,7 @@ const Rightsection = () => {
           </h2>
         </div>
 
-        {trendsItem.map((item, i) => (
+        {trendsItem.map((item:any, i:any) => (
           <div
             key={i}
             className="p-2 flex flex-col justify-center hover:bg-[#e5e7eb] cursor-pointer"
@@ -136,7 +136,7 @@ const Rightsection = () => {
           </h2>
         </div>
 
-        {users.map((e:any, i:number) => (
+        {users.map((e:any, i:any) => (
           <div
             key={i}
             className="p-2 flex flex-col justify-center hover:bg-[#e5e7eb] cursor-pointer"
