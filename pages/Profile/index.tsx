@@ -23,7 +23,8 @@ const Index = () => {
 
         <div className=" flex flex-row  w-screen gap-3">
           <div className="w-3/5 border">
-            <Profile setOnComp={setOnComp} setArray={setArray} array={array} />
+            <Profile />
+            {/* <Profile setOnComp={setOnComp} setArray={setArray} array={array} /> */}
           </div>
           <div className="h-fit w-1/4 sticky -top-3/4">
             <Rightsection />
