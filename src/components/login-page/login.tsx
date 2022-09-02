@@ -1,7 +1,7 @@
 // @ts-nocheck
 import Link from 'next/link'
 import Header from './header'
-import { mySvg } from '~/public/assets/svg.js'
+import { mySvg } from '~/public/assets/svg'
 import { useRouter } from 'next/router'
 import { useAtom } from 'jotai'
 import clsx from 'clsx'
