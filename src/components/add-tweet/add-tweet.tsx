@@ -40,7 +40,7 @@ const AddTweet = ({ newTweet, id, name, userName, filterGetTweets, refetch }: an
       },
     }
   )
-  console.log(3333444, error)
+  // console.log(3333444, error)
   const handleDelete = async () => {
     try {
       //@ts-ignore

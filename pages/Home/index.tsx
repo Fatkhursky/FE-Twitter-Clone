@@ -9,13 +9,13 @@ import { useRef } from 'react'
 import LoadingBar from 'react-top-loading-bar'
 import { graphQLClient } from '@/src/libraries/graphql-request'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-
+import useBreakpoint from '@/src/shared-hooks/use-breakpoint'
 const HomePage = () => {
   const { data: session, status } = useSession()
   const queryClient = useQueryClient()
 
   const [filterGetTweets, setFilterGetTweets] = useState<any>(null)
-
+  const breakPoints = useBreakpoint()
   useEffect(() => {
     if (status !== 'loading') {
       setFilterGetTweets({
@@ -40,7 +40,7 @@ const HomePage = () => {
   const { mutate, error } = useMutation(
     async (variables) => {
       const data = await graphQLClient.request(createOneTweet, variables)
-      console.log(3333444123, { data, variables })
+      // console.log(3333444123, { data, variables })
       return data?.tweets || []
     },
     {
@@ -53,7 +53,7 @@ const HomePage = () => {
           filterGetTweets,
         ])
 
-        queryClient.setQueryData(['/home', 'tweets', filterGetTweets], (old:any) => [
+        queryClient.setQueryData(['/home', 'tweets', filterGetTweets], (old: any) => [
           {
             id: 'new-id',
             content: newData?.data?.content,
@@ -107,13 +107,13 @@ const HomePage = () => {
         <title>Home</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <div className="w-screen flex flex-row gap-2 bg-white">
-        <div className="flex top-0 sticky h-screen w-2/4 ">
+      <div className="w-screen flex xs:flex-col sm:flex-row sm:gap-2 bg-white">
+        <div className="flex top-0 sticky sm:h-screen w-2/4 ">
           <div className="grow"></div>
-          <Mainmenu />
+          {breakPoints === 'xs' ? null : <Mainmenu />}
         </div>
         <div className="flex flex-row  w-screen gap-3">
-          <div className="w-3/5 border relative">
+          <div className="w-[600px] sm:border relative">
             <LoadingBar className="" color="#3b82f6" ref={ref} />
             <Home
               handleSubmit={handleSubmit}
@@ -124,10 +124,13 @@ const HomePage = () => {
               refetch={refetch}
             />
           </div>
-          <div className="h-fit w-1/4 sticky -top-3/4">
-            <Rightsection />
-          </div>
+          {breakPoints === 'md' || breakPoints === 'sm' || breakPoints === 'xs' ? null : (
+            <div className="h-fit bg-slate-300 w-80 sticky -top-3/4">
+              <Rightsection />
+            </div>
+          )}
         </div>
+        {breakPoints === 'xs' ? <Mainmenu /> : null}
       </div>
     </>
   )

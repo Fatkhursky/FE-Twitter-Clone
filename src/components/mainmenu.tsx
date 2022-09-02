@@ -8,9 +8,8 @@ import { useAtom } from 'jotai'
 import { currentMenu, fieldUserName, globalName } from '../stores/jotai-atom'
 import Popup from 'reactjs-popup'
 import { signOut, useSession } from 'next-auth/react'
-import { decodeToken } from 'react-jwt'
-import { DATAUSER_QUERY } from '../requests/graphql'
-import { useQuery } from '@apollo/client'
+import useBreakpoint from '../shared-hooks/use-breakpoint'
+
 const listMenuIcon = [
   {
     label: 'Home',
@@ -46,10 +45,28 @@ const listMenuIcon = [
   },
 ]
 
+const listMenuIconBot = [
+  {
+    label: 'Home',
+    icon: [mySvg.home[0], mySvg.home[1]],
+  },
+  {
+    label: 'Search',
+    icon: [mySvg.search[0], mySvg.search[1]],
+  },
+  {
+    label: 'Notifications',
+    icon: [mySvg.notification[0], mySvg.notification[1]],
+  },
+  {
+    label: 'Messages',
+    icon: [mySvg.messages[0], mySvg.messages[1]],
+  },
+]
+
 const Mainmenu = () => {
-
   const { data: session } = useSession()
-
+  const breakPoints = useBreakpoint()
 
   const [name, setName] = useAtom(globalName)
   const [currentRouter, setCurrentRouter] = useState('')
@@ -76,8 +93,17 @@ const Mainmenu = () => {
     router.push(data.url)
   }
 
+ if (breakPoints === 'xs') {
   return (
-    <div className="flex flex-col h-screen w-64 top-0 sticky">
+    <div className='bg-white flex gap-2 justify-between px-6 flex-row bottom-0 fixed w-full'>
+      {listMenuIconBot.map((menu, i) => (
+        <div key={i} className='w-6 py-2'>{menu.icon[0]}</div>
+      ))}
+    </div>
+  )
+ } else {
+  return (
+    <div className="flex flex-col h-screen w-fit items-center top-0 sticky">
       <div className="h-fit">
         <div className="hover:bg-[#e0f2fe] transition-all rounded-full w-12 h-12 items-center justify-center flex cursor-pointer top-12 left-12">
           <IoLogoTwitter className="text-[#1d9bf0] text-3xl" />
@@ -93,38 +119,49 @@ const Mainmenu = () => {
                 <svg className="w-7 h-7">
                   {menu.label == currentRouter.substring(1) ? menu.icon[1] : menu.icon[0]}
                 </svg>
-                <h1
-                  className={clsx(
-                    'pl-2',
-                    menu.label == currentRouter.substring(1) ? 'font-bold' : null
-                  )}
-                >
-                  {menu.label}
-                </h1>
+                {breakPoints === 'lg' || breakPoints === 'xl' || breakPoints === '2xl' ? (
+                  <h1
+                    className={clsx(
+                      'pl-2',
+                      menu.label == currentRouter.substring(1) ? 'font-bold' : null
+                    )}
+                  >
+                    {menu.label}
+                  </h1>
+                ) : null}
               </div>
             </div>
           </div>
         ))}
 
         <div className="items-center flex">
-          <div className="text-1xs w-56 bg-[#1D9BF0] hover:bg-[#197FC5] p-3 cursor-pointer rounded-full transtiton-all flex justify-center">
-            <button className="text-white">Tweet</button>
-          </div>
+          {breakPoints === 'lg' || breakPoints === 'xl' || breakPoints === '2xl' ? (
+            <div className="text-1xs w-56 bg-[#1D9BF0] hover:bg-[#197FC5] p-3 cursor-pointer rounded-full transtiton-all flex justify-center">
+              <button className="text-white">Tweet</button>
+            </div>
+          ) : (
+            <div className="bg-sky-500 rounded-full p-3">
+              <div className="w-6  fill-white">{mySvg.fur}</div>
+            </div>
+          )}
         </div>
       </div>
 
       <div className="grow"></div>
       <Popup
         trigger={
-          <div className="flex hover:bg-[#e5e7eb] cursor-pointer p-2 rounded-full justify-center items-center w-56">
-            <img className="h-12 w-12" src={'/assets/logo193.png'} alt="" />
-            <div className="grow pl-2">
+          <div className="flex hover:bg-[#e5e7eb] cursor-pointer p-2 rounded-full justify-center items-center w-fit">
+            <img className="h-8 w-8" src={'/assets/logo193.png'} alt="" />
+            {breakPoints === 'lg' || breakPoints === 'xl' || breakPoints === '2xl' ? <div className="grow pl-2">
               <p>{session?.user?.name}</p>
               <p>{session?.username}</p>
-            </div>
+            </div> : null}
+            {breakPoints === 'lg' || breakPoints === 'xl' || breakPoints === '2xl' ?       
             <div>
               <svg className="h-7 w-7">{mySvg.more}</svg>
-            </div>
+            </div> : null}
+            
+      
           </div>
         }
         {...{}}
@@ -155,6 +192,8 @@ const Mainmenu = () => {
       </Popup>
     </div>
   )
+ }
+
 }
 
 export default Mainmenu
