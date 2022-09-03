@@ -10,6 +10,7 @@ import LoadingBar from 'react-top-loading-bar'
 import { graphQLClient } from '@/src/libraries/graphql-request'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import useBreakpoint from '@/src/shared-hooks/use-breakpoint'
+
 const HomePage = () => {
   const { data: session, status } = useSession()
   const queryClient = useQueryClient()

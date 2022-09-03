@@ -3,6 +3,8 @@ import AddTweet from '@/src/components/add-tweet/add-tweet'
 import TextareaAutosize from 'react-textarea-autosize'
 import useBreakpoint from '@/src/shared-hooks/use-breakpoint'
 import { useState } from 'react'
+import { signOut } from 'next-auth/react'
+import { useRouter } from 'next/router'
 const listMenuIcon = [
   {
     label: 'Profile',
@@ -73,6 +75,13 @@ const Home = ({
   filterGetTweets,
   refetch,
 }: any) => {
+  const router = useRouter()
+  const logOut = async () => {
+    const data = await signOut({ redirect: false, callbackUrl: `/api/auth/signin` })
+    // localStorage.removeItem('Bearer')
+    router.push(data.url)
+  }
+
   const breakPoints = useBreakpoint()
   const [showMenu, setShowMenu] = useState(false)
   return (
@@ -116,7 +125,7 @@ const Home = ({
               </div>
             </div>
           ))}
-          <p>Log out</p>
+          <button className='cursor-default' onClick={logOut}>Log out</button>
         </div>
       ) : null}
       <div className="header flex items-center justify-between px-2 py-2 sticky top-0 relative">

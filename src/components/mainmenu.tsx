@@ -78,6 +78,7 @@ const Mainmenu = () => {
     setUserName(session?.username)
     setName(session?.user?.name)
     setCurrentRouter(router.pathname)
+    console.log(session, 'session')
   }, [])
 
   const handleChangeMenu = (menu: any) => {
@@ -89,7 +90,7 @@ const Mainmenu = () => {
   }
   const logOut = async () => {
     const data = await signOut({ redirect: false, callbackUrl: `/api/auth/signin` })
-    localStorage.removeItem('Bearer')
+    // localStorage.removeItem('Bearer')
     router.push(data.url)
   }
 
